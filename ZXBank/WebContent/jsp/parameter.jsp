@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="c.tld" prefix="c"%>
+
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>经销商参数设置</title>
 <link href="../css/css.css" rel="stylesheet" type="text/css" />
 <script src="../js/common.js"></script>
 <script src="../js/jquery-1.8.3.min.js"></script>
@@ -14,19 +16,16 @@
 
 //执行保存操作
 function doSave(){
-	/* if($("#bankDockType").val()!="0"){
-		if($("#zsCustNo").val()==""){
-			alert("请填写浙商银行客户号!");
-			return false;
-		}
-	} */
 	var chooseVal = $("#chooseBank").val();
 	if(chooseVal=="0"){
 		
 	}if(chooseVal=="1"){
 		alert("浙商银行");
 	}if(chooseVal=="2"){
-		alert("中信银行");
+		if($("#organizationcode").val()=="" || $("#contract").val()==""){
+			alert("组织机构代码或合同编号不能为空");
+			return false;
+		}
 	}
 	document.forms[0].submit();
 }
@@ -44,6 +43,7 @@ function changeBankDockType(bankDockType){
 	}
 }
 
+
 /* //进入列表页面
 function goList() {
 	location = "/ledger/dealer.do?method=findBusinessList";
@@ -55,24 +55,19 @@ function goList() {
 <div class="pagebodyOuter">
 	<div class="pagebodyInner">
 		<form action="../distribset.do" method="post" onsubmit="return false">
-			<input type="hidden" name="method" id="method" value="addOrUpddistribset">
+			<input type="hidden" name="method" id="method" value="chooseBank">
+			<input type="hidden" name="did" value="6">
 			<!-- <html:hidden property="distribset.distribid" styleId="distribset.distribid" />
 			<html:hidden property="distribset.id" styleId="distribset.id" /> -->
 			<table class="formTable">
 				<tr>
-					<td class="nameCol" style="width:25%" >监管物移动百分比:</td>
-					<td><input style="height:36px;width:260px;" name="moveperc" /></td>
-					<%-- <td class="codeCol" >
-						<html:text property="distribset.movePerc" styleId="movePerc" />%
-					</td> --%>
+					<td class="nameCol">监管物移动百分比:</td>
+					<td class="codeCol" >
+						<input style="height:36px;width:260px;" name="moveperc" />%
+					</td>
 					<td class="nameCol">对接银行:</td>
 					<td class="codeCol" >
-						<!-- <form:select property="distribset.bankDockType"
-							styleId="bankDockType" onchange="changeBankDockType(this.value)">
-							<html:option value="0">不对接</html:option>
-							<html:optionsCollection name="bankDockTypes" label="label" value="value" />
-						</form:select></td> -->
-						<select onchange="changeBankDockType(this.value)" id="chooseBank">
+						<select onchange="changeBankDockType(this.value)" id="chooseBank" name="bankdocktype">
 							<option value="0">不对接</option>
 							<option value="1">浙商银行</option>
 							<option value="2">中信银行</option>
@@ -84,16 +79,10 @@ function goList() {
 						<div　id="custNoContractN" >
 							<table class="formTable">
 								<tr>
-									<td class="nameCol" style="width:25%" ><font color="#FF0000">*</font>浙商银行客户号:</td>
-									<td><input style="height:36px;width:260px;"/></td>
-									<!-- <td class="codeCol">
-										<html:text property="distribset.zsCustNo" styleId="zsCustNo" />
-									</td> -->
+									<td class="nameCol" ><font color="#FF0000">*</font>浙商银行客户号:</td>
+									<td class="codeCol" ><input style="height:36px;width:260px;"/></td>
 									<td class="nameCol">质押合同编号:</td>
-									<td><input style="height:36px;width:260px;" /></td>
-									<!-- <td class="codeCol" >
-										<html:text property="distribset.contractNo" styleId="contractNo" />
-									</td> -->
+									<td class="codeCol" ><input style="height:36px;width:260px;" /></td>
 								</tr>
 							</table>
 						</div>
@@ -101,17 +90,13 @@ function goList() {
 				</tr>
 				<tr>
 					<td colspan="4" id="dealerno" hidden="true">
-						<div id="custNoContractN">
+						<div id="custNoContractM">
 							<table class="formTable">
 								<tr>
-									<td class="nameCol"  style="width:25%"><font color="#FF0000" >*</font>经销商组织机构代码:</td>
-									<td><input style="height:36px;width:260px;" name="organizationcode" /></td>
-									<!-- <td class="codeCol">
-										<html:text property="distribset.zsCustNo" styleId="zsCustNo" />
-									</td> -->
-									<td> 质押合同编号：</td>
-									<td><input style="height:36px;width:260px;" name="contract"/></td>
-									<!-- <td><html:text property="distribset.contractNo" styleId="contractNo" /></td> -->
+									<td class="nameCol" ><font color="#FF0000" >*</font>经销商组织机构代码:</td>
+									<td class="codeCol" ><input style="height:36px;width:260px;" name="organizationcode" id="organizationcode"/></td>
+									<td class="nameCol" > 质押合同编号：</td>
+									<td class="codeCol" ><input style="height:36px;width:260px;" name="contract" id="contract"/></td>
 								</tr>
 							</table>
 						</div>

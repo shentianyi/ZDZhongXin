@@ -46,22 +46,22 @@
 		<filter-name>loginValidation</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping> -->
-	<!-- <filter>
+	<filter>
 		<filter-name>CharacterEncoding</filter-name>
 		<filter-class>com.zd.core.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
-	</filter> -->
-	<!-- <filter-mapping>
+	</filter>
+	 <filter-mapping>
 		<filter-name>CharacterEncoding</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>CharacterEncoding</filter-name>
 		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping> -->
+	</filter-mapping>
 	
 	<!-- <filter>
 		<filter-name>NullFilter</filter-name>

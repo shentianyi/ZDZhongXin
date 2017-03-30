@@ -8,4 +8,14 @@ import com.zd.csms.zxbank.bean.DistribsetZX;
 public interface IDistribsetDAO extends IDAO {
 	
 	List<DistribsetZX> findAll();
+
+	/**
+	 * 按条件查询
+	 * @param query
+	 * @return
+	 */
+	List<DistribsetZX> searchDistribsetList(DistribsetZX query);
+
+	List<DistribsetZX> findorg();
+
 }

@@ -2,13 +2,15 @@ package com.zd.csms.zxbank.bean;
 
 import java.util.Date;
 
+import com.zd.core.annotation.table;
+
 /**
  * 
  * 仓库信息表
  */
+@table(name="ZX_WAREHOUSE")
 public class Warehouse {
-	
-	private int whId;//仓库查询表主键
+	private int Whid;//仓库查询表主键
 	private String custNo;//客户号
 	private String whName;//仓库名字
 	private String whCode;//仓库代码
@@ -16,15 +18,14 @@ public class Warehouse {
 	private String whOperorg;//经办行
 	private String whAddress;//仓库地址
 	private String phone;//电话
-	private Date createDate;//数据同步时间
-	private Date updateDate;//数据更新时间
+	private String createDate;//数据同步时间
+	private String updateDate;//数据更新时间
 	
-	
-	public int getWhId() {
-		return whId;
+	public int getWhid() {
+		return Whid;
 	}
-	public void setWhId(int whId) {
-		this.whId = whId;
+	public void setWhid(int whid) {
+		Whid = whid;
 	}
 	public String getCustNo() {
 		return custNo;
@@ -68,17 +69,24 @@ public class Warehouse {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate.substring(0, createDate.length()-2);
 	}
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate.substring(0, updateDate.length()-2);
 	}
-	
+	@Override
+	public String toString() {
+		return "Warehouse [Whid=" + Whid + ", custNo=" + custNo + ", whName="
+				+ whName + ", whCode=" + whCode + ", whLevel=" + whLevel
+				+ ", whOperorg=" + whOperorg + ", whAddress=" + whAddress
+				+ ", phone=" + phone + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + "]";
+	}
 }

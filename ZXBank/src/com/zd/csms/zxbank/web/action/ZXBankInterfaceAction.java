@@ -1,5 +1,8 @@
 package com.zd.csms.zxbank.web.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,17 +12,37 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itextpdf.text.pdf.PRTokeniser;
+import com.sun.script.javascript.JSAdapter;
 import com.zd.core.ActionSupport;
+import com.zd.core.JSONAction;
 import com.zd.csms.zxbank.bean.Customer;
+import com.zd.csms.zxbank.bean.DistribsetZX;
 import com.zd.csms.zxbank.bean.Warehouse;
+import com.zd.csms.zxbank.dao.ICustomerDao;
+import com.zd.csms.zxbank.dao.IDistribsetDAO;
+import com.zd.csms.zxbank.dao.IWareHouseDAO;
+import com.zd.csms.zxbank.dao.SetDAOFactory;
 import com.zd.csms.zxbank.dao.ZXBankDAOFactory;
 import com.zd.csms.zxbank.dao.ZXIBankDockDao;
 import com.zd.csms.zxbank.dao.oracle.WareHouseDao;
 import com.zd.csms.zxbank.dao.oracle.ZXBankDockDao;
+import com.zd.csms.zxbank.model.WarHouseQueryVO;
+import com.zd.csms.zxbank.service.CustomerService;
+import com.zd.csms.zxbank.service.DistribsetService;
+import com.zd.csms.zxbank.service.WareHouseService;
+import com.zd.csms.zxbank.web.form.CustomerForm;
+import com.zd.csms.zxbank.web.form.WarehouseForm;
+import com.zd.tools.thumbPage.IThumbPageTools;
+import com.zd.tools.thumbPage.ToolsFactory;
+import com.zd.tools.thumbPage.impl.ThumbPageToolsForOracle;
 
 
 public class ZXBankInterfaceAction extends ActionSupport{
@@ -46,26 +69,94 @@ public class ZXBankInterfaceAction extends ActionSupport{
 		custType = SystemProperty.getPropertyValue("bankdock.properties", "zs.custType");
 	}*/
 	
-	private ZXIBankDockDao dao = ZXBankDAOFactory.getBankDockDAO();
-	/*private ZXIBankDockDao d=new ZXBankDockDao(null);*/
-	public ActionForward customer(ActionMapping mapping,ActionForm actionform, HttpServletRequest request,
-			HttpServletResponse response)  {
-		List<Customer> list=dao.findAllList();
+	/*private ZXIBankDockDao dao = ZXBankDAOFactory.getBankDockDAO();*/
+	
+	//客户接口
+	private CustomerService idao=new CustomerService();
+	//经销商参数接口
+	private DistribsetService dis = new DistribsetService();
+	private WareHouseService wdao = new WareHouseService();
+	
+	public ActionForward distribset(ActionMapping mapping,ActionForm form, HttpServletRequest request,
+			HttpServletResponse response){
+		
+		return mapping.findForward("cuslist");
+	}
+	//经销商 参数ajax查询经销商参数的
+	
+	public ActionForward disajax(ActionMapping mapping,ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws UnsupportedEncodingException  {
+		List<DistribsetZX> distri=dis.findorg();
+		//request.setAttribute("distri", distri);
+		/*String[] res =distri.toArray(new String[0]);*/
+		
+		JSONArray json = JSONArray.fromObject(distri);
+		try {
+			PrintWriter out = response.getWriter();
+			/*out.write(res);*/
+			out.write(json.toString());
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//return distri;
+		return null;
+	}
+	
+	/**
+	 * 分页查询数据
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public ActionForward customer(ActionMapping mapping,ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws UnsupportedEncodingException  {
+		
+		CustomerForm cust = (CustomerForm) form;
+		Customer dquery = cust.getCustomer();
+		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Customer", request);
+		tools.setPageSize(3);
+		tools.saveQueryVO(dquery);
+		List<Customer> list = idao.findcustallList(dquery,tools);
+		
+		
+		List<DistribsetZX> list1=dis.findorg();
+			
+		request.setAttribute("list1", list1);
 		request.setAttribute("list", list);
 		return mapping.findForward("cuslist");
 	}
 	
-	
-	private WareHouseDao da=ZXBankDAOFactory.getWareHouseDAO();
+	/**
+	 * 仓库信息查询
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	public ActionForward warehouse(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
-		
-		System.out.println("---ZXBankInterfaceAction");
-		List<Warehouse> list=da.findAllList();
-		request.setAttribute("list", list);
-		System.out.println("------"+list.size());
+		try {
+			WarehouseForm WarHouseform=(WarehouseForm)form;
+			WarHouseQueryVO query=WarHouseform.getQuer();//查询条件获取
+			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Warehouse", request);//获取分页模板
+			tools.setPageSize(2);//设置当页面显示条数
+			query.setCustNo(request.getParameter("custNo"));
+			List<Warehouse> list = wdao.findBusinessList(query, tools);//获取分页后的数据list
+			request.setAttribute("custNo",request.getParameter("custNo"));
+			request.setAttribute("list", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mapping.findForward("warehouse");
 	}
+	
 
 	
 	

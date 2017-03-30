@@ -3,6 +3,7 @@ package com.zd.csms.zxbank.dao;
 import com.zd.core.BeanManager;
 import com.zd.core.Constants;
 import com.zd.core.SystemProperty;
+import com.zd.csms.zxbank.dao.oracle.CustomerDao;
 import com.zd.csms.zxbank.dao.oracle.WareHouseDao;
 import com.zd.csms.zxbank.dao.oracle.ZXBankDockDao;
 
@@ -12,7 +13,8 @@ import com.zd.csms.zxbank.dao.oracle.ZXBankDockDao;
 public class ZXBankDAOFactory {
 	
 	private static ZXIBankDockDao bankDockDao;
-	private static WareHouseDao wareHouseDao;
+	private static IWareHouseDAO iwareHouseDao;
+	private static ICustomerDao icustomerDao;
 	
 	public static ZXIBankDockDao getBankDockDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
@@ -28,16 +30,30 @@ public class ZXBankDAOFactory {
 		return null;
 	}
 	
-	public static WareHouseDao getWareHouseDAO() {
+	public static ICustomerDao getcustDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
 
 		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
-			if(wareHouseDao==null){
-				wareHouseDao = new WareHouseDao(dataSourceName);
-				return wareHouseDao;
+			if(icustomerDao==null){
+				icustomerDao = new CustomerDao(dataSourceName);
+				return icustomerDao;
 			}
 			else 
-				return wareHouseDao;
+				return icustomerDao;
+		}
+		return null;
+	}
+	
+	public static IWareHouseDAO getWareHouseDAO() {
+		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
+
+		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
+			if(iwareHouseDao==null){
+				iwareHouseDao = new WareHouseDao(dataSourceName);
+				return iwareHouseDao;
+			}
+			else 
+				return iwareHouseDao;
 		}
 		return null;
 	}

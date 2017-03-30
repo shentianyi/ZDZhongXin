@@ -13,7 +13,7 @@ public class DistribsetForm extends ActionForm {
 	 */
 	private static final long serialVersionUID = 6183603022278423099L;
 
-	private DistribsetZX distribset = new DistribsetZX();
+	/*private DistribsetZX distribset = new DistribsetZX();
 
 	public DistribsetZX getDistribset() {
 		return distribset;
@@ -21,24 +21,21 @@ public class DistribsetForm extends ActionForm {
 
 	public void setDistribset(DistribsetZX distribset) {
 		this.distribset = distribset;
-	}
+	}*/
 	
-	
-	/*private int id;//序列号
+	private int did;//序列号
 	private String moveperc;//监管物移动百分比
 	private int distribid;//经销商ID
 	private int bankdocktype;//对接银行类型 0不对接1浙商银行2中信银行
 	private String contract;//合同编号
 	private String organizationcode;//组织机构代码
-	private Date createdate;//表中数据创建时间
-	private Date updatedate;//表中数据修改时间
-	private String createuser;//表中数据创建人
 	
-	public int getId() {
-		return id;
+	
+	public int getDid() {
+		return did;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setDid(int did) {
+		this.did = did;
 	}
 	public String getMoveperc() {
 		return moveperc;
@@ -70,22 +67,4 @@ public class DistribsetForm extends ActionForm {
 	public void setOrganizationcode(String organizationcode) {
 		this.organizationcode = organizationcode;
 	}
-	public Date getCreatedate() {
-		return createdate;
-	}
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
-	}
-	public Date getUpdatedate() {
-		return updatedate;
-	}
-	public void setUpdatedate(Date updatedate) {
-		this.updatedate = updatedate;
-	}
-	public String getCreateuser() {
-		return createuser;
-	}
-	public void setCreateuser(String createuser) {
-		this.createuser = createuser;
-	}*/
 }

@@ -8,8 +8,9 @@
 <%@ taglib uri="struts-html.tld" prefix="html"%>
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="fmt.tld" prefix="fmt"%>
-
+<%-- <%@ taglib uri="fmt.tld" prefix="fmt"%> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,35 +21,40 @@
 <link rel="stylesheet" href="css/jquery-ui.min.css">
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
+<script src="js/thumbpage/thumbpage.js"></script>
 <script>
+function doQuery(){
+	document.forms[0].submit();
+}
+
   $(function() {
-    var availableTags = [
-      "41234",
-      "12312",
-      "12341",
-      "5123412",
-      "234125",
-      "51234",
-      "234534",
-      "623452",
-      "6346345",
-      "62346",
-      "62346",
-      "1412341y",
-      "1234234",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#tags" ).autocomplete({
-      source: availableTags
-    });
+	$.ajax({
+		url:"ZXinterface.do?method=disajax",
+		type:"post",
+		date:{
+			
+		},
+		dataType:"json",
+		success:function(result){
+			console.log(result[0]);
+			var datas = eval('{' + result.organizationcode + '}');
+			console.log(datas);
+			$("#custOrganizationcode").autocomplete(result[0], {
+				source:[result[0].organizationcode,"1233123"]
+				});
+			/* var datas = eval('(' + msg.d + ')');
+				$("#custOrganizationcode").autocomplete(datas, {
+					formatItem: function (row, i, max) {
+						return "<table width='400px'><tr><td align='left'>" + row.Key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>" + row.Value + "</font>&nbsp;&nbsp;</td></tr></table>";
+					},
+					formatMatch: function(row, i, max){
+						return row.Key;
+						}
+			}); */s
+		}
+	});
+	  
+    
   });
   
   $(function() {
@@ -76,7 +82,7 @@
 			"Scala",
 			"Scheme"
 	    ];
-	    $( "#c_name" ).autocomplete({
+	    $( "#custName" ).autocomplete({
 	      source: availableTags
 	    });
 	  });
@@ -86,7 +92,7 @@
 	<div class="public-bar hidden">
 		<div class="ly-contai clearfix">
 			<div class="public-bar-crumbs fl hidden">
-				<a class="crumbs-link" href="/zdwl_test">中信银行接口</a>
+				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
 				>
 				<a class="crumbs-link" href="#">客户信息查询</a>
 			</div>
@@ -94,21 +100,23 @@
 	</div>
 <div class="public-main abs">
 	<div class="ly-contai rel">
-	
+		<html:form action="ZXinterface.do" styleId="iForm" method="post" onsubmit="return false">
+		<input name="method" id="method" type="hidden" value="customer" />
 		<div class="public-main-input ly-col-2 hidden abs">
 			<div class="ly-input-w">
 				<div class="ly-row clearfix">
 					<div class="ly-col fl">
                         <div class="label block fl hidden">组织机构代码：</div>
 	                    <div class="input block fl hidden">
-	                    	<input id="tags" type="text" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" />
+	                    	<html:text property="customer.custOrganizationcode"  styleId="custOrganizationcode" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" />
 	                    </div>
                     </div>
                     
                     <div class="ly-col fl">
                         <div class="label block fl hidden">客户名称：</div>
 	                    <div class="input block fl hidden">
-	                    	<input id="c_name" type="text" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" />
+	                    	<html:text property="customer.custName" styleId="custName" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" />
+	                    	<!-- <input id="custName" type="text" name="custName" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" /> -->
 	                    </div>
                     </div>
                     <div class="ly-col fl">
@@ -163,12 +171,80 @@
 		
 		<div class="public-main-footer hidden abs">
 			<div class="public-main-footer-pagin fr">
-				<!-- 共&nbsp;3&nbsp;条记录&nbsp;第&nbsp;1&nbsp;页  跳转至<input type="text" value="1" style="width:30px;height:28px;" />
-				<button >第一页</button>&nbsp;<button >上一页</button>&nbsp;<button >下一页</button>&nbsp;<button >最末页</button> -->
+				<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Customer" action="ZXinterface.do?method=customer" />
 			</div>
 		</div>
-		
+		</html:form>
 	</div>
 </div>
+<script type="text/javascript">
+    var ele = $('#ly-table-thead-w'),
+        template;
+
+    $('.public-main-table .ly-cont').perfectScrollbar({
+        cursorwidth: 10,
+        cursorborder: "none",
+        cursorcolor: "#999",
+        hidecursordelay: 0,
+        zindex: 10001,
+        horizrailenabled: true,
+        callbackFn: function(){
+            if (parseInt($('#ascrail2000').find('div').css('top')) > 0) {
+                if (ele.length === 0) {
+                    var tr = $('.public-main-table .t-tbody tr'),
+                        width = 0;
+
+                    // 生成thead区块
+                    template = '<div id="ly-table-thead-w"><div class="ly-table-scroll">';
+                    $('.public-main-table .t-thead th').each(function(key){
+                        template += '<div class="block fl">'+ $(this).text() +'</div>';
+                    });
+                    template += '</div></div>';
+
+                    ele = $(template).css({
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '36px',
+                        overflow: 'hidden'
+                    });
+
+                    // 复制操作
+                    tr.eq(0).find('td').each(function(key){
+                        var _width = $(this).width() + 1;
+
+                        ele.find('.block').eq(key).css({
+                            width: _width,
+                            padding: '0 5px',
+                            height: '36px',
+                            lineHeight: '36px',
+                            fontSize: '14px',
+                            fontFamily: 'Microsoft Yahei',
+                            textAlign: 'center',
+                        });
+                        width += _width + 10;
+                    });
+                    ele.find('.ly-table-scroll').css({
+                        position: 'relative',
+                        width: width,
+                        height: '100%',
+                        background: '#eee'
+                    });
+
+                    $('.public-main-table .ly-cont').append(ele);
+                } else {
+                    ele.show();
+                };
+            } else {
+                ele.hide();
+            };
+        },
+        _callbackFn: function(left){
+            ele.find('.ly-table-scroll').css('left', -left);
+        }
+    });
+
+</script>
 </body>
 </html>

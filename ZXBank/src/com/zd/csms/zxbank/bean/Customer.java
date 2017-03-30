@@ -1,7 +1,4 @@
 package com.zd.csms.zxbank.bean;
-
-import java.util.Date;
-
 /**
  * 
  * 客户信息表
@@ -38,25 +35,18 @@ public class Customer {
 	public void setCustName(String custName) {
 		this.custName = custName;
 	}
-	
 	public String getCustCreateDate() {
 		return custCreateDate;
 	}
 	public void setCustCreateDate(String custCreateDate) {
-		this.custCreateDate = custCreateDate;
+		this.custCreateDate = custCreateDate.substring(0,custCreateDate.length()-2);
 	}
 	public String getCustUpdateDate() {
 		return custUpdateDate;
 	}
 	public void setCustUpdateDate(String custUpdateDate) {
-		this.custUpdateDate = custUpdateDate;
+		this.custUpdateDate = custUpdateDate.substring(0,custUpdateDate.length()-2);
 	}
-	@Override
-	public String toString() {
-		return "Customer [custId=" + custId + ", custNo=" + custNo
-				+ ", custOrganizationcode=" + custOrganizationcode
-				+ ", custName=" + custName + ", custCreateDate="
-				+ custCreateDate + ", custUpdateDate=" + custUpdateDate + "]";
-	}
+	
 	
 }

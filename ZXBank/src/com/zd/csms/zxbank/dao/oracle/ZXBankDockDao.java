@@ -16,9 +16,7 @@ public class ZXBankDockDao extends DAOSupport implements ZXIBankDockDao{
 
 	@Override
 	public List<Customer> findAllList() {
-		System.out.println("++++++++++z这是sql");
-		String sql="select cust_id,cust_no,cust_organizationcode,cust_name,cust_createdate,cust_updatedate from zx_customer";
-		System.out.println("---------sq2l");
+		String sql="select cust_id,cust_no,cust_organizationcode,cust_name,cust_createdate as custCreateDate,cust_updatedate as custUpdateDate from zx_customer";
 		@SuppressWarnings("unchecked")
 		List<Customer> list = getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Customer.class));
 		return list;
