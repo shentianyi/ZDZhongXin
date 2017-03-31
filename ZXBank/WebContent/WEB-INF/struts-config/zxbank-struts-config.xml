@@ -6,6 +6,7 @@
 		<form-bean name="iForm" type="com.zd.csms.zxbank.web.form.CustomerForm"></form-bean>
 		<form-bean name="warForm" type="com.zd.csms.zxbank.web.form.WarehouseForm"></form-bean>
 		<form-bean name="nForm" type="com.zd.csms.zxbank.web.form.NoticeForm"></form-bean>
+		<form-bean name="fiForm" type="com.zd.csms.zxbank.web.form.FinancingForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
@@ -21,6 +22,10 @@
 		<action path="/ZXnotice"  parameter="method" name="nForm"
 			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
 			<forward name="noticelist"  path="/jsp/notice_push.jsp" />
+		</action>
+		<action path="/Financing"  parameter="method" name="fiForm"
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="financing"  path="/jsp/financing.jsp" />
 		</action>
 	</action-mappings>
 </struts-config>	

@@ -17,7 +17,6 @@ public class NoticeDao extends DAOSupport implements INoticeDao{
 
 	public NoticeDao(String dataSourceName) {
 		super(dataSourceName);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -51,10 +50,6 @@ public class NoticeDao extends DAOSupport implements INoticeDao{
 			params.add(query.getNtType());
 		}
 		
-		/*if(!StringUtil.isEmpty(query.getNtStdate())){
-			sql.append(" and a.cust_name like ? ");
-			params.add("%"+query.getNtStdate().trim()+"%");
-		}*/
 	}
 
 	

@@ -181,14 +181,11 @@ public class ThumPageTools {
 	
 	//生成记录参数用元素代码
 	public String getParamHTML(String action){
-		System.out.println("这里是分页");
 		ThumbPageVO thumbPageVO = (ThumbPageVO)pageContext.findAttribute(ThumbPageConstants.THUMBPAGE_PARAM.getCode() + tableName);
 		
 		String tagHTMLBegin = "<input type=\"hidden\"";
 		String tagHTMLEnd = ">";
 		StringBuffer html = new StringBuffer();
-		System.out.println("表格的名字是"+tableName);
-		System.out.println( "总页数是 " +thumbPageVO.getTotalPagesNum());
 		//排序字段
 		html.append(tagHTMLBegin)
 			.append(getParamElementNameHTML("totalPagesNum"))

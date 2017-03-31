@@ -80,7 +80,6 @@ public class BeanManager {
 	 * @return com.comall.core.jdbc.JdbcTemplate
 	 * */
 	static com.zd.core.jdbc.JdbcTemplate getJdbcTemplate(String dataSourceName) {
-		System.out.println("getJdbcTemplate  here");
 		return new com.zd.core.jdbc.JdbcTemplate(getDataSource(dataSourceName));
 	}
 	

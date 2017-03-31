@@ -21,12 +21,12 @@ public class DistribsetOracleDAO extends DAOSupport implements IDistribsetDAO {
 
 	private void formatDistribsetWhereSQL(DistribsetZX zx, StringBuffer sql,List<Object> params) {
 		// 当zx属性不为null且不为空（int属性不为-1）时说明属性需要修改，拼入sql和执行参数，并根据queryFlag标志判断是否需要拼写逗号。
-		if (zx.getZx_did() > 0) {
-			sql.append(" and ZX_DID=? ");
-			params.add(zx.getZx_did());
+		if (zx.getDistribID() > 0) {
+			sql.append(" AND DISTRIBID=? ");
+			params.add(zx.getDistribID());
 		}
 		if (zx.getOrganizationcode() != null) {
-			sql.append(" and ORGANIZATIONCODE=? ");
+			sql.append(" AND ORGANIZATIONCODE=? ");
 			params.add(zx.getOrganizationcode());
 		}
 	}
@@ -73,15 +73,15 @@ public class DistribsetOracleDAO extends DAOSupport implements IDistribsetDAO {
 	@Override
 	public boolean update(Object obj) {
 		DistribsetZX zx = (DistribsetZX) obj;
-		String sql = "UPDATE ZX_DISTRIBSET SET ZX_MOVEPERC=?,ZX_BANKDOCKTYPE=?,CONTRACTNO=?,ORGANIZATIONCODE=?,ZX_UPDATEDATE=? WHERE ZX_DID=?";
+		String sql = "UPDATE ZX_DISTRIBSET SET ZX_MOVEPERC=?,ZX_BANKDOCKTYPE=?,CONTRACTNO=?,ORGANIZATIONCODE=?,ZX_UPDATEDATE=? WHERE DISTRIBID=?";
 		Boolean flag = false;
-		flag = this.update(sql, zx.getZx_moveperc(),zx.getZx_bankdocktype(),zx.getContractno(),zx.getOrganizationcode(),zx.getZx_updatedate(),zx.getZx_did());
+		flag = this.update(sql, zx.getZx_moveperc(),zx.getZx_bankdocktype(),zx.getContractno(),zx.getOrganizationcode(),zx.getZx_updatedate(),zx.getDistribID());
 		return flag;
 	}
 
 	@Override
-	public List<DistribsetZX> findorg() {
-		String sql = "select ORGANIZATIONCODE from ZX_DISTRIBSET";
+	public List<DistribsetZX> findorg(String org) {
+		String sql = "SELECT ORGANIZATIONCODE FROM ZX_DISTRIBSET WHERE ORGANIZATIONCODE LIKE '%"+org+"%'";
 		@SuppressWarnings("unchecked")
 		List<DistribsetZX> list = getJdbcTemplate().query(sql,
 				new BeanPropertyRowMapper(DistribsetZX.class));

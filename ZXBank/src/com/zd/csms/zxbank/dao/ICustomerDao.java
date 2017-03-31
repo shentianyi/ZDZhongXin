@@ -14,6 +14,5 @@ public interface ICustomerDao extends IDAO{
 	 * @param tools
 	 * @return
 	 */
-	/*public List<Customer> findcustList(Customer query,IThumbPageTools tools);*/
 	public List<Customer> findcustallList(Customer customer,IThumbPageTools tools);
 }

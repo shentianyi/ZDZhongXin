@@ -36,7 +36,6 @@ public class DAOSupport implements IDAO{
 	 * @return com.comall.core.jdbc.JdbcTemplate
 	 * */
 	public JdbcTemplate getJdbcTemplate(){
-		System.out.println("this jdbc");
 		return jdbc;
 	}
 

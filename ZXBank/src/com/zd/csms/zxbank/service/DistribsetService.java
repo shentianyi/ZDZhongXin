@@ -12,8 +12,8 @@ public class DistribsetService extends ServiceSupport {
 	
 	private IDistribsetDAO dao = SetDAOFactory.getDistribsetDAO();
 	
-	public List<DistribsetZX> findorg(){
-		return dao.findorg();
+	public List<DistribsetZX> findorg(String org){
+		return dao.findorg(org);
 	}
 	/**
 	 * 添加中信经销商组织机构代码

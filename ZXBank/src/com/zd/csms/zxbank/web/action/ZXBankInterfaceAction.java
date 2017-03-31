@@ -25,6 +25,7 @@ import com.zd.core.ActionSupport;
 import com.zd.core.JSONAction;
 import com.zd.csms.zxbank.bean.Customer;
 import com.zd.csms.zxbank.bean.DistribsetZX;
+import com.zd.csms.zxbank.bean.Financing;
 import com.zd.csms.zxbank.bean.Notice;
 import com.zd.csms.zxbank.bean.Warehouse;
 import com.zd.csms.zxbank.dao.ICustomerDao;
@@ -35,12 +36,15 @@ import com.zd.csms.zxbank.dao.ZXBankDAOFactory;
 import com.zd.csms.zxbank.dao.ZXIBankDockDao;
 import com.zd.csms.zxbank.dao.oracle.WareHouseDao;
 import com.zd.csms.zxbank.dao.oracle.ZXBankDockDao;
+import com.zd.csms.zxbank.model.FinancingQueryVO;
 import com.zd.csms.zxbank.model.WarHouseQueryVO;
 import com.zd.csms.zxbank.service.CustomerService;
 import com.zd.csms.zxbank.service.DistribsetService;
+import com.zd.csms.zxbank.service.FinancingService;
 import com.zd.csms.zxbank.service.NoticeService;
 import com.zd.csms.zxbank.service.WareHouseService;
 import com.zd.csms.zxbank.web.form.CustomerForm;
+import com.zd.csms.zxbank.web.form.FinancingForm;
 import com.zd.csms.zxbank.web.form.NoticeForm;
 import com.zd.csms.zxbank.web.form.WarehouseForm;
 import com.zd.tools.thumbPage.IThumbPageTools;
@@ -75,12 +79,14 @@ public class ZXBankInterfaceAction extends ActionSupport{
 	/*private ZXIBankDockDao dao = ZXBankDAOFactory.getBankDockDAO();*/
 	
 	//客户接口
-	private CustomerService idao=new CustomerService();
+	private CustomerService cs=new CustomerService();
 	//经销商参数接口
 	private DistribsetService dis = new DistribsetService();
-	private WareHouseService wdao = new WareHouseService();
+	private WareHouseService whs = new WareHouseService();
 	//通知推送接口 
 	private NoticeService ndao = new NoticeService();
+	//融资信息业务
+	private FinancingService fs = new FinancingService();
 	
 	public ActionForward distribset(ActionMapping mapping,ActionForm form, HttpServletRequest request,
 			HttpServletResponse response){
@@ -91,21 +97,16 @@ public class ZXBankInterfaceAction extends ActionSupport{
 	
 	public ActionForward disajax(ActionMapping mapping,ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException  {
-		List<DistribsetZX> distri=dis.findorg();
-		//request.setAttribute("distri", distri);
-		/*String[] res =distri.toArray(new String[0]);*/
-		
+		List<DistribsetZX> distri=dis.findorg(request.getParameter("custinput"));
 		JSONArray json = JSONArray.fromObject(distri);
 		try {
 			PrintWriter out = response.getWriter();
-			/*out.write(res);*/
 			out.write(json.toString());
 			out.flush();
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//return distri;
 		return null;
 	}
 	
@@ -126,7 +127,7 @@ public class ZXBankInterfaceAction extends ActionSupport{
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Customer", request);
 		tools.setPageSize(3);
 		tools.saveQueryVO(dquery);
-		List<Customer> list = idao.findcustallList(dquery,tools);
+		List<Customer> list = cs.findcustallList(dquery,tools);
 		
 		
 		/*List<DistribsetZX> list1=dis.findorg();*/
@@ -153,7 +154,7 @@ public class ZXBankInterfaceAction extends ActionSupport{
 			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Warehouse", request);//获取分页模板
 			tools.setPageSize(2);//设置当页面显示条数
 			query.setCustNo(request.getParameter("custNo"));
-			List<Warehouse> list = wdao.findBusinessList(query, tools);//获取分页后的数据list
+			List<Warehouse> list = whs.findBusinessList(query, tools);//获取分页后的数据list
 			request.setAttribute("custNo",request.getParameter("custNo"));
 			request.setAttribute("list", list);
 		} catch (Exception e) {
@@ -174,6 +175,34 @@ public class ZXBankInterfaceAction extends ActionSupport{
 		request.setAttribute("list1",type );
 		request.setAttribute("list", list);
 		return mapping.findForward("noticelist");
+	}
+	
+	/**
+	 * 融资信息查询
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward financing(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		try {
+			FinancingForm form = (FinancingForm)actionform;
+			FinancingQueryVO query = form.getFinancingVO();
+			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Financing", request);
+			
+			//设置每页显示几条数据
+			tools.setPageSize(2);
+			//从数据库查询
+			List<Financing> list = fs.findByQuery(query, tools);
+			System.out.println(list.get(0));
+			request.setAttribute("list", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mapping.findForward("financing");
 	}
 	
 	

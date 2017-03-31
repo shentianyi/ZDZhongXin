@@ -31,15 +31,12 @@ public class ActionSupport extends DispatchAction {
 			HttpServletResponse response, String name) throws Exception {
 
 			ActionForward forward = null;
-			System.out.println("zhelishi jilei");
 			if (name == null)
 				return unspecified(mapping, form, request, response);
 			
 			Method method = null;
 			try {
-				System.out.println("这个是method的名字"+method);
 				method = getMethod(name);
-				System.out.println("------------------是不是这里出错了");
 			} catch (NoSuchMethodException e) {
 				e.printStackTrace();
 				String message = messages.getMessage("dispatch.method", mapping.getPath(), name);
@@ -48,11 +45,8 @@ public class ActionSupport extends DispatchAction {
 				return null;
 			}
 			try {
-				System.out.println("看来是这里有问题");
 				Object[] args = { mapping, form, request, response };
-				System.out.println("果真是这里吗=====================================");
 				forward = (ActionForward) method.invoke(this, args);
-				System.out.println("我希望不是这里出错了"+method);
 			} catch (ClassCastException e) {
 				e.printStackTrace();
 				String message = messages.getMessage("dispatch.return", mapping

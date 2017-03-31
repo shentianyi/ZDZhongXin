@@ -1,7 +1,6 @@
 package com.zd.csms.zxbank.web.action;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.mysql.jdbc.Util;
 import com.zd.core.ActionSupport;
-import com.zd.core.BeanManager;
-import com.zd.core.Constants;
 import com.zd.csms.zxbank.bean.DistribsetZX;
-import com.zd.csms.zxbank.dao.IDistribsetDAO;
-import com.zd.csms.zxbank.dao.SetDAOFactory;
 import com.zd.csms.zxbank.service.DistribsetService;
 import com.zd.csms.zxbank.web.form.DistribsetForm;
 import com.zd.tools.SqlUtil;
@@ -33,12 +28,13 @@ public class DistribsetAction extends ActionSupport {
 			ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		DistribsetForm form = (DistribsetForm) actionform;
+		DistribsetZX dzx = form.getDistribset();
 		
-		if(form.getBankdocktype()==1){
+		if(dzx.getZx_bankdocktype()==1){
 			System.out.println("浙商银行");
 			ZSaddOrUpddistribset(mapping, actionform, request, response);
 		}
-		if(form.getBankdocktype()==2){
+		if(dzx.getZx_bankdocktype()==2){
 			System.out.println("中信银行");
 			addOrUpddistribset(mapping, actionform, request, response);
 		}
@@ -50,16 +46,10 @@ public class DistribsetAction extends ActionSupport {
 			HttpServletResponse response) throws IOException {
 		// form表单获得数据
 		DistribsetForm form = (DistribsetForm) actionform;
-		DistribsetZX dzx = new DistribsetZX();
-		dzx.setZx_did(form.getDid());
-		//dzx.setZx_did(6);
-		dzx.setZx_bankdocktype(form.getBankdocktype());
-		dzx.setZx_moveperc(form.getMoveperc());
-		dzx.setOrganizationcode(form.getOrganizationcode());
-		dzx.setContractno(form.getContract());
+		DistribsetZX dzx = form.getDistribset();
 		Boolean flag = false;
 		try {
-			if (dzx.getZx_did() > 0) {
+			if (dzx.getDistribID() > 0) {
 				dzx.setZx_updatedate(new Date(System.currentTimeMillis()));
 				flag = ds.updDistribset(dzx);
 			} else {

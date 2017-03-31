@@ -10,7 +10,8 @@ import com.zd.core.annotation.table;
  */
 @table(name="ZX_DISTRIBSET")
 public class DistribsetZX {
-	private int zx_did;//经销商ID
+	private int zx_did;//经销商序列ID
+	private int distribID;//经销商ID
 	private String zx_moveperc;//监管物移动百分比
 	private int zx_bankdocktype;//对接银行类型 0不对接1浙商银行2中信银行
 	private String contractno;//合同编号
@@ -24,6 +25,12 @@ public class DistribsetZX {
 	}
 	public void setZx_did(int zx_did) {
 		this.zx_did = zx_did;
+	}
+	public int getDistribID() {
+		return distribID;
+	}
+	public void setDistribID(int distribID) {
+		this.distribID = distribID;
 	}
 	public String getZx_moveperc() {
 		return zx_moveperc;
