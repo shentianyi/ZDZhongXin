@@ -15,7 +15,7 @@
 		</div>
 		<div>
 		<ul>
-			<li><a href="jsp/notice_push.jsp">通知推送</a></li>
+			<li><a href="ZXnotice.do?method=findnotice">通知推送</a></li>
 			<li><a href="jsp/parameter.jsp">经销商参数配置</a></li>
 			<li><a href="ZXinterface.do?method=customer">客户信息查询</a></li>
 			<li><a href="Warehouse.do?method=warehouse">仓库信息查询</a></li>

@@ -4,6 +4,7 @@ import com.zd.core.BeanManager;
 import com.zd.core.Constants;
 import com.zd.core.SystemProperty;
 import com.zd.csms.zxbank.dao.oracle.CustomerDao;
+import com.zd.csms.zxbank.dao.oracle.NoticeDao;
 import com.zd.csms.zxbank.dao.oracle.WareHouseDao;
 import com.zd.csms.zxbank.dao.oracle.ZXBankDockDao;
 
@@ -15,6 +16,7 @@ public class ZXBankDAOFactory {
 	private static ZXIBankDockDao bankDockDao;
 	private static IWareHouseDAO iwareHouseDao;
 	private static ICustomerDao icustomerDao;
+	private static INoticeDao inoticeDao;
 	
 	public static ZXIBankDockDao getBankDockDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
@@ -55,6 +57,19 @@ public class ZXBankDAOFactory {
 			else 
 				return iwareHouseDao;
 		}
+		return null;
+	}
+	public static INoticeDao getnoticeDao(){
+		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
+		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
+			if(inoticeDao==null){
+				inoticeDao = new NoticeDao(dataSourceName);
+				return inoticeDao;
+			}
+			else 
+				return inoticeDao;
+		}
+		
 		return null;
 	}
 	

@@ -5,8 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=IUTF-8">
 <title>中都汽车金融监管系统</title>
-<link type="text/css" rel="stylesheet" href="/zdwl_test/css/base.css" />
-<link type="text/css" rel="stylesheet" href="/zdwl_test/css/public.css" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
+<link type="text/css" rel="stylesheet" href="css/public.css" />
 <link rel="stylesheet" href="../css/jquery-ui.min.css">
 <script src="../js/jquery-1.8.3.min.js"></script>
 <script src="../js/jquery-ui.min.js"></script>

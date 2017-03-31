@@ -25,6 +25,7 @@ import com.zd.core.ActionSupport;
 import com.zd.core.JSONAction;
 import com.zd.csms.zxbank.bean.Customer;
 import com.zd.csms.zxbank.bean.DistribsetZX;
+import com.zd.csms.zxbank.bean.Notice;
 import com.zd.csms.zxbank.bean.Warehouse;
 import com.zd.csms.zxbank.dao.ICustomerDao;
 import com.zd.csms.zxbank.dao.IDistribsetDAO;
@@ -37,8 +38,10 @@ import com.zd.csms.zxbank.dao.oracle.ZXBankDockDao;
 import com.zd.csms.zxbank.model.WarHouseQueryVO;
 import com.zd.csms.zxbank.service.CustomerService;
 import com.zd.csms.zxbank.service.DistribsetService;
+import com.zd.csms.zxbank.service.NoticeService;
 import com.zd.csms.zxbank.service.WareHouseService;
 import com.zd.csms.zxbank.web.form.CustomerForm;
+import com.zd.csms.zxbank.web.form.NoticeForm;
 import com.zd.csms.zxbank.web.form.WarehouseForm;
 import com.zd.tools.thumbPage.IThumbPageTools;
 import com.zd.tools.thumbPage.ToolsFactory;
@@ -76,6 +79,8 @@ public class ZXBankInterfaceAction extends ActionSupport{
 	//经销商参数接口
 	private DistribsetService dis = new DistribsetService();
 	private WareHouseService wdao = new WareHouseService();
+	//通知推送接口 
+	private NoticeService ndao = new NoticeService();
 	
 	public ActionForward distribset(ActionMapping mapping,ActionForm form, HttpServletRequest request,
 			HttpServletResponse response){
@@ -124,9 +129,9 @@ public class ZXBankInterfaceAction extends ActionSupport{
 		List<Customer> list = idao.findcustallList(dquery,tools);
 		
 		
-		List<DistribsetZX> list1=dis.findorg();
+		/*List<DistribsetZX> list1=dis.findorg();*/
 			
-		request.setAttribute("list1", list1);
+		/*request.setAttribute("list1", list1);*/
 		request.setAttribute("list", list);
 		return mapping.findForward("cuslist");
 	}
@@ -157,7 +162,19 @@ public class ZXBankInterfaceAction extends ActionSupport{
 		return mapping.findForward("warehouse");
 	}
 	
-
+	public ActionForward findnotice(ActionMapping mapping,ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		NoticeForm not = (NoticeForm) form;
+		Notice dquery = not.getNotice();
+		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Notice", request);
+		tools.setPageSize(3);
+		tools.saveQueryVO(dquery);
+		List<Notice> type = ndao.findnoticetype();
+		List<Notice> list = ndao.findNotice(dquery, tools);
+		request.setAttribute("list1",type );
+		request.setAttribute("list", list);
+		return mapping.findForward("noticelist");
+	}
 	
 	
 	/**
