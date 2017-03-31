@@ -126,14 +126,14 @@ function doClear(){
 					<div class="ly-col fl">
                         <div class="label block fl hidden">ECIF客户号：</div>
 	                    <div class="input block fl hidden">
-	                    	<input class="ly-bor-none" id="custNo" type="text" name="custNo" value="<c:out value='${custNo }'/>"/>
+	                    	<input class="ly-bor-none" id="custNo" type="text" name="warehouse.custNo" value="<c:out value='${cusNo }'/>"/>
 	                    </div>
                     </div>
                     
                     <div class="ly-col fl">
-                        <div class="label block fl hidden">借款企业名称：</div>
+                        <div class="label block fl hidden">仓库名称：</div>
 	                    <div class="input block fl hidden">
-	                    	<input id="loncpid_name" type="text" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" />
+	                    	<input name="warehouse.whName" id="loncpid_name" type="text" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" value="<c:out value='${whName }'/>" />
 	                    </div>
                     </div>
                     
@@ -165,7 +165,6 @@ function doClear(){
 						<tr class="t-tr">
 							<th class="t-th">序号</th>
 							<th class="t-th">ECIF客户号</th>
-							<!-- <th class="t-th">借款企业名称</th> -->
 							<th class="t-th">仓库名称</th>
 							<th class="t-th">仓库代码</th>
 							<th class="t-th">仓库级别</th>

@@ -81,7 +81,7 @@ public class DistribsetOracleDAO extends DAOSupport implements IDistribsetDAO {
 
 	@Override
 	public List<DistribsetZX> findorg(String org) {
-		String sql = "SELECT ORGANIZATIONCODE FROM ZX_DISTRIBSET WHERE ORGANIZATIONCODE LIKE '%"+org+"%'";
+		String sql = "SELECT ORGANIZATIONCODE FROM ZX_DISTRIBSET WHERE ORGANIZATIONCODE LIKE '%"+org.trim()+"%'";
 		@SuppressWarnings("unchecked")
 		List<DistribsetZX> list = getJdbcTemplate().query(sql,
 				new BeanPropertyRowMapper(DistribsetZX.class));

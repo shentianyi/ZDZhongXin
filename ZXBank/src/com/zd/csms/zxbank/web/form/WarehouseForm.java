@@ -2,20 +2,22 @@ package com.zd.csms.zxbank.web.form;
 
 import org.apache.struts.action.ActionForm;
 
-import com.zd.csms.zxbank.model.WarHouseQueryVO;
+import com.zd.csms.zxbank.bean.Warehouse;
 
 public class WarehouseForm extends ActionForm{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3669948099916919341L;
-	private WarHouseQueryVO quer=new WarHouseQueryVO();
-
-	public WarHouseQueryVO getQuer() {
-		return quer;
+	private Warehouse warehouse=new Warehouse();
+	public Warehouse getWarehouse() {
+		return warehouse;
 	}
-
-	public void setQuer(WarHouseQueryVO quer) {
-		this.quer = quer;
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

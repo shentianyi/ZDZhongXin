@@ -20,7 +20,7 @@
 			<li><a href="ZXinterface.do?method=customer">客户信息查询</a></li>
 			<li><a href="Warehouse.do?method=warehouse">仓库信息查询</a></li>
 			<li><a href="Financing.do?method=financing">融资信息查询</a></li>
-			<li><a href="jsp/supervise_protocol.jsp">监管协议信息查询</a></li>
+			<li><a href="agreement.do?method=agreement">监管协议信息查询</a></li>
 			<li><a href="jsp/delivery_notice.jsp">收货通知书</a></li>
 			<li><a href="jsp/remove_pledge_notice.jsp">解除质押通知书</a></li>
 			<li><a href="jsp/move_notice.jsp">移库通知书</a></li>

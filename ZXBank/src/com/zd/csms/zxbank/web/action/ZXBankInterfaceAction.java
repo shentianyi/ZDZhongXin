@@ -23,6 +23,7 @@ import com.itextpdf.text.pdf.PRTokeniser;
 import com.sun.script.javascript.JSAdapter;
 import com.zd.core.ActionSupport;
 import com.zd.core.JSONAction;
+import com.zd.csms.zxbank.bean.Agreement;
 import com.zd.csms.zxbank.bean.Customer;
 import com.zd.csms.zxbank.bean.DistribsetZX;
 import com.zd.csms.zxbank.bean.Financing;
@@ -37,12 +38,13 @@ import com.zd.csms.zxbank.dao.ZXIBankDockDao;
 import com.zd.csms.zxbank.dao.oracle.WareHouseDao;
 import com.zd.csms.zxbank.dao.oracle.ZXBankDockDao;
 import com.zd.csms.zxbank.model.FinancingQueryVO;
-import com.zd.csms.zxbank.model.WarHouseQueryVO;
+import com.zd.csms.zxbank.service.AgreementService;
 import com.zd.csms.zxbank.service.CustomerService;
 import com.zd.csms.zxbank.service.DistribsetService;
 import com.zd.csms.zxbank.service.FinancingService;
 import com.zd.csms.zxbank.service.NoticeService;
 import com.zd.csms.zxbank.service.WareHouseService;
+import com.zd.csms.zxbank.web.form.AgreementForm;
 import com.zd.csms.zxbank.web.form.CustomerForm;
 import com.zd.csms.zxbank.web.form.FinancingForm;
 import com.zd.csms.zxbank.web.form.NoticeForm;
@@ -87,6 +89,8 @@ public class ZXBankInterfaceAction extends ActionSupport{
 	private NoticeService ndao = new NoticeService();
 	//融资信息业务
 	private FinancingService fs = new FinancingService();
+	//监管协议查询
+	private AgreementService Adao=new AgreementService();
 	
 	public ActionForward distribset(ActionMapping mapping,ActionForm form, HttpServletRequest request,
 			HttpServletResponse response){
@@ -150,13 +154,13 @@ public class ZXBankInterfaceAction extends ActionSupport{
 			HttpServletResponse response) throws Exception{
 		try {
 			WarehouseForm WarHouseform=(WarehouseForm)form;
-			WarHouseQueryVO query=WarHouseform.getQuer();//查询条件获取
+			Warehouse query=WarHouseform.getWarehouse();//查询条件获取
 			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Warehouse", request);//获取分页模板
 			tools.setPageSize(2);//设置当页面显示条数
-			query.setCustNo(request.getParameter("custNo"));
 			List<Warehouse> list = whs.findBusinessList(query, tools);//获取分页后的数据list
-			request.setAttribute("custNo",request.getParameter("custNo"));
 			request.setAttribute("list", list);
+			request.setAttribute("cusNo", query.getCustNo());
+			request.setAttribute("whName", query.getWhName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -203,6 +207,27 @@ public class ZXBankInterfaceAction extends ActionSupport{
 			e.printStackTrace();
 		}
 		return mapping.findForward("financing");
+	}
+	
+	/**
+	 * 监管协议查询
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward agreement(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		AgreementForm agreementfrom=(AgreementForm)form;
+		Agreement query=agreementfrom.getAgreement();//获取查询条件
+		IThumbPageTools tools=ToolsFactory.getThumbPageTools("Agreement", request);//分页模板获取
+		tools.setPageSize(2);
+		List<Agreement> list=Adao.findBusinessList(query, tools);//分页数据查询
+		request.setAttribute("list", list);
+		request.setAttribute("loncpname", query.getAg_loncpname());
+		request.setAttribute("custno", query.getAg_custno());
+		return mapping.findForward("agreement");
 	}
 	
 	

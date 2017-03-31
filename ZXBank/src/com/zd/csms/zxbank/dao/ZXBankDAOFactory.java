@@ -3,6 +3,7 @@ package com.zd.csms.zxbank.dao;
 import com.zd.core.BeanManager;
 import com.zd.core.Constants;
 import com.zd.core.SystemProperty;
+import com.zd.csms.zxbank.dao.oracle.AgreementDao;
 import com.zd.csms.zxbank.dao.oracle.CustomerDao;
 import com.zd.csms.zxbank.dao.oracle.FinancingDao;
 import com.zd.csms.zxbank.dao.oracle.NoticeDao;
@@ -19,6 +20,7 @@ public class ZXBankDAOFactory {
 	private static ICustomerDao icustomerDao;
 	private static INoticeDao inoticeDao;
 	private static IFinancingDAO ifanancingDao;
+	private static IAgreementDao iagreementDao;
 	
 	public static ZXIBankDockDao getBankDockDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
@@ -87,4 +89,18 @@ public class ZXBankDAOFactory {
 		}
 		return null;
 	}
+	
+	public static IAgreementDao getAgreementDao() {
+		String dataSourceName=SystemProperty.getPropertyValue("system.properties","dataSourceName");
+		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
+			if(iagreementDao==null){
+				iagreementDao=new AgreementDao(dataSourceName);
+				return iagreementDao;
+			}else{
+				return iagreementDao;
+			}
+		}
+		return null;
+	}
+
 }
