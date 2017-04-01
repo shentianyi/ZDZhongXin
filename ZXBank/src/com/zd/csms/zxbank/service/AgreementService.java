@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.zd.core.ServiceSupport;
 import com.zd.csms.zxbank.bean.Agreement;
-import com.zd.csms.zxbank.dao.IAgreementDao;
+import com.zd.csms.zxbank.dao.IAgreementDAO;
 import com.zd.csms.zxbank.dao.ZXBankDAOFactory;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
 public class AgreementService extends ServiceSupport {
-	private IAgreementDao dao=ZXBankDAOFactory.getAgreementDao();
+	private IAgreementDAO dao=ZXBankDAOFactory.getAgreementDAO();
 	public List<Agreement> findBusinessList(Agreement query,IThumbPageTools tools){
 		return dao.firnAllAgList(query, tools);
 	}

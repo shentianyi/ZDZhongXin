@@ -7,13 +7,13 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import com.zd.core.DAOSupport;
 import com.zd.csms.zxbank.bean.Customer;
-import com.zd.csms.zxbank.dao.ICustomerDao;
+import com.zd.csms.zxbank.dao.ICustomerDAO;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
-public class CustomerDao extends DAOSupport implements ICustomerDao{
+public class CustomerDAO extends DAOSupport implements ICustomerDAO{
 
-	public CustomerDao(String dataSourceName) {
+	public CustomerDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 

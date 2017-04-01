@@ -11,9 +11,9 @@ import com.zd.csms.zxbank.dao.IFinancingDAO;
 import com.zd.csms.zxbank.model.FinancingQueryVO;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
-public class FinancingDao extends DAOSupport implements IFinancingDAO{
+public class FinancingDAO extends DAOSupport implements IFinancingDAO{
 
-	public FinancingDao(String dataSourceName) {
+	public FinancingDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 	
@@ -23,7 +23,7 @@ public class FinancingDao extends DAOSupport implements IFinancingDAO{
 	@Override
 	public List<Financing> findByQuery(FinancingQueryVO query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(FinancingDao.select_financing);
+		sql.append(FinancingDAO.select_financing);
 		List<Object> params = new ArrayList<Object>();
 		List<Financing> list = null;
 		formatSQL(sql, params,query);

@@ -110,7 +110,7 @@ function doClear(){
 	<div class="public-bar hidden">
 		<div class="ly-contai clearfix">
 			<div class="public-bar-crumbs fl hidden">
-				<a class="crumbs-link" href="/zdwl_test">中信银行接口</a>
+				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
 				>
 				<a class="crumbs-link" href="#">仓库信息查询</a>
 			</div>
@@ -120,7 +120,7 @@ function doClear(){
 	<div class="ly-contai rel">
 		<html:form action="/Warehouse.do" styleId="iForm" method="post" onsubmit="return false">
 		<input name="method" id="method" type="hidden" value="warehouse" />
-		<div class="public-main-input ly-col-2 hidden abs">
+		<div class="public-main-input ly-col-1 hidden abs">
 			<div class="ly-input-w">
 				<div class="ly-row clearfix">
 					<div class="ly-col fl">

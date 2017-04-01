@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.zd.core.ServiceSupport;
 import com.zd.csms.zxbank.bean.Notice;
-import com.zd.csms.zxbank.dao.INoticeDao;
+import com.zd.csms.zxbank.dao.INoticeDAO;
 import com.zd.csms.zxbank.dao.ZXBankDAOFactory;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
 public class NoticeService extends ServiceSupport{
-	private INoticeDao ndao = ZXBankDAOFactory.getnoticeDao();
+	private INoticeDAO ndao = ZXBankDAOFactory.getnoticeDAO();
 	public List<Notice> findNotice(Notice notice,IThumbPageTools tools){
 		return ndao.findNotice(notice, tools);
 	}

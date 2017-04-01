@@ -7,7 +7,7 @@ import com.zd.csms.zxbank.bean.Customer;
 
 import com.zd.tools.thumbPage.IThumbPageTools;
 
-public interface ICustomerDao extends IDAO{
+public interface ICustomerDAO extends IDAO{
 	/**
 	 * 分页查询所有客户
 	 * @param query

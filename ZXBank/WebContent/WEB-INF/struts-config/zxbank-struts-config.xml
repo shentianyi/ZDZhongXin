@@ -8,6 +8,8 @@
 		<form-bean name="nForm" type="com.zd.csms.zxbank.web.form.NoticeForm"></form-bean>
 		<form-bean name="fiForm" type="com.zd.csms.zxbank.web.form.FinancingForm"></form-bean>
 		<form-bean name="agrForm" type="com.zd.csms.zxbank.web.form.AgreementForm"></form-bean>
+		<form-bean name="rpForm" type="com.zd.csms.zxbank.web.form.RemovePledgeForm"></form-bean>
+		<form-bean name="mnForm" type="com.zd.csms.zxbank.web.form.MoveNoticeForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
@@ -31,6 +33,22 @@
 		<action path="/agreement"  parameter="method" name="agrForm"
 			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
 			<forward name="agreement"  path="/jsp/supervise_agreement.jsp" />
+		</action>
+		<action path="/removepledge"  parameter="method" name="rpForm"
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="removepledge"  path="/jsp/remove_pledge_notice.jsp" />
+		</action>
+		<action path="/removepledgedetail"  parameter="method" 
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="removepledgedetail"  path="/jsp/remove_pledge_notice_detail.jsp" />
+		</action>
+		<action path="/movenotice"  parameter="method" name="mnForm"
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="movenotice"  path="/jsp/move_notice.jsp" />
+		</action>
+		<action path="/movedetail"  parameter="method" 
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="movedetail"  path="/jsp/move_notice_detail.jsp" />
 		</action>
 	</action-mappings>
 </struts-config>	

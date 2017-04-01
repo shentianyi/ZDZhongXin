@@ -1,7 +1,5 @@
 package com.zd.csms.zxbank.bean;
 
-import java.util.Date;
-
 import com.zd.core.annotation.table;
 
 /**

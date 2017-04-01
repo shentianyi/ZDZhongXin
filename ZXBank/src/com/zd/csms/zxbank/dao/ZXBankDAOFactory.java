@@ -3,49 +3,45 @@ package com.zd.csms.zxbank.dao;
 import com.zd.core.BeanManager;
 import com.zd.core.Constants;
 import com.zd.core.SystemProperty;
-import com.zd.csms.zxbank.dao.oracle.AgreementDao;
-import com.zd.csms.zxbank.dao.oracle.CustomerDao;
-import com.zd.csms.zxbank.dao.oracle.FinancingDao;
-import com.zd.csms.zxbank.dao.oracle.NoticeDao;
-import com.zd.csms.zxbank.dao.oracle.WareHouseDao;
-import com.zd.csms.zxbank.dao.oracle.ZXBankDockDao;
-
-
-
+import com.zd.csms.zxbank.dao.oracle.*;
 
 public class ZXBankDAOFactory {
 	
-	private static ZXIBankDockDao bankDockDao;
-	private static IWareHouseDAO iwareHouseDao;
-	private static ICustomerDao icustomerDao;
-	private static INoticeDao inoticeDao;
-	private static IFinancingDAO ifanancingDao;
-	private static IAgreementDao iagreementDao;
+	private static ZXIBankDockDAO bankDockDAO;
+	private static IWareHouseDAO iwareHouseDAO;
+	private static ICustomerDAO icustomerDAO;
+	private static INoticeDAO inoticeDAO;
+	private static IFinancingDAO ifanancingDAO;
+	private static IAgreementDAO iagreementDAO;
+	private static IRemovePledgeDAO iremovepledgeDAO;
+	private static IRemovePledgeDetailDAO iremoveoledgedetailDAO;
+	private static IMoveNoticeDAO imovenoticeDAO;
+	private static IMoveDetailDAO imovedetailDAO;
 	
-	public static ZXIBankDockDao getBankDockDAO() {
+	public static ZXIBankDockDAO getBankDockDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
 
 		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
-			if(bankDockDao==null){
-				bankDockDao = new ZXBankDockDao(dataSourceName);
-				return bankDockDao;
+			if(bankDockDAO==null){
+				bankDockDAO = new ZXBankDockDAO(dataSourceName);
+				return bankDockDAO;
 			}
 			else 
-				return bankDockDao;
+				return bankDockDAO;
 		}
 		return null;
 	}
 	
-	public static ICustomerDao getcustDAO() {
+	public static ICustomerDAO getcustDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
 
 		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
-			if(icustomerDao==null){
-				icustomerDao = new CustomerDao(dataSourceName);
-				return icustomerDao;
+			if(icustomerDAO==null){
+				icustomerDAO = new CustomerDAO(dataSourceName);
+				return icustomerDAO;
 			}
 			else 
-				return icustomerDao;
+				return icustomerDAO;
 		}
 		return null;
 	}
@@ -54,24 +50,24 @@ public class ZXBankDAOFactory {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
 
 		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
-			if(iwareHouseDao==null){
-				iwareHouseDao = new WareHouseDao(dataSourceName);
-				return iwareHouseDao;
+			if(iwareHouseDAO==null){
+				iwareHouseDAO = new WareHouseDAO(dataSourceName);
+				return iwareHouseDAO;
 			}
 			else 
-				return iwareHouseDao;
+				return iwareHouseDAO;
 		}
 		return null;
 	}
-	public static INoticeDao getnoticeDao(){
+	public static INoticeDAO getnoticeDAO(){
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
 		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
-			if(inoticeDao==null){
-				inoticeDao = new NoticeDao(dataSourceName);
-				return inoticeDao;
+			if(inoticeDAO==null){
+				inoticeDAO = new NoticeDAO(dataSourceName);
+				return inoticeDAO;
 			}
 			else 
-				return inoticeDao;
+				return inoticeDAO;
 		}
 		
 		return null;
@@ -80,27 +76,78 @@ public class ZXBankDAOFactory {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
 
 		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
-			if(ifanancingDao==null){
-				ifanancingDao = new FinancingDao(dataSourceName);
-				return ifanancingDao;
+			if(ifanancingDAO==null){
+				ifanancingDAO = new FinancingDAO(dataSourceName);
+				return ifanancingDAO;
 			}
 			else 
-				return ifanancingDao;
+				return ifanancingDAO;
 		}
 		return null;
 	}
 	
-	public static IAgreementDao getAgreementDao() {
+	public static IAgreementDAO getAgreementDAO() {
 		String dataSourceName=SystemProperty.getPropertyValue("system.properties","dataSourceName");
 		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
-			if(iagreementDao==null){
-				iagreementDao=new AgreementDao(dataSourceName);
-				return iagreementDao;
+			if(iagreementDAO==null){
+				iagreementDAO=new AgreementDAO(dataSourceName);
+				return iagreementDAO;
 			}else{
-				return iagreementDao;
+				return iagreementDAO;
 			}
 		}
 		return null;
 	}
 
+	public static IRemovePledgeDAO getRemovePledgeDAO() {
+		String dataSourceName=SystemProperty.getPropertyValue("system.properties","dataSourceName");
+		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
+			if(iremovepledgeDAO==null){
+				iremovepledgeDAO=new RemovePledgeDAO(dataSourceName);
+				return iremovepledgeDAO;
+			}else{
+				return iremovepledgeDAO;
+			}
+		}
+		return null;
+	}
+	
+	public static IRemovePledgeDetailDAO getRemovePledgeDetailDAO() {
+		String dataSourceName=SystemProperty.getPropertyValue("system.properties","dataSourceName");
+		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
+			if(iremoveoledgedetailDAO==null){
+				iremoveoledgedetailDAO=new RemovePledgeDetailDAO(dataSourceName);
+				return iremoveoledgedetailDAO;
+			}else{
+				return iremoveoledgedetailDAO;
+			}
+		}
+		return null;
+	}
+	
+	public static IMoveNoticeDAO getMoveNoticeDAO() {
+		String dataSourceName=SystemProperty.getPropertyValue("system.properties","dataSourceName");
+		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
+			if(imovenoticeDAO==null){
+				imovenoticeDAO=new MoveNoticeDAO(dataSourceName);
+				return imovenoticeDAO;
+			}else{
+				return imovenoticeDAO;
+			}
+		}
+		return null;
+	}
+	
+	public static IMoveDetailDAO getMoveDetailDAO() {
+		String dataSourceName=SystemProperty.getPropertyValue("system.properties","dataSourceName");
+		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
+			if(imovedetailDAO==null){
+				imovedetailDAO=new MoveDetailDAO(dataSourceName);
+				return imovedetailDAO;
+			}else{
+				return imovedetailDAO;
+			}
+		}
+		return null;
+	}
 }

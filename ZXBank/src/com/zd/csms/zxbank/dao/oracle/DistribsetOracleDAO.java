@@ -32,18 +32,6 @@ public class DistribsetOracleDAO extends DAOSupport implements IDistribsetDAO {
 	}
 
 	/**
-	 * 测试查询所有
-	 */
-	@Override
-	public List<DistribsetZX> findAll() {
-		String sql = "select * from ZX_DISTRIBSET";
-		@SuppressWarnings("unchecked")
-		List<DistribsetZX> list = getJdbcTemplate().query(sql,
-				new BeanPropertyRowMapper(DistribsetZX.class));
-		return null;
-	}
-
-	/**
 	 * 按条件查询经销商
 	 */
 	@Override

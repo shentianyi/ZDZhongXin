@@ -109,7 +109,7 @@ allCheckBoxs[i].checked = false;
 	<div class="ly-contai rel">
 		<html:form action="ZXnotice.do?method=findnotice" styleId="nForm" method="post" onsubmit="return false">
 		<input name="method" id="method" type="hidden" value="findnotice" />
-		<div class="public-main-input ly-col-2 hidden abs">
+		<div class="public-main-input ly-col-1 hidden abs">
 			<div class="ly-input-w">
 				<div class="ly-row clearfix">
 					<div class="ly-col fl">

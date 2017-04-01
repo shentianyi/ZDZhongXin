@@ -122,7 +122,7 @@
 	<div class="ly-contai rel">
 	<html:form action="Financing.do" styleId="fiForm" method="post" onsubmit="return false">
 		<input name="method" id="method" type="hidden" value="financing" />
-		<div class="public-main-input ly-col-2 hidden abs">
+		<div class="public-main-input ly-col-1 hidden abs">
 			<div class="ly-input-w">
 				<div class="ly-row clearfix">
                     <div class="ly-col fl">

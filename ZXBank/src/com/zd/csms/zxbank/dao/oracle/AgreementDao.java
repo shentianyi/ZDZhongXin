@@ -8,12 +8,12 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import com.zd.core.DAOSupport;
 import com.zd.csms.zxbank.bean.Agreement;
-import com.zd.csms.zxbank.dao.IAgreementDao;
+import com.zd.csms.zxbank.dao.IAgreementDAO;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
-public class AgreementDao extends DAOSupport implements IAgreementDao{
+public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 
-	public AgreementDao(String dataSourceName) {
+	public AgreementDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 

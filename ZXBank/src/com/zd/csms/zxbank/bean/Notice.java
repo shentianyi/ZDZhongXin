@@ -1,8 +1,5 @@
 package com.zd.csms.zxbank.bean;
 
-import com.sun.security.auth.NTDomainPrincipal;
-
-
 /**
  * 通知推送表
  * @author yixiangyang

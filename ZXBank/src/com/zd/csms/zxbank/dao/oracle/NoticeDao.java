@@ -9,13 +9,13 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import com.zd.core.DAOSupport;
 
 import com.zd.csms.zxbank.bean.Notice;
-import com.zd.csms.zxbank.dao.INoticeDao;
+import com.zd.csms.zxbank.dao.INoticeDAO;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
-public class NoticeDao extends DAOSupport implements INoticeDao{
+public class NoticeDAO extends DAOSupport implements INoticeDAO{
 
-	public NoticeDao(String dataSourceName) {
+	public NoticeDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 

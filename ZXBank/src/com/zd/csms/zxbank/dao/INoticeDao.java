@@ -6,7 +6,7 @@ import com.zd.core.IDAO;
 import com.zd.csms.zxbank.bean.Notice;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
-public interface INoticeDao extends IDAO{
+public interface INoticeDAO extends IDAO{
 	//查询
 	public List<Notice> findNotice(Notice notice,IThumbPageTools tools);
 	//查询通知类型

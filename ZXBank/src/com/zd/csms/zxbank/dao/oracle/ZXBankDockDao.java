@@ -6,11 +6,11 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import com.zd.core.DAOSupport;
 import com.zd.csms.zxbank.bean.Customer;
-import com.zd.csms.zxbank.dao.ZXIBankDockDao;
+import com.zd.csms.zxbank.dao.ZXIBankDockDAO;
 
-public class ZXBankDockDao extends DAOSupport implements ZXIBankDockDao{
+public class ZXBankDockDAO extends DAOSupport implements ZXIBankDockDAO{
 
-	public ZXBankDockDao(String dataSourceName) {
+	public ZXBankDockDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 

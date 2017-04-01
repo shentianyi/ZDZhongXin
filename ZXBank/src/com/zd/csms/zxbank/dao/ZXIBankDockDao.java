@@ -6,7 +6,7 @@ import com.zd.core.IDAO;
 import com.zd.csms.zxbank.bean.Customer;
 
 
-public interface ZXIBankDockDao extends IDAO{
+public interface ZXIBankDockDAO extends IDAO{
 	/**
 	 * @author yixiangyang 
 	 * @return

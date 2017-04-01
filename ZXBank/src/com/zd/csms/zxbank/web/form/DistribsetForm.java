@@ -1,9 +1,6 @@
 package com.zd.csms.zxbank.web.form;
 
-import java.util.Date;
-
 import org.apache.struts.action.ActionForm;
-
 import com.zd.csms.zxbank.bean.DistribsetZX;
 
 public class DistribsetForm extends ActionForm {

@@ -9,9 +9,9 @@ import com.zd.csms.zxbank.dao.IWareHouseDAO;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
-public class WareHouseDao extends DAOSupport implements IWareHouseDAO{
+public class WareHouseDAO extends DAOSupport implements IWareHouseDAO{
 
-	public WareHouseDao(String dataSourceName) {
+	public WareHouseDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 

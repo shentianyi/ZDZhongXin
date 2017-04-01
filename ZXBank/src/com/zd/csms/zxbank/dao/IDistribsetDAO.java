@@ -7,7 +7,6 @@ import com.zd.csms.zxbank.bean.DistribsetZX;
 
 public interface IDistribsetDAO extends IDAO {
 	
-	List<DistribsetZX> findAll();
 
 	/**
 	 * 按条件查询
