@@ -10,6 +10,7 @@
 		<form-bean name="agrForm" type="com.zd.csms.zxbank.web.form.AgreementForm"></form-bean>
 		<form-bean name="rpForm" type="com.zd.csms.zxbank.web.form.RemovePledgeForm"></form-bean>
 		<form-bean name="mnForm" type="com.zd.csms.zxbank.web.form.MoveNoticeForm"></form-bean>
+		<form-bean name="rForm" type="com.zd.csms.zxbank.web.form.ReceivingNoticeForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
@@ -49,6 +50,14 @@
 		<action path="/movedetail"  parameter="method" 
 			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
 			<forward name="movedetail"  path="/jsp/move_notice_detail.jsp" />
+		</action>
+		<action path="/receivingnotice"  parameter="method" name="rForm"
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="receivingnotice"  path="/jsp/receiving_notice.jsp" />
+		</action>
+		<action path="/receivingdetail"  parameter="method"
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="receivingdetail"  path="/jsp/receiving_notice_detail.jsp" />
 		</action>
 	</action-mappings>
 </struts-config>	

@@ -17,6 +17,8 @@ public class ZXBankDAOFactory {
 	private static IRemovePledgeDetailDAO iremoveoledgedetailDAO;
 	private static IMoveNoticeDAO imovenoticeDAO;
 	private static IMoveDetailDAO imovedetailDAO;
+	private static IReceivingNoticeDAO ireceivingnoticeDAO;
+	private static IReceivingDetailDAO ireceivingdetailDAO;
 	
 	public static ZXIBankDockDAO getBankDockDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
@@ -149,5 +151,31 @@ public class ZXBankDAOFactory {
 			}
 		}
 		return null;
+	}
+
+	public static IReceivingNoticeDAO getReceivingNoticeDAO(){
+		String dataSourceName=SystemProperty.getPropertyValue("system.properties", "dataSourceName");
+		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
+			if(ireceivingnoticeDAO==null){
+				ireceivingnoticeDAO=new ReceivingNoticeDAO(dataSourceName);
+				return ireceivingnoticeDAO;
+			}else{
+				return ireceivingnoticeDAO;
+			}
+		}
+		return ireceivingnoticeDAO;
+	}
+	
+	public static IReceivingDetailDAO getReceivingDetailDAO(){
+		String dataSourceName=SystemProperty.getPropertyValue("system.properties", "dataSourceName");
+		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
+			if(ireceivingdetailDAO==null){
+				ireceivingdetailDAO=new ReceivingDetailDAO(dataSourceName);
+				return ireceivingdetailDAO;
+			}else{
+				return ireceivingdetailDAO;
+			}
+		}
+		return ireceivingdetailDAO;
 	}
 }

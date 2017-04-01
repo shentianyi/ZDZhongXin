@@ -1,13 +1,9 @@
-package com.zd.csms.zxbank.web.action;
+﻿package com.zd.csms.zxbank.web.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -83,6 +79,10 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	private MoveNoticeService mns = new MoveNoticeService();
 	// 移库通知详情
 	private MoveDetailService mds = new MoveDetailService();
+	//发货通知
+	private ReceivingNoticeService rns = new ReceivingNoticeService();
+	//发货通知详情
+	private ReceivingDetailService rds = new ReceivingDetailService();
 
 	public ActionForward distribset(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
@@ -336,6 +336,51 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		request.setAttribute("mn", mn);
 		
 		return mapping.findForward("movedetail");
+	}
+
+	/**
+	 * 收货通知书
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward receivingnotice(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		ReceivingNoticeForm notifyrom=(ReceivingNoticeForm)form;
+		ReceivingNotice query=notifyrom.getReceivingnotice();
+		IThumbPageTools tools=ToolsFactory.getThumbPageTools("ReceivingNotice", request);
+		tools.setPageSize(2);
+		List<ReceivingNotice> list=rns.findBusinessList(query, tools);
+		request.setAttribute("list", list);
+		request.setAttribute("nyNo",query.getNyNo());
+		request.setAttribute("nyLonentname", query.getNyLonentname());
+		return mapping.findForward("receivingnotice");
+	}
+	
+	/**
+	 * 收货通知书详情
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward receivingdetail(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String no = request.getParameter("nyNo");
+		ReceivingDetail query= new ReceivingDetail();
+		query.setNdNo(no);
+		IThumbPageTools tools=ToolsFactory.getThumbPageTools("ReceivingDetail", request);
+		tools.setPageSize(2);
+		List<ReceivingDetail> list=rds.findBusinessList(query, tools);
+		
+		ReceivingNotice receiving=rns.getNotify(no);
+		request.setAttribute("list", list);
+		request.setAttribute("receiving", receiving);
+		
+		return mapping.findForward("receivingdetail");
 	}
 
 	/**

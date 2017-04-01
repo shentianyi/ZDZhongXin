@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -21,7 +21,7 @@
 			<li><a href="Warehouse.do?method=warehouse">仓库信息查询</a></li>
 			<li><a href="Financing.do?method=financing">融资信息查询</a></li>
 			<li><a href="agreement.do?method=agreement">监管协议信息查询</a></li>
-			<li><a href="jsp/delivery_notice.jsp">收货通知书</a></li>
+			<li><a href="receivingnotice.do?method=receivingnotice">收货通知书</a></li>
 			<li><a href="removepledge.do?method=removepledge">解除质押通知书</a></li>
 			<li><a href="movenotice.do?method=movenotice">移库通知书</a></li>
 			<li><a href="jsp/gager_apply.jsp">质物入库</a></li>
