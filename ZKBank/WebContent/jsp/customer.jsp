@@ -23,10 +23,6 @@
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
 <script>
-function doQuery(){
-	document.forms[0].submit();
-}
-
   $(function() {
 	  $( "#custOrganizationcode" ).autocomplete({
 	      source: function( request, response ) {
@@ -49,35 +45,15 @@ function doQuery(){
 	  });
   });
   
-  $(function() {
-	    var availableTags = [
-			"ActionScript",
-			"AppleScript",
-			"Asp",
-			"BASIC",
-			"C",
-			"C++",
-			"Clojure",
-			"COBOL",
-			"ColdFusion",
-			"Erlang",
-			"Fortran",
-			"Groovy",
-			"Haskell",
-			"Java",
-			"JavaScript",
-			"Lisp",
-			"Perl",
-			"PHP",
-			"Python",
-			"Ruby",
-			"Scala",
-			"Scheme"
-	    ];
-	    $( "#custName" ).autocomplete({
-	      source: availableTags
-	    });
-	  });
+  function doQuery(){
+		document.forms[0].submit();
+	} 
+  
+  function doClear(){
+	  $("#custOrganizationcode").val("");
+	  $("#custName").val("");
+  }
+  
   </script>
 </head>
 <body class="h-100 public">
@@ -100,15 +76,14 @@ function doQuery(){
 					<div class="ly-col fl">
                         <div class="label block fl hidden">组织机构代码：</div>
 	                    <div class="input block fl hidden">
-	                    	<html:text property="customer.custOrganizationcode"  styleId="custOrganizationcode" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" />
+	                    	<input class="ly-bor-none" type="text" id="custOrganizationcode" name="customer.custOrganizationcode" />
 	                    </div>
                     </div>
                     
                     <div class="ly-col fl">
                         <div class="label block fl hidden">客户名称：</div>
 	                    <div class="input block fl hidden">
-	                    	<html:text property="customer.custName" styleId="custName" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" />
-	                    	<!-- <input id="custName" type="text" name="custName" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" /> -->
+	                    	<input class="ly-bor-none" type="text" id="custName" name="customer.custName" />
 	                    </div>
                     </div>
                     <div class="ly-col fl">

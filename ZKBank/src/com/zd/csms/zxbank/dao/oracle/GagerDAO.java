@@ -14,7 +14,6 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 
 	public GagerDAO(String dataSourceName) {
 		super(dataSourceName);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -26,11 +25,7 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 		formatSQL(query,parameter,sql);
 		try {
 			list=tools.goPage(sql.toString(),parameter.toArray(),new BeanPropertyRowMapper(Gager.class));
-			for (Gager gager : list) {
-				System.out.println(gager.toString());
-			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -54,7 +49,6 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 		try {
 			list = tools.goPage(sql.toString(), new BeanPropertyRowMapper(Gager.class));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Gager ager=list.get(0);

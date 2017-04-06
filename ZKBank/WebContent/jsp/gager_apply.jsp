@@ -73,7 +73,7 @@
 </div>
 <div class="public-main abs">
 	<div class="ly-contai rel">
-		<html:form action="/gagerApp.do" styleId="gForm" method="post" onsubmit="return false" enctype="multipart/form-data">
+		<html:form action="/gager.do" styleId="gForm" method="post" onsubmit="return false" enctype="multipart/form-data">
 		<input name="method" id="method" type="hidden" value="" />
 		<div class="public-main-input ly-col-2 hidden abs">
 			<div class="ly-input-w">
@@ -132,7 +132,7 @@
 				</div>
 			</div>
 			<div class="ly-button-w">
-                <a href="javascript:doCommit('gager');" class="button btn-query">导入</a>
+                <a href="javascript:doCommit('gagerApp');" class="button btn-query">导入</a>
             </div>
 		</div>
 		<div class="public-main-table hidden abs">

@@ -29,4 +29,17 @@ public class ReceivingDetailDAO extends DAOSupport implements IReceivingDetailDA
 		return list;
 	}
 
+	@Override
+	public List<ReceivingDetail> firnAll(ReceivingDetail query) {
+		StringBuffer sql=new StringBuffer();
+		sql.append("select * from zx_notifydetail where nd_no='"+query.getNdNo()+"'");
+		List<ReceivingDetail> list=null;
+		try {
+			list=getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ReceivingDetail.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

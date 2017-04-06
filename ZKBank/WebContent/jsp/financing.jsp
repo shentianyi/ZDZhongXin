@@ -17,7 +17,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=IUTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>中都汽车金融监管系统</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
@@ -27,6 +27,7 @@
 <script src="js/jquery.easyui.min.js"></script>
 <script src="js/easyui-lang-zh_CN.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
+<script src="js/calendar.js"></script>
 <style type="text/css">
 	.title td{
 		padding:0 15px 0 15px;
@@ -36,7 +37,6 @@
 		margin-left:10%;
 	}
 </style>
-<script src="js/calendar.js"></script>
 <script type="text/javascript">
 	function doQuery(){
 		if($("#choose").val()=="2"){
@@ -103,7 +103,6 @@
 		$('#fgStDateEnd').datebox({
 			editable:false
 		});  
-		 
 
 	});
 </script>
@@ -122,7 +121,7 @@
 	<div class="ly-contai rel">
 	<html:form action="Financing.do" styleId="fiForm" method="post" onsubmit="return false">
 		<input name="method" id="method" type="hidden" value="financing" />
-		<div class="public-main-input ly-col-1 hidden abs">
+		<div class="public-main-input ly-col-1 abs" >
 			<div class="ly-input-w">
 				<div class="ly-row clearfix">
                     <div class="ly-col fl">

@@ -10,8 +10,12 @@ import com.zd.tools.thumbPage.IThumbPageTools;
 
 public class ReceivingDetailService extends ServiceSupport{
 	private IReceivingDetailDAO nodldao=ZXBankDAOFactory.getReceivingDetailDAO();
+	
 	public List<ReceivingDetail> findBusinessList(ReceivingDetail query,IThumbPageTools tools){
 		return nodldao.firnAllAgList(query, tools);
 	}
 	
+	public List<ReceivingDetail> findAll(ReceivingDetail query){
+		return nodldao.firnAll(query);
+	}
 }

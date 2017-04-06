@@ -21,6 +21,7 @@ public class ZXBankDAOFactory {
 	private static IReceivingDetailDAO ireceivingdetailDAO;
 	private static IGagerDAO igagerDAO;
 	private static ICommodityDAO icommodityDAO;
+	private static ICheckstockDAO icheckstockDAO;
 	
 	public static ZXIBankDockDAO getBankDockDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
@@ -205,5 +206,19 @@ public class ZXBankDAOFactory {
 			}
 		}
 		return icommodityDAO;
+	}
+	
+	
+	public static ICheckstockDAO getCheckstockDAO() {
+		String dataSourceName=SystemProperty.getPropertyValue("system.properties", "dataSourceName");
+		if(Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))){
+			if(icheckstockDAO==null){
+				icheckstockDAO=new CheckstockDAO(dataSourceName);
+				return icheckstockDAO;
+			}else{
+				return icheckstockDAO;
+			}
+		}
+		return icheckstockDAO;
 	}
 }

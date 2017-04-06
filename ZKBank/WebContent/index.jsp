@@ -24,10 +24,10 @@
 			<li><a href="receivingnotice.do?method=receivingnotice">收货通知书</a></li>
 			<li><a href="removepledge.do?method=removepledge">解除质押通知书</a></li>
 			<li><a href="movenotice.do?method=movenotice">移库通知书</a></li>
-			<li><a href="gagerApp.do?method=gagerApp">质物入库</a></li>
+			<li><a href="gager.do?method=gagerApp">质物入库</a></li>
 			<li><a href="gager.do?method=gager">质物入库查询</a></li>
-			<li><a href="jsp/stock_taking.jsp">盘库信息提交</a></li>
-			<li><a href="jsp/stock_taking_select.jsp">盘库信息查询</a></li>
+			<li><a href="stock.do?method=initstock">盘库信息提交</a></li>
+			<li><a href="checkstock.do?method=checkstock">盘库信息查询</a></li>
 		</ul>
 		</div>
 	</div>

@@ -22,8 +22,8 @@ function doSave(){
 	}if(chooseVal=="1"){
 		alert("浙商银行");
 	}if(chooseVal=="2"){
-		if($("#organizationcode").val()=="" || $("#contract").val()==""){
-			alert("组织机构代码或合同编号不能为空");
+		if($("#organizationcode").val()==""){
+			alert("组织机构代码不能为空");
 			return false;
 		}
 	}

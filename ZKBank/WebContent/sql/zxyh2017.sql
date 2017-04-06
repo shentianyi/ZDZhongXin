@@ -438,3 +438,48 @@ create sequence zx_commodityId
 increment by 1
 start with 1;
 
+--盘库信息表
+create table zx_checkstock(
+cs_id number(19,2) primary key,--盘库表id
+cs_loncpId Varchar2(50) Not null,--借款企业id
+cs_protocolno Varchar2(50) Not null,--系统监管协议编号
+cs_protocolCode Varchar2(50) Not null,--纸质监管协议编号
+cs_userNo Varchar2(50) Not null,--操作人编号
+cs_userName Varchar2(20) Not null,--操作人名称
+cs_tradeid Varchar2(50)	Not null,--交易流水号
+cs_planDate Char(8) Not null,--计划盘库日期
+cs_factDate Char(8) Not null,--实际盘库日期
+cs_errorReport Varchar2(1000) Not null,--差错报告
+cs_remark Varchar2(1000),--备注
+Cs_createdate Date--创建时间
+);
+create sequence zx_checkstockId
+increment by 1
+start with 1
+
+--监管仓库和商品
+create table zx_check(
+ck_id number(19,2) primary key,--主键	监管仓库和商品id
+ck_csid	Number(19,2),--外键引用盘库表主键
+ck_spvwhcode Varchar2(20),--监管仓库代码
+ck_cmcode Number(19,2),--商品代码
+ck_cstkcmdnum Number(19,2),--盘库商品数量
+ck_cmgrtcntno Varchar2(20),--动产质押担保合同编号
+ck_vin Varchar2(40)--车架号
+)
+create sequence zx_checkId
+increment by 1
+start with 1
+
+--监管仓库列表
+create table zx_checkwarehouse(
+ch_id number(19,2) primary key,--主键 监管仓库id
+ch_ckid	Number(19,2),--外键引用监管仓库和商品表中的主键
+ch_whlevel Varchar2(100) not null,--仓库级别
+ch_whcode varchar2(30) not null,--仓库代码
+ch_whaddr Varchar2(300),--仓库地址
+ch_num Number(19,2)--车辆数量
+)
+create sequence zx_checkwarehouseId
+increment by 1
+start with 1

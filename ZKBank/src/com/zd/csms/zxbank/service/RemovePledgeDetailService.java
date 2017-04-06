@@ -20,4 +20,8 @@ public class RemovePledgeDetailService extends ServiceSupport{
 	public List<RemovePledgeDetail> findByQuery(RemovePledgeDetail query, IThumbPageTools tools) {
 		return dao.findByQuery(query, tools);
 	}
+	
+	public List<RemovePledgeDetail> findAll(String no) {
+		return dao.findAll(no);
+	}
 }

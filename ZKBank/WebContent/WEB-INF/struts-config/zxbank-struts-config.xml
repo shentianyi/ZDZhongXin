@@ -61,17 +61,26 @@
 			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
 			<forward name="receivingdetail" path="/jsp/receiving_notice_detail.jsp" />
 		</action>
-		<action path="/gagerApp" parameter="method" name="gForm"
-			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
-			<forward name="gagerApp" path="/jsp/gager_apply.jsp" />
-		</action>
 		<action path="/gager"  parameter="method" name="gForm"
 			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
 			<forward name="gager"  path="/jsp/gager_select.jsp" />
+			<forward name="gagerApp" path="/jsp/gager_apply.jsp" />
 		</action>
 		<action path="/commodity"  parameter="method"
 			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
 			<forward name="commodity"  path="/jsp/gager_select_detail.jsp" />
+		</action>
+		<action path="/stock"  parameter="method" name="gForm"
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="stocktaking"  path="/jsp/stock_taking.jsp" />
+		</action>
+		<action path="/checkstock"  parameter="method" name="gForm"
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="checkstock"  path="/jsp/stock_taking_select.jsp" />
+		</action>
+		<action path="/checkstockDetail"  parameter="method"
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="checkstockDetail"  path="/jsp/stock_taking_detail.jsp" />
 		</action>
 	</action-mappings>
 </struts-config>	

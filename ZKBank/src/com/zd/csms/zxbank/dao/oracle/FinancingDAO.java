@@ -51,7 +51,7 @@ public class FinancingDAO extends DAOSupport implements IFinancingDAO{
 			sql.append(" AND FGSTDATE>?");
 		}
 		if(query.getFgStDateEnd()!=null&&!query.getFgStDateEnd().equals("")){
-			params.add(query.getFgStDateStart());
+			params.add(query.getFgStDateEnd());
 			sql.append(" AND FGSTDATE<?");
 		}
 	}

@@ -3,6 +3,7 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -34,12 +36,17 @@ import com.zd.csms.zxbank.dao.*;
 import com.zd.csms.zxbank.dao.oracle.*;
 import com.zd.csms.zxbank.model.*;
 import com.zd.csms.zxbank.service.*;
+import com.zd.csms.zxbank.util.ExcelUtil;
 import com.zd.csms.zxbank.util.SocketClient;
 import com.zd.csms.zxbank.util.ZhongXinBankUtil;
+import com.zd.csms.zxbank.web.excel.RemoveRowMapper;
 import com.zd.csms.zxbank.web.form.*;
+import com.zd.csms.zxbank.web.mapper.CheckstockVOImportRowMapper;
 import com.zd.csms.zxbank.web.mapper.CommodityImportRowMapper;
 import com.zd.tools.StringUtil;
+import com.zd.tools.file.importFile.IExportFile;
 import com.zd.tools.file.importFile.IImportFile;
+import com.zd.tools.file.importFile.impl.ExportFileExcelImpl;
 import com.zd.tools.file.importFile.impl.ImportFileExcelImpl;
 import com.zd.tools.thumbPage.IThumbPageTools;
 import com.zd.tools.thumbPage.ToolsFactory;
@@ -102,6 +109,8 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	private GagerService gds = new GagerService();
 	//质物入库详情信息。
 	private CommodityService cds = new CommodityService();
+	//盘库信息查询 详情查询
+	private CheckstockService ckds = new CheckstockService();
 
 	public ActionForward distribset(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -123,36 +132,6 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	/**
-	 * 质物入库导入文件
-	 * 
-	 * @throws FileNotFoundException
-	 */
-	public ActionForward pergager(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		// setOptions(request);
-
-		// 获得form
-		BankInterfaceForm bForm = (BankInterfaceForm) form;
-
-		Gager gager = bForm.getGager();
-		// 设置其他必填参数
-		FormFile file = bForm.getImportFile();
-
-		IImportFile importFile = new ImportFileExcelImpl(file.getInputStream(), 0);
-
-		@SuppressWarnings("unchecked")
-		List<Commodity> list = (List<Commodity>) importFile.readAll(1, new CommodityImportRowMapper());
-
-		if (list == null || list.size() == 0) {
-			request.setAttribute("message", "导入列表不能为空");
-			return mapping.findForward("gagerApp");
-		}
-		request.setAttribute("list", list);
-		request.setAttribute("gager", gager);
-		return mapping.findForward("gagerApp");
 	}
 
 	/**
@@ -331,6 +310,32 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	}
 
 	/**
+	 * 解除质押通知书详情导出
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward removepledgedetailOut(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String no = request.getParameter("rdno");
+		RemovePledge rp = rps.fingByNo(no);
+		List<RemovePledgeDetail> list = rpds.findAll(no);
+
+		IExportFile export = new ExportFileExcelImpl();
+		try {
+			export.export(list, new RemoveRowMapper(), export.createDefaultFileName("解除质押通知详情"), "解除质押通知详情", response);
+			System.out.println("come here");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
 	 * 移库通知查询
 	 * 
 	 * @param mapping
@@ -438,6 +443,133 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	}
 
 	/**
+	 * 收货通知书详情导出
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward receivingdetailOut(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String no = request.getParameter("nyNo");
+		ReceivingDetail query = new ReceivingDetail();
+		query.setNdNo(no);
+
+		List<ReceivingDetail> list = rds.findAll(query);
+
+		ReceivingNotice receiving = rns.getNotify(no);
+		request.setAttribute("list", list);
+		request.setAttribute("receiving", receiving);
+
+		//生成EXCEL
+		// 第一步，创建一个webbook，对应一个Excel文件  
+		HSSFWorkbook wb = new HSSFWorkbook();
+		// 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
+		HSSFSheet sheet = wb.createSheet("收货通知");
+		// 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
+		HSSFRow row = sheet.createRow(0);
+		// 第四步，创建单元格，并设置值表头 设置表头居中  
+		HSSFCellStyle style = wb.createCellStyle();
+		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式  
+
+		//收货通知
+		String[] values = { "收货通知书编号", "核心企业名称", "(在库)监管企业名称", "(在途)监管企业名称", "运输企业名称", "借款企业ID", "借款企业名称", "发货日期",
+				"预计到港(库)日期", "预计到港(库)", "纸质监管协议编号", "通知书日期", "货物价值合计", "交货地点", "总记录", "备注" };
+		ExcelUtil.setHead(row, values, style);
+
+		//写入数据
+		row = sheet.createRow(1);
+		row.createCell(0).setCellValue(receiving.getNyNo());
+		row.createCell(1).setCellValue(receiving.getNyCorentnm());
+		row.createCell(2).setCellValue(receiving.getNySpventnm());
+		row.createCell(3).setCellValue(receiving.getNyOnwspvenm());
+		row.createCell(4).setCellValue(receiving.getNyTrsptentnm());
+		row.createCell(5).setCellValue(receiving.getNyLonentno());
+		row.createCell(6).setCellValue(receiving.getNyLonentname());
+		row.createCell(7).setCellValue(receiving.getNyCreatedate());
+		row.createCell(8).setCellValue(receiving.getNyEta());
+		row.createCell(9).setCellValue(receiving.getNyEpa());
+		row.createCell(10).setCellValue(receiving.getNyOfflnsatno());
+		row.createCell(11).setCellValue(receiving.getNyNtcdate());
+		row.createCell(12).setCellValue(receiving.getNyTtlcmdval());
+		row.createCell(13).setCellValue(receiving.getNyExcplace());
+		row.createCell(14).setCellValue(receiving.getNyTotnum());
+		row.createCell(15).setCellValue(receiving.getNyRemark());
+
+		//详情
+		String[] details = { "实际订单纸质编号", "实际订单名称", "商品代码", "商品名称", "发货数量", "计量单位", "发货单价", "发货价值", "SCF放款批次号",
+				"质押合同编号", "融资编号", "合格证编号", "车架号", "车价", "备注" };
+		row = sheet.createRow(3);
+		ExcelUtil.setHead(row, values, style);
+
+		// 第五步，写入实体数据 
+		for (int i = 0; i < list.size(); i++) {
+			row = sheet.createRow(i + 4);
+			ReceivingDetail rd = list.get(i);
+			// 第四步，创建单元格，并设置值
+			row.createCell(0).setCellValue(rd.getNdIdtplanno());
+			row.createCell(1).setCellValue(rd.getNdIdtplannm());
+			row.createCell(2).setCellValue(rd.getNdCmdcode());
+			row.createCell(3).setCellValue(rd.getNdCmdname());
+			row.createCell(4).setCellValue(rd.getNdCsnnum());
+			row.createCell(5).setCellValue(rd.getNdUnit());
+			row.createCell(6).setCellValue(rd.getNdCsnprc());
+			row.createCell(7).setCellValue(rd.getNdReqcsnval());
+			row.createCell(8).setCellValue(rd.getNdScflonno());
+			row.createCell(9).setCellValue(rd.getNdMtgcntno());
+			row.createCell(10).setCellValue(rd.getNdLoancode());
+			row.createCell(11).setCellValue(rd.getNdHgzno());
+			row.createCell(12).setCellValue(rd.getNdVin());
+			row.createCell(13).setCellValue(rd.getNdCarprice());
+			row.createCell(14).setCellValue(rd.getNdRemark());
+		}
+
+		// 第六步，将文件存到指定位置  
+		try {
+			FileOutputStream fout = new FileOutputStream("D:/收货通知.xls");
+			wb.write(fout);
+			fout.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	/**
+	 * 质物入库导入文件
+	 * 
+	 * @throws FileNotFoundException
+	 */
+	public ActionForward pergager(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		// setOptions(request);
+
+		// 获得form
+		BankInterfaceForm bForm = (BankInterfaceForm) form;
+
+		Gager gager = bForm.getGager();
+		// 设置其他必填参数
+		FormFile file = bForm.getImportFile();
+
+		IImportFile importFile = new ImportFileExcelImpl(file.getInputStream(), 0);
+
+		@SuppressWarnings("unchecked")
+		List<Commodity> list = (List<Commodity>) importFile.readAll(1, new CommodityImportRowMapper());
+
+		if (list == null || list.size() == 0) {
+			request.setAttribute("message", "导入列表不能为空");
+			return mapping.findForward("gagerApp");
+		}
+		request.setAttribute("list", list);
+		request.setAttribute("gager", gager);
+		return mapping.findForward("gagerApp");
+	}
+
+	/**
 	 * 质物入库
 	 * @param mapping
 	 * @param form
@@ -504,9 +636,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		 */
 		request.setAttribute("list", list);
 		// request.getSession().setAttribute("gyl016List", list);
-		return mapping.findForward("gager");
+		return mapping.findForward("gagerApp");
 	}
-	
+
 	/**
 	 * 质物入库信息查询
 	 * @param mapping
@@ -516,16 +648,18 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward gager(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		BankInterfaceForm gform=(BankInterfaceForm)form;
-		Gager query= gform.getGager();
-		IThumbPageTools tools=ToolsFactory.getThumbPageTools("Gager",request);
+	public ActionForward gager(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		BankInterfaceForm gform = (BankInterfaceForm) form;
+		Gager query = gform.getGager();
+		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Gager", request);
 		tools.setPageSize(2);
-		List<Gager> list=gds.findBusinessList(query, tools);
-		request.setAttribute("gaLonentno",query.getGaLonentno());
+		List<Gager> list = gds.findBusinessList(query, tools);
+		request.setAttribute("gaLonentno", query.getGaLonentno());
 		request.setAttribute("list", list);
 		return mapping.findForward("gager");
 	}
+
 	/**
 	 * 质物入库详情
 	 * @param mapping
@@ -535,20 +669,133 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward commodity(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		Commodity query= new Commodity();
+	public ActionForward commodity(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		Commodity query = new Commodity();
 		query.setCmGaid(Integer.parseInt(request.getParameter("gaId")));
-		
-		IThumbPageTools tools=ToolsFactory.getThumbPageTools("Commodity",request);
+
+		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Commodity", request);
 		tools.setPageSize(2);
-		List<Commodity> list=cds.findBusinessList(query, tools);
+		List<Commodity> list = cds.findBusinessList(query, tools);
 		request.setAttribute("list", list);
-		Gager gager=gds.getGager(Integer.parseInt(request.getParameter("gaId")), tools);
-		request.setAttribute("Gager",gager);
+		Gager gager = gds.getGager(Integer.parseInt(request.getParameter("gaId")), tools);
+		request.setAttribute("Gager", gager);
 		return mapping.findForward("commodity");
 	}
+
+	public ActionForward initstock(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return mapping.findForward("stocktaking");
+	}
+
+	/**
+	 * 盘库信息导入文件
+	 * 
+	 * @throws FileNotFoundException
+	 */
+	public ActionForward perstock(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		// setOptions(request);
+
+		// 获得form
+		BankInterfaceForm bForm = (BankInterfaceForm) form;
+
+		//Gager gager = bForm.getGager();
+		// 设置其他必填参数
+		FormFile file = bForm.getImportFile();
+
+		IImportFile importFile = new ImportFileExcelImpl(file.getInputStream(), 0);
+
+		@SuppressWarnings("unchecked")
+		List<CheckstockVO> list = (List<CheckstockVO>) importFile.readAll(1, new CheckstockVOImportRowMapper());
+
+		List<Checkwarehouse> wlist = new ArrayList<Checkwarehouse>();
+		List<Check> clist = new ArrayList<Check>();
+		for (CheckstockVO csVO : list) {
+			Boolean flag = false;
+			String whcode = csVO.getWhcode();
+			if (wlist.size() > 0) {
+				for (Checkwarehouse cwt : wlist) {
+					if (cwt.getChWhcode().equals(whcode)) {
+						int num = cwt.getChNum();
+						cwt.setChNum(++num);
+						flag = true;
+						break;
+					}
+				}
+			}
+			if (!flag) {
+				Checkwarehouse cw = new Checkwarehouse();
+				cw.setChWhcode(csVO.getWhcode());
+				cw.setChWhlevel(csVO.getWhlevel());
+				cw.setChWhaddr(csVO.getWhaddr());
+				cw.setChNum(1);
+				wlist.add(cw);
+			}
+
+			Check c = new Check();
+			c.setCkSpvwhcode(whcode);
+			c.setCkCmcode(csVO.getCmcode());
+			c.setCkCstkcmdnum(Integer.parseInt(csVO.getNum()));
+			c.setCkCmgrtcntno(csVO.getCmgrtcntno());
+			c.setCkVin(csVO.getVin());
+			clist.add(c);
+			flag = false;
+		}
+
+		if (list == null || list.size() == 0) {
+			request.setAttribute("message", "导入列表不能为空");
+			return mapping.findForward("stocktaking");
+		}
+		request.setAttribute("list", list);
+		//request.setAttribute("gager", gager);
+		return mapping.findForward("stocktaking");
+	}
 	
-	
+	/**
+	 * 盘库信息查询
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward checkstock(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		BankInterfaceForm bform=(BankInterfaceForm)form;
+		Checkstock query=bform.getCheckstock();
+		IThumbPageTools tools=ToolsFactory.getThumbPageTools("Checkstock",request);
+		tools.setPageSize(2);
+		List<Checkstock> list=ckds.findBusinessList(query, tools);
+		request.setAttribute("list", list);
+		for (Checkstock checkstock : list) {
+			System.out.println(checkstock.toString());
+		}
+		request.setAttribute("csLoncpid",query.getCsLoncpid());
+		return mapping.findForward("checkstock");
+	}
+	/**
+	 * 盘库详情信息
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward checkstockDetail(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		int id=Integer.parseInt(request.getParameter("csid"));
+		int loncpid=Integer.parseInt(request.getParameter("loncpid"));
+		
+		IThumbPageTools tools=ToolsFactory.getThumbPageTools("CheckstockVO",request);
+		tools.setPageSize(1);
+		Checkstock checkstock=ckds.getCheckstock(loncpid);//获取共同盘库信息部分
+		List<CheckstockVO> list=ckds.findAllVOList(id, tools);//获取详情信息列表
+		
+		request.setAttribute("checkstock",checkstock);
+		request.setAttribute("list", list);
+		return mapping.findForward("checkstockDetail");
+	}
 
 	/*private boolean commonRequest(ActionMapping mapping, HttpServletRequest request, String listName,
 			Class<?> resultClassType, String... field) throws Exception, DocumentException {

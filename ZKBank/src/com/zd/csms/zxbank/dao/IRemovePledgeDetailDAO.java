@@ -21,4 +21,6 @@ public interface IRemovePledgeDetailDAO extends IDAO {
 	 */
 	public List<RemovePledgeDetail> findByQuery(RemovePledgeDetail query, IThumbPageTools tools);
 
+	public List<RemovePledgeDetail> findAll(String no);
+	
 }
