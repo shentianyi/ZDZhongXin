@@ -82,5 +82,11 @@
 			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
 			<forward name="checkstockDetail"  path="/jsp/stock_taking_detail.jsp" />
 		</action>
+		<action path="/noticepush"  parameter="method" 
+			type="com.zd.csms.zxbank.web.action.ZXBankInterfaceAction" scope="request">
+			<forward name="receivingdetail" path="/jsp/receiving_notice_detail.jsp" />
+			<forward name="removepledgedetail" path="/jsp/remove_pledge_notice_detail.jsp" />
+			<forward name="movedetail" path="/jsp/move_notice_detail.jsp" />
+		</action>
 	</action-mappings>
 </struts-config>	

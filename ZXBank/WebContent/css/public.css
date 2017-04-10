@@ -14,7 +14,6 @@
 	cursor: pointer;
 }
 
-
 /* 宸ュ叿鏍忔牱寮�*/
 .public-bar {
 	background: #f8f8f8;
@@ -214,6 +213,7 @@
 .public-main-table .t-th {
 	font-size: 14px;
 	font-weight: normal;
+	border-right: 1px solid #ccc;
 }
 .public-main-table .t-td {
 	max-width: 400px;

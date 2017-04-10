@@ -22,7 +22,6 @@
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
 <link rel="stylesheet" href="css/jquery-ui.min.css">
-<link rel="stylesheet" href="css/tablecs.css">
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
@@ -35,77 +34,8 @@ function doClear(){
 	$("custNo").value="";
 	getElement("pledgeName").value="";
 }
-  $(function() {
-    var availableTags = [
-      "41234",
-      "12312",
-      "12341",
-      "5123412",
-      "234125",
-      "51234",
-      "234534",
-      "623452",
-      "6346345",
-      "62346",
-      "62346",
-      "1412341y",
-      "1234234",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#custNo" ).autocomplete({
-      source: availableTags
-    });
-  });
-  $(function() {
-	    var availableTags = [
-			"41234",
-			"12312",
-			"12341",
-			"5123412",
-			"234125",
-			"51234",
-			"234534",
-			"623452",
-			"6346345",
-			"62346",
-			"62346",
-			"1412341y",
-			"1234234",
-			"Java",
-			"JavaScript",
-			"Lisp",
-			"Perl",
-			"PHP",
-			"Python",
-			"Ruby",
-			"Scala",
-			"Scheme"];
-	    $( "#loncpid_name" ).autocomplete({
-	      source: availableTags
-	    });
-	  });
   
-  
-  	/* $.ajax({
-  		url:"ZXinterface.do?method=warehouse",
-  		type:"POST",
-  		date:{
-  			
-  		},
-  		dateType:'json',
-  		success:function(date){
-  			alert(date);
-  		}
-  	}); */
-  </script>
+</script>
 </head>
 <body class="h-100 public">
 	<div class="public-bar hidden">
@@ -164,16 +94,17 @@ function doClear(){
 				<table class="t-table" border="0" cellspacing="0" cellpadding="0">
 					<thead class="t-thead">
 						<tr class="t-tr">
-							<th class="t-th" style="border-right: 1px solid #ccc;">序号</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">ECIF客户号</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">仓库名称</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">仓库代码</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">仓库级别</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">经办行</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">地址</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">电话</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">创建时间</th>
-							<th class="t-th" style="border-right: 1px solid #ccc;">更新时间</th>
+							<th class="t-th">序号</th>
+							<th class="t-th">ECIF客户号</th>
+							<th class="t-th">借款企业名称</th>
+							<th class="t-th">仓库名称</th>
+							<th class="t-th">仓库代码</th>
+							<th class="t-th">仓库级别</th>
+							<th class="t-th">经办行</th>
+							<th class="t-th">地址</th>
+							<th class="t-th">电话</th>
+							<th class="t-th">创建时间</th>
+							<th class="t-th">更新时间</th>
 						</tr>
 					</thead>
 					<tbody class="t-tbody hidden">
@@ -182,6 +113,7 @@ function doClear(){
 							<tr class="t-tr">
 								<td class="t-td"><c:out value="${index+1}"/></td>
 								<td class="t-td"><c:out value="${row.custNo}"/></td>
+								<td class="t-td"><c:out value="${row.loncpname}"/></td>
 								<td class="t-td"><c:out value="${row.whName}"/></td>
 								<td class="t-td"><c:out value="${row.whCode}"/></td>
 								<td class="t-td"><c:out value="${row.whLevel}"/></td>

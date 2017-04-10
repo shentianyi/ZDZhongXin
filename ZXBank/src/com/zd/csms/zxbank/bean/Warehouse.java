@@ -14,6 +14,7 @@ public class Warehouse {
 	private String whCode;//仓库代码
 	private String whLevel;//仓库级别
 	private String whOperorg;//经办行
+	private String loncpname;//借款企业名称  新增
 	private String whAddress;//仓库地址
 	private String phone;//电话
 	private String createDate;//数据同步时间
@@ -79,12 +80,19 @@ public class Warehouse {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate.substring(0, updateDate.length()-2);
 	}
+	public String getLoncpname() {
+		return loncpname;
+	}
+	public void setLoncpname(String loncpname) {
+		this.loncpname = loncpname;
+	}
 	@Override
 	public String toString() {
 		return "Warehouse [Whid=" + Whid + ", custNo=" + custNo + ", whName="
 				+ whName + ", whCode=" + whCode + ", whLevel=" + whLevel
-				+ ", whOperorg=" + whOperorg + ", whAddress=" + whAddress
-				+ ", phone=" + phone + ", createDate=" + createDate
-				+ ", updateDate=" + updateDate + "]";
+				+ ", whOperorg=" + whOperorg + ", loncpname=" + loncpname
+				+ ", whAddress=" + whAddress + ", phone=" + phone
+				+ ", createDate=" + createDate + ", updateDate=" + updateDate
+				+ "]";
 	}
 }

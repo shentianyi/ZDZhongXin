@@ -13,9 +13,6 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jxl.Workbook;
-import jxl.write.WritableWorkbook;
-
 import net.sf.json.JSONArray;
 
 import org.apache.poi.hssf.usermodel.*;
@@ -166,6 +163,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		/* List<DistribsetZX> list1=dis.findorg(); */
 		/* request.setAttribute("list1", list1); */
 		request.setAttribute("list", list);
+		
 		return mapping.findForward("cuslist");
 	}
 
@@ -195,7 +193,15 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return mapping.findForward("warehouse");
 	}
-
+	/**
+	 * 通知推送
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	public ActionForward findnotice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		NoticeForm not = (NoticeForm) form;
@@ -300,7 +306,11 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward removepledgedetail(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String no = request.getParameter("rdno");
+		String no;
+		no = request.getParameter("rdno");
+		if(no==null){
+			no=request.getAttribute("rdno").toString();
+		}
 		// 获得页面查询数据
 		RemovePledgeDetail query = new RemovePledgeDetail();
 		query.setRdNo(no);
@@ -398,16 +408,11 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward movedetail(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String no = "";
-		try {
-			no = (String) request.getAttribute("mdno");
-		} catch (Exception e) {}
-		
+		String no;
+		no = request.getParameter("mdno");
 		if(no==null){
-			no = request.getParameter("mdno");
+			no=request.getAttribute("mdno").toString();
 		}
-		
-		System.out.println(no);
 		// 获得页面查询数据
 		MoveDetail query = new MoveDetail();
 		query.setMdNo(no);
@@ -500,7 +505,11 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward receivingdetail(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String no = request.getParameter("nyNo");
+		String no;
+		no = request.getParameter("nyNo");
+		if(no==null){
+			no=request.getAttribute("nyNo").toString();
+		}
 		ReceivingDetail query = new ReceivingDetail();
 		query.setNdNo(no);
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("ReceivingDetail", request);
@@ -514,6 +523,16 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		return mapping.findForward("receivingdetail");
 	}
 
+	/**
+	 * 收货通知书详情导出
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	/**
 	 * 收货通知书详情导出
 	 * 
@@ -766,7 +785,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		//request.setAttribute("gager", gager);
 		return mapping.findForward("stocktaking");
 	}
-
+	
 	/**
 	 * 盘库信息查询
 	 * @param mapping
@@ -776,21 +795,16 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward checkstock(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		BankInterfaceForm bform = (BankInterfaceForm) form;
-		Checkstock query = bform.getCheckstock();
-		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Checkstock", request);
+	public ActionForward checkstock(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		BankInterfaceForm bform=(BankInterfaceForm)form;
+		Checkstock query=bform.getCheckstock();
+		IThumbPageTools tools=ToolsFactory.getThumbPageTools("Checkstock",request);
 		tools.setPageSize(2);
-		List<Checkstock> list = ckds.findBusinessList(query, tools);
+		List<Checkstock> list=ckds.findBusinessList(query, tools);
 		request.setAttribute("list", list);
-		for (Checkstock checkstock : list) {
-			System.out.println(checkstock.toString());
-		}
-		request.setAttribute("csLoncpid", query.getCsLoncpid());
+		request.setAttribute("csLoncpid",query.getCsLoncpid());
 		return mapping.findForward("checkstock");
 	}
-
 	/**
 	 * 盘库详情信息
 	 * @param mapping
@@ -800,89 +814,43 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward checkstockDetail(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		int id = Integer.parseInt(request.getParameter("csid"));
-		int loncpid = Integer.parseInt(request.getParameter("loncpid"));
-
-		IThumbPageTools tools = ToolsFactory.getThumbPageTools("CheckstockVO", request);
+	public ActionForward checkstockDetail(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		int id=Integer.parseInt(request.getParameter("csid"));
+		int loncpid=Integer.parseInt(request.getParameter("loncpid"));
+		
+		IThumbPageTools tools=ToolsFactory.getThumbPageTools("CheckstockVO",request);
 		tools.setPageSize(1);
-		Checkstock checkstock = ckds.getCheckstock(loncpid);//获取共同盘库信息部分
-		List<CheckstockVO> list = ckds.findAllVOList(id, tools);//获取详情信息列表
-
-		request.setAttribute("checkstock", checkstock);
+		Checkstock checkstock=ckds.getCheckstock(loncpid);//获取共同盘库信息部分
+		List<CheckstockVO> list=ckds.findAllVOList(id, tools);//获取详情信息列表
+		
+		request.setAttribute("checkstock",checkstock);
 		request.setAttribute("list", list);
 		return mapping.findForward("checkstockDetail");
 	}
-
-	/*private boolean commonRequest(ActionMapping mapping, HttpServletRequest request, String listName,
-			Class<?> resultClassType, String... field) throws Exception, DocumentException {
-		Document doc = null;
-		return commonRequest(mapping, request, doc, listName, resultClassType, field);
-	}
-
-	private boolean commonRequest(ActionMapping mapping, HttpServletRequest request, Document doc, String listName,
-			Class<?> resultClassType, String... field) throws Exception, DocumentException {
-		String methodName = request.getParameter("method");
-		Map<String, Object> body = new HashMap<String, Object>();
-		ZhongXinBankUtil.autoFill(body, request, field);
-
-		SocketClient socket = new SocketClient(host, port);
-		Map<String, Object> head = ZhongXinBankUtil.getBaseHeadList(methodName, "");
-		String xml = socket.send(head, body);
-
-		xml = xml.substring(2);
-		// 拼接返回值
-		doc = DocumentHelper.parseText(xml);
-		Element ap = doc.getRootElement();
-		if (!ZhongXinBankUtil.getRetCode(ap.element("head"))) {
-			return false;
-		}
-
-		Element bodyNode = ap.element("body");
-		if (!bodyNode.hasContent()) {
-			return false;
-		}
-		int totalCount = Integer.parseInt(bodyNode.element("totalCount").getText());
-		request.setAttribute("totalCount", totalCount);
-		request.setAttribute("currentPageSize", Integer.parseInt(bodyNode.element("currentPageSize").getText()));
-		if (totalCount <= 0)
-			return false;
-
-		Element list = bodyNode.element(listName + "List");
-		List infos = list.elements(listName + "Info");
-		List resultList = new ArrayList();
-		if (infos != null)
-			for (Iterator it = infos.iterator(); it.hasNext();) {
-				Element info = (Element) it.next();
-				Object bean = ZhongXinBankUtil.getBean(resultClassType, info);
-				resultList.add(bean);
-			}
-		request.setAttribute("list", resultList);
-		request.setAttribute("doc", doc);
-		return true;
-	}*/
-	
-	public ActionForward noticePush(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	/**
+	 * 通知推送
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward noticepush(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		int ntType = Integer.parseInt(request.getParameter("ntType"));
 		String ntNo = request.getParameter("ntNo");
 		if(ntType==1){
-			/*actionforward.setPath("receivingdetail.do?method=receivingdetail&nyNo="
-					+ntNo);*/
 			request.setAttribute("nyNo",ntNo);
-			receivingdetail(mapping, form, request, response);
+			return receivingdetail(mapping, form, request, response);
 		}else if(ntType==2){
-			//actionforward.setPath("movedetail.do?method=movedetail&mdno="+ntNo);
 			request.setAttribute("mdno", ntNo);
-			movedetail(mapping, form, request, response);
+			return this.movedetail(mapping, form, request, response);
 		}else if(ntType==3){
-			/*actionforward.setPath("removepledgedetail.do?method=removepledgedetail&rdno="+ntNo);*/
 			request.setAttribute("rdno", ntNo);
-			removepledgedetail(mapping, form, request, response);
+			return removepledgedetail(mapping, form, request, response);
 		}
-		return null;
+		return mapping.findForward(""); 
 	}
-	
 	
 }

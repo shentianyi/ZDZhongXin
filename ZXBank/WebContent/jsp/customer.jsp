@@ -22,7 +22,6 @@
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
-<link rel="stylesheet" href="css/tablecs.css">
 <script>
   $(function() {
 	  $( "#custOrganizationcode" ).autocomplete({

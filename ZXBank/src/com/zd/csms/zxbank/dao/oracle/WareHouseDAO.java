@@ -18,7 +18,7 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO{
 	@Override
 	public List<Warehouse> findBusinessList(Warehouse query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select zx_whid as Whid,zx_custno as custNo,zx_whname as whName,zx_whcode as whCode,zx_whlevel as whLevel,zx_whoperorg as whOperorg,zx_whaddress as whAddress,zx_phone as phone,zx_createdate as createDate,zx_updatedate as updateDate from ZX_WAREHOUSE");
+		sql.append("select ZX_LONCPNAME as loncpname,zx_whid as Whid,zx_custno as custNo,zx_whname as whName,zx_whcode as whCode,zx_whlevel as whLevel,zx_whoperorg as whOperorg,zx_whaddress as whAddress,zx_phone as phone,zx_createdate as createDate,zx_updatedate as updateDate from ZX_WAREHOUSE");
 		List<Object> params = new ArrayList<Object>();
 		List<Warehouse> list = null;
 		formatSQL(sql, params,query);

@@ -514,8 +514,6 @@ insert into zx_check(ck_id,ck_csid,ck_spvwhcode,ck_cmcode,ck_cstkcmdnum,ck_cmgrt
 insert into zx_check(ck_id,ck_csid,ck_spvwhcode,ck_cmcode,ck_cstkcmdnum,ck_cmgrtcntno,ck_vin) values(zx_checkId.nextval,25,'A2','31651','1','13515361','C61235515');
 
 
-
-
 --监管仓库列表
 create table zx_checkwarehouse(
 ch_id number(19,2) primary key,--主键 监管仓库id

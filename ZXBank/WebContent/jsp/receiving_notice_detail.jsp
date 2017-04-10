@@ -23,9 +23,6 @@
 <script src="js/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	function saveCode() {
-		/* $.post("ZXinterface.do?method=receivingdetailOut&nyNo=${receiving.nyNo}",function(result) {
-			
-		}); */
 		document.forms[0].submit();
 	}
 </script>

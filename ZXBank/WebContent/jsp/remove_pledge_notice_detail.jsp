@@ -20,7 +20,6 @@
 <title>解除质押通知书详情</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
-<link rel="stylesheet" href="css/tablecs.css">
 <script src="js/thumbpage/thumbpage.js"></script>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
@@ -126,6 +125,8 @@ function saveCode() {
 										<th class="t-th">所在仓库编号</th>
 										<th class="t-th">SCF放款批次号</th>
 										<th class="t-th">动产质押担保合同编号</th>
+										<th class="t-th">赎货经办人姓名</th>
+										<th class="t-th">赎货经办人身份证号码</th>
 										<th class="t-th">移库数量</th>
 										<th class="t-th">车架号</th>
 										<th class="t-th">合格证编号</th>
@@ -145,6 +146,8 @@ function saveCode() {
 												<td class="t-td"><c:out value='${row.rdWhcode }' /></td>
 												<td class="t-td"><c:out value='${row.rdScflonno }' /></td>
 												<td class="t-td"><c:out value='${row.rdChattelpdno }' /></td>
+												<td class="t-td"><c:out value='${row.rdUsername}' /></td>
+												<td class="t-td"><c:out value='${row.rdUsercardid}' /></td>
 												<td class="t-td"><c:out value='${row.rdNumber }' /></td>
 												<td class="t-td"><c:out value='${row.rdChassisno }' /></td>
 												<td class="t-td"><c:out value='${row.rdCertificationno }' /></td>

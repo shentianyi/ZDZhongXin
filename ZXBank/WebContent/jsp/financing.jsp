@@ -23,7 +23,6 @@
 <link type="text/css" rel="stylesheet" href="css/public.css" />
 <link href="css/easyui.css" rel="stylesheet" type="text/css" />
 <link href="css/icon.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="css/tablecs.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.easyui.min.js"></script>
 <script src="js/easyui-lang-zh_CN.js"></script>
@@ -159,7 +158,6 @@
 			<div class="ly-button-w">
                 <a href="javascript:doQuery();" class="button btn-query">查询</a>
                 <a href="javascript:doClear();" class="button btn-reset">重置</a>
-                  <a href="javascript:;" class="button">手工同步</a>
             </div>
 		</div>
 		 
@@ -171,6 +169,7 @@
 						<tr class="t-tr">
 							<th class="t-th">序号</th>
 							<th class="t-th">借款企业ID</th>
+							<th class="t-th">借款企业名称</th>
 							<th class="t-th">融资编号</th>
 							<th class="t-th">放款批次号</th>
 							<th class="t-th">融资金额</th>
@@ -192,6 +191,7 @@
 							<tr class="t-tr">
 								<td class="t-td"><c:out value="${index+1}"/></td>
 								<td class="t-td"><c:out value="${row.fgLonentNo}"/></td>
+								<td class="t-td"><c:out value="${row.loncpname}"/></td>
 								<td class="t-td"><c:out value="${row.fgLoanCode}"/></td>
 								<td class="t-td"><c:out value="${row.fgScftxNo}"/></td>
 								<td class="t-td"><c:out value="${row.fgLoanAmt}"/></td>

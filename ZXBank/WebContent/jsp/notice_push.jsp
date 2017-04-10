@@ -8,7 +8,6 @@
 <%@ taglib uri="struts-html.tld" prefix="html"%>
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
-<%-- <%@ taglib uri="fmt.tld" prefix="fmt"%> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -43,43 +42,7 @@ $(function() {
       source: availableTags
     });
   });
-
-
-/* 
-function selectAllDels() 
-{ 
-var allCheckBoxs = document.getElementsByName("preDelCheck"); 
-var desc = document.getElementById("allChecked"); 
-var selectOrUnselect=false; 
-for(var i = 0; i < allCheckBoxs.length; i ++ ) 
-{ 
-if(allCheckBoxs[i].checked){ 
-selectOrUnselect=true; 
-break; 
-} 
-} 
-if (selectOrUnselect) 
-{ 
-_allUnchecked(allCheckBoxs); 
-}else 
-{ 
-_allchecked(allCheckBoxs); 
-} 
-} 
-function _allchecked(allCheckBoxs){ 
-for(var i = 0; i < allCheckBoxs.length; i ++ ) 
-{ 
-allCheckBoxs[i].checked = true; 
-} 
-} 
-function _allUnchecked(allCheckBoxs){ 
-for(var i = 0; i < allCheckBoxs.length; i ++ ) 
-{ 
-allCheckBoxs[i].checked = false; 
-} 
-}  */
 </script>
-
 </head>
 <body class="h-100 public">
 	<div class="public-bar hidden">
@@ -93,7 +56,7 @@ allCheckBoxs[i].checked = false;
 	</div>
 <div class="public-main abs">
 	<div class="ly-contai rel">
-		<html:form action="ZXnotice.do?method=findnotice" styleId="nForm" method="post" onsubmit="return false">
+		<html:form action="/ZXnotice.do?method=findnotice" styleId="nForm" method="post" onsubmit="return false">
 		<input name="method" id="method" type="hidden" value="findnotice" />
 		<div class="public-main-input ly-col-1 hidden abs">
 			<div class="ly-input-w">
@@ -118,7 +81,6 @@ allCheckBoxs[i].checked = false;
                         <div class="label block fl hidden">通知编号：</div>
 	                    <div class="input block fl hidden">
 	                    	<html:text styleClass="ly-bor-none" property="notice.ntNo"  styleId="notice.ntno" />
-	                    	<!-- <input class="ly-bor-none" id="noticeid" type="text" name="pledgeName" value=""/> -->
 	                    </div>
                     </div>
 				</div>
@@ -136,7 +98,6 @@ allCheckBoxs[i].checked = false;
 				<table class="t-table" border="0" cellspacing="0" cellpadding="0">
 					<thead class="t-thead">
 						<tr class="t-tr">
-							<!-- <th class="t-th"><input type="checkbox" name="allChecked" onClick="selectAllDels()"/>全选</th> -->
 							<th class="t-th">序号</th>
 							<th class="t-th">通知书类型</th>
 							<th class="t-th">通知书编号</th>
@@ -149,18 +110,20 @@ allCheckBoxs[i].checked = false;
 						<logic:iterate name="list" id="row" indexId="index">
 							<tr class="t-tr">
 								<td class="t-td"><c:out value="${index+1}"/></td>
-								<td class="t-td"><%-- <c:out value="${row.ntType}"/> --%>
-									 <c:if test="${row.ntType=='1'}">收货通知书</c:if>
-	                    				<c:if test="${row.ntType=='2'}">移库通知书</c:if>
-	                    				 <c:if test="${row.ntType=='3'}">解除质押通知书</c:if>
+								<td class="t-td">
+									<c:if test="${row.ntType=='1'}">收货通知书</c:if>
+	                    			<c:if test="${row.ntType=='2'}">移库通知书</c:if>
+	                    			<c:if test="${row.ntType=='3'}">解除质押通知书</c:if>
 								</td>
 								<td class="t-td"><c:out value="${row.ntNo}"/></td>
-								<td class="t-td"><c:out value="${row.ntFailflag}"/></td>
+								<td class="t-td">
+									<c:if test="${row.ntFailflag=='0' }">读取失败</c:if>
+									<c:if test="${row.ntFailflag=='1' }">读取成功</c:if>
+								</td>
 								<td class="t-td"><c:out value="${row.ntStdate}"/></td>
-								<%-- <td class="t-td"><c:out value="${row.ntFailflag}"/></td> --%>
 								<td class="t-td">
 									<c:if test="${row.ntFailflag=='0'}"><a href=""><input type="button" value="重新读取"/></a></c:if>
-									<c:if test="${row.ntFailflag=='1'}"><a href="ZXinterface.do?method=noticePush&ntNo=${row.ntNo}&ntType=${row.ntType}"><input type="button" value="查看详情"/></a></c:if>
+									<c:if test="${row.ntFailflag=='1'}"><a href="noticepush.do?method=noticepush&ntNo=${row.ntNo}&ntType=${row.ntType}"><input type="button" value="查看详情"/></a></c:if>
 								</td>
 							</tr>
 							

@@ -17,6 +17,7 @@ public class Financing implements Serializable{
 
 	private int fiId;//融资查询表主键
 	private String fgLonentNo;//借款企业Id
+	private String loncpname ;//借款企业名称  新增
 	private String fgStDate;//融资起始日期 ，格式为YYYYMMDD
 	private String fgEndDate;//融资结束日期，格式为YYYYMMDD
 	private String fgLoanCode;//融资编号
@@ -122,12 +123,24 @@ public class Financing implements Serializable{
 		this.fgUpdateDate = fgUpdateDate;
 	}
 	
+	public String getLoncpname() {
+		return loncpname;
+	}
+	public void setLoncpname(String loncpname) {
+		this.loncpname = loncpname;
+	}
 	@Override
 	public String toString() {
-		return "Financing [fiId=" + fiId + ", fgLonentNo=" + fgLonentNo + ", fgStDate=" + fgStDate + ", fgEndDate=" + fgEndDate + ", fgLoanCode="
-				+ fgLoanCode + ", fgScftxNo=" + fgScftxNo + ", fgLoanAmt=" + fgLoanAmt + ", fgBailRat=" + fgBailRat + ", fgSlfcap=" + fgSlfcap
-				+ ", fgFstblRat=" + fgFstblRat + ", fgProcrt=" + fgProcrt + ", fgBizMod=" + fgBizMod + ", fgOperOrg=" + fgOperOrg + ", fgCreateDate="
-				+ fgCreateDate + ", fgUpdateDate=" + fgUpdateDate + "]";
+		return "Financing [fiId=" + fiId + ", fgLonentNo=" + fgLonentNo
+				+ ", loncpname=" + loncpname + ", fgStDate=" + fgStDate
+				+ ", fgEndDate=" + fgEndDate + ", fgLoanCode=" + fgLoanCode
+				+ ", fgScftxNo=" + fgScftxNo + ", fgLoanAmt=" + fgLoanAmt
+				+ ", fgBailRat=" + fgBailRat + ", fgSlfcap=" + fgSlfcap
+				+ ", fgFstblRat=" + fgFstblRat + ", fgProcrt=" + fgProcrt
+				+ ", fgBizMod=" + fgBizMod + ", fgOperOrg=" + fgOperOrg
+				+ ", fgCreateDate=" + fgCreateDate + ", fgUpdateDate="
+				+ fgUpdateDate + "]";
 	}
+	
 	
 }
