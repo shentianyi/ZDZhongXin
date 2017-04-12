@@ -68,6 +68,7 @@ public class ObjectSQLUtil {
 				sql.append(",?");
 			}
 			sql.append(")");
+			System.out.println(sql.toString());
 			objSQLMap.put(key, sql.toString());
 			return sql.toString();
 		}else{

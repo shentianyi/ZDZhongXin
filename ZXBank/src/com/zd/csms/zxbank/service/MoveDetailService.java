@@ -23,5 +23,4 @@ public class MoveDetailService extends ServiceSupport{
 	public List<MoveDetail> findAll(String no) {
 		return dao.findAll(no);
 	}
-	
 }

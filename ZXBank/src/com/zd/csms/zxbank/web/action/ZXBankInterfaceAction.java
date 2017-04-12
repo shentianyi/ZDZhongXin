@@ -423,6 +423,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		// 获得数据
 		MoveNotice mn = mns.fingByNo(no);
 		List<MoveDetail> list = mds.findByQuery(query, tools);
+		
 		// 页面设置参数
 		request.setAttribute("list", list);
 		request.setAttribute("mn", mn);

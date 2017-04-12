@@ -9,7 +9,9 @@
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,6 +24,7 @@
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
+<script type="text/javascript" src="js/jquery.divscroll.js"></script>
 <script>
 	function doQuery() {
 		document.forms[0].submit();
@@ -64,7 +67,7 @@
 		<div class="ly-contai rel">
 			<html:form action="/receivingnotice.do" styleId="rForm" method="post" onsubmit="return false">
 			<input name="method" id="method" type="hidden" value="receivingnotice" />
-			<div class="public-main-input ly-col-2 hidden abs">
+			<div class="public-main-input ly-col-1 hidden abs">
 				<div class="ly-input-w">
 					<div class="ly-row clearfix">
 						<div class="ly-col fl">
@@ -91,8 +94,6 @@
 			</div>
 			<div class="public-main-table hidden abs">
 				<div class="ly-cont">
-					<div
-						style="overflow-x: auto; overflow-y: auto; height: 100%; width: 100%">
 						<table width="100%" class="t-table" border="0" cellspacing="0"
 							cellpadding="0">
 							<thead class="t-thead">
@@ -156,7 +157,6 @@
 								</logic:iterate>
 							</tbody>
 						</table>
-					</div>
 				</div>
 			</div>
 			<div class="public-main-footer hidden abs">
@@ -171,5 +171,75 @@
 			</html:form>			
 		</div>
 	</div>
+<script type="text/javascript">
+    var ele = $('#ly-table-thead-w'),
+        template;
+
+    $('.public-main-table .ly-cont').perfectScrollbar({
+        cursorwidth: 10,
+        cursorborder: "none",
+        cursorcolor: "#999",
+        hidecursordelay: 0,
+        zindex: 10001,
+        horizrailenabled: true,
+        callbackFn: function(){
+            if (parseInt($('#ascrail2000').find('div').css('top')) > 0) {
+                if (ele.length === 0) {
+                    var tr = $('.public-main-table .t-tbody tr'),
+                        width = 0;
+
+                    // 生成thead区块
+                    template = '<div id="ly-table-thead-w"><div class="ly-table-scroll">';
+                    $('.public-main-table .t-thead th').each(function(key){
+                        template += '<div class="block fl">'+ $(this).text() +'</div>';
+                    });
+                    template += '</div></div>';
+
+                    ele = $(template).css({
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '36px',
+                        overflow: 'hidden'
+                    });
+
+                    // 复制操作
+                    tr.eq(0).find('td').each(function(key){
+                        var _width = $(this).width() + 1;
+
+                        ele.find('.block').eq(key).css({
+                            width: _width,
+                            padding: '0 5px',
+                            height: '36px',
+                            lineHeight: '36px',
+                            fontSize: '14px',
+                            fontFamily: 'Microsoft Yahei',
+                            textAlign: 'center',
+                        });
+                        width += _width + 10;
+                    });
+                    ele.find('.ly-table-scroll').css({
+                        position: 'relative',
+                        width: width,
+                        height: '100%',
+                        background: '#eee'
+                    });
+
+                    $('.public-main-table .ly-cont').append(ele);
+                } else {
+                    ele.show();
+                };
+            } else {
+                ele.hide();
+            };
+        },
+        _callbackFn: function(left){
+            ele.find('.ly-table-scroll').css('left', -left);
+        }
+    });
+
+</script>	
+	
 </body>
 </html>

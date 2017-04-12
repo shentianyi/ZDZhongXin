@@ -3,11 +3,14 @@ package com.zd.csms.zxbank.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.zd.core.annotation.table;
+
 /**
  * 移库详情
  * @author duyong
  *
  */
+@table(name="ZX_MOVEDETAIL")
 public class MoveDetail implements Serializable{
 
 	private static final long serialVersionUID = -1438252117901030215L;

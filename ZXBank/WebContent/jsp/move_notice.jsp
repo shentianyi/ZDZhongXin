@@ -16,7 +16,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=IUTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>中都汽车金融监管系统</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
@@ -35,6 +35,7 @@
 		$("#mnLoncpname").val("");
 		document.forms[0].submit();
 	}
+	
 </script>
 </head>
 <body class="h-100 public">
@@ -89,7 +90,7 @@
 										<th class="t-th">创建时间</th>
 										<th class="t-th">更新时间</th>
 										<th class="t-th">操作</th>
-									</tr>
+									</tr> 
 								</thead>
 								<tbody class="t-tbody hidden">
 									<c:if test="${not empty list }">

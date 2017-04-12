@@ -34,6 +34,9 @@ public class MoveDetailDAO  extends DAOSupport implements IMoveDetailDAO{
 		formatSQL(sql, params,query);
 		try {
 			list = tools.goPage(sql.toString(), params.toArray(), new BeanPropertyRowMapper(MoveDetail.class));
+			
+			String sqls = "insert into ZX_MOVEDETAIL (MD_ID,MD_NO,MD_REMOVEOUTNO,MD_REMOVEINNO,MD_WARENO,MD_MOVENUMBER,MD_CHASSISNO,MD_CERTIFICATIONNO,MD_CARPRICE) values(?,?,?,?,?,?,?,?,?)";
+			System.out.println(getJdbcTemplate().add(sqls, new Object[]{"16","10","10","10","10","10","10","10","10"}));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
