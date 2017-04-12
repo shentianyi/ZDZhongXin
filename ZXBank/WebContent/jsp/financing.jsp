@@ -210,8 +210,12 @@
 										汽车金融先票后货三方
 									</c:if>
 								</td>
-								<td class="t-td"><c:out value="${row.fgCreateDate}"/></td>
-								<td class="t-td"><c:out value="${row.fgUpdateDate}"/></td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.fgCreateDate}" idtype="ss"/>
+								</td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.fgUpdateDate}" idtype="ss"/>
+								</td>
 							</tr>
 						</logic:iterate>
 					</tbody>

@@ -10,6 +10,7 @@
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,24 +40,7 @@ function doClear(){
       "12312",
       "12341",
       "5123412",
-      "234125",
-      "51234",
-      "234534",
-      "623452",
-      "6346345",
-      "62346",
-      "62346",
-      "1412341y",
-      "1234234",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
+      "234125"
     ];
     $( "#loncpid" ).autocomplete({
       source: availableTags
@@ -68,24 +52,6 @@ function doClear(){
 			"ActionScript",
 			"AppleScript",
 			"Asp",
-			"BASIC",
-			"C",
-			"C++",
-			"Clojure",
-			"COBOL",
-			"ColdFusion",
-			"Erlang",
-			"Fortran",
-			"Groovy",
-			"Haskell",
-			"Java",
-			"JavaScript",
-			"Lisp",
-			"Perl",
-			"PHP",
-			"Python",
-			"Ruby",
-			"Scala",
 			"Scheme"
 	    ];
 	    $( "#loncpid_name" ).autocomplete({
@@ -108,28 +74,26 @@ function doClear(){
 	<div class="ly-contai rel">
 		<html:form action="/agreement.do" styleId="agrForm" method="post" onsubmit="return false">
 		<input name="method" id="method" type="hidden" value="agreement" />
-		<div class="public-main-input ly-col-2 hidden abs">
+		<div class="public-main-input ly-col-1 hidden abs">
 			<div class="ly-input-w">
 				<div class="ly-row clearfix">
 					<div class="ly-col fl">
                         <div class="label block fl hidden">ECIF客户号：</div>
 	                    <div class="input block fl hidden">
-	                    	 <input name="agreement.ag_custno" id="loncpid" type="text" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" value="<c:out value='${custno }'/>"/>
-	                    	 <%-- <html:text property="agreement.ag_custno" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" value="<c:out value='${custno }'/>"/> --%>
+	              			<input class="ly-bor-none" type="text" id="loncpid" name="agreement.ag_custno" />      		
 	                    </div>
                     </div>
                      <div class="ly-col fl">
                         <div class="label block fl hidden">借款企业名称：</div>
 	                    <div class="input block fl hidden">
-	                    	<input name="agreement.ag_loncpname" id="loncpid_name" type="text" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" value="<c:out value='${loncpname }'/>"/>
-	                    	<%-- <html:text property="agreement.ag_loncpname" style="display: block;width:80%;margin-left:10%;margin-top:5px;border: 1px solid #eee;border-radius: 4px;outline: none;height:24px;" /> --%>
+	                    	<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.ag_loncpname" />
 	                    </div>
 					</div> 
 					
 					<div class="ly-col fl">
                         <div class="label block fl hidden">查询方式：</div>
 	                    <div class="input block fl hidden">
-	                    	<select class="ly-bor-none" id="" name="" style="min-width:150px;width:80%;">
+	                    	<select class="ly-bor-none" id="" name="" >
 	                    		<option>请选择</option>
 	                    		<option value="1">本地查询</option>
 	                    		<option value="2">远程查询</option>
@@ -192,8 +156,12 @@ function doClear(){
 									<td class="t-td"><c:out value="${row.ag_stdate }"/></td>
 									<td class="t-td"><c:out value="${row.ag_enddate }"/></td>
 									<td class="t-td"><c:out value="${row.ag_totnum }"/></td>
-									<td class="t-td"><c:out value="${row.ag_createdate }"/></td>
-									<td class="t-td"><c:out value="${row.ag_updatedate }"/></td>
+									<td class="t-td">
+										<select:timestamp timestamp="${row.ag_createdate}" idtype="ss"/>
+									</td>
+									<td class="t-td">
+										<select:timestamp timestamp="${row.ag_updatedate}" idtype="ss"/>
+									</td>
 								</tr>				
 							</logic:iterate>
 						</c:if>

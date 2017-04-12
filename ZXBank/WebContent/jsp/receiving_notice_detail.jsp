@@ -95,7 +95,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">发货日期:</div>
 								<div class="input block fl hidden">
-									<c:out value='${receiving.nyCsndate }' />
+									<select:timestamp timestamp="${receiving.nyCsndate}" idtype="ss"/>
 								</div>
 							</div>
 						</div>
@@ -103,7 +103,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">预计到港(库)日期:</div>
 								<div class="input block fl hidden">
-									<c:out value='${receiving.nyEta }' />
+									<select:timestamp timestamp="${receiving.nyEta}" idtype="ss"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
@@ -123,7 +123,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">通知书日期:</div>
 								<div class="input block fl hidden">
-									<c:out value='${receiving.nyNtcdate }' />
+									<select:timestamp timestamp="${receiving.nyNtcdate}" idtype="ss"/>
 								</div>
 							</div>
 						</div>

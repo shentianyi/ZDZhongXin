@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="form.tld" prefix="form"%>
@@ -10,6 +9,7 @@
 <%@ taglib uri="thumbpage.tld" prefix="thumbpage"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="fmt.tld" prefix="fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,8 +24,9 @@
 	<div class="public-bar hidden">
 		<div class="ly-contai clearfix">
 			<div class="public-bar-crumbs fl hidden">
-				<a class="crumbs-link" href="/ZXBank">中信银行接口</a> > <a
-					class="crumbs-link" href="#">质物入库详情</a>
+				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
+				>
+				<a class="crumbs-link" href="#">质物入库详情</a>
 			</div>
 		</div>
 	</div>
@@ -39,70 +40,54 @@
 							<div class="label block fl hidden">
 								<font color="#FF0000">*</font>借款企业ID：
 							</div>
-							<div class="input block fl hidden">
-								${Gager.gaLonentno }
-							</div>
+							<div class="input block fl hidden">${Gager.gaLonentno }</div>
 						</div>
 						<div class="ly-col fl">
 							<div class="label block fl hidden">
 								<font color="#FF0000">*</font>操作人名称：
 							</div>
-							<div class="input block fl hidden">
-								${Gager.gaOprtname }
-							</div>
+							<div class="input block fl hidden">${Gager.gaOprtname }</div>
 						</div>
 						<div class="ly-col fl">
 							<div class="label block fl hidden">
 								<font color="#FF0000">*</font>交易流水号：
 							</div>
-							<div class="input block fl hidden">
-								${Gager.gaOrderno }
-							</div>
+							<div class="input block fl hidden">${Gager.gaOrderno }</div>
 						</div>
 						<div class="ly-col fl">
 							<div class="label block fl hidden">纸质担保编号</div>
-							<div class="input block fl hidden">
-								${Gager.gaPcgrtntno }
-							</div>
+							<div class="input block fl hidden">${Gager.gaPcgrtntno }</div>
 						</div>
 					</div>
 					<div class="ly-row clearfix">
 						<div class="ly-col fl">
 							<div class="label block fl hidden">动产质押合同编号</div>
-							<div class="input block fl hidden">
-								${Gager.gaCmgrtcntno }
-							</div>
+							<div class="input block fl hidden">${Gager.gaCmgrtcntno }</div>
 						</div>
 						<div class="ly-col fl">
 							<div class="label block fl hidden">总记录数：</div>
-							<div class="input block fl hidden">
-								${Gager.gaCount }
-							</div>
+							<div class="input block fl hidden">${Gager.gaCount }</div>
 						</div>
 						<div class="ly-col fl">
 							<div class="label block fl hidden">状态：</div>
-							<div class="input block fl hidden">
-								${Gager.gaState }
-							</div>
+							<div class="input block fl hidden">${Gager.gaState }</div>
 						</div>
 						<div class="ly-col fl">
 							<div class="label block fl hidden">申请时间：</div>
 							<div class="input block fl hidden">
-								${Gager.gaCreatedate }
+								<select:timestamp timestamp="${Gager.gaCreatedate }" idtype="ss"/>
 							</div>
 						</div>
 					</div>
 
 				</div>
 				<div class="ly-button-w">
-					<a href="history.go(-1)" onclick="history.go(-1)"
-						class="button btn-query">返回</a>
+					<a href="history.go(-1)" onclick="history.go(-1)" class="button btn-query">返回</a>
 				</div>
 			</div>
 			<div class="public-main-table hidden abs">
 				<div class="ly-cont">
-					<div
-						style="overflow-x: auto; overflow-y: auto; height: 100%; width: 100%">
+					<div style="overflow-x: auto; overflow-y: auto; height: 100%; width: 100%">
 						<table class="t-table" border="0" cellspacing="0" cellpadding="0">
 							<thead class="t-thead">
 								<tr class="t-tr">
@@ -141,9 +126,8 @@
 			<div class="public-main-footer hidden abs">
 				<div class="public-main-footer-pagin fr">
 					<c:if test="${not empty list }">
-						<thumbpage:tools
-							className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>"
-							tableName="Commodity" action="commodity.do?method=commodity" />
+						<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Commodity"
+							action="commodity.do?method=commodity" />
 					</c:if>
 				</div>
 			</div>

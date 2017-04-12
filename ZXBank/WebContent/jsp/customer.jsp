@@ -8,9 +8,9 @@
 <%@ taglib uri="struts-html.tld" prefix="html"%>
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
-<%-- <%@ taglib uri="fmt.tld" prefix="fmt"%> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,7 +36,7 @@
 	                  response( $.map(data, function( item ) {
 	                      return {
 	                          label:item.organizationcode
-	                      }
+	                      };
 	                  }));
 	              }
 	          });
@@ -89,7 +89,7 @@
                     <div class="ly-col fl">
                         <div class="label block fl hidden">查询方式：</div>
 	                    <div class="input block fl hidden">
-	                    	<select class="ly-bor-none" id="" name="" style="min-width:150px;width:80%;">
+	                    	<select class="ly-bor-none" id="" name="">
 	                    		<option>请选择</option>
 	                    		<option>本地查询</option>
 	                    		<option>远程查询</option>
@@ -126,8 +126,12 @@
 								<td class="t-td"><c:out value="${row.custOrganizationcode}"/></td>
 								<td class="t-td"><c:out value="${row.custNo}"/></td>
 								<td class="t-td"><c:out value="${row.custName}"/></td>
-								<td class="t-td"><c:out value="${row.custCreateDate}"/></td>
-								<td class="t-td"><c:out value="${row.custUpdateDate}"/></td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.custCreateDate}" idtype="ss"/>
+								</td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.custUpdateDate}" idtype="ss"/>
+								</td>
 							</tr>
 						</logic:iterate>
 					</tbody>

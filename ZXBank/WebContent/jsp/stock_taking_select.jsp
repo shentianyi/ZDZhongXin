@@ -10,6 +10,7 @@
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,9 +34,7 @@
 	}
 	$(function() {
 		var availableTags = [ "41234", "12312", "12341", "5123412", "234125",
-				"51234", "234534", "623452", "6346345", "62346", "62346",
-				"1412341y", "1234234", "Java", "JavaScript", "Lisp", "Perl",
-				"PHP", "Python", "Ruby", "Scala", "Scheme" ];
+				"51234", "234534" ];
 		$("#loncpid").autocomplete({
 			source : availableTags
 		});
@@ -43,9 +42,7 @@
 
 	$(function() {
 		var availableTags = [ "ActionScript", "AppleScript", "Asp", "BASIC",
-				"C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang",
-				"Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp",
-				"Perl", "PHP", "Python", "Ruby", "Scala", "Scheme" ];
+				"C", "C++" ];
 		$("#loncp_name").autocomplete({
 			source : availableTags
 		});
@@ -126,7 +123,9 @@
 											<td class="t-td"><c:out value="${row.csFactdate }" /></td>
 											<td class="t-td"><c:out value="${row.csErrorreport }" /></td>
 											<td class="t-td"><c:out value="${row.csRemark }" /></td>
-											<td class="t-td"><c:out value="${row.csCreatedate }" /></td>
+											<td class="t-td">
+												<select:timestamp timestamp="${row.csCreatedate}" idtype="ss"/>
+											</td>
 											<td class="t-td"><a href="checkstockDetail.do?method=checkstockDetail&csid=${row.csId}&loncpid=${row.csLoncpid}">详情</a></td>
 										</tr>
 									</logic:iterate>

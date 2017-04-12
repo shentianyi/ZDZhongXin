@@ -120,7 +120,9 @@ $(function() {
 									<c:if test="${row.ntFailflag=='0' }">读取失败</c:if>
 									<c:if test="${row.ntFailflag=='1' }">读取成功</c:if>
 								</td>
-								<td class="t-td"><c:out value="${row.ntStdate}"/></td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.ntStdate}" idtype="ss"/>
+								</td>
 								<td class="t-td">
 									<c:if test="${row.ntFailflag=='0'}"><a href=""><input type="button" value="重新读取"/></a></c:if>
 									<c:if test="${row.ntFailflag=='1'}"><a href="noticepush.do?method=noticepush&ntNo=${row.ntNo}&ntType=${row.ntType}"><input type="button" value="查看详情"/></a></c:if>
@@ -130,8 +132,8 @@ $(function() {
 						</logic:iterate> 
 					</tbody>
 				</table>
-				<div style="overflow-x: auto; overflow-y: auto; height: 100%; width:100%">
-			</div>
+				<!-- <div style="overflow-x: auto; overflow-y: auto; height: 100%; width:100%">
+			</div> -->
 		</div>
 			</div>
 			</div>

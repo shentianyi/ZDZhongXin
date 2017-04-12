@@ -33,24 +33,7 @@ $(function() {
       "12312",
       "12341",
       "5123412",
-      "234125",
-      "51234",
-      "234534",
-      "623452",
-      "6346345",
-      "62346",
-      "62346",
-      "1412341y",
-      "1234234",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
+      "234125"
     ];
     $( "#noticeid" ).autocomplete({
       source: availableTags
@@ -88,7 +71,7 @@ $(function() {
 			<div class="ly-input-w">
 				<div class="ly-row clearfix">
 					<div class="ly-col fl">
-                        <div class="label block fl hidden" >解除质押通知编号：</div>
+                        <div class="label block fl hidden">解除质押通知编号：</div>
 	                    <div class="input block fl hidden">
 	                    	<input class="ly-bor-none" id="rpNo" type="text" name="removepledge.rpNo" value=""/>
 	                    </div>
@@ -141,8 +124,12 @@ $(function() {
 								<td class="t-td"><c:out value="${row.rpRelievepddate}"/></td>
 								<td class="t-td"><c:out value="${row.rpContent}"/></td>
 								<td class="t-td"><c:out value="${row.rpNoticedate}"/></td>
-								<td class="t-td"><c:out value="${row.rpCreatedate}"/></td>
-								<td class="t-td"><c:out value="${row.rpUpdatedate}"/></td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.rpCreatedate}" idtype="ss"/>
+								</td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.rpUpdatedate}" idtype="ss"/>
+								</td>
 								<td class="t-td">
 									<a href="removepledgedetail.do?method=removepledgedetail&rdno=<c:out value='${row.rpNo }'/>">详情</a>
 								</td>

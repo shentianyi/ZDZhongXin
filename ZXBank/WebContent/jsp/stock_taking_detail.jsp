@@ -10,8 +10,9 @@
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html class="h-100">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="renderer" content="webkit" />
@@ -184,7 +185,9 @@ function doClear() {
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">创建时间：</div>
-								<div class="input block fl hidden">${checkstock.csCreatedate}</div>
+								<div class="input block fl hidden">
+									<select:timestamp timestamp="${checkstock.csCreatedate}" idtype="ss"/>
+								</div>
 							</div>
 						</div>
 					</div>

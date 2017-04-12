@@ -133,14 +133,24 @@
 										<td class="t-td"><c:out value="${row.nyOfflnsatno }" /></td>
 										<td class="t-td"><c:out value="${row.nyExcplace }" /></td>
 										<td class="t-td"><c:out value="${row.nyTtlcmdval }" /></td>
-										<td class="t-td"><c:out value="${row.nyNtcdate }" /></td>
-										<td class="t-td"><c:out value="${row.nyCsndate }" /></td>
-										<td class="t-td"><c:out value="${row.nyEta }" /></td>
+										<td class="t-td">
+											<select:timestamp timestamp="${row.nyNtcdate}" idtype="ss"/>
+										</td>
+										<td class="t-td">
+											<select:timestamp timestamp="${row.nyCsndate}" idtype="ss"/>
+										</td>
+										<td class="t-td">
+											<select:timestamp timestamp="${row.nyEta}" idtype="ss"/>
+										</td>
 										<td class="t-td"><c:out value="${row.nyEpa }" /></td>
 										<td class="t-td"><c:out value="${row.nyRemark }" /></td>
 										<td class="t-td"><c:out value="${row.nyTotnum}" /></td>
-										<td class="t-td"><c:out value="${row.nyCreatedate}" /></td>
-										<td class="t-td"><c:out value="${row.nyUpdatedate}" /></td>
+										<td class="t-td">
+											<select:timestamp timestamp="${row.nyCreatedate}" idtype="ss"/>
+										</td>
+										<td class="t-td">
+											<select:timestamp timestamp="${row.nyUpdatedate}" idtype="ss"/>
+										</td>
 										<td class="t-td"><a href="receivingdetail.do?method=receivingdetail&nyNo=${row.nyNo}">详情</a></td>
 									</tr>
 								</logic:iterate>

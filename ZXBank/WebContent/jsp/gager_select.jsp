@@ -10,7 +10,8 @@
 <%@ taglib uri="thumbpage.tld" prefix="thumbpage"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="fmt.tld" prefix="fmt"%>
-<!DOCTYPE html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -39,26 +40,7 @@ $(function() {
     var availableTags = [
       "41234",
       "12312",
-      "12341",
-      "5123412",
-      "234125",
-      "51234",
-      "234534",
-      "623452",
-      "6346345",
-      "62346",
-      "62346",
-      "1412341y",
-      "1234234",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
+      "12341"
     ];
     $( "#custNo" ).autocomplete({
       source: availableTags
@@ -80,7 +62,6 @@ $(function() {
 	<div class="ly-contai rel">
 		<html:form action="gager.do" styleId="gForm" method="post" onsubmit="return false">
 		<input name="method" id="method" type="hidden" value="gager" />
-		<%-- <input type="hidden" name="gyl013ExtExcel" id="gyl013ExtExcel" value="<c:out value='${gyl013ExtExcel }'/>"/> --%>
 		<div class="public-main-input ly-col-1 hidden abs">
 			<div class="ly-input-w">
 				<div class="ly-row clearfix">
@@ -139,7 +120,9 @@ $(function() {
 									<td class="t-td"><c:out value='${row.gaState }'/></td>
 									<td class="t-td"><c:out value='${row.gaCount }'/></td>
 									<td class="t-td"><c:out value='${row.gaRemark }'/></td>
-									<td class="t-td"><c:out value='${row.gaCreatedate }'/></td>
+									<td class="t-td">
+										<select:timestamp timestamp="${row.gaCreatedate}" idtype="ss"/>
+									</td>
 									<td class="t-td"><a href="commodity.do?method=commodity&gaId=${row.gaId}">详情</a></td>
 								</tr>
 							</logic:iterate>

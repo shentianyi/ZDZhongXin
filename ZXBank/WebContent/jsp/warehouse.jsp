@@ -87,7 +87,6 @@ function doClear(){
             </div>
 		</div>
 		
-		
 		<div class="public-main-table hidden abs">
 			<div class="ly-cont">
 			<div style="overflow-x: auto; overflow-y: auto; height: 100%; width:100%">
@@ -120,8 +119,12 @@ function doClear(){
 								<td class="t-td"><c:out value="${row.whOperorg}"/></td>
 								<td class="t-td"><c:out value="${row.whAddress}"/></td>
 								<td class="t-td"><c:out value="${row.phone}"/></td>
-								<td class="t-td"><c:out value="${row.createDate}"/></td>
-								<td class="t-td"><c:out value="${row.updateDate}"/></td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.createDate}" idtype="ss"/>
+								</td>
+								<td class="t-td">
+									<select:timestamp timestamp="${row.updateDate}" idtype="ss"/>
+								</td>
 							</tr>
 						</logic:iterate>
 						</c:if>
