@@ -1,0 +1,89 @@
+html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, pre, a, em, font, img, small, strong, b, u, i, s, dl, dt, dd, ol, ul, li, fieldset, form, label, input, textarea {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #fff;
+    color: #1e1e1e;
+    font: 16px/150% Verdana,Arial,SimSun,Microsoft Yahei;
+}
+ol, ul, li {
+    list-style: outside none none;
+}
+img {
+    border: 0 none;
+}
+.clear {
+    clear: both;
+    font-size: 0;
+    height: 0;
+    overflow: hidden;
+}
+input, a, select {
+    outline: 0 none;
+}
+a {
+    color: #1e1e1e;
+    text-decoration: none;
+}
+a:link {
+    color: #1e1e1e;
+}
+a:visited {
+    color: #1e1e1e;
+}
+a:hover {
+    text-decoration: underline;
+}
+a:active {
+    color: #1e1e1e;
+}
+.slimscreen {
+    margin: 0 auto;
+    width: 990px;
+}
+.narrowscreen {
+    margin: 0 auto;
+    width: 1210px;
+}
+.fullscreen {
+    width: 100%;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+.rel {
+    position: relative;
+}
+.abs {
+    position: absolute;
+}
+.clearfix:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+}
+.clearfix {
+}
+.nowrap {
+    white-space: nowrap;
+}
+.hidden {
+    overflow: hidden;
+}
+.ellipsis {
+    text-overflow: ellipsis;
+}
+.pointer {
+    cursor: pointer;
+}
