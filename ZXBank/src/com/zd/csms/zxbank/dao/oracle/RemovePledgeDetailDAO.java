@@ -13,8 +13,6 @@ import com.zd.tools.thumbPage.IThumbPageTools;
 /**
  * 解除质押通知详情DAO实现层
  * 
- * @author duyong
- * 
  */
 public class RemovePledgeDetailDAO extends DAOSupport implements IRemovePledgeDetailDAO {
 
@@ -54,6 +52,7 @@ public class RemovePledgeDetailDAO extends DAOSupport implements IRemovePledgeDe
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<RemovePledgeDetail> findAll(String no) {
 		StringBuffer sql = new StringBuffer();

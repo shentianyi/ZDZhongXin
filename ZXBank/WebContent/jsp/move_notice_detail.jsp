@@ -7,7 +7,7 @@
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="thumbpage.tld" prefix="thumbpage"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="fmt.tld" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ page import="com.zd.csms.constants.Constants"%>
 <%@ page import="com.zd.csms.constants.StateConstants"%>
@@ -20,7 +20,6 @@
 <title>中都汽车金融监管系统</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
-<link rel="stylesheet" href="css/tablecs.css">
 <script src="js/thumbpage/thumbpage.js"></script>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
@@ -36,9 +35,9 @@
 		<div class="ly-contai clearfix">
 			<div class="public-bar-crumbs fl hidden">
 				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
-				>
-				<a class="crumbs-link" href="movenotice.do?method=movenotice">移库通知</a>
-				>
+				&gt;
+				<a class="crumbs-link" href="ZXinterface.do?method=movenotice">移库通知</a>
+				&gt;
 				<a class="crumbs-link" href="#">通知书详细查询</a>
 			</div>
 		</div>
@@ -125,7 +124,7 @@
 				<div class="public-main-footer hidden abs">
 					<div class="public-main-footer-pagin fr">
 						<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="MoveDetail"
-							action="movedetail.do?method=movedetail&mdno=${mn.mnNo}" />
+							action="ZXinterface.do?method=movedetail&mdno=${mn.mnNo}" />
 					</div>
 				</div>
 			</html:form>

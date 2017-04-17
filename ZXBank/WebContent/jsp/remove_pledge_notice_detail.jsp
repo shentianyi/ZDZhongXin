@@ -7,7 +7,7 @@
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="thumbpage.tld" prefix="thumbpage"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="fmt.tld" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ page import="com.zd.csms.constants.Constants"%>
 <%@ page import="com.zd.csms.constants.StateConstants"%>
@@ -28,22 +28,15 @@ function saveCode() {
 	document.forms[0].submit();
 }
 </script>
-
-<style type="text/css">
-.title td {
-	padding: 0 15px 0 15px;
-}
-</style>
-
 <head>
 <body class="h-100 public">
 	<div class="public-bar hidden">
 		<div class="ly-contai clearfix">
 			<div class="public-bar-crumbs fl hidden">
 				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
-				>
-				<a class="crumbs-link" href="removepledge.do?method=removepledge">解除质押通知</a>
-				>
+				&gt;
+				<a class="crumbs-link" href="ZXinterface.do?method=removepledge">解除质押通知</a>
+				&gt;
 				<a class="crumbs-link" href="#">通知书详情查询</a>
 			</div>
 		</div>
@@ -162,7 +155,7 @@ function saveCode() {
 				<div class="public-main-footer hidden abs">
 					<div class="public-main-footer-pagin fr">
 						<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="RemovePledgeDetail"
-							action="removepledgedetail.do?method=removepledgedetail&rdno=${rp.rpNo}" />
+							action="ZXinterface.do?method=removepledgedetail&rdno=${rp.rpNo}" />
 					</div>
 				</div>
 			</html:form>

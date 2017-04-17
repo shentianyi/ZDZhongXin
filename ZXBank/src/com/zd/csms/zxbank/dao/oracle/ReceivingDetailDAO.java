@@ -9,6 +9,9 @@ import com.zd.csms.zxbank.bean.ReceivingDetail;
 import com.zd.csms.zxbank.dao.IReceivingDetailDAO;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ * 收货通知详情DAO实现层 
+ */
 public class ReceivingDetailDAO extends DAOSupport implements IReceivingDetailDAO{
 
 	public ReceivingDetailDAO(String dataSourceName) {
@@ -29,6 +32,7 @@ public class ReceivingDetailDAO extends DAOSupport implements IReceivingDetailDA
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ReceivingDetail> findAll(String no) {
 		StringBuffer sql=new StringBuffer();

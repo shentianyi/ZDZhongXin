@@ -8,14 +8,17 @@ import com.zd.csms.zxbank.dao.IReceivingDetailDAO;
 import com.zd.csms.zxbank.dao.ZXBankDAOFactory;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
-public class ReceivingDetailService extends ServiceSupport{
-	private IReceivingDetailDAO nodldao=ZXBankDAOFactory.getReceivingDetailDAO();
-	
-	public List<ReceivingDetail> findBusinessList(ReceivingDetail query,IThumbPageTools tools){
+/**
+ * 收货详情Service 
+ */
+public class ReceivingDetailService extends ServiceSupport {
+	private IReceivingDetailDAO nodldao = ZXBankDAOFactory.getReceivingDetailDAO();
+
+	public List<ReceivingDetail> findBusinessList(ReceivingDetail query, IThumbPageTools tools) {
 		return nodldao.firnAllAgList(query, tools);
 	}
-	
-	public List<ReceivingDetail> findAll(String no){
+
+	public List<ReceivingDetail> findAll(String no) {
 		return nodldao.findAll(no);
 	}
 }

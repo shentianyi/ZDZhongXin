@@ -9,17 +9,15 @@ import com.zd.tools.thumbPage.IThumbPageTools;
 
 /**
  * 解除质押通知业务层
- * @author duyong
- *
  */
-public class MoveDetailService extends ServiceSupport{
+public class MoveDetailService extends ServiceSupport {
 
 	private IMoveDetailDAO dao = ZXBankDAOFactory.getMoveDetailDAO();
-	
+
 	public List<MoveDetail> findByQuery(MoveDetail query, IThumbPageTools tools) {
 		return dao.findByQuery(query, tools);
 	}
-	
+
 	public List<MoveDetail> findAll(String no) {
 		return dao.findAll(no);
 	}

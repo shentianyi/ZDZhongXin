@@ -34,6 +34,7 @@ public class DistribsetOracleDAO extends DAOSupport implements IDistribsetDAO {
 	/**
 	 * 按条件查询经销商
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<DistribsetZX> searchDistribsetList(DistribsetZX query) {
 		StringBuffer sql = new StringBuffer();

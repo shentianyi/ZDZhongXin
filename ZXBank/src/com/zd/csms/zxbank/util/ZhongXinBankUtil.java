@@ -50,6 +50,7 @@ public class ZhongXinBankUtil {
 	public static final byte[] BODY_HEAD=new byte[]{48,48};// 报体为2个字节（00）+数据报文，前一个字节表示加密标志（0：不加密，1：加密），后一个字节为保留位（用‘0’表示）
 	
 	
+	@SuppressWarnings("unchecked")
 	public static String parseXml(Map<String, Object> headMap, Map<String, Object> bodyMap) {
 		Document document = DocumentHelper.createDocument();
 		Element root = document.addElement("ap");

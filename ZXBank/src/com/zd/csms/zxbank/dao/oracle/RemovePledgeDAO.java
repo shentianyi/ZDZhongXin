@@ -6,14 +6,12 @@ import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import com.zd.core.DAOSupport;
-import com.zd.core.jdbc.JdbcTemplate;
 import com.zd.csms.zxbank.bean.RemovePledge;
 import com.zd.csms.zxbank.dao.IRemovePledgeDAO;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
 /**
  * 解除质押通知DAO实现层
- * @author duyong
  *
  */
 public class RemovePledgeDAO  extends DAOSupport implements IRemovePledgeDAO{

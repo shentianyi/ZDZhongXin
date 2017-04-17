@@ -13,6 +13,10 @@ import com.zd.csms.zxbank.web.bean.CustomerFar;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ * 用户信息DAO实现 
+ *
+ */
 public class CustomerDAO extends DAOSupport implements ICustomerDAO{
 
 	public CustomerDAO(String dataSourceName) {
@@ -22,6 +26,7 @@ public class CustomerDAO extends DAOSupport implements ICustomerDAO{
 	/**
 	 * 分页 查询所有用户
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Customer> findcustallList(Customer query,IThumbPageTools tools) {
 		List<Customer> list=null;
 		StringBuffer sql = new StringBuffer("Select a.cust_id,a.cust_no,a.cust_organizationcode,a.cust_name,a.cust_createdate as custCreateDate,a.cust_updatedate as custUpdateDate " +
@@ -37,6 +42,7 @@ public class CustomerDAO extends DAOSupport implements ICustomerDAO{
 		return list;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Customer> query() {
 		String sql="Select a.cust_id,a.cust_no,a.cust_organizationcode,a.cust_name,a.cust_createdate as custCreateDate,a.cust_updatedate as custUpdateDate from zx_customer a";
 		List<Customer> list=new ArrayList<Customer>();

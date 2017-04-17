@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="form.tld" prefix="form"%>
 <%@ taglib uri="url.tld" prefix="url"%>
@@ -8,7 +7,9 @@
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="thumbpage.tld" prefix="thumbpage"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="fmt.tld" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,8 +18,7 @@
 <title>质物入库详情</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
-<link rel="stylesheet" href="css/jquery-ui.min.css">
-<link rel="stylesheet" href="css/tablecs.css">
+<link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" />
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
@@ -28,7 +28,7 @@
 		<div class="ly-contai clearfix">
 			<div class="public-bar-crumbs fl hidden">
 				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
-				>
+				&gt;
 				<a class="crumbs-link" href="#">质物入库详情</a>
 			</div>
 		</div>
@@ -130,7 +130,7 @@
 					<div class="public-main-footer-pagin fr">
 						<c:if test="${not empty list }">
 							<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Commodity"
-								action="commodity.do?method=commodity&gaId=${list[0].cmGaid}" />
+								action="ZXinterface.do?method=commodity&gaId=${list[0].cmGaid}" />
 						</c:if>
 					</div>
 				</div>

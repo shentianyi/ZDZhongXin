@@ -10,13 +10,16 @@ import com.zd.csms.zxbank.dao.ICommodityDAO;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ *  质物入库详情DAO实现
+ */
 public class CommodityDAO extends DAOSupport implements ICommodityDAO {
 
 	public CommodityDAO(String dataSourceName) {
 		super(dataSourceName);
-		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Commodity> findAllList(Commodity query, IThumbPageTools tools) {
 		StringBuffer sql=new StringBuffer();

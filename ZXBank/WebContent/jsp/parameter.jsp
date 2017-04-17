@@ -76,7 +76,7 @@ function goList() {
 				</tr>
 				<tr>
 					<td colspan="4" id="custNoContractNo" hidden="true">
-						<div　id="custNoContractN" >
+						<div id="custNoContractN">
 							<table class="formTable">
 								<tr>
 									<td class="nameCol" ><font color="#FF0000">*</font>浙商银行客户号:</td>

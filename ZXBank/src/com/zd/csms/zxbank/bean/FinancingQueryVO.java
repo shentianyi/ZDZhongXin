@@ -1,4 +1,4 @@
-package com.zd.csms.zxbank.model;
+package com.zd.csms.zxbank.bean;
 
 /**
  * 融资信息查询类

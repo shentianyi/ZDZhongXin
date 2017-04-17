@@ -8,6 +8,7 @@
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@ page import="com.zd.tools.thumbPage.constants.ThumbPageConstants"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,7 +18,6 @@
 <title>中都汽车金融监管系统</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
-<link rel="stylesheet" href="css/tablecs.css">
 <script src="js/thumbpage/thumbpage.js"></script>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
@@ -33,9 +33,9 @@
 		<div class="ly-contai clearfix">
 			<div class="public-bar-crumbs fl hidden">
 				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
-				>
-				<a class="crumbs-link" href="receivingnotice.do?method=receivingnotice">收货通知</a>
-				>
+				&gt;
+				<a class="crumbs-link" href="ZXinterface.do?method=receivingnotice">收货通知</a>
+				&gt;
 				<a class="crumbs-link" href="#">通知详细查询</a>
 			</div>
 		</div>
@@ -95,7 +95,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">发货日期:</div>
 								<div class="input block fl hidden">
-									<select:timestamp timestamp="${receiving.nyCsndate}" idtype="ss"/>
+									<select:timestamp timestamp="${receiving.nyCsndate}" idtype="ss" />
 								</div>
 							</div>
 						</div>
@@ -103,7 +103,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">预计到港(库)日期:</div>
 								<div class="input block fl hidden">
-									<select:timestamp timestamp="${receiving.nyEta}" idtype="ss"/>
+									<select:timestamp timestamp="${receiving.nyEta}" idtype="ss" />
 								</div>
 							</div>
 							<div class="ly-col fl">
@@ -123,7 +123,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">通知书日期:</div>
 								<div class="input block fl hidden">
-									<select:timestamp timestamp="${receiving.nyNtcdate}" idtype="ss"/>
+									<select:timestamp timestamp="${receiving.nyNtcdate}" idtype="ss" />
 								</div>
 							</div>
 						</div>
@@ -161,7 +161,7 @@
 					</div>
 				</div>
 				<div class="public-main-table hidden abs" style="margin-top: 25px;">
-					<div class="ly-cont" >
+					<div class="ly-cont">
 						<div style="overflow-x: auto; overflow-y: auto; height: 100%; width: 100%">
 							<table class="t-table" border="0" cellspacing="0" cellpadding="0">
 								<thead class="t-thead">
@@ -215,7 +215,7 @@
 				<div class="public-main-footer hidden abs">
 					<div class="public-main-footer-pagin fr">
 						<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="ReceivingDetail"
-							action="receivingdetail.do?method=receivingdetail&nyNo=${receiving.nyNo}" />
+							action="ZXinterface.do?method=receivingdetail&nyNo=${receiving.nyNo}" />
 					</div>
 				</div>
 			</html:form>

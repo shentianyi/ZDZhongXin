@@ -8,13 +8,13 @@ import com.zd.csms.zxbank.dao.IDistribsetDAO;
 import com.zd.csms.zxbank.dao.SetDAOFactory;
 
 public class DistribsetService extends ServiceSupport {
-	
-	
+
 	private IDistribsetDAO dao = SetDAOFactory.getDistribsetDAO();
-	
-	public List<DistribsetZX> findorg(String org){
+
+	public List<DistribsetZX> findorg(String org) {
 		return dao.findorg(org);
 	}
+
 	/**
 	 * 添加中信经销商组织机构代码
 	 * @param zx
@@ -66,7 +66,7 @@ public class DistribsetService extends ServiceSupport {
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * 中信银行组织机构代码唯一验证
 	 * @param zsCustNo
@@ -88,5 +88,5 @@ public class DistribsetService extends ServiceSupport {
 		}
 		return flag;
 	}
-	
+
 }

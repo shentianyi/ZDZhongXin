@@ -11,12 +11,16 @@ import com.zd.csms.zxbank.dao.IGagerDAO;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ *	盘库基本信息DAO实现 
+ */
 public class GagerDAO extends DAOSupport implements IGagerDAO {
 
 	public GagerDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Gager> findAllList(Gager query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();
@@ -40,6 +44,7 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Gager getGager(int gaid) {
 		StringBuffer sql = new StringBuffer();

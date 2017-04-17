@@ -12,12 +12,16 @@ import com.zd.csms.zxbank.dao.ICheckstockDAO;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ * 盘库信息DAO实现 
+ */
 public class CheckstockDAO extends DAOSupport implements ICheckstockDAO {
 
 	public CheckstockDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Checkstock> findAllList(Checkstock query, IThumbPageTools tools) {
 		StringBuffer sql=new StringBuffer();
@@ -42,6 +46,7 @@ public class CheckstockDAO extends DAOSupport implements ICheckstockDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Checkstock getCheckstock(int loncpid) {
 		StringBuffer sql=new StringBuffer();
@@ -55,6 +60,7 @@ public class CheckstockDAO extends DAOSupport implements ICheckstockDAO {
 		return list.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CheckstockVO> findAllVOList(int id, IThumbPageTools tools) {
 		StringBuffer sql=new StringBuffer();

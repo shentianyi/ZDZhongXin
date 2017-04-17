@@ -23,7 +23,6 @@ import org.dom4j.Element;
 import com.zd.core.ActionSupport;
 import com.zd.core.SystemProperty;
 import com.zd.csms.zxbank.bean.*;
-import com.zd.csms.zxbank.model.*;
 import com.zd.csms.zxbank.service.*;
 import com.zd.csms.zxbank.util.SocketClient;
 import com.zd.csms.zxbank.util.SqlUtil;
@@ -52,13 +51,10 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	private static final String host;
 	private static final int port;
 
-
-
 	static {
 		host = SystemProperty.getPropertyValue("bankdock.properties", "zx.host");
 		port = Integer.parseInt(SystemProperty.getPropertyValue("bankdock.properties", "zx.port"));
 	}
-
 
 	// 客户接口
 	private CustomerService cs = new CustomerService();
@@ -93,7 +89,6 @@ public class ZXBankInterfaceAction extends ActionSupport {
 
 	public ActionForward distribset(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
-
 		return mapping.findForward("cuslist");
 	}
 
@@ -112,116 +107,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
-
-	/**
-	 * 分页查询数据
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 */
-	public ActionForward customer(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		//获取form表单数据
-				CustomerForm cust = (CustomerForm) form;
-				Customer dquery = cust.getCustomer();
-				//查询方式
-				int queryType=0;
-				if(request.getParameter("queryType")!=null){
-					queryType=Integer.parseInt(request.getParameter("queryType"));  
-				}
-				System.out.println("客户查询方式：queryType:"+queryType);
-				//远程查询返回数据
-				if(queryType==2){
-					System.out.println("--远程查询--");
-					request.setAttribute("action", "DLCDCMLQ");
-					request.setAttribute("userName","");
-					request.setAttribute("orgCode", dquery.getCustOrganizationcode());
-					boolean flg=commonRequest(mapping, request, "", CustomerFar.class, new String[]{"action","userName","orgCode"});
-					if(flg){
-						System.out.println("--远程查询到的数据列表--");
-						List resultList1=(List)request.getAttribute("resultList");
-						for (Object object : resultList1) {
-							System.out.println(object.toString());
-						}
-						//保存或更新数据
-						List resultList=(List)request.getAttribute("resultList");
-						cs.autoUpdateCust(resultList,dquery);
-					}
-				}
-				System.out.println("--开始本地查询--");
-				//本地查询
-				//根据类名获取分页工具
-				IThumbPageTools tools = ToolsFactory.getThumbPageTools("Customer", request);
-				//设置分页数据显示数量
-				tools.setPageSize(3);
-				//保存查询条件
-				tools.saveQueryVO(dquery);
-				//调用本地查询方法传入条件及分页工具。返回数据
-				List<Customer> list = cs.findcustallList(dquery, tools);
-				//放入request会话域中
-				request.setAttribute("list", list);
-				//返回视图名称
-				return mapping.findForward("cuslist");
-	}
-
-	/**
-	 * 仓库信息查询
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward warehouse(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			WarehouseForm WarHouseform = (WarehouseForm) form;
-			Warehouse query = WarHouseform.getWarehouse();// 查询条件获取
-			//查询方式
-			int queryType=0;
-			if(request.getParameter("queryType")!=null){
-				queryType=Integer.parseInt(request.getParameter("queryType"));  
-			}
-			System.out.println("客户查询方式：queryType:"+queryType);
-			//远程查询返回数据
-			if(queryType==2){
-				System.out.println("--远程查询--");//
-				request.setAttribute("action", "DLCDWMLQ");//请求代码
-				request.setAttribute("userName","");//登录名
-				request.setAttribute("hostNo", query.getCustNo());//- ECIF客户号
-				boolean flg=commonRequest(mapping, request, "", WarehouseFar.class, new String[]{"action","userName","hostNo"});
-				if(flg){
-					System.out.println("--远程查询到的数据列表--");
-					System.out.println("))))))))))");
-					List resultList1=(List)request.getAttribute("resultList");
-					for (Object object : resultList1) {
-						System.out.println(object.toString());
-					}
-					//保存或更新数据
-					List resultList=(List)request.getAttribute("resultList");
-					whs.autoUpdateCust(resultList1, query);
-				}
-			}
-			System.out.println("--开始本地查询--");
-			//--开始本地查询--
-			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Warehouse", request);// 获取分页模板
-			tools.setPageSize(2);// 设置当页面显示条数
-			List<Warehouse> list = whs.findBusinessList(query, tools);// 获取分页后的数据list
-			request.setAttribute("list", list);
-			request.setAttribute("cusNo", query.getCustNo());
-			request.setAttribute("whName", query.getWhName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return mapping.findForward("warehouse");
-	}
-
+	
 	/**
 	 * 通知推送
 	 * @param mapping
@@ -233,14 +119,14 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward findnotice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		NoticeForm not = (NoticeForm) form;
+		BankInterfaceForm not = (BankInterfaceForm) form;
 		Notice dquery = not.getNotice();
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Notice", request);
 		tools.setPageSize(3);
 		tools.saveQueryVO(dquery);
-		List<Notice> type = ns.findnoticetype();
+		List<Notice> types = ns.findnoticetype();
 		List<Notice> list = ns.findNotice(dquery, tools);
-		request.setAttribute("list1", type);
+		request.setAttribute("types", types);
 		request.setAttribute("list", list);
 		return mapping.findForward("noticelist");
 	}
@@ -270,7 +156,117 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return mapping.findForward("");
 	}
-	
+
+
+	/**
+	 * 用户信息查询数据
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public ActionForward customer(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		//获取form表单数据
+		BankInterfaceForm cust = (BankInterfaceForm) form;
+		Customer dquery = cust.getCustomer();
+		//查询方式
+		int queryType = 0;
+		if (request.getParameter("queryType") != null) {
+			queryType = Integer.parseInt(request.getParameter("queryType"));
+		}
+		System.out.println("客户查询方式：queryType:" + queryType);
+		//远程查询返回数据
+		if (queryType == 2) {
+			System.out.println("--远程查询--");
+			request.setAttribute("action", "DLCDCMLQ");
+			request.setAttribute("userName", "");
+			request.setAttribute("orgCode", dquery.getCustOrganizationcode());
+			boolean flg = commonRequest(mapping, request, "", CustomerFar.class, new String[] { "action", "userName",
+					"orgCode" });
+			if (flg) {
+				System.out.println("--远程查询到的数据列表--");
+				//保存或更新数据
+				List resultList = (List) request.getAttribute("resultList");
+				for (Object object : resultList) {
+					System.out.println(object.toString());
+				}
+				cs.autoUpdateCust(resultList, dquery);
+			}
+		}
+		System.out.println("--开始本地查询--");
+		//本地查询
+		//根据类名获取分页工具
+		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Customer", request);
+		//设置分页数据显示数量
+		tools.setPageSize(3);
+		//保存查询条件
+		tools.saveQueryVO(dquery);
+		//调用本地查询方法传入条件及分页工具。返回数据
+		List<Customer> list = cs.findcustallList(dquery, tools);
+		//放入request会话域中
+		request.setAttribute("list", list);
+		//返回视图名称
+		return mapping.findForward("cuslist");
+	}
+
+	/**
+	 * 仓库信息查询
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward warehouse(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			BankInterfaceForm WarHouseform = (BankInterfaceForm) form;
+			Warehouse query = WarHouseform.getWarehouse();// 查询条件获取
+			//查询方式
+			int queryType = 0;
+			if (request.getParameter("queryType") != null) {
+				queryType = Integer.parseInt(request.getParameter("queryType"));
+			}
+			System.out.println("客户查询方式：queryType:" + queryType);
+			//远程查询返回数据
+			if (queryType == 2) {
+				System.out.println("--远程查询--");//
+				request.setAttribute("action", "DLCDWMLQ");//请求代码
+				request.setAttribute("userName", "");//登录名
+				request.setAttribute("hostNo", query.getCustNo());//- ECIF客户号
+				boolean flg = commonRequest(mapping, request, "", WarehouseFar.class, new String[] { "action",
+						"userName", "hostNo" });
+				if (flg) {
+					System.out.println("--远程查询到的数据列表--");
+					System.out.println("))))))))))");
+					List resultList1 = (List) request.getAttribute("resultList");
+					for (Object object : resultList1) {
+						System.out.println(object.toString());
+					}
+					//保存或更新数据
+					List resultList = (List) request.getAttribute("resultList");
+					whs.autoUpdateCust(resultList1, query);
+				}
+			}
+			System.out.println("--开始本地查询--");
+			//--开始本地查询--
+			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Warehouse", request);// 获取分页模板
+			tools.setPageSize(2);// 设置当页面显示条数
+			List<Warehouse> list = whs.findBusinessList(query, tools);// 获取分页后的数据list
+			request.setAttribute("list", list);
+			request.setAttribute("cusNo", query.getCustNo());
+			request.setAttribute("whName", query.getWhName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mapping.findForward("warehouse");
+	}
 	/**
 	 * 融资信息查询
 	 * 
@@ -284,17 +280,17 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	public ActionForward financing(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
-			FinancingForm form = (FinancingForm) actionform;
+			BankInterfaceForm form = (BankInterfaceForm) actionform;
 			FinancingQueryVO query = form.getFinancingVO();
-			
+
 			//查询方式
 			String choose = "";
-			if(request.getParameter("queryType")!=null){
+			if (request.getParameter("queryType") != null) {
 				choose = request.getParameter("queryType");
 				System.out.println(choose);
 			}
-			
-			if(choose.equals("2")){
+
+			if (choose.equals("2")) {
 				request.setAttribute("action", "DLCDLMLQ");
 				request.setAttribute("userName", "ceshi");
 				request.setAttribute("loncpId", query.getFgLonentNo());
@@ -308,7 +304,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 					System.out.println(resultList);
 				}*/
 			}
-			
+
 			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Financing", request);
 
 			// 设置每页显示几条数据
@@ -321,10 +317,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return mapping.findForward("financing");
 	}
-
+	
 	/**
 	 * 监管协议查询
-	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -334,7 +329,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward agreement(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		AgreementForm agreementfrom = (AgreementForm) form;
+		BankInterfaceForm agreementfrom = (BankInterfaceForm) form;
 		Agreement query = agreementfrom.getAgreement();// 获取查询条件
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Agreement", request);// 分页模板获取
 		tools.setPageSize(2);
@@ -344,7 +339,100 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		request.setAttribute("custno", query.getAg_custno());
 		return mapping.findForward("agreement");
 	}
+	
+	/**
+	 * 收货通知书
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward receivingnotice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		BankInterfaceForm notifyrom = (BankInterfaceForm) form;
+		ReceivingNotice query = notifyrom.getReceivingnotice();
+		IThumbPageTools tools = ToolsFactory.getThumbPageTools("ReceivingNotice", request);
+		tools.setPageSize(2);
+		List<ReceivingNotice> list = rns.findBusinessList(query, tools);
+		request.setAttribute("list", list);
+		request.setAttribute("nyNo", query.getNyNo());
+		request.setAttribute("nyLonentname", query.getNyLonentname());
+		return mapping.findForward("receivingnotice");
+	}
 
+	/**
+	 * 收货通知书详情
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward receivingdetail(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String no;
+		no = request.getParameter("nyNo");
+		if (no == null) {
+			no = request.getAttribute("nyNo").toString();
+		}
+		ReceivingDetail query = new ReceivingDetail();
+		query.setNdNo(no);
+		IThumbPageTools tools = ToolsFactory.getThumbPageTools("ReceivingDetail", request);
+		tools.setPageSize(2);
+		List<ReceivingDetail> list = rds.findBusinessList(query, tools);
+
+		ReceivingNotice receiving = rns.getNotify(no);
+		request.setAttribute("list", list);
+		request.setAttribute("receiving", receiving);
+
+		return mapping.findForward("receivingdetail");
+	}
+
+	/**
+	 * 收货通知书详情导出
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward receivingdetailOut(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String no = request.getParameter("nyno");
+		List<ReceivingDetail> list = rds.findAll(no);
+		ReceivingNotice receiving = rns.getNotify(no);
+
+		//创建导出内容
+		IExportFile export = new ExportFileExcelImpl();
+
+		//处理需求内容
+		List<ReceivingNotice> rns = new ArrayList<ReceivingNotice>();
+		rns.add(receiving);
+		List<List<?>> dataLists = new ArrayList<List<?>>();
+		List<IImportRowMapper> mappers = new ArrayList<IImportRowMapper>();
+		IImportRowMapper mapper = new ReceivingRowMapper();
+		IImportRowMapper mapperDetail = new ReceivingDetailRowMapper();
+		dataLists.add(rns);
+		dataLists.add(list);
+		mappers.add(mapper);
+		mappers.add(mapperDetail);
+
+		try {
+			//下载
+			export.export(dataLists, mappers, export.createDefaultFileName("收货通知"), "收货通知", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * 解除质押通知查询
 	 * 
@@ -358,7 +446,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	public ActionForward removepledge(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		// 获得页面查询数据
-		RemovePledgeForm form = (RemovePledgeForm) actionform;
+		BankInterfaceForm form = (BankInterfaceForm) actionform;
 		RemovePledge query = form.getRemovepledge();
 		// 分页工具
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("RemovePledge", request);
@@ -445,7 +533,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * 移库通知查询
 	 * 
@@ -459,7 +547,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	public ActionForward movenotice(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		// 获得页面查询数据
-		MoveNoticeForm form = (MoveNoticeForm) actionform;
+		BankInterfaceForm form = (BankInterfaceForm) actionform;
 		MoveNotice query = form.getMovenotice();
 		// 分页工具
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("MoveNotice", request);
@@ -547,10 +635,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
-
+	
 	/**
-	 * 收货通知书
-	 * 
+	 * 初始化质物入库
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -558,99 +645,6 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward receivingnotice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		ReceivingNoticeForm notifyrom = (ReceivingNoticeForm) form;
-		ReceivingNotice query = notifyrom.getReceivingnotice();
-		IThumbPageTools tools = ToolsFactory.getThumbPageTools("ReceivingNotice", request);
-		tools.setPageSize(2);
-		List<ReceivingNotice> list = rns.findBusinessList(query, tools);
-		request.setAttribute("list", list);
-		request.setAttribute("nyNo", query.getNyNo());
-		request.setAttribute("nyLonentname", query.getNyLonentname());
-		return mapping.findForward("receivingnotice");
-	}
-
-	/**
-	 * 收货通知书详情
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward receivingdetail(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String no;
-		no = request.getParameter("nyNo");
-		if (no == null) {
-			no = request.getAttribute("nyNo").toString();
-		}
-		ReceivingDetail query = new ReceivingDetail();
-		query.setNdNo(no);
-		IThumbPageTools tools = ToolsFactory.getThumbPageTools("ReceivingDetail", request);
-		tools.setPageSize(2);
-		List<ReceivingDetail> list = rds.findBusinessList(query, tools);
-
-		ReceivingNotice receiving = rns.getNotify(no);
-		request.setAttribute("list", list);
-		request.setAttribute("receiving", receiving);
-
-		return mapping.findForward("receivingdetail");
-	}
-
-	/**
-	 * 收货通知书详情导出
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	/**
-	 * 收货通知书详情导出
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward receivingdetailOut(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String no = request.getParameter("nyno");
-		List<ReceivingDetail> list = rds.findAll(no);
-		ReceivingNotice receiving = rns.getNotify(no);
-
-		//创建导出内容
-		IExportFile export = new ExportFileExcelImpl();
-
-		//处理需求内容
-		List<ReceivingNotice> rns = new ArrayList<ReceivingNotice>();
-		rns.add(receiving);
-		List<List<?>> dataLists = new ArrayList<List<?>>();
-		List<IImportRowMapper> mappers = new ArrayList<IImportRowMapper>();
-		IImportRowMapper mapper = new ReceivingRowMapper();
-		IImportRowMapper mapperDetail = new ReceivingDetailRowMapper();
-		dataLists.add(rns);
-		dataLists.add(list);
-		mappers.add(mapper);
-		mappers.add(mapperDetail);
-
-		try {
-			//下载
-			export.export(dataLists, mappers, export.createDefaultFileName("收货通知"), "收货通知", response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public ActionForward initgager(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		return mapping.findForward("gagerApp");
@@ -930,12 +924,22 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		return mapping.findForward("stocktaking");
 	}
 
+	/**
+	 * 盘库导入
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	public ActionForward stockApp(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		BankInterfaceForm bForm = (BankInterfaceForm) form;
 
 		Checkstock check = bForm.getCheckstock();
 
+		@SuppressWarnings("unchecked")
 		List<CheckstockVO> list = (List<CheckstockVO>) request.getSession().getAttribute("checkList");
 		//其它必填项确认
 		if (StringUtil.isEmpty(check.getCsLoncpid())) {
@@ -1031,7 +1035,6 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	/**
 	 * 远程连接处理
 	 */
-	@SuppressWarnings("unused")
 	private boolean commonRequest(ActionMapping mapping, HttpServletRequest request, String listName,
 			Class<?> resultClassType, String... field) throws Exception, DocumentException {
 		Document doc = null;
@@ -1072,11 +1075,15 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		request.setAttribute("resultList", resultList);
 		return true;
 	}
-	
-	public static boolean NoticeSynchronous(int noticeType,Map<String, Object> body,Map<String, Object> head,String listName,Class<?> beanClassType,Class<?> resultClassType)throws Exception{
+
+	/**
+	 * 远程查询保存到本地
+	 */
+	public static boolean NoticeSynchronous(int noticeType, Map<String, Object> body, Map<String, Object> head,
+			String listName, Class<?> beanClassType, Class<?> resultClassType) throws Exception {
 		SocketClient socket = new SocketClient(host, port);
 		Document doc = null;
-		String xml=socket.send(head, body);
+		String xml = socket.send(head, body);
 		xml = xml.substring(2);
 		// 拼接返回值
 		doc = DocumentHelper.parseText(xml);
@@ -1085,11 +1092,11 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			return false;
 		}
 		Element bodyNode = ap.element("stream");
-		if(!bodyNode.hasContent()){
+		if (!bodyNode.hasContent()) {
 			return false;
 		}
-		List liststs=ap.elements("stream");
-		Object bean=null;
+		List liststs = ap.elements("stream");
+		Object bean = null;
 		for (Iterator it = liststs.iterator(); it.hasNext();) {
 			Element listst = (Element) it.next();
 			bean = ZhongXinBankUtil.getBean(beanClassType, listst);
@@ -1103,7 +1110,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				Object beans = ZhongXinBankUtil.getBean(resultClassType, info);
 				resultList.add(beans);
 			}
-		ns.save(noticeType, resultList,bean);
+		ns.save(noticeType, resultList, bean);
 		return true;
 	}
 }

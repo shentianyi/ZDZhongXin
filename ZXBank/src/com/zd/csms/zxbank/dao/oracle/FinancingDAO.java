@@ -7,10 +7,13 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import com.zd.core.DAOSupport;
 import com.zd.csms.zxbank.bean.Financing;
+import com.zd.csms.zxbank.bean.FinancingQueryVO;
 import com.zd.csms.zxbank.dao.IFinancingDAO;
-import com.zd.csms.zxbank.model.FinancingQueryVO;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ * 融资信息DAO实现
+ */
 public class FinancingDAO extends DAOSupport implements IFinancingDAO{
 
 	public FinancingDAO(String dataSourceName) {
@@ -20,6 +23,7 @@ public class FinancingDAO extends DAOSupport implements IFinancingDAO{
 	// 资源查询语句
 	private static String select_financing = "SELECT FIID,FGLONENTNO,LONCPNAME,FGSTDATE,FGENDDATE,FGLOANCODE,FGSCFTXNO,FGLOANAMT,FGBAILRAT,FGSLFCAP,FGFSTBLRAT,FGPROCRT,FGBIZMOD,FGOPERORG,FGCREATEDATE,FGUPDATEDATE FROM ZX_FINANCING WHERE 1=1";
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Financing> findByQuery(FinancingQueryVO query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();

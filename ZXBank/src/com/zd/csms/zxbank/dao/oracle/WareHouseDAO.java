@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import com.zd.core.DAOSupport;
-import com.zd.csms.zxbank.bean.Customer;
 import com.zd.csms.zxbank.bean.Warehouse;
 import com.zd.csms.zxbank.dao.IWareHouseDAO;
 import com.zd.csms.zxbank.web.bean.WarehouseFar;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ * 仓库信息DAO实现
+ */
 public class WareHouseDAO extends DAOSupport implements IWareHouseDAO{
 
 	public WareHouseDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Warehouse> findBusinessList(Warehouse query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();
@@ -63,6 +66,7 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO{
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Warehouse> query(String custno) {
 		String sql="select zx_whcode as whCode from ZX_WAREHOUSE where zx_custno='"+custno+"'";

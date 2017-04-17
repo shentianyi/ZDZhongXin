@@ -7,7 +7,7 @@
 <%@ taglib uri="struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="thumbpage.tld" prefix="thumbpage"%>
 <%@ taglib uri="struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="fmt.tld" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ page import="com.zd.csms.constants.Constants"%>
 <%@ page import="com.zd.csms.constants.StateConstants"%>
@@ -20,8 +20,7 @@
 <title>中都汽车金融监管系统</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
-<link rel="stylesheet" href="css/jquery-ui.min.css">
-<link rel="stylesheet" href="css/tablecs.css">
+<link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" />
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
@@ -33,9 +32,7 @@
 	function doClear() {
 		$("#mnNo").val("");
 		$("#mnLoncpname").val("");
-		document.forms[0].submit();
 	}
-	
 </script>
 </head>
 <body class="h-100 public">
@@ -43,14 +40,14 @@
 		<div class="ly-contai clearfix">
 			<div class="public-bar-crumbs fl hidden">
 				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
-				>
+				&gt;
 				<a class="crumbs-link" href="#">移库通知</a>
 			</div>
 		</div>
 	</div>
 	<div class="public-main abs">
 		<div class="ly-contai rel">
-			<html:form action="/movenotice.do" styleId="mnForm" method="post" onsubmit="return false">
+			<html:form action="/ZXinterface.do" styleId="mnForm" method="post" onsubmit="return false">
 				<input name="method" id="method" type="hidden" value="movenotice" />
 				<div class="public-main-input ly-col-1 hidden abs">
 					<div class="ly-input-w">
@@ -58,13 +55,13 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">移库通知书编号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" id="mnNo" type="text" name="movenotice.mnNo" value="" />
+									<input class="ly-bor-none" type="text" id="mnNo" name="movenotice.mnNo" />
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" id="mnLoncpname" type="text" name="movenotice.mnLoncpname" value="" />
+									<input class="ly-bor-none" type="text" id="mnLoncpname" name="movenotice.mnLoncpname" />
 								</div>
 							</div>
 						</div>
@@ -90,7 +87,7 @@
 										<th class="t-th">创建时间</th>
 										<th class="t-th">更新时间</th>
 										<th class="t-th">操作</th>
-									</tr> 
+									</tr>
 								</thead>
 								<tbody class="t-tbody hidden">
 									<c:if test="${not empty list }">
@@ -103,13 +100,9 @@
 												<td class="t-td"><c:out value="${row.mnMovedate}" /></td>
 												<td class="t-td"><c:out value="${row.mnNoticedate}" /></td>
 												<td class="t-td"><c:out value="${row.mnOperorg}" /></td>
-												<td class="t-td">
-													<select:timestamp timestamp="${row.mnCreatedate}" idtype="ss"/>
-												</td>
-												<td class="t-td">
-													<select:timestamp timestamp="${row.mnUpdatedate}" idtype="ss"/>
-												</td>
-												<td class="t-td"><a href="movedetail.do?method=movedetail&mdno=<c:out value='${row.mnNo }'/>">详情</a></td>
+												<td class="t-td"><select:timestamp timestamp="${row.mnCreatedate}" idtype="ss" /></td>
+												<td class="t-td"><select:timestamp timestamp="${row.mnUpdatedate}" idtype="ss" /></td>
+												<td class="t-td"><a href="ZXinterface.do?method=movedetail&mdno=<c:out value='${row.mnNo }'/>">详情</a></td>
 											</tr>
 										</logic:iterate>
 									</c:if>
@@ -122,7 +115,7 @@
 				<div class="public-main-footer hidden abs">
 					<div class="public-main-footer-pagin fr">
 						<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="MoveNotice"
-							action="movenotice.do?method=movenotice" />
+							action="ZXinterface.do?method=movenotice" />
 					</div>
 				</div>
 			</html:form>

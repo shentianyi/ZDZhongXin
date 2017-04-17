@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.zd.core.IDAO;
 import com.zd.csms.zxbank.bean.Financing;
-import com.zd.csms.zxbank.model.FinancingQueryVO;
+import com.zd.csms.zxbank.bean.FinancingQueryVO;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
 public interface IFinancingDAO extends IDAO {

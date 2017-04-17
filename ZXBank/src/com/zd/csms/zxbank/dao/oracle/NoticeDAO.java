@@ -13,12 +13,16 @@ import com.zd.csms.zxbank.dao.INoticeDAO;
 import com.zd.tools.StringUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ * 通知推送DAO实现
+ */
 public class NoticeDAO extends DAOSupport implements INoticeDAO{
 
 	public NoticeDAO(String dataSourceName) {
 		super(dataSourceName);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Notice> findNotice(Notice query, IThumbPageTools tools) {
 		List<Notice> list = null;
@@ -33,6 +37,7 @@ public class NoticeDAO extends DAOSupport implements INoticeDAO{
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Notice> findnoticetype() {
 		StringBuffer sql = new StringBuffer("select distinct nt_type from zx_notice");
 		return getJdbcTemplate().query(sql.toString(),new BeanPropertyRowMapper(Notice.class));

@@ -56,6 +56,7 @@ public class MoveDetailDAO  extends DAOSupport implements IMoveDetailDAO{
 		}	
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MoveDetail> findAll(String no) {
 		StringBuffer sql = new StringBuffer();

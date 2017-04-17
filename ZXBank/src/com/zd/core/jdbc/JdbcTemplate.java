@@ -184,7 +184,6 @@ public class JdbcTemplate extends org.springframework.jdbc.core.JdbcTemplate {
 	 * @param clazz 查询结果对象类型（可使用Timestamp或Long等）
 	 * @return Object
 	 * */
-	@SuppressWarnings("unchecked")
 	public Object queryForObject(String sql,Class clazz){
 		List<?> result = super.queryForList(sql, clazz);
 		if(!result.isEmpty()){
@@ -200,7 +199,6 @@ public class JdbcTemplate extends org.springframework.jdbc.core.JdbcTemplate {
 	 * @param clazz 查询结果对象类型（可使用Timestamp或Long等）
 	 * @return Object
 	 * */
-	@SuppressWarnings("unchecked")
 	public Object queryForObject(String sql,Object[] params,Class clazz){
 		List result = super.queryForList(sql, params, clazz);
 		if(!result.isEmpty()){

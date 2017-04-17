@@ -7,7 +7,6 @@ import com.zd.csms.zxbank.dao.oracle.*;
 
 public class ZXBankDAOFactory {
 	
-	private static ZXIBankDockDAO bankDockDAO;
 	private static IWareHouseDAO iwareHouseDAO;
 	private static ICustomerDAO icustomerDAO;
 	private static INoticeDAO inoticeDAO;
@@ -22,20 +21,6 @@ public class ZXBankDAOFactory {
 	private static IGagerDAO igagerDAO;
 	private static ICommodityDAO icommodityDAO;
 	private static ICheckstockDAO icheckstockDAO;
-	
-	public static ZXIBankDockDAO getBankDockDAO() {
-		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");
-
-		if (Constants.DB_DRIVER_ORACLE.getCode().equals(BeanManager.getDbDriver(dataSourceName))) {
-			if(bankDockDAO==null){
-				bankDockDAO = new ZXBankDockDAO(dataSourceName);
-				return bankDockDAO;
-			}
-			else 
-				return bankDockDAO;
-		}
-		return null;
-	}
 	
 	public static ICustomerDAO getcustDAO() {
 		String dataSourceName = SystemProperty.getPropertyValue("system.properties", "dataSourceName");

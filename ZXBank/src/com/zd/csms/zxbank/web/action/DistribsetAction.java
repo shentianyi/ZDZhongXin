@@ -9,12 +9,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.mysql.jdbc.Util;
 import com.zd.core.ActionSupport;
 import com.zd.csms.zxbank.bean.DistribsetZX;
 import com.zd.csms.zxbank.service.DistribsetService;
 import com.zd.csms.zxbank.web.form.DistribsetForm;
-import com.zd.tools.SqlUtil;
 
 /**
  * 经销商参数设置

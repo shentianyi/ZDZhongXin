@@ -9,14 +9,17 @@ import com.zd.csms.zxbank.dao.ZXBankDAOFactory;
 import com.zd.csms.zxbank.util.SqlUtil;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
+/**
+ * 盘库详情Service
+ */
 public class CommodityService extends ServiceSupport {
-	private ICommodityDAO dao=ZXBankDAOFactory.getCommodityDAO();
-	
-	public List<Commodity> findBusinessList(Commodity query,IThumbPageTools tools){
+	private ICommodityDAO dao = ZXBankDAOFactory.getCommodityDAO();
+
+	public List<Commodity> findBusinessList(Commodity query, IThumbPageTools tools) {
 		return dao.findAllList(query, tools);
 	}
-	
-	public boolean addList(List<Commodity> lists,int gagerId){
+
+	public boolean addList(List<Commodity> lists, int gagerId) {
 		for (int i = 0; i < lists.size(); i++) {
 			Commodity com = lists.get(i);
 			com.setCmId(SqlUtil.getID(Commodity.class));
