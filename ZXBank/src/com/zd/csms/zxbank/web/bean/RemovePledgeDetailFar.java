@@ -4,7 +4,7 @@ package com.zd.csms.zxbank.web.bean;
  * 解除质押合同详情
  * @author duyong
  */
-public class RemovePledgeDetail{
+public class RemovePledgeDetailFar{
 	private String cmdCode;
 	private String cmdName;
 	private String unit;

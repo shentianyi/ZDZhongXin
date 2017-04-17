@@ -92,20 +92,20 @@ public class ReturnReceiptServer implements Runnable {
 							body.put("action", "DLCDRGNQ");
 							body.put("userName", "");
 							body.put("rvccmdntcNo", ntcno);
-							ZXBankInterfaceAction.NoticeSynchronous(1, body, head, "cmdinf", ReceivingNotice.class,
-									ReceivingDetail.class);
+							ZXBankInterfaceAction.NoticeSynchronous(1, body, head, "cmdinf", ReceivingNoticeFar.class,
+									ReceivingDetailFar.class);
 						} else if (ntctp.equals("DLCDTWNQ")) {
 							body.put("action", "DLCDTWNQ");
 							body.put("userName", "");
 							body.put("mwntcNo", ntcno);
-							ZXBankInterfaceAction.NoticeSynchronous(2, body, head, "", MoveNotice.class,
-									MoveDetail.class);
+							ZXBankInterfaceAction.NoticeSynchronous(2, body, head, "", MoveNoticeFar.class,
+									MoveDetailFar.class);
 						} else if (ntctp.equals("DLCDUINQ")) {
 							body.put("action", "DLCDUINQ");
 							body.put("userName", "");
 							body.put("rlsmgntcNo", ntcno);
-							ZXBankInterfaceAction.NoticeSynchronous(3, body, head, "", RemovePledge.class,
-									RemovePledgeDetail.class);
+							ZXBankInterfaceAction.NoticeSynchronous(3, body, head, "", RemovePledgeFar.class,
+									RemovePledgeDetailFar.class);
 						}
 					}
 

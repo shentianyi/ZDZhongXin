@@ -5,7 +5,7 @@ package com.zd.csms.zxbank.web.bean;
  * 解除质押通知书
  * @author duyong
  */
-public class RemovePledge {
+public class RemovePledgeFar {
 	private String rlsmgntcNo;
 	private String operOrg;
 	private String mtgpsnNm;

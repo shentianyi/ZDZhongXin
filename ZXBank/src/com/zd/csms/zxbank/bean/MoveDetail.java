@@ -10,7 +10,7 @@ import com.zd.core.annotation.table;
  * @author duyong
  *
  */
-@table(name="ZX_MOVEDETAIL")
+@table(name="zx_movedetail")
 public class MoveDetail implements Serializable{
 
 	private static final long serialVersionUID = -1438252117901030215L;
@@ -20,10 +20,10 @@ public class MoveDetail implements Serializable{
 	private String mdRemoveoutno;//移除仓库编号
 	private String mdRemoveinno;//移入仓库编号
 	private String mdWareno;//商品代码
-	private BigDecimal mdMovenumber;//移库数量
+	private String mdMovenumber;//移库数量
 	private String mdChassisno;//车架号
 	private String mdCertificationno;//合格证编号
-	private BigDecimal mdCarprice;//车价
+	private String mdCarprice;//车价
 	
 	public int getMdId() {
 		return mdId;
@@ -55,12 +55,6 @@ public class MoveDetail implements Serializable{
 	public void setMdWareno(String mdWareno) {
 		this.mdWareno = mdWareno;
 	}
-	public BigDecimal getMdMovenumber() {
-		return mdMovenumber;
-	}
-	public void setMdMovenumber(BigDecimal mdMovenumber) {
-		this.mdMovenumber = mdMovenumber;
-	}
 	public String getMdChassisno() {
 		return mdChassisno;
 	}
@@ -73,17 +67,28 @@ public class MoveDetail implements Serializable{
 	public void setMdCertificationno(String mdCertificationno) {
 		this.mdCertificationno = mdCertificationno;
 	}
-	public BigDecimal getMdCarprice() {
+	
+	public String getMdMovenumber() {
+		return mdMovenumber;
+	}
+	public void setMdMovenumber(String mdMovenumber) {
+		this.mdMovenumber = mdMovenumber;
+	}
+	public String getMdCarprice() {
 		return mdCarprice;
 	}
-	public void setMdCarprice(BigDecimal mdCarprice) {
+	public void setMdCarprice(String mdCarprice) {
 		this.mdCarprice = mdCarprice;
 	}
-	
 	@Override
 	public String toString() {
-		return "MoveDetail [mdId=" + mdId + ", mdNo=" + mdNo + ", mdRemoveoutno=" + mdRemoveoutno + ", mdRemoveinno=" + mdRemoveinno + ", mdWareno="
-				+ mdWareno + ", mdMovenumber=" + mdMovenumber + ", mdChassisno=" + mdChassisno + ", mdCertificationno=" + mdCertificationno
-				+ ", mdCarprice=" + mdCarprice + "]";
+		return "MoveDetail [mdId=" + mdId + ", mdNo=" + mdNo
+				+ ", mdRemoveoutno=" + mdRemoveoutno + ", mdRemoveinno="
+				+ mdRemoveinno + ", mdWareno=" + mdWareno + ", mdMovenumber="
+				+ mdMovenumber + ", mdChassisno=" + mdChassisno
+				+ ", mdCertificationno=" + mdCertificationno + ", mdCarprice="
+				+ mdCarprice + "]";
 	}
+	
+	
 }

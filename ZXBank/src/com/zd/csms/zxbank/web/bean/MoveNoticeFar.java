@@ -5,7 +5,7 @@ package com.zd.csms.zxbank.web.bean;
  * @author duyong
  * 
  */
-public class MoveNotice{
+public class MoveNoticeFar{
 	private String operOrg;
 	private String spventnm;
 	private String mwapyDate;

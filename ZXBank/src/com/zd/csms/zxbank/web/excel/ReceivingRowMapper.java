@@ -14,8 +14,8 @@ public class ReceivingRowMapper implements IImportRowMapper {
 	public String[] exportRow(Object obj) {
 		ReceivingNotice rn = (ReceivingNotice) obj;
 		return new String[] { rn.getNyNo(), rn.getNyCorentnm(), rn.getNySpventnm(), rn.getNyOnwspvenm(),
-				rn.getNyTrsptentnm(), rn.getNyLonentno(), rn.getNyLonentname(), rn.getNyCsndate(), rn.getNyEta(),
-				rn.getNyEpa(), rn.getNyOfflnsatno(), rn.getNyNtcdate(), rn.getNyTtlcmdval() + "", rn.getNyExcplace(),
+				rn.getNyTrsptentnm(), rn.getNyLonentno(), rn.getNyLonentname(), rn.getNyCsndate().toString(), rn.getNyEta().toString(),
+				rn.getNyEpa(), rn.getNyOfflnsatno(), rn.getNyNtcdate().toString(), rn.getNyTtlcmdval() + "", rn.getNyExcplace(),
 				rn.getNyTotnum() + "", rn.getNyRemark() };
 	}
 

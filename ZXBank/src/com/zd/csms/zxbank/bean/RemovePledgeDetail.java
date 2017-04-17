@@ -9,7 +9,7 @@ import com.zd.core.annotation.table;
  * 解除质押合同详情
  * @author duyong
  */
-@table(name="ZX_REMOVEPLEDGEDETAIL")
+@table(name="zx_removepledgedetail")
 public class RemovePledgeDetail implements Serializable{
 
 	private static final long serialVersionUID = 1682831269544002616L;
@@ -19,15 +19,15 @@ public class RemovePledgeDetail implements Serializable{
 	private String rdCmdcode;//商品代码
 	private String rdCmdname;//商品名称
 	private String rdUnit;//计量单位
-	private int rdStknum;//库存数量
-	private int rdRlsmgnum;//解除质押数量
+	private String rdStknum;//库存数量
+	private String rdRlsmgnum;//解除质押数量
 	private String rdWhcode;//所在仓库编号
 	private String rdScflonno;//SCF放款批次号
 	private String rdChattelpdno;//动产质押担保合同编号
-	private BigDecimal rdNumber;//移库数量
+	private String rdNumber;//移库数量
 	private String rdChassisno;//车架号
 	private String rdCertificationno;//合格证编号
-	private BigDecimal rdCarprice;//车价
+	private String rdCarprice;//车价
 	private String rdUsername;//赎货经办人姓名
 	private String rdUsercardid;//赎货经办人身份证号码
 	public int getRdId() {
@@ -60,16 +60,16 @@ public class RemovePledgeDetail implements Serializable{
 	public void setRdUnit(String rdUnit) {
 		this.rdUnit = rdUnit;
 	}
-	public int getRdStknum() {
+	public String getRdStknum() {
 		return rdStknum;
 	}
-	public void setRdStknum(int rdStknum) {
+	public void setRdStknum(String rdStknum) {
 		this.rdStknum = rdStknum;
 	}
-	public int getRdRlsmgnum() {
+	public String getRdRlsmgnum() {
 		return rdRlsmgnum;
 	}
-	public void setRdRlsmgnum(int rdRlsmgnum) {
+	public void setRdRlsmgnum(String rdRlsmgnum) {
 		this.rdRlsmgnum = rdRlsmgnum;
 	}
 	public String getRdWhcode() {
@@ -90,10 +90,10 @@ public class RemovePledgeDetail implements Serializable{
 	public void setRdChattelpdno(String rdChattelpdno) {
 		this.rdChattelpdno = rdChattelpdno;
 	}
-	public BigDecimal getRdNumber() {
+	public String getRdNumber() {
 		return rdNumber;
 	}
-	public void setRdNumber(BigDecimal rdNumber) {
+	public void setRdNumber(String rdNumber) {
 		this.rdNumber = rdNumber;
 	}
 	public String getRdChassisno() {
@@ -108,10 +108,10 @@ public class RemovePledgeDetail implements Serializable{
 	public void setRdCertificationno(String rdCertificationno) {
 		this.rdCertificationno = rdCertificationno;
 	}
-	public BigDecimal getRdCarprice() {
+	public String getRdCarprice() {
 		return rdCarprice;
 	}
-	public void setRdCarprice(BigDecimal rdCarprice) {
+	public void setRdCarprice(String rdCarprice) {
 		this.rdCarprice = rdCarprice;
 	}
 	public String getRdUsername() {
@@ -126,12 +126,20 @@ public class RemovePledgeDetail implements Serializable{
 	public void setRdUsercardid(String rdUsercardid) {
 		this.rdUsercardid = rdUsercardid;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Override
 	public String toString() {
-		return "RemovePledgeDetail [rdId=" + rdId + ", rdNo=" + rdNo + ", rdCmdcode=" + rdCmdcode + ", rdCmdname=" + rdCmdname + ", rdUnit=" + rdUnit
-				+ ", rdStknum=" + rdStknum + ", rdRlsmgnum=" + rdRlsmgnum + ", rdWhcode=" + rdWhcode + ", rdScflonno=" + rdScflonno
-				+ ", rdChattelpdno=" + rdChattelpdno + ", rdNumber=" + rdNumber + ", rdChassisno=" + rdChassisno + ", rdCertificationno="
-				+ rdCertificationno + ", rdCarprice=" + rdCarprice + ", rdUsername=" + rdUsername + ", rdUsercardid=" + rdUsercardid + "]";
+		return "RemovePledgeDetail [rdId=" + rdId + ", rdNo=" + rdNo
+				+ ", rdCmdcode=" + rdCmdcode + ", rdCmdname=" + rdCmdname
+				+ ", rdUnit=" + rdUnit + ", rdStknum=" + rdStknum
+				+ ", rdRlsmgnum=" + rdRlsmgnum + ", rdWhcode=" + rdWhcode
+				+ ", rdScflonno=" + rdScflonno + ", rdChattelpdno="
+				+ rdChattelpdno + ", rdNumber=" + rdNumber + ", rdChassisno="
+				+ rdChassisno + ", rdCertificationno=" + rdCertificationno
+				+ ", rdCarprice=" + rdCarprice + ", rdUsername=" + rdUsername
+				+ ", rdUsercardid=" + rdUsercardid + "]";
 	}
 	
 }

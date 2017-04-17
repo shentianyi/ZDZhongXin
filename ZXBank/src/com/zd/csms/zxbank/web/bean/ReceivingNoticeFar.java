@@ -1,6 +1,6 @@
 package com.zd.csms.zxbank.web.bean;
 
-public class ReceivingNotice {
+public class ReceivingNoticeFar {
 	private String rcvcmdntcNo;
 	private String corentNm;
 	private String spventNm;

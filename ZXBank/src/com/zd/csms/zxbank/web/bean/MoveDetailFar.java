@@ -5,7 +5,7 @@ package com.zd.csms.zxbank.web.bean;
  * @author duyong
  *
  */
-public class MoveDetail{
+public class MoveDetailFar{
 
 	private String mwCode;
 	private String iwCode;

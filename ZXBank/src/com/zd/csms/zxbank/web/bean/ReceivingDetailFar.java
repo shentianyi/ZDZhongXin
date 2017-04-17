@@ -1,6 +1,6 @@
 package com.zd.csms.zxbank.web.bean;
 
-public class ReceivingDetail {
+public class ReceivingDetailFar {
 	private String idtplanNo;
 	private String idtplanNm;
 	private String cmdCode;

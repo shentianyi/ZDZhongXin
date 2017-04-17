@@ -1,5 +1,8 @@
 package com.zd.csms.zxbank.bean;
 
+import com.zd.core.annotation.table;
+
+@table(name="zx_notifydetail")
 public class ReceivingDetail {
 	private int ndId;//--收货质物明细表主键id
 	private String ndNo;//--通知书编号
@@ -7,10 +10,10 @@ public class ReceivingDetail {
 	private String ndIdtplannm;//--实际订单名称
 	private String ndCmdcode;//--商品代码
 	private String ndCmdname;//--商品名称
-	private int ndCsnnum;//--发货数量
+	private String ndCsnnum;//--发货数量
 	private String ndUnit;//--计量单位
-	private double ndCsnprc;//--发货单价
-	private double ndReqcsnval;//--发货价值
+	private String ndCsnprc;//--发货单价
+	private String ndReqcsnval;//--发货价值
 	private String ndScflonno;//--SCF放款批次号
 	private String ndMtgcntno;//--质押合同编号
 	private String ndRemark;//--备注
@@ -62,36 +65,6 @@ public class ReceivingDetail {
 	public void setNdCmdname(String ndCmdname) {
 		this.ndCmdname = ndCmdname;
 	}
-	public int getNdCsnnum() {
-		return ndCsnnum;
-	}
-	public void setNdCsnnum(int ndCsnnum) {
-		this.ndCsnnum = ndCsnnum;
-	}
-	public String getNdUnit() {
-		return ndUnit;
-	}
-	public void setNdUnit(String ndUnit) {
-		this.ndUnit = ndUnit;
-	}
-	public double getNdCsnprc() {
-		return ndCsnprc;
-	}
-	public void setNdCsnprc(double ndCsnprc) {
-		this.ndCsnprc = ndCsnprc;
-	}
-	public double getNdReqcsnval() {
-		return ndReqcsnval;
-	}
-	public void setNdReqcsnval(double ndReqcsnval) {
-		this.ndReqcsnval = ndReqcsnval;
-	}
-	public String getNdScflonno() {
-		return ndScflonno;
-	}
-	public void setNdScflonno(String ndScflonno) {
-		this.ndScflonno = ndScflonno;
-	}
 	public String getNdMtgcntno() {
 		return ndMtgcntno;
 	}
@@ -122,13 +95,47 @@ public class ReceivingDetail {
 	public void setNdLoancode(String ndLoancode) {
 		this.ndLoancode = ndLoancode;
 	}
+	public String getNdCsnnum() {
+		return ndCsnnum;
+	}
+	public void setNdCsnnum(String ndCsnnum) {
+		this.ndCsnnum = ndCsnnum;
+	}
+	public String getNdUnit() {
+		return ndUnit;
+	}
+	public void setNdUnit(String ndUnit) {
+		this.ndUnit = ndUnit;
+	}
+	public String getNdCsnprc() {
+		return ndCsnprc;
+	}
+	public void setNdCsnprc(String ndCsnprc) {
+		this.ndCsnprc = ndCsnprc;
+	}
+	public String getNdReqcsnval() {
+		return ndReqcsnval;
+	}
+	public void setNdReqcsnval(String ndReqcsnval) {
+		this.ndReqcsnval = ndReqcsnval;
+	}
+	public String getNdScflonno() {
+		return ndScflonno;
+	}
+	public void setNdScflonno(String ndScflonno) {
+		this.ndScflonno = ndScflonno;
+	}
 	@Override
 	public String toString() {
-		return "Notifydetail [ndId=" + ndId + ", ndNo=" + ndNo + ", ndIdtplanno=" + ndIdtplanno + ", ndIdtplannm=" + ndIdtplannm + ", ndCmdcode="
-				+ ndCmdcode + ", ndCmdname=" + ndCmdname + ", ndCsnnum=" + ndCsnnum + ", ndUnit=" + ndUnit + ", ndCsnprc=" + ndCsnprc
-				+ ", ndReqcsnval=" + ndReqcsnval + ", ndScflonno=" + ndScflonno + ", ndMtgcntno=" + ndMtgcntno + ", ndRemark=" + ndRemark
-				+ ", ndVin=" + ndVin + ", ndHgzno=" + ndHgzno + ", ndCarprice=" + ndCarprice + ", ndLoancode=" + ndLoancode + "]";
+		return "ReceivingDetail [ndId=" + ndId + ", ndNo=" + ndNo
+				+ ", ndIdtplanno=" + ndIdtplanno + ", ndIdtplannm="
+				+ ndIdtplannm + ", ndCmdcode=" + ndCmdcode + ", ndCmdname="
+				+ ndCmdname + ", ndCsnnum=" + ndCsnnum + ", ndUnit=" + ndUnit
+				+ ", ndCsnprc=" + ndCsnprc + ", ndReqcsnval=" + ndReqcsnval
+				+ ", ndScflonno=" + ndScflonno + ", ndMtgcntno=" + ndMtgcntno
+				+ ", ndRemark=" + ndRemark + ", ndVin=" + ndVin + ", ndHgzno="
+				+ ndHgzno + ", ndCarprice=" + ndCarprice + ", ndLoancode="
+				+ ndLoancode + "]";
 	}
-	
 	
 }

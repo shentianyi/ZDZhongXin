@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.zd.core.annotation.table;
-
 /**
  * 解除质押通知书
  * @author duyong
  */
-@table(name="ZX_REMOVEPLEDGE")
+@table(name="zx_removepledge")
 public class RemovePledge implements Serializable{
 
 	private static final long serialVersionUID = -4016128896242148226L;
@@ -75,6 +74,8 @@ public class RemovePledge implements Serializable{
 	public void setRpCorename(String rpCorename) {
 		this.rpCorename = rpCorename;
 	}
+	
+	
 	public String getRpRelievepddate() {
 		return rpRelievepddate;
 	}

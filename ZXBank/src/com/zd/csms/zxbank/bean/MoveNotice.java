@@ -3,11 +3,14 @@ package com.zd.csms.zxbank.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.zd.core.annotation.table;
+
 /**
  * 移库通知
  * @author duyong
  * 
  */
+@table(name="zx_movenotice")
 public class MoveNotice implements Serializable{
 
 	private static final long serialVersionUID = 4059920180306182093L;
@@ -19,7 +22,7 @@ public class MoveNotice implements Serializable{
 	private String mnMovedate;//移库申请日期
 	private String mnLoncpname;//借款企业名称
 	private String mnNoticedate;//通知日期
-	private int mnTotnum;//总记录数
+	private String mnTotnum;//总记录数
 	private Date mnCreatedate;//同步时间
 	private Date mnUpdatedate;//更新数据时间
 	public int getMnId() {
@@ -46,32 +49,24 @@ public class MoveNotice implements Serializable{
 	public void setMnSupervisename(String mnSupervisename) {
 		this.mnSupervisename = mnSupervisename;
 	}
-	public String getMnMovedate() {
-		return mnMovedate;
-	}
-	public void setMnMovedate(String mnMovedate) {
-		this.mnMovedate = mnMovedate;
-	}
 	public String getMnLoncpname() {
 		return mnLoncpname;
 	}
 	public void setMnLoncpname(String mnLoncpname) {
 		this.mnLoncpname = mnLoncpname;
 	}
-	public String getMnNoticedate() {
-		return mnNoticedate;
-	}
-	public void setMnNoticedate(String mnNoticedate) {
-		this.mnNoticedate = mnNoticedate;
-	}
-	public int getMnTotnum() {
-		return mnTotnum;
-	}
-	public void setMnTotnum(int mnTotnum) {
-		this.mnTotnum = mnTotnum;
-	}
 	public Date getMnCreatedate() {
 		return mnCreatedate;
+	}
+	
+	public String getMnTotnum() {
+		return mnTotnum;
+	}
+	public void setMnTotnum(String mnTotnum) {
+		this.mnTotnum = mnTotnum;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public void setMnCreatedate(Date mnCreatedate) {
 		this.mnCreatedate = mnCreatedate;
@@ -83,6 +78,18 @@ public class MoveNotice implements Serializable{
 		this.mnUpdatedate = mnUpdatedate;
 	}
 	
+	public String getMnMovedate() {
+		return mnMovedate;
+	}
+	public void setMnMovedate(String mnMovedate) {
+		this.mnMovedate = mnMovedate;
+	}
+	public String getMnNoticedate() {
+		return mnNoticedate;
+	}
+	public void setMnNoticedate(String mnNoticedate) {
+		this.mnNoticedate = mnNoticedate;
+	}
 	@Override
 	public String toString() {
 		return "Movenotice [mnId=" + mnId + ", mnNo=" + mnNo + ", mnOperorg=" + mnOperorg + ", mnSupervisename=" + mnSupervisename + ", mnMovedate="
