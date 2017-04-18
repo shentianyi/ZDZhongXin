@@ -1,5 +1,7 @@
 package com.zd.csms.zxbank.bean;
 
+import java.util.Date;
+
 import com.zd.core.annotation.table;
 
 /**
@@ -17,8 +19,8 @@ public class Warehouse {
 	private String loncpname;//借款企业名称  新增
 	private String whAddress;//仓库地址
 	private String phone;//电话
-	private String createDate;//数据同步时间
-	private String updateDate;//数据更新时间
+	private Date createDate;//数据同步时间
+	private Date updateDate;//数据更新时间
 	
 	public int getWhid() {
 		return Whid;
@@ -68,17 +70,19 @@ public class Warehouse {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getCreateDate() {
+	
+	
+	public Date getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate.substring(0, createDate.length()-2);
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public String getUpdateDate() {
+	public Date getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate.substring(0, updateDate.length()-2);
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 	public String getLoncpname() {
 		return loncpname;

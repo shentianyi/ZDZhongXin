@@ -8,6 +8,7 @@ import com.zd.csms.util.DateUtil;
 import com.zd.csms.zxbank.bean.Warehouse;
 import com.zd.csms.zxbank.dao.IWareHouseDAO;
 import com.zd.csms.zxbank.dao.ZXBankDAOFactory;
+import com.zd.csms.zxbank.util.SqlUtil;
 import com.zd.csms.zxbank.web.bean.WarehouseFar;
 import com.zd.tools.thumbPage.IThumbPageTools;
 
@@ -20,52 +21,62 @@ public class WareHouseService extends ServiceSupport {
 	public List<Warehouse> findBusinessList(Warehouse query, IThumbPageTools tools) {
 		return wdao.findBusinessList(query, tools);
 	}
-
 	// 远程数据与本地数据比对
 	public void autoUpdateWare(List<WarehouseFar> bankList, Warehouse warehouse) throws Exception {
 		List<Warehouse> list = wdao.query(warehouse.getCustNo());
-		System.out.println(list);
+		System.out.println("--本地-"+warehouse.getCustNo()+"-所有--"+list);
 		if (bankList != null && bankList.size() > 0)
 			for (WarehouseFar warehouseFar : bankList) {
 				int tem = 0;
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).getWhCode().trim().equals(warehouseFar.getBkwhCode().trim())) {
-						System.out.println("更新仓库：" + warehouseFar.getWhName());
+						if(update(warehouseFar, warehouse.getCustNo())){
+							System.out.println("更新仓库：" + warehouseFar.getWhName()+" 成功");
+						}
 						tem++;
 						break;
 					}
 				}
-				if (tem == 0) {
-					add(warehouseFar, warehouse.getCustNo());
-					System.out.println("保存仓库：" + warehouseFar.getWhName());
+				if (tem == 0){
+					if(add(warehouseFar, warehouse.getCustNo())){
+						System.out.println("保存仓库：" + warehouseFar.getWhName()+"  成功");
+					}else{
+						System.out.println("保存仓库：" + warehouseFar.getWhName()+"  失败");
+					}
 				}
 			}
-
 	}
 
 	// 更新仓库信息
-	@SuppressWarnings("unused")
-	private void update(WarehouseFar warehouseFar, String orgCode) {
-		//Date date = new Date();
-		//String updatedate = DateUtil.getStringFormatByDate(date, "yyyy-MM-dd HH:mm:ss");
+	private boolean update(WarehouseFar weFar, String custNo) {
+		Warehouse ware=new Warehouse();
+		ware.setWhid(SqlUtil.getID(Warehouse.class));
+		ware.setCustNo(custNo);
+		ware.setLoncpname(weFar.getLonNm());
+		ware.setPhone(weFar.getPhone());
+		ware.setWhAddress(weFar.getAddress());
+		ware.setWhCode(weFar.getBkwhCode());
+		ware.setWhLevel(weFar.getWhLevel());
+		ware.setWhName(weFar.getWhName());
+		ware.setWhOperorg(weFar.getOperOrg());
+		ware.setUpdateDate(new Date());
+		return wdao.upadat(ware);
 	}
 
 	// 保存仓库信息
-	public void add(WarehouseFar waFar, String custNo) {
-		Date date = new Date();
-		String createDate = DateUtil.getStringFormatByDate(date, "yyyy-MM-dd HH:mm:ss");
+	public boolean add(WarehouseFar waFar, String custNo) {
 		Warehouse was = new Warehouse();
-		was.setCreateDate(createDate);
+		was.setWhid(SqlUtil.getID(Warehouse.class));//获取下一个主键id
 		was.setCustNo(custNo);
 		was.setLoncpname(waFar.getLonNm());
 		was.setPhone(waFar.getPhone());
-		was.setUpdateDate(createDate);
 		was.setWhAddress(waFar.getAddress());
 		was.setWhCode(waFar.getBkwhCode());
 		was.setWhLevel(waFar.getWhLevel());
 		was.setWhName(waFar.getWhName());
 		was.setWhOperorg(waFar.getOperOrg());
-		wdao.add(was);
+		was.setCreateDate(new Date());
+		return wdao.add(was);
 	}
 
 }

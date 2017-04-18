@@ -11,7 +11,13 @@ public interface IWareHouseDAO extends IDAO {
 	public List<Warehouse> findBusinessList(Warehouse query,
 			IThumbPageTools tools);
 	public boolean add(Warehouse warehouse);
-	public boolean upadat(WarehouseFar warehouseFar,Warehouse warehouse);
+	/**
+	 * 更新仓库信息
+	 * @param warehouseFar
+	 * @param warehouse
+	 * @return
+	 */
+	public boolean upadat(Warehouse warehouse);
 	/**
 	 * 简单查询所仓库户信息
 	 * @return

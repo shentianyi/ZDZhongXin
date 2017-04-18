@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.zd.core.IDAO;
 import com.zd.csms.zxbank.bean.Customer;
-import com.zd.csms.zxbank.web.bean.CustomerFar;
-
 import com.zd.tools.thumbPage.IThumbPageTools;
 
 public interface ICustomerDAO extends IDAO{
@@ -22,7 +20,7 @@ public interface ICustomerDAO extends IDAO{
 	 * @return
 	 */
 	public boolean add(Customer customer);
-	public boolean upadat(CustomerFar customerFar,Customer customer);
+	public boolean upadat(Customer customer);
 	/**
 	 * 简单查询所有客户信息
 	 * @return

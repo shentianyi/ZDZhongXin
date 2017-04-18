@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import com.zd.core.ServiceSupport;
-import com.zd.csms.util.DateUtil;
 import com.zd.csms.zxbank.bean.Customer;
 import com.zd.csms.zxbank.dao.ICustomerDAO;
 import com.zd.csms.zxbank.dao.ZXBankDAOFactory;
+import com.zd.csms.zxbank.util.DateUtil;
+import com.zd.csms.zxbank.util.SqlUtil;
 import com.zd.csms.zxbank.web.bean.CustomerFar;
 import com.zd.tools.thumbPage.IThumbPageTools;
+
 
 /**
  * 客户信息Service
@@ -29,41 +31,47 @@ public class CustomerService extends ServiceSupport {
 				int tem = 0;
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).getCustNo().trim().equals(customerFar.getEcifCode().trim())) {
-						System.out.println("客户已存在");
-						//System.out.println("更新客户："+customerFar.getCustName());
-						//update(customerFar,customer.getCustOrganizationcode());
+						System.out.println("客户已存在，正在更新。。");
+						if(update(customerFar,customer.getCustOrganizationcode())){
+							System.out.println("更新客户："+customerFar.getCustName()+"成功");
+						}else{
+							System.out.println("更新客户："+customerFar.getCustName()+"失败");
+						}
 						tem++;
 						break;
 					}
 				}
 				if (tem == 0) {
-					add(customerFar, customer.getCustOrganizationcode());
-					System.out.println("保存客户：" + customerFar.getCustName());
+					if(add(customerFar, customer.getCustOrganizationcode())){
+						System.out.println("保存客户：" + customerFar.getCustName()+"  成功");
+					}else{
+						System.out.println("保存客户：" + customerFar.getCustName()+"  失败");
+					}
+					
 				}
 			}
 
 	}
 
 	// 更新客户信息
-	@SuppressWarnings("unused")
-	private void update(CustomerFar customerFar, String orgCode) {
+	private boolean update(CustomerFar customerFar, String orgCode) {
 		Customer cus = new Customer();
-		Date date = new Date();
-		String updatedate = DateUtil.getStringFormatByDate(date, "yyyy-MM-dd HH:mm:ss");
+		cus.setCustNo(customerFar.getEcifCode());
+		cus.setCustName(customerFar.getCustName());
 		cus.setCustOrganizationcode(orgCode);
-		cus.setCustUpdateDate(updatedate);
-		idao.update("", customerFar, cus);
+		cus.setCustUpdateDate(new Date());
+		return idao.upadat(cus);//自增更新方法
 	}
 
 	// 保存客户信息
-	public void add(CustomerFar customerFar, String orgCode) {
-		Date date = new Date();
+	public boolean add(CustomerFar customerFar, String orgCode) {
 		Customer cus = new Customer();
+		cus.setCustId(SqlUtil.getID(Customer.class));
 		cus.setCustName(customerFar.getCustName());
 		cus.setCustNo(customerFar.getEcifCode());
-		cus.setCustCreateDate(DateUtil.getStringFormatByDate(date, "yyyy-MM-dd HH:mm:ss"));
+		cus.setCustCreateDate(new Date());
 		cus.setCustOrganizationcode(orgCode);
-		idao.add(cus);
+		return idao.add(cus);
 	}
 
 }

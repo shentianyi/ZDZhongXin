@@ -28,6 +28,7 @@ import com.zd.csms.zxbank.util.SocketClient;
 import com.zd.csms.zxbank.util.SqlUtil;
 import com.zd.csms.zxbank.util.ZhongXinBankUtil;
 import com.zd.csms.zxbank.web.bean.CustomerFar;
+import com.zd.csms.zxbank.web.bean.FinancingFar;
 import com.zd.csms.zxbank.web.bean.WarehouseFar;
 import com.zd.csms.zxbank.web.excel.MoveDetailRowMapper;
 import com.zd.csms.zxbank.web.excel.MoveRowMapper;
@@ -296,13 +297,14 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				request.setAttribute("loncpId", query.getFgLonentNo());
 				request.setAttribute("loanstDate", query.getFgStDateStart());
 				//远程查询
-				/*boolean flg = commonRequest(mapping, request, "", Financing.class,new String[]{"action","userName","loncpId","loanstDate"});
+				boolean flg = commonRequest(mapping, request, "", FinancingFar.class,new String[]{"action","userName","loncpId","loanstDate"});
 				//处理远程查询并保存到本地服务器
 				if(flg){
 					@SuppressWarnings("unchecked")
-					List<Financing> resultList = (List<Financing>) request.getAttribute("resultList");
+					List<FinancingFar> resultList = (List<FinancingFar>) request.getAttribute("resultList");
 					System.out.println(resultList);
-				}*/
+					fs.addOrUpdate(resultList,query);
+				}
 			}
 
 			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Financing", request);

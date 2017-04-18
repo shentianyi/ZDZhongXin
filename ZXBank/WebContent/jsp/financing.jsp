@@ -192,7 +192,7 @@
 										<tr class="t-tr">
 											<td class="t-td"><c:out value="${index+1}" /></td>
 											<td class="t-td"><c:out value="${row.fgLonentNo}" /></td>
-											<td class="t-td"><c:out value="${row.loncpname}" /></td>
+											<td class="t-td"><c:out value="${row.fgLoncpName}" /></td>
 											<td class="t-td"><c:out value="${row.fgLoanCode}" /></td>
 											<td class="t-td"><c:out value="${row.fgScftxNo}" /></td>
 											<td class="t-td"><c:out value="${row.fgLoanAmt}" /></td>

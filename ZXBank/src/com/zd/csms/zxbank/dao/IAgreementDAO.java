@@ -8,4 +8,5 @@ import com.zd.tools.thumbPage.IThumbPageTools;
 
 public interface IAgreementDAO extends IDAO {
 	public List<Agreement> firnAllAgList(Agreement query,IThumbPageTools tools);
+	public Agreement getAgreement(String LonentNo);
 }
