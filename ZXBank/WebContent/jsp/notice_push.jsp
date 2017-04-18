@@ -29,7 +29,7 @@
 	}
 
 	function doClear(){
-		$("#ntno").val("");
+		$(":text").val("");
 	}
 </script>
 </head>

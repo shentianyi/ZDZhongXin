@@ -26,11 +26,22 @@
 <script src="js/thumbpage/thumbpage.js"></script>
 <script>
 	function doQuery() {
+		if ($('#choose').val() == "2" && $("#custNo").val() == "") {
+			alert("ECIF客户号不能为空");
+			return;
+		}
 		document.forms[0].submit();
 	}
 	function doClear() {
-		$("#custNo").val("");
-		$("#whName").val("");
+		$(":text").val("");
+	}
+
+	function doChoose(val) {
+		if (val == "2") {
+			$(".req").css("visibility", "visible");
+		} else {
+			$(".req").css("visibility", "hidden");
+		}
 	}
 </script>
 </head>
@@ -52,23 +63,25 @@
 					<div class="ly-input-w">
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
-								<div class="label block fl hidden">ECIF客户号：</div>
+								<div class="label block fl hidden">
+									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>ECIF客户号：
+								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="custNo" name="warehouse.custNo" value="${cusNo} " />
+									<input class="ly-bor-none" type="text" id="custNo" name="warehouse.custNo" value="${warehouse.custNo}" />
 								</div>
 							</div>
 
 							<div class="ly-col fl">
 								<div class="label block fl hidden">仓库名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="whName" name="warehouse.whName" />
+									<input class="ly-bor-none" type="text" id="whName" name="warehouse.whName" value="${warehouse.whName}" />
 								</div>
 							</div>
 
 							<div class="ly-col fl">
 								<div class="label block fl hidden">查询方式：</div>
 								<div class="input block fl hidden">
-									<select class="ly-bor-none" name="queryType">
+									<select class="ly-bor-none" id="choose" name="queryType" onchange="doChoose(this.value)">
 										<option value="0">请选择</option>
 										<option value="1">本地查询</option>
 										<option value="2">远程查询</option>
@@ -129,8 +142,7 @@
 
 				<div class="public-main-footer hidden abs">
 					<div class="public-main-footer-pagin fr">
-						<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Warehouse"
-							action="ZXinterface.do?method=warehouse" />
+						<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Warehouse" action="ZXinterface.do?method=warehouse" />
 					</div>
 				</div>
 			</html:form>

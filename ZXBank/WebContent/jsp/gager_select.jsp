@@ -51,11 +51,9 @@
 					<div class="ly-input-w">
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
-								<div class="label block fl hidden">
-									<font color="#FF0000">*</font>借款企业Id：
-								</div>
+								<div class="label block fl hidden">借款企业Id：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="gaLonentno" name="gager.gaLonentno" />
+									<input class="ly-bor-none" type="text" id="gaLonentno" name="gager.gaLonentno" value="${gager.gaLonentno}" />
 								</div>
 							</div>
 						</div>
@@ -117,8 +115,7 @@
 				<div class="public-main-footer hidden abs">
 					<div class="public-main-footer-pagin fr">
 						<c:if test="${not empty list }">
-							<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Gager"
-								action="ZXinterface.do?method=gager" />
+							<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Gager" action="ZXinterface.do?method=gager" />
 						</c:if>
 					</div>
 				</div>

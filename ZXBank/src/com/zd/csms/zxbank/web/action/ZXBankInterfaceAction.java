@@ -63,7 +63,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	// 仓库信息接口
 	private WareHouseService whs = new WareHouseService();
 	// 通知推送接口
-	private static NoticeService ns = new NoticeService();
+	private NoticeService ns = new NoticeService();
 	// 融资信息业务
 	private FinancingService fs = new FinancingService();
 	// 监管协议查询
@@ -154,7 +154,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			request.setAttribute("rdno", ntNo);
 			return removepledgedetail(mapping, form, request, response);
 		}
-		return mapping.findForward("");
+		return null;
 	}
 
 
@@ -172,7 +172,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			HttpServletResponse response) throws Exception {
 		//获取form表单数据
 		BankInterfaceForm cust = (BankInterfaceForm) form;
-		Customer dquery = cust.getCustomer();
+		Customer query = cust.getCustomer();
 		//查询方式
 		int queryType = 0;
 		if (request.getParameter("queryType") != null) {
@@ -184,7 +184,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			System.out.println("--远程查询--");
 			request.setAttribute("action", "DLCDCMLQ");
 			request.setAttribute("userName", "");
-			request.setAttribute("orgCode", dquery.getCustOrganizationcode());
+			request.setAttribute("orgCode", query.getCustOrganizationcode());
 			boolean flg = commonRequest(mapping, request, "", CustomerFar.class, new String[] { "action", "userName",
 					"orgCode" });
 			if (flg) {
@@ -194,7 +194,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				for (Object object : resultList) {
 					System.out.println(object.toString());
 				}
-				cs.autoUpdateCust(resultList, dquery);
+				cs.autoUpdateCust(resultList, query);
 			}
 		}
 		System.out.println("--开始本地查询--");
@@ -202,13 +202,14 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		//根据类名获取分页工具
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Customer", request);
 		//设置分页数据显示数量
-		tools.setPageSize(3);
+		//tools.setPageSize(3);
 		//保存查询条件
-		tools.saveQueryVO(dquery);
+		tools.saveQueryVO(query);
 		//调用本地查询方法传入条件及分页工具。返回数据
-		List<Customer> list = cs.findcustallList(dquery, tools);
+		List<Customer> list = cs.findcustallList(query, tools);
 		//放入request会话域中
 		request.setAttribute("list", list);
+		request.setAttribute("customer", query);
 		//返回视图名称
 		return mapping.findForward("cuslist");
 	}
@@ -244,14 +245,13 @@ public class ZXBankInterfaceAction extends ActionSupport {
 						"userName", "hostNo" });
 				if (flg) {
 					System.out.println("--远程查询到的数据列表--");
-					System.out.println("))))))))))");
 					List resultList1 = (List) request.getAttribute("resultList");
 					for (Object object : resultList1) {
 						System.out.println(object.toString());
 					}
 					//保存或更新数据
 					List resultList = (List) request.getAttribute("resultList");
-					whs.autoUpdateCust(resultList1, query);
+					whs.autoUpdateWare(resultList1, query);
 				}
 			}
 			System.out.println("--开始本地查询--");
@@ -260,13 +260,13 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			tools.setPageSize(2);// 设置当页面显示条数
 			List<Warehouse> list = whs.findBusinessList(query, tools);// 获取分页后的数据list
 			request.setAttribute("list", list);
-			request.setAttribute("cusNo", query.getCustNo());
-			request.setAttribute("whName", query.getWhName());
+			request.setAttribute("warehouse", query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mapping.findForward("warehouse");
 	}
+	
 	/**
 	 * 融资信息查询
 	 * 
@@ -312,6 +312,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			// 从数据库查询
 			List<Financing> list = fs.findByQuery(query, tools);
 			request.setAttribute("list", list);
+			request.setAttribute("financingVO", query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -335,8 +336,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		tools.setPageSize(2);
 		List<Agreement> list = as.findBusinessList(query, tools);// 分页数据查询
 		request.setAttribute("list", list);
-		request.setAttribute("loncpname", query.getAg_loncpname());
-		request.setAttribute("custno", query.getAg_custno());
+		request.setAttribute("agreement", query);
 		return mapping.findForward("agreement");
 	}
 	
@@ -358,8 +358,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		tools.setPageSize(2);
 		List<ReceivingNotice> list = rns.findBusinessList(query, tools);
 		request.setAttribute("list", list);
-		request.setAttribute("nyNo", query.getNyNo());
-		request.setAttribute("nyLonentname", query.getNyLonentname());
+		request.setAttribute("receivingnotice", query);
 		return mapping.findForward("receivingnotice");
 	}
 
@@ -456,6 +455,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		List<RemovePledge> list = rps.findByQuery(query, tools);
 		// 页面设置参数
 		request.setAttribute("list", list);
+		request.setAttribute("removepledge", query);
 		return mapping.findForward("removepledge");
 	}
 
@@ -557,7 +557,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		List<MoveNotice> list = mns.findByQuery(query, tools);
 		// 页面设置参数
 		request.setAttribute("list", list);
-
+		request.setAttribute("movenotice", query);
 		return mapping.findForward("movenotice");
 	}
 
@@ -824,6 +824,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		List<Gager> list = gds.findBusinessList(query, tools);
 		request.setAttribute("gaLonentno", query.getGaLonentno());
 		request.setAttribute("list", list);
+		request.setAttribute("gager", query);
 		return mapping.findForward("gager");
 	}
 
@@ -1004,7 +1005,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		tools.setPageSize(2);
 		List<Checkstock> list = ckds.findBusinessList(query, tools);
 		request.setAttribute("list", list);
-		request.setAttribute("csLoncpid", query.getCsLoncpid());
+		request.setAttribute("checkstock", query);
 		return mapping.findForward("checkstock");
 	}
 
@@ -1081,6 +1082,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public static boolean NoticeSynchronous(int noticeType, Map<String, Object> body, Map<String, Object> head,
 			String listName, Class<?> beanClassType, Class<?> resultClassType) throws Exception {
+		NoticeService ns = new NoticeService();
 		SocketClient socket = new SocketClient(host, port);
 		Document doc = null;
 		String xml = socket.send(head, body);

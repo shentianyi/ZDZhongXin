@@ -28,6 +28,12 @@
 <script src="js/easyui-lang-zh_CN.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
 <script src="js/calendar.js"></script>
+<style type="text/css">
+	.textbox{
+		margin-top:5px;
+		margin-left:10%;
+	}
+</style>
 <script type="text/javascript">
 	$(function() {
 		//加载插件
@@ -42,9 +48,11 @@
 
 	/*重置*/
 	function doClear() {
+		$(":text").val("");
+		$('#csPlandate').datebox('clear');
+		$('#csFactdate').datebox('clear');
 	}
 
-	/*重置*/
 	function doFile() {
 		$("#importFile").click();
 	}

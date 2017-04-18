@@ -30,9 +30,7 @@
 	}
 
 	function doClear() {
-		$("#rpNo").val("");
-		$("#rpLoncpname").val("");
-		document.forms[0].submit();
+		$(":text").val("");
 	}
 </script>
 </head>
@@ -56,13 +54,13 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">解除质押通知编号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="rpNo" name="removepledge.rpNo" />
+									<input class="ly-bor-none" type="text" id="rpNo" name="removepledge.rpNo" value="${removepledge.rpNo }"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="rpLoncpname" name="removepledge.rpLoncpname" value="" />
+									<input class="ly-bor-none" type="text" id="rpLoncpname" name="removepledge.rpLoncpname" value="${removepledge.rpLoncpname }"/>
 								</div>
 							</div>
 						</div>

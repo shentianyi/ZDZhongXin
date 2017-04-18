@@ -34,8 +34,7 @@ public class ReturnReceiptServer implements Runnable {
 	private ServerSocket serverSocket;
 	private Socket socket;
 
-	public ReturnReceiptServer() {
-	}
+	public ReturnReceiptServer() {}
 
 	public ReturnReceiptServer(ServletContext servletContext) {
 		this.servletContext = servletContext;//从web.xml中context-param节点获取socket端口

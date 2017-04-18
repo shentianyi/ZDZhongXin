@@ -30,11 +30,35 @@
 
 	function doCommit(method) {
 		$("#method").val(method);
+		
+		if(method=='gagerApp'){
+			if($('#gaLonentno').val()==""){
+				alert("借款企业ID不能为空");
+				return;
+			}
+			if($('#gaOprtname').val()==""){
+				alert("操作人名称不能为空");
+				return;
+			}
+			if($('#gaOrderno').val()==""){
+				alert("交易流水号不能为空");
+				return;
+			}
+			if($('#gaCount').val()==""){
+				alert("总记录数不能为空");
+				return;
+			}
+		}
 		document.forms[0].submit();
 	}
 
 	function doFile() {
 		$("#importFile").click();
+	}
+	
+	/*重置*/
+	function doClear() {
+		$(":text").val("");
 	}
 </script>
 </head>
@@ -123,6 +147,7 @@
 					</div>
 					<div class="ly-button-w">
 						<a href="javascript:doCommit('gagerApp');" class="button btn-query">导入</a>
+						<a href="javascript:doClear();" class="button btn-query">重置</a>
 					</div>
 				</div>
 				<div class="public-main-table hidden abs">

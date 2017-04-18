@@ -25,12 +25,23 @@
 <script src="js/thumbpage/thumbpage.js"></script>
 <script>
 	function doQuery() {
+		if ($('#choose').val() == "2" && $("#loncpid").val() == "") {
+			alert("ECIF客户号不能为空");
+			return;
+		}
 		document.forms[0].submit();
 	}
+	
 	function doClear() {
-
-		$("custNo").value = "";
-		getElement("pledgeName").value = "";
+		$(":text").val("");
+	}
+	
+	function doChoose(val) {
+		if (val == "2") {
+			$(".req").css("visibility", "visible");
+		} else {
+			$(".req").css("visibility", "hidden");
+		}
 	}
 </script>
 </head>
@@ -52,23 +63,23 @@
 					<div class="ly-input-w">
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
-								<div class="label block fl hidden">ECIF客户号：</div>
+								<div class="label block fl hidden"><font class="req" color="#FF0000" style="visibility: hidden;">*</font>ECIF客户号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="loncpid" name="agreement.ag_custno" />
+									<input class="ly-bor-none" type="text" id="loncpid" name="agreement.ag_custno" value="${agreement.ag_custno }"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.ag_loncpname" />
+									<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.ag_loncpname" value="${agreement.ag_loncpname }"/>
 								</div>
 							</div>
 
 							<div class="ly-col fl">
 								<div class="label block fl hidden">查询方式：</div>
 								<div class="input block fl hidden">
-									<select class="ly-bor-none">
-										<option>请选择</option>
+									<select class="ly-bor-none" id="choose" name="queryType" onchange="doChoose(this.value)">
+										<option value="0">请选择</option>
 										<option value="1">本地查询</option>
 										<option value="2">远程查询</option>
 									</select>

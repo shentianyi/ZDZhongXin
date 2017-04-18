@@ -27,7 +27,7 @@
 		document.forms[0].submit();
 	}
 	function doClear() {
-		$("#csLoncpid").val("");
+		$(":text").val("");
 	}
 </script>
 </head>
@@ -51,7 +51,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业ID：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="csLoncpid" name="checkstock.csLoncpid" />
+									<input class="ly-bor-none" type="text" id="csLoncpid" name="checkstock.csLoncpid" value="${checkstock.csLoncpid}"/>
 								</div>
 							</div>
 						</div>

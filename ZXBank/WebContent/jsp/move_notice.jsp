@@ -30,8 +30,7 @@
 	}
 
 	function doClear() {
-		$("#mnNo").val("");
-		$("#mnLoncpname").val("");
+		$(":text").val("");
 	}
 </script>
 </head>
@@ -55,13 +54,13 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">移库通知书编号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="mnNo" name="movenotice.mnNo" />
+									<input class="ly-bor-none" type="text" id="mnNo" name="movenotice.mnNo" value="${movenotice.mnNo }"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="mnLoncpname" name="movenotice.mnLoncpname" />
+									<input class="ly-bor-none" type="text" id="mnLoncpname" name="movenotice.mnLoncpname" value="${movenotice.mnLoncpname }"/>
 								</div>
 							</div>
 						</div>

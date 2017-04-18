@@ -26,7 +26,12 @@
 <script src="js/easyui-lang-zh_CN.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
 <script src="js/calendar.js"></script>
-
+<style type="text/css">
+	.textbox{
+		margin-top:5px;
+		margin-left:10%;
+	}
+</style>
 <script type="text/javascript">
 	function doQuery() {
 		if ($("#choose").val() == "2") {
@@ -65,7 +70,7 @@
 	}
 
 	function doClear() {
-		$("#fgLonentNo").val("");
+		$(":text").val("");
 		$('#fgStDateStart').datebox('clear');
 		$('#fgStDateEnd').datebox('clear');
 	}
@@ -77,6 +82,11 @@
 			$(".req").css("visibility", "hidden");
 		}
 	}
+	
+	function parseDate(newDate){
+		return newDate.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');
+	}
+	
 
 	$(function() {
 		//加载插件
@@ -86,7 +96,12 @@
 		$('#fgStDateEnd').datebox({
 			editable : false
 		});
-
+			
+		var startDate = '${financingVO.fgStDateStart}';
+		var endDate = '${financingVO.fgStDateEnd}';
+		
+		startDate!=""?$('#fgStDateStart').datebox('setValue',parseDate(startDate)):"";
+		endDate!=""?$('#fgStDateEnd').datebox('setValue',parseDate(endDate)):"";
 	});
 </script>
 </head>
@@ -112,7 +127,7 @@
 									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>借款企业ID：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" id="fgLonentNo" name="financingVO.fgLonentNo" type="text" />
+									<input class="ly-bor-none" type="text" id="fgLonentNo" name="financingVO.fgLonentNo" value="${financingVO.fgLonentNo}" />
 								</div>
 							</div>
 							<div class="ly-col fl">
@@ -120,13 +135,13 @@
 									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>融资起始日-开始：
 								</div>
 								<div class="input block fl hidden">
-									<input id="fgStDateStart" name="financingVO.fgStDateStart" type="text" value="" />
+									<input id="fgStDateStart" name="financingVO.fgStDateStart" type="text" />
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">融资起始日-结束：</div>
 								<div class="input block fl hidden">
-									<input id="fgStDateEnd" name="financingVO.fgStDateEnd" type="text" value="" />
+									<input id="fgStDateEnd" name="financingVO.fgStDateEnd" type="text"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
