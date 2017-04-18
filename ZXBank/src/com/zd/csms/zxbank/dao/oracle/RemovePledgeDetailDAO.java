@@ -21,7 +21,7 @@ public class RemovePledgeDetailDAO extends DAOSupport implements IRemovePledgeDe
 	}
 
 	// 资源查询语句
-	private static String select_removepledgedetail = "SELECT RD_ID,RD_NO,RD_CMDCODE,RD_CMDNAME,RD_UNIT,RD_STKNUM,RD_RLSMGNUM,RD_WHCODE,RD_SCFLONNO,RD_CHATTELPDNO,RD_NUMBER,RD_CHASSISNO,RD_CERTIFICATIONNO,RD_CARPRICE,RD_USERNAME,RD_USERCARDID FROM ZX_REMOVEPLEDGEDETAIL WHERE 1=1";
+	private static String select_removepledgedetail = "SELECT RDID,RDNO,RDCMDCODE,RDCMDNAME,RDUNIT,RDSTKNUM,RDRLSMGNUM,RDWHCODE,RDSCFLONNO,RDCHATTELPDNO,RDNUMBER,RDCHASSISNO,RDCERTIFICATIONNO,RDCARPRICE,RDUSERNAME,RDUSERCARDID FROM ZX_REMOVEPLEDGEDETAIL WHERE 1=1";
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -48,7 +48,7 @@ public class RemovePledgeDetailDAO extends DAOSupport implements IRemovePledgeDe
 	private void formatSQL(StringBuffer sql,List<Object> params,RemovePledgeDetail query){
 		if(query.getRdNo()!=null&&!query.getRdNo().equals("")){
 			params.add(query.getRdNo());
-			sql.append(" AND RD_NO = ?");
+			sql.append(" AND RDNO = ?");
 		}
 	}
 
@@ -57,7 +57,7 @@ public class RemovePledgeDetailDAO extends DAOSupport implements IRemovePledgeDe
 	public List<RemovePledgeDetail> findAll(String no) {
 		StringBuffer sql = new StringBuffer();
 		sql.append(RemovePledgeDetailDAO.select_removepledgedetail);
-		sql.append(" AND RD_NO = "+no);
+		sql.append(" AND RDNO = "+no);
 		List<RemovePledgeDetail> list = null;
 		try {
 			list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(RemovePledgeDetail.class));

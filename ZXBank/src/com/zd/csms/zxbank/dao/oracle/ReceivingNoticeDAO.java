@@ -38,11 +38,11 @@ public class ReceivingNoticeDAO extends DAOSupport implements IReceivingNoticeDA
 		sql.append(" where 1=1");
 		if(!StringUtil.isEmpty(query.getNyNo())){
 			parameters.add("%"+query.getNyNo().trim()+"%");
-			sql.append(" and ny_no like ?");
+			sql.append(" and nyNo like ?");
 		}
 		if(!StringUtil.isEmpty(query.getNyLonentname())){
 			parameters.add("%"+query.getNyLonentname().trim()+"%");
-			sql.append(" and ny_lonentname like ?");
+			sql.append(" and nyLonentname like ?");
 		}
 	}
 
@@ -50,7 +50,7 @@ public class ReceivingNoticeDAO extends DAOSupport implements IReceivingNoticeDA
 	@Override
 	public ReceivingNotice getNotify(String no) {
 		StringBuffer sql=new StringBuffer();
-		sql.append("select * from zx_notify where ny_no='"+no+"'");
+		sql.append("select * from zx_notify where nyno='"+no+"'");
 		List<ReceivingNotice> list=null;
 		list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ReceivingNotice.class));
 		return list.get(0);

@@ -22,7 +22,7 @@ public class MoveDetailDAO  extends DAOSupport implements IMoveDetailDAO{
 	}
 
 	// 资源查询语句
-	private static String select_movedetail = "SELECT MD_ID,MD_NO,MD_REMOVEOUTNO,MD_REMOVEINNO,MD_WARENO,MD_MOVENUMBER,MD_CHASSISNO,MD_CERTIFICATIONNO,MD_CARPRICE FROM ZX_MOVEDETAIL WHERE 1=1";
+	private static String select_movedetail = "SELECT MDID,MDNO,MDREMOVEOUTNO,MDREMOVEINNO,MDWARENO,MDMOVENUMBER,MDCHASSISNO,MDCERTIFICATIONNO,MDCARPRICE FROM ZX_MOVEDETAIL WHERE 1=1";
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -34,9 +34,6 @@ public class MoveDetailDAO  extends DAOSupport implements IMoveDetailDAO{
 		formatSQL(sql, params,query);
 		try {
 			list = tools.goPage(sql.toString(), params.toArray(), new BeanPropertyRowMapper(MoveDetail.class));
-			
-			String sqls = "insert into ZX_MOVEDETAIL (MD_ID,MD_NO,MD_REMOVEOUTNO,MD_REMOVEINNO,MD_WARENO,MD_MOVENUMBER,MD_CHASSISNO,MD_CERTIFICATIONNO,MD_CARPRICE) values(?,?,?,?,?,?,?,?,?)";
-			System.out.println(getJdbcTemplate().add(sqls, new Object[]{"16","10","10","10","10","10","10","10","10"}));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,7 +49,7 @@ public class MoveDetailDAO  extends DAOSupport implements IMoveDetailDAO{
 	private void formatSQL(StringBuffer sql,List<Object> params,MoveDetail query){
 		if(query.getMdNo()!=null&&!query.getMdNo().equals("")){
 			params.add(query.getMdNo());
-			sql.append(" AND MD_NO = ?");
+			sql.append(" AND MDNO = ?");
 		}	
 	}
 
@@ -61,7 +58,7 @@ public class MoveDetailDAO  extends DAOSupport implements IMoveDetailDAO{
 	public List<MoveDetail> findAll(String no) {
 		StringBuffer sql = new StringBuffer();
 		sql.append(MoveDetailDAO.select_movedetail);
-		sql.append(" AND MD_NO = "+no);
+		sql.append(" AND MDNO = "+no);
 		List<MoveDetail> list = null;
 		try {
 			list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(MoveDetail.class));

@@ -67,11 +67,7 @@
 									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>ECIF客户号：
 								</div>
 								<div class="input block fl hidden">
-<<<<<<< Updated upstream
 									<input class="ly-bor-none" type="text" id="custNo" name="warehouse.custNo" value="${warehouse.custNo}" />
-=======
-									<input class="ly-bor-none" type="text" id="custNo" name="warehouse.custNo" value="${cusNo}" />
->>>>>>> Stashed changes
 								</div>
 							</div>
 

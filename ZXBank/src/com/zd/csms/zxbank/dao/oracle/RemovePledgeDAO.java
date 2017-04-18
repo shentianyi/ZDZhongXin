@@ -21,7 +21,7 @@ public class RemovePledgeDAO  extends DAOSupport implements IRemovePledgeDAO{
 	}
 
 	// 资源查询语句
-	private static String select_removepledge = "SELECT RP_ID,RP_NO,RP_OPERORG,RP_PLDEGEENAME,RP_LONCPID,RP_LONCPNAME,RP_SUPERVISENAME,RP_CORENAME,RP_RELIEVEPDDATE,RP_CONTENT,RP_NOTICEDATE,RP_CREATEDATE,RP_UPDATEDATE FROM ZX_REMOVEPLEDGE WHERE 1=1";
+	private static String select_removepledge = "SELECT RPID,RPNO,RPOPERORG,RPPLDEGEENAME,RPLONCPID,RPLONCPNAME,RPSUPERVISENAME,RPCORENAME,RPRELIEVEPDDATE,RPCONTENT,RPNOTICEDATE,RPCREATEDATE,RPUPDATEDATE FROM ZX_REMOVEPLEDGE WHERE 1=1";
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -48,11 +48,11 @@ public class RemovePledgeDAO  extends DAOSupport implements IRemovePledgeDAO{
 	private void formatSQL(StringBuffer sql,List<Object> params,RemovePledge query){
 		if(query.getRpNo()!=null&&!query.getRpNo().equals("")){
 			params.add("%"+query.getRpNo()+"%");
-			sql.append(" AND RP_NO LIKE ?");
+			sql.append(" AND RPNO LIKE ?");
 		}	
 		if(query.getRpLoncpname()!=null&&!query.getRpLoncpname().equals("")){
 			params.add("%"+query.getRpLoncpname()+"%");
-			sql.append(" AND RP_LONCPNAME LIKE ?");
+			sql.append(" AND RPLONCPNAME LIKE ?");
 		}
 	}
 
@@ -61,7 +61,7 @@ public class RemovePledgeDAO  extends DAOSupport implements IRemovePledgeDAO{
 		RemovePledge rp = null;
 		StringBuffer sql = new StringBuffer();
 		sql.append(RemovePledgeDAO.select_removepledge);
-		sql.append("AND RP_NO ="+no);
+		sql.append("AND RPNO ="+no);
 		rp = (RemovePledge) getJdbcTemplate().query(sql.toString(),new BeanPropertyRowMapper(RemovePledge.class)).get(0);
 		return rp;
 	}

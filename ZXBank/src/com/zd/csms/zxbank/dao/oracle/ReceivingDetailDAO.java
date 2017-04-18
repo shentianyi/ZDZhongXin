@@ -22,7 +22,7 @@ public class ReceivingDetailDAO extends DAOSupport implements IReceivingDetailDA
 	@Override
 	public List<ReceivingDetail> firnAllAgList(ReceivingDetail query, IThumbPageTools tools) {
 		StringBuffer sql=new StringBuffer();
-		sql.append("select * from zx_notifydetail where nd_no='"+query.getNdNo()+"'");
+		sql.append("select * from zx_notifydetail where ndno='"+query.getNdNo()+"'");
 		List<ReceivingDetail> list=null;
 		try {
 			list=tools.goPage(sql.toString(),new BeanPropertyRowMapper(ReceivingDetail.class));
@@ -36,7 +36,7 @@ public class ReceivingDetailDAO extends DAOSupport implements IReceivingDetailDA
 	@Override
 	public List<ReceivingDetail> findAll(String no) {
 		StringBuffer sql=new StringBuffer();
-		sql.append("select * from zx_notifydetail where nd_no='"+no+"'");
+		sql.append("select * from zx_notifydetail where ndno='"+no+"'");
 		List<ReceivingDetail> list=null;
 		try {
 			list=getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ReceivingDetail.class));

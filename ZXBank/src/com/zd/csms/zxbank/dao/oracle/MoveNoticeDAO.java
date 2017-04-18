@@ -22,7 +22,7 @@ public class MoveNoticeDAO  extends DAOSupport implements IMoveNoticeDAO{
 	}
 
 	// 资源查询语句
-	private static String select_movenotice = "SELECT MN_ID,MN_NO,MN_OPERORG,MN_SUPERVISENAME,MN_MOVEDATE,MN_LONCPNAME,MN_NOTICEDATE,MN_TOTNUM,MN_CREATEDATE,MN_UPDATEDATE FROM ZX_MOVENOTICE WHERE 1=1";
+	private static String select_movenotice = "SELECT MNID,MNNO,MNOPERORG,MNSUPERVISENAME,MNMOVEDATE,MNLONCPNAME,MNNOTICEDATE,MNTOTNUM,MNCREATEDATE,MNUPDATEDATE FROM ZX_MOVENOTICE WHERE 1=1";
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -49,11 +49,11 @@ public class MoveNoticeDAO  extends DAOSupport implements IMoveNoticeDAO{
 	private void formatSQL(StringBuffer sql,List<Object> params,MoveNotice query){
 		if(query.getMnNo()!=null&&!query.getMnNo().equals("")){
 			params.add("%"+query.getMnNo()+"%");
-			sql.append(" AND MN_NO LIKE ?");
+			sql.append(" AND MNNO LIKE ?");
 		}	
 		if(query.getMnLoncpname()!=null&&!query.getMnLoncpname().equals("")){
 			params.add("%"+query.getMnLoncpname()+"%");
-			sql.append(" AND MN_LONCPNAME LIKE ?");
+			sql.append(" AND MNLONCPNAME LIKE ?");
 		}
 	}
 
@@ -62,7 +62,7 @@ public class MoveNoticeDAO  extends DAOSupport implements IMoveNoticeDAO{
 		MoveNotice mn = null;
 		StringBuffer sql = new StringBuffer();
 		sql.append(MoveNoticeDAO.select_movenotice);
-		sql.append("AND MN_NO ="+no);
+		sql.append("AND MNNO ="+no);
 		mn = (MoveNotice) getJdbcTemplate().query(sql.toString(),new BeanPropertyRowMapper(MoveNotice.class)).get(0);
 		return mn;
 	}
