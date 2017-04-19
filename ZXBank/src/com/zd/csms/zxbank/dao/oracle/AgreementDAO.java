@@ -54,6 +54,9 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 	public Agreement getAgreement(String LonentNo){
 		String sql="select ag_loncpname from zx_agreement where ag_loncpid='"+LonentNo+"'";
 		List<Agreement> list=getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Agreement.class));
+		if(list.size()==0){
+			return null;
+		}
 		return list.get(0);
 	}
 }

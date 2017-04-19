@@ -53,13 +53,36 @@ public class NoticeService extends ServiceSupport{
 	public List<Notice> findnoticetype(){
 		return ndao.findnoticetype();
 	}
+	
+	public boolean addOrUpdate(Notice notice){
+		
+		System.out.println("推送接收到的通知："+notice);
+		
+		
+		if(ndao.getNotice(notice)!=null){
+			return update(notice);
+		}else{
+			return add(notice);
+		}
+	}
+	
+	private boolean add(Notice notice){
+		notice.setNtId(SqlUtil.getID(Notice.class));
+		return ndao.add(notice);
+	}
+	public boolean update(Notice notice){
+		notice.setNtEnddate(new Date());
+		System.out.println("-通知推送更新信息-");
+		return ndao.update(notice);
+	}
+	
 	/**
 	 * 通知推送表及通知详情保存保存
 	 * @param noticeType
 	 * @param resultList
 	 * @return
 	 */
-	public boolean save(int noticeType,List<Object> resultList,Object bean){
+	public boolean saveNotice(int noticeType,List<Object> resultList,Object bean){
 		//根据类型不同
 		if(noticeType==1){
 			System.out.println("--收货通知--");

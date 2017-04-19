@@ -18,6 +18,9 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
+import com.zd.csms.zxbank.bean.Notice;
+import com.zd.csms.zxbank.service.NoticeService;
+import com.zd.csms.zxbank.util.DateUtil;
 import com.zd.csms.zxbank.util.ReturnReceiptUtil;
 import com.zd.csms.zxbank.util.ZhongXinBankUtil;
 import com.zd.csms.zxbank.web.action.ZXBankInterfaceAction;
@@ -34,6 +37,8 @@ public class ReturnReceiptServer implements Runnable {
 	private ServerSocket serverSocket;
 	private Socket socket;
 
+	private NoticeService ns = new NoticeService();
+	
 	public ReturnReceiptServer() {}
 
 	public ReturnReceiptServer(ServletContext servletContext) {
@@ -63,51 +68,49 @@ public class ReturnReceiptServer implements Runnable {
 				String lonentid = bodyNode.element("LONENTID").getText();
 				String branchid = bodyNode.element("BRANCHID").getText();
 				String ntcdate = bodyNode.element("NTCDATE").getText();
+				Element list = bodyNode.element("LST");
+				List infos = list.elements("row");
+				
+				//打印
 				System.out.println("NTCTP:" + ntctp);
 				System.out.println("LONENTID:" + lonentid);
 				System.out.println("NTCNO:" + ntcno);
 				System.out.println("BRANCHID:" + branchid);
 				System.out.println("NTCDATE:" + ntcdate);
 				System.out.println("---集合列表---");
-				Element list = bodyNode.element("LST");
-				List infos = list.elements("row");
-				List resultList = new ArrayList();
+//				List resultList = new ArrayList();
 				if (infos != null)
 					for (Iterator it = infos.iterator(); it.hasNext();) {
 						Element info = (Element) it.next();
 						System.out.println(info.element("ECIFCODE").getText());
 						System.out.println(info.element("OPERORG").getText());
 					}
+				//
+				
+				//保存
+				Notice notice=new Notice();
+				notice.setNtNo(ntcno);//通知编号
+				notice.setNtStdate(DateUtil.StringToDate(ntcdate));//通知发送时间
+				notice.setNtBranchid(branchid);//分行id
+				notice.setNtLonentid(lonentid);//借款企业id
+				notice.setNtType(ntctp.equals("DLCDRGNQ")?1:ntctp.equals("DLCDTWNQ")?2:ntctp.equals("DLCDUINQ")?3:0);
+				ns.addOrUpdate(notice);
 				//回执方法开始
 				String status = ReturnReceiptUtil.returnReceipt(ntctp, ntcno);
 				if (status != null && status.equals("AAAAAAA")) {
 					System.out.println("--回执成功--");
-					//回执成功进行远程通知信息同步
-					System.out.println("ntcno" + ntcno);
-					if (ntcno != null) {
-						Map<String, Object> head = ZhongXinBankUtil.getBaseHeadList();
-						Map<String, Object> body = new HashMap<String, Object>();
-						if (ntctp.equals("DLCDRGNQ")) {
-							body.put("action", "DLCDRGNQ");
-							body.put("userName", "");
-							body.put("rvccmdntcNo", ntcno);
-							ZXBankInterfaceAction.NoticeSynchronous(1, body, head, "cmdinf", ReceivingNoticeFar.class,
-									ReceivingDetailFar.class);
-						} else if (ntctp.equals("DLCDTWNQ")) {
-							body.put("action", "DLCDTWNQ");
-							body.put("userName", "");
-							body.put("mwntcNo", ntcno);
-							ZXBankInterfaceAction.NoticeSynchronous(2, body, head, "", MoveNoticeFar.class,
-									MoveDetailFar.class);
-						} else if (ntctp.equals("DLCDUINQ")) {
-							body.put("action", "DLCDUINQ");
-							body.put("userName", "");
-							body.put("rlsmgntcNo", ntcno);
-							ZXBankInterfaceAction.NoticeSynchronous(3, body, head, "", RemovePledgeFar.class,
-									RemovePledgeDetailFar.class);
-						}
+					//通知查询报文发送
+					if(FarQuery(ntcno,ntctp)){
+						notice.setNtFailflag(3);
+						ns.update(notice);
+					}else{
+						notice.setNtFailflag(2);
+						ns.update(notice);
 					}
-
+				}else{
+					System.out.println("--回执失败--");
+					notice.setNtFailflag(1);
+					ns.update(notice);
 				}
 			}
 		}
@@ -182,5 +185,32 @@ public class ReturnReceiptServer implements Runnable {
 			}
 		}
 	}
-
+	
+	public boolean FarQuery(String ntcno,String ntctp)throws Exception{
+		//回执成功进行远程通知信息同步
+		if (ntcno != null) {
+			Map<String, Object> head = ZhongXinBankUtil.getBaseHeadList();
+			Map<String, Object> body = new HashMap<String, Object>();
+			if (ntctp.equals("DLCDRGNQ")) {
+				body.put("action", "DLCDRGNQ");
+				body.put("userName", "");
+				body.put("rvccmdntcNo", ntcno);
+				return ZXBankInterfaceAction.NoticeSynchronous(1, body, head, "cmdinf", ReceivingNoticeFar.class,
+						ReceivingDetailFar.class);
+			} else if (ntctp.equals("DLCDTWNQ")) {
+				body.put("action", "DLCDTWNQ");
+				body.put("userName", "");
+				body.put("mwntcNo", ntcno);
+				return ZXBankInterfaceAction.NoticeSynchronous(2, body, head, "", MoveNoticeFar.class,
+						MoveDetailFar.class);
+			} else if (ntctp.equals("DLCDUINQ")) {
+				body.put("action", "DLCDUINQ");
+				body.put("userName", "");
+				body.put("rlsmgntcNo", ntcno);
+				return ZXBankInterfaceAction.NoticeSynchronous(3, body, head, "", RemovePledgeFar.class,
+						RemovePledgeDetailFar.class);
+			}
+		}
+		return false;
+	}
 }

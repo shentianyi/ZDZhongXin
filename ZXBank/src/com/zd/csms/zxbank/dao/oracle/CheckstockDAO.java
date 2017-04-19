@@ -57,6 +57,9 @@ public class CheckstockDAO extends DAOSupport implements ICheckstockDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(list.size()==0){
+			return null;
+		}
 		return list.get(0);
 	}
 

@@ -53,6 +53,9 @@ public class ReceivingNoticeDAO extends DAOSupport implements IReceivingNoticeDA
 		sql.append("select * from zx_notify where nyno='"+no+"'");
 		List<ReceivingNotice> list=null;
 		list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ReceivingNotice.class));
+		if(list.size()==0){
+			return null;
+		}
 		return list.get(0);
 	}
 

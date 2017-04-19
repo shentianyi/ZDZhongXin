@@ -11,4 +11,8 @@ public interface INoticeDAO extends IDAO{
 	public List<Notice> findNotice(Notice notice,IThumbPageTools tools);
 	//查询通知类型
 	public List<Notice> findnoticetype();
+	
+	public Notice getNotice(Notice notice);
+	
+	public boolean update(Notice notice);
 }

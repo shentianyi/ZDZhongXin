@@ -39,6 +39,7 @@ import com.zd.csms.zxbank.web.excel.RemoveRowMapper;
 import com.zd.csms.zxbank.web.form.*;
 import com.zd.csms.zxbank.web.mapper.CheckstockVOImportRowMapper;
 import com.zd.csms.zxbank.web.mapper.CommodityImportRowMapper;
+import com.zd.csms.zxbank.web.server.ReturnReceiptServer;
 import com.zd.tools.StringUtil;
 import com.zd.tools.file.importFile.IExportFile;
 import com.zd.tools.file.importFile.IImportFile;
@@ -157,6 +158,27 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
+	public ActionForward noticeReread(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+			ReturnReceiptServer rrs=new ReturnReceiptServer();
+			int ntType = Integer.parseInt(request.getParameter("ntType"));
+			String ntcno=request.getParameter("ntcno");
+			String ntctp=null;
+			if (ntType == 1) {
+				ntctp="DLCDRGNQ";
+			} else if (ntType == 2) {
+				ntctp="DLCDTWNQ";
+			} else if (ntType == 3) {
+				ntctp="DLCDUINQ";
+			}
+			if(ntctp!=null){
+				rrs.FarQuery(ntcno, ntctp);	
+			}else{
+				System.out.println("通知类型出错");
+			}
+		return findnotice(mapping, form, request, response);
+	}
+	
 
 
 	/**
@@ -1066,6 +1088,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		if (!bodyNode.hasContent()) {
 			return false;
 		}
+		String status = bodyNode.element("status").getText();//交易状态
+		String statusText = bodyNode.element("statusText").getText();//交易状态信息
+		
 		Element list = bodyNode.element(listName + "lst");
 		List infos = list.elements("row");
 		List<Object> resultList = new ArrayList<Object>();
@@ -1075,7 +1100,11 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				Object bean = ZhongXinBankUtil.getBean(resultClassType, info);
 				resultList.add(bean);
 			}
-		request.setAttribute("resultList", resultList);
+		if(status.trim().equals("AAAAAAA")){
+			request.setAttribute("resultList", resultList);
+		}else{
+			System.out.println("交易状态异常");
+		}
 		return true;
 	}
 
@@ -1114,7 +1143,13 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				Object beans = ZhongXinBankUtil.getBean(resultClassType, info);
 				resultList.add(beans);
 			}
-		ns.save(noticeType, resultList, bean);
+		String status = bodyNode.element("status").getText();//交易状态
+		String statusText = bodyNode.element("statusText").getText();//交易状态信息
+		if(status.trim().equals("AAAAAAA")){
+			ns.saveNotice(noticeType, resultList, bean);
+		}else{
+			System.out.println("交易状态异常");
+		}
 		return true;
 	}
 }

@@ -57,8 +57,10 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Gager ager = list.get(0);
-		return ager;
+		if(list.size()==0){
+			return null;
+		}
+		return list.get(0);
 	}
 
 	@Override

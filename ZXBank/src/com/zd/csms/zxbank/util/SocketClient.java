@@ -69,7 +69,7 @@ public class SocketClient {
 					}
 					break; 
 				}
-			} 
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
