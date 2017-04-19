@@ -39,8 +39,11 @@
 	function doChoose(val) {
 		if (val == "2") {
 			$(".req").css("visibility", "visible");
+			$("#whName").val("");
+			$("#whName").attr("disabled","disabled");
 		} else {
 			$(".req").css("visibility", "hidden");
+			$("#whName").removeAttr("disabled");
 		}
 	}
 </script>

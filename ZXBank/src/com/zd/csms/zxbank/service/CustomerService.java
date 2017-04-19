@@ -26,7 +26,7 @@ public class CustomerService extends ServiceSupport {
 	// 远程数据与本地数据比对
 	public void autoUpdateCust(List<CustomerFar> bankList, Customer customer) throws Exception {
 		List<Customer> list = idao.query();
-		if (bankList != null && bankList.size() > 0)
+		if (bankList != null && bankList.size() > 0 && list != null)
 			for (CustomerFar customerFar : bankList) {
 				int tem = 0;
 				for (int i = 0; i < list.size(); i++) {

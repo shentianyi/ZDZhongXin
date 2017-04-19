@@ -15,7 +15,6 @@ public class ReceivingNoticeDAO extends DAOSupport implements IReceivingNoticeDA
 
 	public ReceivingNoticeDAO(String dataSourceName) {
 		super(dataSourceName);
-		// TODO Auto-generated constructor stub
 	}
 
 	@SuppressWarnings("unchecked")
@@ -23,7 +22,7 @@ public class ReceivingNoticeDAO extends DAOSupport implements IReceivingNoticeDA
 	public List<ReceivingNotice> firnAllAgList(ReceivingNotice query, IThumbPageTools tools) {
 		StringBuffer sql=new StringBuffer();
 		sql.append("select * from zx_notify");
-		List<Object> parameters=new ArrayList<>();
+		List<Object> parameters=new ArrayList<Object>();
 		formatSQL(sql,parameters,query);
 		List<ReceivingNotice> list=null;
 		try {

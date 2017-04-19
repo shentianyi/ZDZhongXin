@@ -50,17 +50,20 @@
 			minLength : 3
 		});
 	}); */
-	
+
 	function doChoose(val) {
 		if (val == "2") {
 			$(".req").css("visibility", "visible");
+			$("#custName").val("");
+			$("#custName").attr("disabled","disabled");
 		} else {
 			$(".req").css("visibility", "hidden");
+			$("#custName").removeAttr("disabled");
 		}
 	}
-	
+
 	function doQuery() {
-		if($('#choose').val()=="2" && $("#custOrganizationcode").val()==""){
+		if ($('#choose').val() == "2" && $("#custOrganizationcode").val() == "") {
 			alert("组织机构代码不能为空");
 			return;
 		}
@@ -73,69 +76,71 @@
 </script>
 </head>
 <body class="h-100 public">
-		<div class="public-bar hidden">
-			<div class="ly-contai clearfix">
-				<div class="public-bar-crumbs fl hidden">
-					<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
-					&gt;
-					<a class="crumbs-link" href="#">客户信息查询</a>
-				</div>
+	<div class="public-bar hidden">
+		<div class="ly-contai clearfix">
+			<div class="public-bar-crumbs fl hidden">
+				<a class="crumbs-link" href="/ZXBank">中信银行接口</a>
+				&gt;
+				<a class="crumbs-link" href="#">客户信息查询</a>
 			</div>
 		</div>
-		<div class="public-main abs">
-			<div class="ly-contai rel">
-				<html:form action="/ZXinterface.do" styleId="cusForm" method="post" onsubmit="return false">
-					<input name="method" id="method" type="hidden" value="customer" />
-					<div class="public-main-input ly-col-1 hidden abs">
-						<div class="ly-input-w">
-							<div class="ly-row clearfix">
-								<div class="ly-col fl">
-									<div class="label block fl hidden">
-										<font class="req" color="#FF0000" style="visibility: hidden;">*</font>组织机构代码：</div>
-									<div class="input block fl hidden">
-										<input class="ly-bor-none" type="text" id="custOrganizationcode" name="customer.custOrganizationcode" value="${customer.custOrganizationcode}" />
-									</div>
+	</div>
+	<div class="public-main abs">
+		<div class="ly-contai rel">
+			<html:form action="/ZXinterface.do" styleId="cusForm" method="post" onsubmit="return false">
+				<input name="method" id="method" type="hidden" value="customer" />
+				<div class="public-main-input ly-col-1 hidden abs">
+					<div class="ly-input-w">
+						<div class="ly-row clearfix">
+							<div class="ly-col fl">
+								<div class="label block fl hidden">
+									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>组织机构代码：
 								</div>
+								<div class="input block fl hidden">
+									<input class="ly-bor-none" type="text" id="custOrganizationcode" name="customer.custOrganizationcode" value="${customer.custOrganizationcode}" />
+								</div>
+							</div>
 
-								<div class="ly-col fl">
-									<div class="label block fl hidden">客户名称：</div>
-									<div class="input block fl hidden">
-										<input class="ly-bor-none" type="text" id="custName" name="customer.custName" value="${customer.custName}" />
-									</div>
+							<div class="ly-col fl">
+								<div class="label block fl hidden">客户名称：</div>
+								<div class="input block fl hidden">
+									<input class="ly-bor-none" type="text" id="custName" name="customer.custName" value="${customer.custName}" />
 								</div>
-								<div class="ly-col fl">
-									<div class="label block fl hidden">查询方式：</div>
-									<div class="input block fl hidden">
-										<select class="ly-bor-none" id="choose" name="queryType" onchange="doChoose(this.value)">
-											<option value="0">请选择</option>
-											<option value="1">本地查询</option>
-											<option value="2">远程查询</option>
-										</select>
-									</div>
+							</div>
+							<div class="ly-col fl">
+								<div class="label block fl hidden">查询方式：</div>
+								<div class="input block fl hidden">
+									<select class="ly-bor-none" id="choose" name="queryType" onchange="doChoose(this.value)">
+										<option value="0">请选择</option>
+										<option value="1">本地查询</option>
+										<option value="2">远程查询</option>
+									</select>
 								</div>
 							</div>
 						</div>
-						<div class="ly-button-w">
-							<a href="javascript:doQuery();" class="button btn-query">查询</a>
-							<a href="javascript:doClear();" class="button btn-reset">重置</a>
-						</div>
 					</div>
+					<div class="ly-button-w">
+						<a href="javascript:doQuery();" class="button btn-query">查询</a>
+						<a href="javascript:doClear();" class="button btn-reset">重置</a>
+					</div>
+				</div>
 
-					<div class="public-main-table hidden abs">
-						<div class="ly-cont">
-							<div style="overflow-x: auto; overflow-y: auto; height: 100%; width: 100%">
-								<table class="t-table" border="0" cellspacing="0" cellpadding="0">
-									<thead class="t-thead">
-										<tr class="t-tr">
-											<th class="t-th">序号</th>
-											<th class="t-th">组织机构代码</th>
-											<th class="t-th">ECIF客户号</th>
-											<th class="t-th">客户名称</th>
-											<th class="t-th">创建时间</th>
-											<th class="t-th">更新时间</th>
-										</tr>
-									</thead>
-									<tbody class="t-tbody hidden">
+				<div class="public-main-table hidden abs">
+					<div class="ly-cont">
+						<div style="overflow-x: auto; overflow-y: auto; height: 100%; width: 100%">
+							<table class="t-table" border="0" cellspacing="0" cellpadding="0">
+								<thead class="t-thead">
+									<tr class="t-tr">
+										<th class="t-th">序号</th>
+										<th class="t-th">组织机构代码</th>
+										<th class="t-th">ECIF客户号</th>
+										<th class="t-th">客户名称</th>
+										<th class="t-th">创建时间</th>
+										<th class="t-th">更新时间</th>
+									</tr>
+								</thead>
+								<tbody class="t-tbody hidden">
+									<c:if test="${not empty list }">
 										<logic:iterate name="list" id="row" indexId="index">
 											<tr class="t-tr">
 												<td class="t-td"><c:out value="${index+1}" /></td>
@@ -146,18 +151,19 @@
 												<td class="t-td"><select:timestamp timestamp="${row.custUpdateDate}" idtype="ss" /></td>
 											</tr>
 										</logic:iterate>
-									</tbody>
-								</table>
-							</div>
+									</c:if>
+								</tbody>
+							</table>
 						</div>
 					</div>
+				</div>
 
-					<div class="public-main-footer hidden abs">
-						<div class="public-main-footer-pagin fr">
-							<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Customer" action="ZXinterface.do?method=customer" />
-						</div>
+				<div class="public-main-footer hidden abs">
+					<div class="public-main-footer-pagin fr">
+						<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Customer" action="ZXinterface.do?method=customer" />
 					</div>
-				</html:form>
+				</div>
+			</html:form>
 		</div>
 	</div>
 </body>

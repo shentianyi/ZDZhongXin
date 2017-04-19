@@ -78,8 +78,15 @@
 	function doChoose(val) {
 		if (val == "2") {
 			$(".req").css("visibility", "visible");
+			$('#fgStDateEnd').datebox('setValue',"");
+			$('#fgStDateEnd').datebox({
+				disabled : true
+			});
 		} else {
 			$(".req").css("visibility", "hidden");
+			$('#fgStDateEnd').datebox({
+				disabled : false
+			});
 		}
 	}
 	
@@ -188,6 +195,7 @@
 									</tr>
 								</thead>
 								<tbody class="t-tbody hidden">
+								<c:if test="${not empty list }">
 									<logic:iterate name="list" id="row" indexId="index">
 										<tr class="t-tr">
 											<td class="t-td"><c:out value="${index+1}" /></td>
@@ -212,6 +220,7 @@
 											<td class="t-td"><select:timestamp timestamp="${row.fgUpdateDate}" idtype="ss" /></td>
 										</tr>
 									</logic:iterate>
+									</c:if>
 								</tbody>
 							</table>
 						</div>

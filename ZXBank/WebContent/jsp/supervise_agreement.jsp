@@ -39,8 +39,11 @@
 	function doChoose(val) {
 		if (val == "2") {
 			$(".req").css("visibility", "visible");
+			$("#loncpid_name").val("");
+			$("#loncpid_name").attr("disabled","disabled");
 		} else {
 			$(".req").css("visibility", "hidden");
+			$("#loncpid_name").removeAttr("disabled");
 		}
 	}
 </script>

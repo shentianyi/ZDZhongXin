@@ -109,7 +109,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 通知推送
 	 * @param mapping
@@ -158,28 +158,27 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
+
 	public ActionForward noticeReread(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-			ReturnReceiptServer rrs=new ReturnReceiptServer();
-			int ntType = Integer.parseInt(request.getParameter("ntType"));
-			String ntcno=request.getParameter("ntcno");
-			String ntctp=null;
-			if (ntType == 1) {
-				ntctp="DLCDRGNQ";
-			} else if (ntType == 2) {
-				ntctp="DLCDTWNQ";
-			} else if (ntType == 3) {
-				ntctp="DLCDUINQ";
-			}
-			if(ntctp!=null){
-				rrs.FarQuery(ntcno, ntctp);	
-			}else{
-				System.out.println("通知类型出错");
-			}
+		ReturnReceiptServer rrs = new ReturnReceiptServer();
+		int ntType = Integer.parseInt(request.getParameter("ntType"));
+		String ntcno = request.getParameter("ntcno");
+		String ntctp = null;
+		if (ntType == 1) {
+			ntctp = "DLCDRGNQ";
+		} else if (ntType == 2) {
+			ntctp = "DLCDTWNQ";
+		} else if (ntType == 3) {
+			ntctp = "DLCDUINQ";
+		}
+		if (ntctp != null) {
+			rrs.FarQuery(ntcno, ntctp);
+		} else {
+			System.out.println("通知类型出错");
+		}
 		return findnotice(mapping, form, request, response);
 	}
-	
-
 
 	/**
 	 * 用户信息查询数据
@@ -199,24 +198,25 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		//查询方式
 		int queryType = 0;
 		if (request.getParameter("queryType") != null) {
-			queryType = Integer.parseInt(request.getParameter("queryType"));
+			try {
+				queryType = Integer.parseInt(request.getParameter("queryType"));
+			} catch (Exception e) {
+			}
 		}
 		System.out.println("客户查询方式：queryType:" + queryType);
 		//远程查询返回数据
 		if (queryType == 2) {
 			System.out.println("--远程查询--");
 			request.setAttribute("action", "DLCDCMLQ");
+			//userName 需要等到整合时将Session中用户保存
 			request.setAttribute("userName", "");
-			request.setAttribute("orgCode", query.getCustOrganizationcode());
+			request.setAttribute("orgCode", query.getCustOrganizationcode().trim());
 			boolean flg = commonRequest(mapping, request, "", CustomerFar.class, new String[] { "action", "userName",
 					"orgCode" });
 			if (flg) {
 				System.out.println("--远程查询到的数据列表--");
 				//保存或更新数据
 				List resultList = (List) request.getAttribute("resultList");
-				for (Object object : resultList) {
-					System.out.println(object.toString());
-				}
 				cs.autoUpdateCust(resultList, query);
 			}
 		}
@@ -267,20 +267,14 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				boolean flg = commonRequest(mapping, request, "", WarehouseFar.class, new String[] { "action",
 						"userName", "hostNo" });
 				if (flg) {
-					System.out.println("--远程查询到的数据列表--");
-					List resultList1 = (List) request.getAttribute("resultList");
-					for (Object object : resultList1) {
-						System.out.println(object.toString());
-					}
 					//保存或更新数据
 					List resultList = (List) request.getAttribute("resultList");
-					whs.autoUpdateWare(resultList1, query);
+					whs.autoUpdateWare(resultList, query);
 				}
 			}
 			System.out.println("--开始本地查询--");
 			//--开始本地查询--
 			IThumbPageTools tools = ToolsFactory.getThumbPageTools("Warehouse", request);// 获取分页模板
-			tools.setPageSize(2);// 设置当页面显示条数
 			List<Warehouse> list = whs.findBusinessList(query, tools);// 获取分页后的数据list
 			request.setAttribute("list", list);
 			request.setAttribute("warehouse", query);
@@ -289,7 +283,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return mapping.findForward("warehouse");
 	}
-	
+
 	/**
 	 * 融资信息查询
 	 * 
@@ -319,13 +313,14 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				request.setAttribute("loncpId", query.getFgLonentNo());
 				request.setAttribute("loanstDate", query.getFgStDateStart());
 				//远程查询
-				boolean flg = commonRequest(mapping, request, "", FinancingFar.class,new String[]{"action","userName","loncpId","loanstDate"});
+				boolean flg = commonRequest(mapping, request, "", FinancingFar.class, new String[] { "action",
+						"userName", "loncpId", "loanstDate" });
 				//处理远程查询并保存到本地服务器
-				if(flg){
+				if (flg) {
 					@SuppressWarnings("unchecked")
 					List<FinancingFar> resultList = (List<FinancingFar>) request.getAttribute("resultList");
 					System.out.println(resultList);
-					fs.addOrUpdate(resultList,query);
+					fs.addOrUpdate(resultList, query);
 				}
 			}
 
@@ -342,7 +337,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return mapping.findForward("financing");
 	}
-	
+
 	/**
 	 * 监管协议查询
 	 * @param mapping
@@ -363,7 +358,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		request.setAttribute("agreement", query);
 		return mapping.findForward("agreement");
 	}
-	
+
 	/**
 	 * 收货通知书
 	 * 
@@ -455,7 +450,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 解除质押通知查询
 	 * 
@@ -557,7 +552,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 移库通知查询
 	 * 
@@ -659,7 +654,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 初始化质物入库
 	 * @param mapping
@@ -1090,7 +1085,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		String status = bodyNode.element("status").getText();//交易状态
 		String statusText = bodyNode.element("statusText").getText();//交易状态信息
-		
+
 		Element list = bodyNode.element(listName + "lst");
 		List infos = list.elements("row");
 		List<Object> resultList = new ArrayList<Object>();
@@ -1100,9 +1095,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				Object bean = ZhongXinBankUtil.getBean(resultClassType, info);
 				resultList.add(bean);
 			}
-		if(status.trim().equals("AAAAAAA")){
+		if (status.trim().equals("AAAAAAA")) {
 			request.setAttribute("resultList", resultList);
-		}else{
+		} else {
 			System.out.println("交易状态异常");
 		}
 		return true;
@@ -1145,9 +1140,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			}
 		String status = bodyNode.element("status").getText();//交易状态
 		String statusText = bodyNode.element("statusText").getText();//交易状态信息
-		if(status.trim().equals("AAAAAAA")){
+		if (status.trim().equals("AAAAAAA")) {
 			ns.saveNotice(noticeType, resultList, bean);
-		}else{
+		} else {
 			System.out.println("交易状态异常");
 		}
 		return true;

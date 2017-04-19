@@ -27,10 +27,7 @@ public class FinancingService extends ServiceSupport {
 	}
 
 	public void addOrUpdate(List<FinancingFar> list,FinancingQueryVO query) {
-		System.out.println("报文集合"+list);
-		System.out.println("查询条件："+query.getFgLonentNo());
 		Agreement agreement=adao.getAgreement(query.getFgLonentNo().trim());
-		System.out.println("agreement:"+agreement);
 		Financing fg=new Financing();
 		for (FinancingFar ffar : list) {
 			int count = dao.getCountByOther(ffar.getLoanCode());
