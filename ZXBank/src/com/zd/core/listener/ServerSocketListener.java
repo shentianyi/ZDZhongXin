@@ -1,5 +1,6 @@
 package com.zd.core.listener;
 
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -23,6 +24,8 @@ public class ServerSocketListener implements ServletContextListener {
 		ReturnReceiptServer socket = new ReturnReceiptServer(e.getServletContext());
 		server = new Thread(socket);
 		server.start();
+		
+		ZXTimerManager timer = new ZXTimerManager();
 	}
 }
 

@@ -51,7 +51,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业ID：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="csLoncpid" name="checkstock.csLoncpid" value="${checkstock.csLoncpid}"/>
+									<input class="ly-bor-none" type="text" id="csLoncpid" name="checkstock.csLoncpid" value="${checkstock.csLoncpid}" maxlength="20" />
 								</div>
 							</div>
 						</div>
@@ -97,8 +97,7 @@
 											<td class="t-td"><c:out value="${row.csErrorreport }" /></td>
 											<td class="t-td"><c:out value="${row.csRemark }" /></td>
 											<td class="t-td"><select:timestamp timestamp="${row.csCreatedate}" idtype="ss" /></td>
-											<td class="t-td"><a
-													href="ZXinterface.do?method=checkstockDetail&csid=${row.csId}&loncpid=${row.csLoncpid}">详情</a></td>
+											<td class="t-td"><a href="ZXinterface.do?method=checkstockDetail&csid=${row.csId}&loncpid=${row.csLoncpid}">详情</a></td>
 										</tr>
 									</logic:iterate>
 								</tbody>
@@ -110,8 +109,7 @@
 				<div class="public-main-footer hidden abs">
 					<div class="public-main-footer-pagin fr">
 						<c:if test="${not empty list }">
-							<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Checkstock"
-								action="ZXinterface.do?method=checkstock" />
+							<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="Checkstock" action="ZXinterface.do?method=checkstock" />
 						</c:if>
 					</div>
 				</div>

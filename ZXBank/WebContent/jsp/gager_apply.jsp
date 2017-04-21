@@ -85,7 +85,7 @@
 									<font color="#FF0000">*</font>借款企业ID：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" id="gaLonentno" name="gager.gaLonentno" type="text" value="${gager.gaLonentno }" />
+									<input class="ly-bor-none" id="gaLonentno" name="gager.gaLonentno" type="text" value="${gager.gaLonentno }" maxlength="10"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
@@ -93,7 +93,7 @@
 									<font color="#FF0000">*</font>操作人名称：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" id="gaOprtname" name="gager.gaOprtname" type="text" value="${gager.gaOprtname }" />
+									<input class="ly-bor-none" id="gaOprtname" name="gager.gaOprtname" type="text" value="${gager.gaOprtname }" maxlength="30"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
@@ -101,7 +101,7 @@
 									<font color="#FF0000">*</font>交易流水号：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" id="gaOrderno" name="gager.gaOrderno" type="text" value="${gager.gaOrderno }" />
+									<input class="ly-bor-none" id="gaOrderno" name="gager.gaOrderno" type="text" value="${gager.gaOrderno }" maxlength="20"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
@@ -121,20 +121,20 @@
 								</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" id="gaCount" name="gager.gaCount" type="text"
-										value="${gager.gaCount==0?'':gager.gaCount }" />
+										value="${gager.gaCount==0?'':gager.gaCount }"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">纸质担保合同编号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" id="gaPcgrtntno" name="gager.gaPcgrtntno" type="text" value="${gager.gaPcgrtntno }" />
+									<input class="ly-bor-none" id="gaPcgrtntno" name="gager.gaPcgrtntno" type="text" value="${gager.gaPcgrtntno }" maxlength="100"/>
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">动产质押担保合同编号：</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" id="gaCmgrtcntno" name="gager.gaCmgrtcntno" type="text"
-										value="${gager.gaCmgrtcntno }" />
+										value="${gager.gaCmgrtcntno }" maxlength="30"/>
 								</div>
 							</div>
 							<div class="ly-col fl">

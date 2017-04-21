@@ -19,7 +19,7 @@
 <link type="text/css" rel="stylesheet" href="css/public.css" />
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/easyui.css" />
-<link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" />
+<!-- <link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" /> -->
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
@@ -68,13 +68,13 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden"><font class="req" color="#FF0000" style="visibility: hidden;">*</font>ECIF客户号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="loncpid" name="agreement.ag_custno" value="${agreement.ag_custno }"/>
+									<input class="ly-bor-none" type="text" id="loncpid" name="agreement.ag_custno" value="${agreement.ag_custno }" maxlength="20" />
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.ag_loncpname" value="${agreement.ag_loncpname }"/>
+									<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.ag_loncpname" value="${agreement.ag_loncpname }" maxlength="120" />
 								</div>
 							</div>
 

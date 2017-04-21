@@ -63,10 +63,12 @@
 	}
 
 	function doQuery() {
-		if ($('#choose').val() == "2" && $("#custOrganizationcode").val() == "") {
+		
+		if ($('#choose').val()=="2" && $("#custOrganizationcode").val()=="") {
 			alert("组织机构代码不能为空");
 			return;
 		}
+		
 		document.forms[0].submit();
 	}
 
@@ -97,14 +99,14 @@
 									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>组织机构代码：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="custOrganizationcode" name="customer.custOrganizationcode" value="${customer.custOrganizationcode}" />
+									<input class="ly-bor-none" type="text" id="custOrganizationcode" name="customer.custOrganizationcode" value="${customer.custOrganizationcode}" maxlength="10" />
 								</div>
 							</div>
 
 							<div class="ly-col fl">
 								<div class="label block fl hidden">客户名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="custName" name="customer.custName" value="${customer.custName}" />
+									<input class="ly-bor-none" type="text" id="custName" name="customer.custName" value="${customer.custName}" maxlength="122" />
 								</div>
 							</div>
 							<div class="ly-col fl">

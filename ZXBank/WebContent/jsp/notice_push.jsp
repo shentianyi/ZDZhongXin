@@ -68,10 +68,10 @@
 							</div>
 
 							<div class="ly-col fl">
-								<div class="label block fl hidden">通知编号：</div>
+								<div class="label block fl hidden">通知书编号：</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="ntno"
-										name="notice.ntNo" />
+										name="notice.ntNo" maxlength="20" />
 								</div>
 							</div>
 						</div>

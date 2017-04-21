@@ -97,4 +97,12 @@ public class CustomerDAO extends DAOSupport implements ICustomerDAO {
 		}
 	}
 
+	@Override
+	public List<String> findAllByECIF() {
+		List<String> list = null;
+		StringBuffer sql = new StringBuffer("SELECT CUSTNO FROM ZX_CUSTOMER");
+		list = getJdbcTemplate().queryForList(sql.toString(), String.class);
+		return list;
+	}
+
 }

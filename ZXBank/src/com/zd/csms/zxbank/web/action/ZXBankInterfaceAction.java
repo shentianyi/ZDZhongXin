@@ -1085,7 +1085,10 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		String status = bodyNode.element("status").getText();//交易状态
 		String statusText = bodyNode.element("statusText").getText();//交易状态信息
-
+		if (!status.trim().equals("AAAAAAA")) {
+			System.out.println("交易状态异常");
+			return false;
+		}
 		Element list = bodyNode.element(listName + "lst");
 		List infos = list.elements("row");
 		List<Object> resultList = new ArrayList<Object>();
@@ -1095,11 +1098,8 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				Object bean = ZhongXinBankUtil.getBean(resultClassType, info);
 				resultList.add(bean);
 			}
-		if (status.trim().equals("AAAAAAA")) {
-			request.setAttribute("resultList", resultList);
-		} else {
-			System.out.println("交易状态异常");
-		}
+		request.setAttribute("resultList", resultList);
+
 		return true;
 	}
 
@@ -1124,6 +1124,12 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			return false;
 		}
 		List liststs = ap.elements("stream");
+		String status = bodyNode.element("status").getText();//交易状态
+		String statusText = bodyNode.element("statusText").getText();//交易状态信息
+		if (!status.trim().equals("AAAAAAA")) {
+			System.out.println("交易状态异常");
+			return false;
+		}
 		Object bean = null;
 		for (Iterator it = liststs.iterator(); it.hasNext();) {
 			Element listst = (Element) it.next();
@@ -1138,13 +1144,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				Object beans = ZhongXinBankUtil.getBean(resultClassType, info);
 				resultList.add(beans);
 			}
-		String status = bodyNode.element("status").getText();//交易状态
-		String statusText = bodyNode.element("statusText").getText();//交易状态信息
-		if (status.trim().equals("AAAAAAA")) {
-			ns.saveNotice(noticeType, resultList, bean);
-		} else {
-			System.out.println("交易状态异常");
-		}
+		ns.saveNotice(noticeType, resultList, bean);
 		return true;
 	}
 }

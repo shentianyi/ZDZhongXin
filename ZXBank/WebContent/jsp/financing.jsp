@@ -35,7 +35,7 @@
 <script type="text/javascript">
 	function doQuery() {
 		if ($("#choose").val() == "2") {
-			if ($("#fgLonentNo").val() == "") {
+			if (fgNo == "") {
 				alert("借款企业ID不能为空");
 				return false;
 			}
@@ -134,7 +134,7 @@
 									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>借款企业ID：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="fgLonentNo" name="financingVO.fgLonentNo" value="${financingVO.fgLonentNo}" />
+									<input class="ly-bor-none" type="text" id="fgLonentNo" name="financingVO.fgLonentNo" value="${financingVO.fgLonentNo}" maxlength="20" />
 								</div>
 							</div>
 							<div class="ly-col fl">

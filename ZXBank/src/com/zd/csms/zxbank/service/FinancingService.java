@@ -44,7 +44,7 @@ public class FinancingService extends ServiceSupport {
 					fg.setFgScftxNo(ffar.getScftxNo());
 					fg.setFgSlfcap(ffar.getSlfcapRat());
 					fg.setFgLonentNo(query.getFgLonentNo());//借款企业id
-					fg.setFgLoncpName(agreement.getAg_loncpname());//借款企业名称
+					fg.setFgLoncpName(agreement==null?"":agreement.getAg_loncpname());//借款企业名称
 					fg.setFgUpdateDate(new Date());
 					if(dao.update(fg)){
 						System.out.println("更新融资信息成功");
@@ -66,7 +66,7 @@ public class FinancingService extends ServiceSupport {
 				fg.setFgScftxNo(ffar.getScftxNo());
 				fg.setFgSlfcap(ffar.getSlfcapRat());
 				fg.setFgLonentNo(query.getFgLonentNo());//借款企业id
-				fg.setFgLoncpName(agreement.getAg_loncpname());//借款企业名称
+				fg.setFgLoncpName(agreement==null?"":agreement.getAg_loncpname());//借款企业名称
 				if(dao.add(fg)){
 					System.out.println("融资添加成功");
 				}else{

@@ -22,6 +22,13 @@ public class Warehouse {
 	private Date createDate;//数据同步时间
 	private Date updateDate;//数据更新时间
 	
+	public Warehouse() {
+		super();
+	}
+	
+	public Warehouse(String custNo) {
+		this.custNo = custNo;
+	}
 	public int getWhid() {
 		return Whid;
 	}

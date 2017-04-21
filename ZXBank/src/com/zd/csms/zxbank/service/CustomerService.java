@@ -74,4 +74,7 @@ public class CustomerService extends ServiceSupport {
 		return idao.add(cus);
 	}
 
+	public List<String> findAllByECIF(){
+		return idao.findAllByECIF();
+	}
 }

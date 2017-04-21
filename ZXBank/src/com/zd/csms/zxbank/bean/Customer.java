@@ -17,6 +17,12 @@ public class Customer {
 	private Date custCreateDate;//数据同步时间
 	private Date custUpdateDate;//数据同步更新时间
 	
+	public Customer(){}
+	
+	public Customer(String orgcode){
+		this.custOrganizationcode = orgcode;
+	}
+	
 	public int getCustId() {
 		return custId;
 	}

@@ -190,7 +190,21 @@ public class ZhongXinBankUtil {
 		}
 	}
 	
-	
+	/**
+	 * body报文体数据数据填写
+	 * @param action 请求方法代码
+	 * @param userName 登录名
+	 * @param other 其它项
+	 */
+	public static void autoFill(Map<String,Object> body,String action,String userName,String... others) {
+		body.put("action",action.trim());
+		body.put("userName",userName.trim());
+		if(action.equals("DLCDCMLQ")){
+			body.put("orgCode", others[0].trim());
+		}else if(action.equals("DLCDWMLQ")){
+			body.put("hostNo", others[0].trim());
+		}
+	}
 	
 	/**
 	 * 返回是否正确的请求报文
