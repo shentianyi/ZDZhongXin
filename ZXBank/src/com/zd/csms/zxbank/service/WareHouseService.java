@@ -24,8 +24,7 @@ public class WareHouseService extends ServiceSupport {
 	// 远程数据与本地数据比对
 	public void autoUpdateWare(List<WarehouseFar> bankList, Warehouse warehouse) throws Exception {
 		List<Warehouse> list = wdao.query(warehouse.getCustNo());
-		System.out.println("--本地-"+warehouse.getCustNo()+"-所有--"+list);
-		if (bankList != null && bankList.size() > 0)
+		if (bankList != null && bankList.size() > 0 && list != null)
 			for (WarehouseFar warehouseFar : bankList) {
 				int tem = 0;
 				for (int i = 0; i < list.size(); i++) {

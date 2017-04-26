@@ -53,7 +53,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业Id：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="gaLonentno" name="gager.gaLonentno" value="${gager.gaLonentno}" />
+									<input class="ly-bor-none" type="text" id="gaLonentno" name="gager.gaLonentno" value="${gager.gaLonentno}" maxlength="20"/>
 								</div>
 							</div>
 						</div>

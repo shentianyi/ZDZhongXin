@@ -25,7 +25,7 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 	public List<Gager> findAllList(Gager query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select * from zx_gager");
-		List<Object> parameter = new ArrayList<>();
+		List<Object> parameter = new ArrayList<Object>();
 		List<Gager> list = null;
 		formatSQL(query, parameter, sql);
 		try {

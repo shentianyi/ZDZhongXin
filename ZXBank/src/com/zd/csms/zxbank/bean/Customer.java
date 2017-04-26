@@ -12,11 +12,12 @@ import com.zd.core.annotation.table;
 public class Customer {
 	private int custId;//客户查询表主键
 	private String custNo;//客户号
-	private String custOrganizationcode;//组织机构代码
 	private String custName;//客户名称
 	private Date custCreateDate;//数据同步时间
 	private Date custUpdateDate;//数据同步更新时间
 	
+	public Customer(){}
+
 	public int getCustId() {
 		return custId;
 	}
@@ -28,12 +29,6 @@ public class Customer {
 	}
 	public void setCustNo(String custNo) {
 		this.custNo = custNo;
-	}
-	public String getCustOrganizationcode() {
-		return custOrganizationcode;
-	}
-	public void setCustOrganizationcode(String custOrganizationcode) {
-		this.custOrganizationcode = custOrganizationcode;
 	}
 	public String getCustName() {
 		return custName;
@@ -53,11 +48,13 @@ public class Customer {
 	public void setCustUpdateDate(Date custUpdateDate) {
 		this.custUpdateDate = custUpdateDate;
 	}
+
 	@Override
 	public String toString() {
 		return "Customer [custId=" + custId + ", custNo=" + custNo
-				+ ", custOrganizationcode=" + custOrganizationcode
 				+ ", custName=" + custName + ", custCreateDate="
 				+ custCreateDate + ", custUpdateDate=" + custUpdateDate + "]";
 	}
+	
+	
 }

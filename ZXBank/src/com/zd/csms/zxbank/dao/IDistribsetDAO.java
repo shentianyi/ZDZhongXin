@@ -16,5 +16,6 @@ public interface IDistribsetDAO extends IDAO {
 	List<DistribsetZX> searchDistribsetList(DistribsetZX query);
 
 	List<DistribsetZX> findorg(String org);
-
+	
+	List<String> findAllByOrg();
 }

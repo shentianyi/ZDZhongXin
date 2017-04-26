@@ -35,7 +35,7 @@
 <script type="text/javascript">
 	function doQuery() {
 		if ($("#choose").val() == "2") {
-			if ($("#fgLonentNo").val() == "") {
+			if (fgNo == "") {
 				alert("借款企业ID不能为空");
 				return false;
 			}
@@ -78,8 +78,15 @@
 	function doChoose(val) {
 		if (val == "2") {
 			$(".req").css("visibility", "visible");
+			$('#fgStDateEnd').datebox('setValue',"");
+			$('#fgStDateEnd').datebox({
+				disabled : true
+			});
 		} else {
 			$(".req").css("visibility", "hidden");
+			$('#fgStDateEnd').datebox({
+				disabled : false
+			});
 		}
 	}
 	
@@ -127,10 +134,10 @@
 									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>借款企业ID：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="fgLonentNo" name="financingVO.fgLonentNo" value="${financingVO.fgLonentNo}" />
+									<input class="ly-bor-none" type="text" id="fgLonentNo" name="financingVO.fgLonentNo" value="${financingVO.fgLonentNo}" maxlength="20" />
 								</div>
 							</div>
-							<div class="ly-col fl">
+							<div class="ly-col fl" >
 								<div class="label block fl hidden">
 									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>融资起始日-开始：
 								</div>
@@ -188,6 +195,7 @@
 									</tr>
 								</thead>
 								<tbody class="t-tbody hidden">
+								<c:if test="${not empty list }">
 									<logic:iterate name="list" id="row" indexId="index">
 										<tr class="t-tr">
 											<td class="t-td"><c:out value="${index+1}" /></td>
@@ -212,6 +220,7 @@
 											<td class="t-td"><select:timestamp timestamp="${row.fgUpdateDate}" idtype="ss" /></td>
 										</tr>
 									</logic:iterate>
+									</c:if>
 								</tbody>
 							</table>
 						</div>

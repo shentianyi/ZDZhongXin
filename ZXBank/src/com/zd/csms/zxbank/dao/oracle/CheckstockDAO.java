@@ -26,7 +26,7 @@ public class CheckstockDAO extends DAOSupport implements ICheckstockDAO {
 	public List<Checkstock> findAllList(Checkstock query, IThumbPageTools tools) {
 		StringBuffer sql=new StringBuffer();
 		sql.append("select * from zx_checkstock");
-		List<Object> parameter=new ArrayList<>();
+		List<Object> parameter=new ArrayList<Object>();
 		formatSQL(query,parameter,sql);
 		List<Checkstock> list=null;
 		try {

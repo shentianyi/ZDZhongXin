@@ -26,4 +26,6 @@ public interface ICustomerDAO extends IDAO{
 	 * @return
 	 */
 	public List<Customer> query();
+	
+	public List<String> findAllByECIF();
 }

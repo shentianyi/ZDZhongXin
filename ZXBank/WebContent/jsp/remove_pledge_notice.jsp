@@ -54,13 +54,13 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">解除质押通知编号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="rpNo" name="removepledge.rpNo" value="${removepledge.rpNo }"/>
+									<input class="ly-bor-none" type="text" id="rpNo" name="removepledge.rpNo" value="${removepledge.rpNo }" maxlength="20" />
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="rpLoncpname" name="removepledge.rpLoncpname" value="${removepledge.rpLoncpname }"/>
+									<input class="ly-bor-none" type="text" id="rpLoncpname" name="removepledge.rpLoncpname" value="${removepledge.rpLoncpname }" maxlength="120" />
 								</div>
 							</div>
 						</div>

@@ -24,15 +24,15 @@ public class CustomerService extends ServiceSupport {
 	}
 
 	// 远程数据与本地数据比对
-	public void autoUpdateCust(List<CustomerFar> bankList, Customer customer) throws Exception {
+	public void autoUpdateCust(List<CustomerFar> bankList) throws Exception {
 		List<Customer> list = idao.query();
-		if (bankList != null && bankList.size() > 0)
+		if (bankList != null && bankList.size() > 0 && list != null)
 			for (CustomerFar customerFar : bankList) {
 				int tem = 0;
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).getCustNo().trim().equals(customerFar.getEcifCode().trim())) {
 						System.out.println("客户已存在，正在更新。。");
-						if(update(customerFar,customer.getCustOrganizationcode())){
+						if(update(customerFar)){
 							System.out.println("更新客户："+customerFar.getCustName()+"成功");
 						}else{
 							System.out.println("更新客户："+customerFar.getCustName()+"失败");
@@ -42,7 +42,7 @@ public class CustomerService extends ServiceSupport {
 					}
 				}
 				if (tem == 0) {
-					if(add(customerFar, customer.getCustOrganizationcode())){
+					if(add(customerFar)){
 						System.out.println("保存客户：" + customerFar.getCustName()+"  成功");
 					}else{
 						System.out.println("保存客户：" + customerFar.getCustName()+"  失败");
@@ -54,24 +54,25 @@ public class CustomerService extends ServiceSupport {
 	}
 
 	// 更新客户信息
-	private boolean update(CustomerFar customerFar, String orgCode) {
+	private boolean update(CustomerFar customerFar) {
 		Customer cus = new Customer();
 		cus.setCustNo(customerFar.getEcifCode());
 		cus.setCustName(customerFar.getCustName());
-		cus.setCustOrganizationcode(orgCode);
 		cus.setCustUpdateDate(new Date());
 		return idao.upadat(cus);//自增更新方法
 	}
 
 	// 保存客户信息
-	public boolean add(CustomerFar customerFar, String orgCode) {
+	public boolean add(CustomerFar customerFar) {
 		Customer cus = new Customer();
 		cus.setCustId(SqlUtil.getID(Customer.class));
 		cus.setCustName(customerFar.getCustName());
 		cus.setCustNo(customerFar.getEcifCode());
 		cus.setCustCreateDate(new Date());
-		cus.setCustOrganizationcode(orgCode);
 		return idao.add(cus);
 	}
 
+	public List<String> findAllByECIF(){
+		return idao.findAllByECIF();
+	}
 }

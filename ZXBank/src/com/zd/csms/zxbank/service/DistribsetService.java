@@ -11,6 +11,10 @@ public class DistribsetService extends ServiceSupport {
 
 	private IDistribsetDAO dao = SetDAOFactory.getDistribsetDAO();
 
+	public List<String> findAllByOrg() {
+		return dao.findAllByOrg();
+	}
+	
 	public List<DistribsetZX> findorg(String org) {
 		return dao.findorg(org);
 	}

@@ -88,7 +88,7 @@
 								</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="csLoncpid" name="checkstock.csLoncpid"
-										value="${checkstock.csLoncpid}" />
+										value="${checkstock.csLoncpid}" maxlength="10" />
 								</div>
 							</div>
 
@@ -98,7 +98,7 @@
 								</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="csProtocolno" name="checkstock.csProtocolno"
-										value="${checkstock.csProtocolno}" />
+										value="${checkstock.csProtocolno}" maxlength="20" />
 								</div>
 							</div>
 
@@ -107,7 +107,7 @@
 									<font color="#FF0000">*</font>操作人员编号：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="csUserno" name="checkstock.csUserno" value="${checkstock.csUserno}" />
+									<input class="ly-bor-none" type="text" id="csUserno" name="checkstock.csUserno" value="${checkstock.csUserno}" maxlength="20" />
 								</div>
 							</div>
 							<div class="ly-col fl">
@@ -116,7 +116,7 @@
 								</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="csUsername" name="checkstock.csUsername"
-										value="${checkstock.csUsername}" />
+										value="${checkstock.csUsername}" maxlength="30" />
 								</div>
 							</div>
 						</div>
@@ -128,7 +128,7 @@
 								</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="csTradeid" name="checkstock.csTradeid"
-										value="${checkstock.csTradeid}" />
+										value="${checkstock.csTradeid}" maxlength="20" />
 								</div>
 							</div>
 
@@ -138,7 +138,7 @@
 								</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="csProtocolcode" name="checkstock.csProtocolcode"
-										value="${checkstock.csProtocolcode}" />
+										value="${checkstock.csProtocolcode}" maxlength="20" />
 								</div>
 							</div>
 
@@ -166,13 +166,13 @@
 								</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="csErrorreport" name="checkstock.csErrorreport"
-										value="${checkstock.csErrorreport}" />
+										value="${checkstock.csErrorreport}" maxlength="1000" />
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">备注：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="csRemark" name="checkstock.csRemark" value="${checkstock.csRemark}" />
+									<input class="ly-bor-none" type="text" id="csRemark" name="checkstock.csRemark" value="${checkstock.csRemark}" maxlength="200" />
 								</div>
 							</div>
 							<div class="ly-col fl">

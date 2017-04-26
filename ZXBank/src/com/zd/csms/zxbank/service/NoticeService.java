@@ -55,10 +55,7 @@ public class NoticeService extends ServiceSupport{
 	}
 	
 	public boolean addOrUpdate(Notice notice){
-		
 		System.out.println("推送接收到的通知："+notice);
-		
-		
 		if(ndao.getNotice(notice)!=null){
 			return update(notice);
 		}else{
