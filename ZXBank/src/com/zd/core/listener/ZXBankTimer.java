@@ -60,6 +60,7 @@ public class ZXBankTimer extends TimerTask {
 		/**
 		 * 仓库信息同步
 		 */
+		//是否应该从数据库查询ECIF客户号  还是直接调用上面的用户集合？
 		List<String> ECIFcodes = cs.findAllByECIF();
 		for (String ecifcode : ECIFcodes) {
 			try {
@@ -69,6 +70,21 @@ public class ZXBankTimer extends TimerTask {
 				Log.error(e.getMessage());
 			}
 		}
+		
+		/**
+		 * 监管协议同步
+		 */
+		
+		/**
+		 * 融资信息同步
+		 * 今日？
+		 * 不需要？直接批量数据处理
+		 */
+		
+		/**
+		 * 融资批量数据同步
+		 */
+		
 	}
 
 
@@ -105,7 +121,7 @@ public class ZXBankTimer extends TimerTask {
 		String status = bodyNode.element("status").getText();//交易状态
 		String statusText = bodyNode.element("statusText").getText();//交易状态信息
 
-		if (status.equals("AAAAAAA")) {
+		if (status!=null && status.equals("AAAAAAA")) {
 			Element list = bodyNode.element(listName + "lst");
 			List infos = list.elements("row");
 			if (infos != null)

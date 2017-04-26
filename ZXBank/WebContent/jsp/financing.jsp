@@ -137,7 +137,7 @@
 									<input class="ly-bor-none" type="text" id="fgLonentNo" name="financingVO.fgLonentNo" value="${financingVO.fgLonentNo}" maxlength="20" />
 								</div>
 							</div>
-							<div class="ly-col fl">
+							<div class="ly-col fl" >
 								<div class="label block fl hidden">
 									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>融资起始日-开始：
 								</div>

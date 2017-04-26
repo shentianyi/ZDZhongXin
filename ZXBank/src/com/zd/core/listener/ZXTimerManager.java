@@ -1,16 +1,9 @@
 package com.zd.core.listener;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
 import java.util.Timer;
 
-import org.jfree.util.Log;
-
-import com.zd.core.Constants;
 import com.zd.core.SystemProperty;
 
 public class ZXTimerManager {

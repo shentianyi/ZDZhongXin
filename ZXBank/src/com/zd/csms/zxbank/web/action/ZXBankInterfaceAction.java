@@ -59,37 +59,37 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	}
 
 	// 客户接口
-	private CustomerService cs = new CustomerService();
+	//private CustomerService cs = new CustomerService();
 	// 经销商参数接口
-	private DistribsetService dis = new DistribsetService();
+	//private DistribsetService dis = new DistribsetService();
 	// 仓库信息接口
-	private WareHouseService whs = new WareHouseService();
+	//private WareHouseService whs = new WareHouseService();
 	// 通知推送接口
-	private NoticeService ns = new NoticeService();
+	//private NoticeService ns = new NoticeService();
 	// 融资信息业务
-	private FinancingService fs = new FinancingService();
+	//private FinancingService fs = new FinancingService();
 	// 监管协议查询
-	private AgreementService as = new AgreementService();
+	//private AgreementService as = new AgreementService();
 	// 解除质押通知
-	private RemovePledgeService rps = new RemovePledgeService();
+	//private RemovePledgeService rps = new RemovePledgeService();
 	// 解除质押通知详情
-	private RemovePledgeDetailService rpds = new RemovePledgeDetailService();
+	//private RemovePledgeDetailService rpds = new RemovePledgeDetailService();
 	// 移库通知
-	private MoveNoticeService mns = new MoveNoticeService();
+	//private MoveNoticeService mns = new MoveNoticeService();
 	// 移库通知详情
-	private MoveDetailService mds = new MoveDetailService();
+	//private MoveDetailService mds = new MoveDetailService();
 	// 发货通知
-	private ReceivingNoticeService rns = new ReceivingNoticeService();
+	//private ReceivingNoticeService rns = new ReceivingNoticeService();
 	// 发货通知详情
-	private ReceivingDetailService rds = new ReceivingDetailService();
+	//private ReceivingDetailService rds = new ReceivingDetailService();
 	//质物入库查询
-	private GagerService gds = new GagerService();
+	//private GagerService gds = new GagerService();
 	//质物入库详情信息。
-	private CommodityService cds = new CommodityService();
+	//private CommodityService cds = new CommodityService();
 	//盘库信息查询 详情查询
-	private CheckstockService ckds = new CheckstockService();
+	//private CheckstockService ckds = new CheckstockService();
 
-	public ActionForward distribset(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	/*public ActionForward distribset(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		return mapping.findForward("cuslist");
 	}
@@ -109,7 +109,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		}
 		return null;
 	}
-
+*/
 	/**
 	 * 通知推送
 	 * @param mapping
@@ -121,6 +121,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward findnotice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		NoticeService ns = new NoticeService();
 		BankInterfaceForm not = (BankInterfaceForm) form;
 		Notice dquery = not.getNotice();
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Notice", request);
@@ -130,6 +131,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		List<Notice> list = ns.findNotice(dquery, tools);
 		request.setAttribute("types", types);
 		request.setAttribute("list", list);
+		
 		return mapping.findForward("noticelist");
 	}
 
@@ -192,6 +194,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward customer(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		CustomerService cs = new CustomerService();
 		//获取form表单数据
 		BankInterfaceForm cust = (BankInterfaceForm) form;
 		Customer query = cust.getCustomer();
@@ -249,6 +252,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward warehouse(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		WareHouseService whs = new WareHouseService();
 		try {
 			BankInterfaceForm WarHouseform = (BankInterfaceForm) form;
 			Warehouse query = WarHouseform.getWarehouse();// 查询条件获取
@@ -296,6 +300,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward financing(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		FinancingService fs = new FinancingService();
 		try {
 			BankInterfaceForm form = (BankInterfaceForm) actionform;
 			FinancingQueryVO query = form.getFinancingVO();
@@ -349,6 +354,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward agreement(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		AgreementService as = new AgreementService();
 		BankInterfaceForm agreementfrom = (BankInterfaceForm) form;
 		Agreement query = agreementfrom.getAgreement();// 获取查询条件
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Agreement", request);// 分页模板获取
@@ -371,6 +377,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward receivingnotice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		ReceivingNoticeService rns = new ReceivingNoticeService();
 		BankInterfaceForm notifyrom = (BankInterfaceForm) form;
 		ReceivingNotice query = notifyrom.getReceivingnotice();
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("ReceivingNotice", request);
@@ -393,8 +400,10 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward receivingdetail(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String no;
-		no = request.getParameter("nyNo");
+		ReceivingNoticeService rns = new ReceivingNoticeService();
+		ReceivingDetailService rds = new ReceivingDetailService();
+		
+		String no = request.getParameter("nyNo");
 		if (no == null) {
 			no = request.getAttribute("nyNo").toString();
 		}
@@ -423,6 +432,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward receivingdetailOut(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		ReceivingNoticeService rns = new ReceivingNoticeService();
+		ReceivingDetailService rds = new ReceivingDetailService();
+		
 		String no = request.getParameter("nyno");
 		List<ReceivingDetail> list = rds.findAll(no);
 		ReceivingNotice receiving = rns.getNotify(no);
@@ -431,13 +443,13 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		IExportFile export = new ExportFileExcelImpl();
 
 		//处理需求内容
-		List<ReceivingNotice> rns = new ArrayList<ReceivingNotice>();
-		rns.add(receiving);
+		List<ReceivingNotice> rnLists = new ArrayList<ReceivingNotice>();
+		rnLists.add(receiving);
 		List<List<?>> dataLists = new ArrayList<List<?>>();
 		List<IImportRowMapper> mappers = new ArrayList<IImportRowMapper>();
 		IImportRowMapper mapper = new ReceivingRowMapper();
 		IImportRowMapper mapperDetail = new ReceivingDetailRowMapper();
-		dataLists.add(rns);
+		dataLists.add(rnLists);
 		dataLists.add(list);
 		mappers.add(mapper);
 		mappers.add(mapperDetail);
@@ -463,6 +475,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward removepledge(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		RemovePledgeService rps = new RemovePledgeService();
 		// 获得页面查询数据
 		BankInterfaceForm form = (BankInterfaceForm) actionform;
 		RemovePledge query = form.getRemovepledge();
@@ -490,8 +503,10 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward removepledgedetail(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String no;
-		no = request.getParameter("rdno");
+		RemovePledgeService rps = new RemovePledgeService();
+		RemovePledgeDetailService rpds = new RemovePledgeDetailService();
+		
+		String no = request.getParameter("rdno");
 		if (no == null) {
 			no = request.getAttribute("rdno").toString();
 		}
@@ -524,6 +539,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward removepledgedetailOut(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		RemovePledgeService rps = new RemovePledgeService();
+		RemovePledgeDetailService rpds = new RemovePledgeDetailService();
+		
 		//获得导出数据
 		String no = request.getParameter("rdno");
 		RemovePledge rp = rps.fingByNo(no);
@@ -533,13 +551,13 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		IExportFile export = new ExportFileExcelImpl();
 
 		//处理需求内容
-		List<RemovePledge> rps = new ArrayList<RemovePledge>();
-		rps.add(rp);
+		List<RemovePledge> rpLists = new ArrayList<RemovePledge>();
+		rpLists.add(rp);
 		List<List<?>> dataLists = new ArrayList<List<?>>();
 		List<IImportRowMapper> mappers = new ArrayList<IImportRowMapper>();
 		IImportRowMapper mapper = new RemoveRowMapper();
 		IImportRowMapper mapperDetail = new RemoveDetailRowMapper();
-		dataLists.add(rps);
+		dataLists.add(rpLists);
 		dataLists.add(list);
 		mappers.add(mapper);
 		mappers.add(mapperDetail);
@@ -565,6 +583,8 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward movenotice(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		MoveNoticeService mns = new MoveNoticeService();
+		
 		// 获得页面查询数据
 		BankInterfaceForm form = (BankInterfaceForm) actionform;
 		MoveNotice query = form.getMovenotice();
@@ -592,8 +612,10 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward movedetail(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String no;
-		no = request.getParameter("mdno");
+		MoveNoticeService mns = new MoveNoticeService();
+		MoveDetailService mds = new MoveDetailService();
+		
+		String no = request.getParameter("mdno");
 		if (no == null) {
 			no = request.getAttribute("mdno").toString();
 		}
@@ -627,6 +649,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward movedetailOut(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		MoveNoticeService mns = new MoveNoticeService();
+		MoveDetailService mds = new MoveDetailService();
+		
 		String no = request.getParameter("mdno");
 		List<MoveDetail> list = mds.findAll(no);
 		MoveNotice mn = mns.fingByNo(no);
@@ -635,13 +660,13 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		IExportFile export = new ExportFileExcelImpl();
 
 		//处理需求内容
-		List<MoveNotice> mns = new ArrayList<MoveNotice>();
-		mns.add(mn);
+		List<MoveNotice> mnLists = new ArrayList<MoveNotice>();
+		mnLists.add(mn);
 		List<List<?>> dataLists = new ArrayList<List<?>>();
 		List<IImportRowMapper> mappers = new ArrayList<IImportRowMapper>();
 		IImportRowMapper mapper = new MoveRowMapper();
 		IImportRowMapper mapperDetail = new MoveDetailRowMapper();
-		dataLists.add(mns);
+		dataLists.add(mnLists);
 		dataLists.add(list);
 		mappers.add(mapper);
 		mappers.add(mapperDetail);
@@ -751,6 +776,8 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward gagerApp(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		GagerService gds = new GagerService();
+		CommodityService cds = new CommodityService();
 		// setOptions(request);
 		// 获得form
 		BankInterfaceForm bForm = (BankInterfaceForm) form;
@@ -836,6 +863,8 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward gager(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		GagerService gds = new GagerService();
+		
 		BankInterfaceForm gform = (BankInterfaceForm) form;
 		Gager query = gform.getGager();
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Gager", request);
@@ -858,6 +887,9 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward commodity(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		GagerService gds = new GagerService();
+		CommodityService cds = new CommodityService();
+		
 		Commodity query = new Commodity();
 		query.setCmGaid(Integer.parseInt(request.getParameter("gaId")));
 
@@ -1018,6 +1050,8 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward checkstock(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		CheckstockService ckds = new CheckstockService();
+		
 		BankInterfaceForm bform = (BankInterfaceForm) form;
 		Checkstock query = bform.getCheckstock();
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("Checkstock", request);
@@ -1039,14 +1073,19 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward checkstockDetail(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		int id = Integer.parseInt(request.getParameter("csid"));
-		int loncpid = Integer.parseInt(request.getParameter("loncpid"));
+		CheckstockService ckds = new CheckstockService();
+		int id = 0;
+		int loncpid = 0;
+		try {
+			id = Integer.parseInt(request.getParameter("csid"));
+			loncpid = Integer.parseInt(request.getParameter("loncpid"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		IThumbPageTools tools = ToolsFactory.getThumbPageTools("CheckstockVO", request);
-		tools.setPageSize(1);
 		Checkstock checkstock = ckds.getCheckstock(loncpid);//获取共同盘库信息部分
 		List<CheckstockVO> list = ckds.findAllVOList(id, tools);//获取详情信息列表
-
 		request.setAttribute("checkstock", checkstock);
 		request.setAttribute("list", list);
 		return mapping.findForward("checkstockDetail");
