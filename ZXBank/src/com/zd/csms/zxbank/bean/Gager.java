@@ -12,7 +12,6 @@ import com.zd.core.annotation.table;
 public class Gager implements Serializable{
 
 	private static final long serialVersionUID = 7756611904828286632L;
-	
 	private int gaId;//质物入库id主键
 	private String gaLonentno;//借款企业id
 	private String gaLonentname;//借款企业名称
@@ -20,12 +19,13 @@ public class Gager implements Serializable{
 	private String gaOrderno;//交易流水号
 	private String gaPcgrtntno;//纸质担保合同编号
 	private String gaCmgrtcntno;//动产质押担保合同编号 
-	private String gaConfirmno;//质物监管确认书编号
 	private String gaRemark;//备注
-	private String gaBizmod;//业务模式
+	private String gaBizmod;//业务模式(没有)
+	private String gaConfirmno;//质物监管确认书编号
+	private int gaCount;//总记录数
 	private String gaCreatedate;//数据添加时间
 	private int gaState;//质物入库状态
-	private int gaCount;//总记录数
+//	private String whCode;//仓库代码（必填项）
 	
 	public int getGaId() {
 		return gaId;
@@ -116,7 +116,4 @@ public class Gager implements Serializable{
 				+ ", gaBizmod=" + gaBizmod + ", gaCreatedate=" + gaCreatedate
 				+ ", gaState=" + gaState + ", gaCount=" + gaCount + "]";
 	}
-	
-	
-	
 }

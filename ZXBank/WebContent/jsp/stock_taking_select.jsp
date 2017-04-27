@@ -69,6 +69,7 @@
 									<tr class="t-tr">
 										<th class="t-th">序号</th>
 										<th class="t-th">借款企业id</th>
+										<th class="t-th">借款企业名称</th>
 										<th class="t-th">系统监管协议编号</th>
 										<th class="t-th">纸质监管协议编号</th>
 										<th class="t-th">操作人编号</th>
@@ -87,6 +88,7 @@
 										<tr class="t-tr">
 											<td class="t-td"><c:out value="${index+1 }" /></td>
 											<td class="t-td"><c:out value="${row.csLoncpid }" /></td>
+											<td class="t-td"><c:out value="${row.csHostname }" /></td>
 											<td class="t-td"><c:out value="${row.csProtocolno }" /></td>
 											<td class="t-td"><c:out value="${row.csProtocolcode }" /></td>
 											<td class="t-td"><c:out value="${row.csUserno }" /></td>
@@ -97,7 +99,7 @@
 											<td class="t-td"><c:out value="${row.csErrorreport }" /></td>
 											<td class="t-td"><c:out value="${row.csRemark }" /></td>
 											<td class="t-td"><select:timestamp timestamp="${row.csCreatedate}" idtype="ss" /></td>
-											<td class="t-td"><a href="ZXinterface.do?method=checkstockDetail&csid=${row.csId}&loncpid=${row.csLoncpid}">详情</a></td>
+											<td class="t-td"><a href="ZXinterface.do?method=checkstockDetail&csid=${row.csId}">详情</a></td>
 										</tr>
 									</logic:iterate>
 								</tbody>

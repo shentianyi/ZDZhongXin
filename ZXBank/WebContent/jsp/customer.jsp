@@ -50,7 +50,14 @@
 			minLength : 3
 		});
 	}); */
-
+	
+	$(function(){
+		if("${msg}"!=""){
+			alert("${msg}");
+		}
+		
+	});
+	
 	function doChoose(val) {
 		if (val == "2") {
 			$(".req").css("visibility", "visible");
@@ -62,12 +69,13 @@
 		}
 	}
 
-	function doQuery(type) {
-		$("#queryType").val(type);
-		/* if ($('#choose').val()=="2" && $("#custOrganizationcode").val()=="") {
+	function doQuery() {
+		
+		if ($('#choose').val()=="2" && $("#custOrganizationcode").val()=="") {
 			alert("组织机构代码不能为空");
 			return;
-		} */
+		}
+		
 		document.forms[0].submit();
 	}
 
@@ -90,28 +98,39 @@
 		<div class="ly-contai rel">
 			<html:form action="/ZXinterface.do" styleId="cusForm" method="post" onsubmit="return false">
 				<input name="method" id="method" type="hidden" value="customer" />
-				<input name="queryType" id="queryType" type="hidden" value="0" />
 				<div class="public-main-input ly-col-1 hidden abs">
 					<div class="ly-input-w">
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
-								<div class="label block fl hidden">客户号：</div>
+								<div class="label block fl hidden">
+									<font class="req" color="#FF0000" style="visibility: hidden;">*</font>组织机构代码：
+								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="custNo" name="customer.custNo" value="${customer.custNo}" maxlength="20" />
+									<input class="ly-bor-none" type="text" id="custOrganizationcode" name="customer.custOrganizationcode" value="${customer.custOrganizationcode}" maxlength="10" />
 								</div>
 							</div>
+
 							<div class="ly-col fl">
 								<div class="label block fl hidden">客户名称：</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="custName" name="customer.custName" value="${customer.custName}" maxlength="122" />
 								</div>
 							</div>
+							<div class="ly-col fl">
+								<div class="label block fl hidden">查询方式：</div>
+								<div class="input block fl hidden">
+									<select class="ly-bor-none" id="choose" name="queryType" onchange="doChoose(this.value)">
+										<option value="0">请选择</option>
+										<option value="1">本地查询</option>
+										<option value="2">远程查询</option>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="ly-button-w">
-						<a href="javascript:doQuery(1);" class="button btn-query">查询</a>
+						<a href="javascript:doQuery();" class="button btn-query">查询</a>
 						<a href="javascript:doClear();" class="button btn-reset">重置</a>
-						<a href="javascript:doQuery(2);" class="button btn-query">手工同步</a>
 					</div>
 				</div>
 
@@ -122,6 +141,7 @@
 								<thead class="t-thead">
 									<tr class="t-tr">
 										<th class="t-th">序号</th>
+										<th class="t-th">组织机构代码</th>
 										<th class="t-th">ECIF客户号</th>
 										<th class="t-th">客户名称</th>
 										<th class="t-th">创建时间</th>
@@ -133,6 +153,7 @@
 										<logic:iterate name="list" id="row" indexId="index">
 											<tr class="t-tr">
 												<td class="t-td"><c:out value="${index+1}" /></td>
+												<td class="t-td"><c:out value="${row.custOrganizationcode}" /></td>
 												<td class="t-td"><c:out value="${row.custNo}" /></td>
 												<td class="t-td"><c:out value="${row.custName}" /></td>
 												<td class="t-td"><select:timestamp timestamp="${row.custCreateDate}" idtype="ss" /></td>

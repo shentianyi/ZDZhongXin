@@ -205,21 +205,11 @@
 								<thead class="t-thead">
 									<tr class="t-tr">
 										<th class="t-th">序号</th>
-										<!-- <th class="t-th">监管仓库代码</th>
-									<th class="t-th">商品代码</th>
-									<th class="t-th">盘库商品数量</th>
-									<th class="t-th">动产质押担保合同编号</th>
-									<th class="t-th">车架号</th>
-									<th class="t-th">仓库级别</th>
-									<th class="t-th">仓库代码</th>
-									<th class="t-th">仓库地址</th>
-									<th class="t-th">车辆数量</th> -->
 										<th class="t-th">仓库级别</th>
 										<th class="t-th">仓库代码</th>
+										<th class="t-th">仓库名称</th>
 										<th class="t-th">仓库地址</th>
-										<th class="t-th">商品代码</th>
-										<th class="t-th">盘库商品数量</th>
-										<th class="t-th">动产质押担保合同编号</th>
+										<th class="t-th">盘点数量</th>
 										<th class="t-th">车架号</th>
 									</tr>
 								</thead>
@@ -230,10 +220,9 @@
 												<td class="t-td"><c:out value='${index+1 }' /></td>
 												<td class="t-td"><c:out value='${row.whlevel }' /></td>
 												<td class="t-td"><c:out value='${row.whcode }' /></td>
+												<td class="t-td"><c:out value='${row.whname }' /></td>
 												<td class="t-td"><c:out value='${row.whaddr }' /></td>
-												<td class="t-td"><c:out value='${row.cmcode }' /></td>
 												<td class="t-td"><c:out value='${row.num }' /></td>
-												<td class="t-td"><c:out value='${row.cmgrtcntno }' /></td>
 												<td class="t-td"><c:out value='${row.vin }' /></td>
 											</tr>
 										</logic:iterate>

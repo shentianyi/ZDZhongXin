@@ -6,16 +6,16 @@ package com.zd.csms.zxbank.web.bean;
  * @author duyong
  */
 public class RemovePledgeFar {
-	private String rlsmgntcNo;
-	private String operOrg;
-	private String mtgpsnNm;
-	private String loaentId;
-	private String lonentNm;
-	private String spventNm;
-	private String corentNm;
-	private String rlsmgDate;
-	private String ostkrsn;
-	private String ntcDate;
+	private String rlsmgntcNo;//解除质押通知书编号
+	private String operOrg;//经办行
+	private String mtgpsnNm;//出质人名称 
+	private String loaentId;//借款企业id
+	private String lonentNm;//借款企业名称
+	private String spventNm;//监管企业名称
+	private String corentNm;//核心企业名称
+	private String rlsmgDate;//-解除质押日期
+	private String ostkrsn;//出库原因
+	private String ntcDate;//通知书日期
 	
 	public String getRlsmgntcNo() {
 		return rlsmgntcNo;

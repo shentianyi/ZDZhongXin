@@ -1,21 +1,25 @@
 package com.zd.csms.zxbank.web.bean;
-
+/**
+ * 发货通知详情
+ * @author caizhuo
+ *
+ */
 public class ReceivingDetailFar {
-	private String idtplanNo;
-	private String idtplanNm;
-	private String cmdCode;
-	private String cmdName;
-	private String csnNum;
-	private String unit;
-	private String csnprc;
-	private String reqcsnval;
-	private String scflonNo;
-	private String mtgcntNo;
-	private String remark;
-	private String vin;
-	private String hgzNo;
-	private String carPrice;
-	private String loanCode;
+	private String idtplanNo;//实际订单纸质编号
+	private String idtplanNm;//实际订单名称
+	private String cmdCode;//商品代码
+	private String cmdName;//商品名称
+	private String csnNum;//发货数量
+	private String unit;//计量单位
+	private String csnprc;//发货单价
+	private String reqcsnval;//发货价值
+	private String scflonNo;//scf放款批次号
+	private String mtgcntNo;//质押合同编号
+	private String remark;//备注
+	private String vin;//车架号
+	private String hgzNo;//合格证编号 
+	private String carPrice;//车价
+	private String loanCode;//融资编号
 	
 	public String getIdtplanNo() {
 		return idtplanNo;

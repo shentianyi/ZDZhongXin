@@ -11,17 +11,17 @@ import com.zd.core.annotation.table;
 @table(name="ZX_WAREHOUSE")
 public class Warehouse {
 	private int Whid;//仓库查询表主键
+	private String loncpname;//借款企业名称  新增
+	private String lonentid;//借款企业id（必填项）
 	private String custNo;//客户号
 	private String whName;//仓库名字
 	private String whCode;//仓库代码
 	private String whLevel;//仓库级别
 	private String whOperorg;//经办行
-	private String loncpname;//借款企业名称  新增
 	private String whAddress;//仓库地址
 	private String phone;//电话
 	private Date createDate;//数据同步时间
 	private Date updateDate;//数据更新时间
-	
 	public Warehouse() {
 		super();
 	}
@@ -97,13 +97,23 @@ public class Warehouse {
 	public void setLoncpname(String loncpname) {
 		this.loncpname = loncpname;
 	}
+
+	public String getLonentid() {
+		return lonentid;
+	}
+
+	public void setLonentid(String lonentid) {
+		this.lonentid = lonentid;
+	}
+
 	@Override
 	public String toString() {
-		return "Warehouse [Whid=" + Whid + ", custNo=" + custNo + ", whName="
+		return "Warehouse [Whid=" + Whid + ", loncpname=" + loncpname
+				+ ", lonentid=" + lonentid + ", custNo=" + custNo + ", whName="
 				+ whName + ", whCode=" + whCode + ", whLevel=" + whLevel
-				+ ", whOperorg=" + whOperorg + ", loncpname=" + loncpname
-				+ ", whAddress=" + whAddress + ", phone=" + phone
-				+ ", createDate=" + createDate + ", updateDate=" + updateDate
-				+ "]";
+				+ ", whOperorg=" + whOperorg + ", whAddress=" + whAddress
+				+ ", phone=" + phone + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + "]";
 	}
+	
 }

@@ -28,7 +28,7 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 	@Override
 	public List<Warehouse> findBusinessList(Warehouse query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select loncpname,Whid,custNo,whName,whCode,whLevel,whOperorg,whAddress,phone,createDate,updateDate from ZX_WAREHOUSE");
+		sql.append("SELECT LONCPNAME,LONENTID,WHID,CUSTNO,WHNAME,WHCODE,WHLEVEL,WHOPERORG,WHADDRESS,PHONE,CREATEDATE,UPDATEDATE FROM ZX_WAREHOUSE");
 		List<Object> params = new ArrayList<Object>();
 		List<Warehouse> list = null;
 		formatSQL(sql, params, query);
@@ -47,14 +47,14 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 	 * @param query
 	 */
 	private void formatSQL(StringBuffer sql, List<Object> params, Warehouse query) {
-		sql.append(" where 1=1");
+		sql.append(" WHERE 1=1");
 		if (!StringUtil.isEmpty(query.getCustNo())) {
 			params.add("%" + query.getCustNo() + "%");
-			sql.append(" and custNo like ?");
+			sql.append(" AND CUSTNO LIKE ?");
 		}
 		if (!StringUtil.isEmpty(query.getWhName())) {
 			params.add("%" + query.getWhName() + "%");
-			sql.append(" AND whName LIKE ?");
+			sql.append(" AND WHNAME LIKE ?");
 		}
 	}
 
@@ -69,7 +69,7 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 	@Override
 	public boolean upadat(Warehouse ware) {
 
-		String sql = "update ZX_WAREHOUSE set custNo=?,whName=?,whLevel=?,whOperorg=?,loncpname=?,whAddress=?,phone=?,updateDate=to_date(?,'YYYY-MM-DD HH24:MI:SS') where whCode=?";
+		String sql = "UPDATE ZX_WAREHOUSE SET CUSTNO=?,WHNAME=?,WHLEVEL=?,WHOPERORG=?,LONCPNAME=?,WHADDRESS=?,PHONE=?,UPDATEDATE=TO_DATE(?,'YYYY-MM-DD HH24:MI:SS'),LONENTID=? WHERE WHCODE=?";
 		PreparedStatement stmt = null;
 		try {
 			stmt = BeanManager.getDataSource(null).getConnection().prepareStatement(sql);
@@ -82,6 +82,7 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 			stmt.setString(7, ware.getPhone());
 			stmt.setString(8, DateUtil.getStringFormatByDate(ware.getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
 			stmt.setString(9, ware.getWhCode());
+			stmt.setString(10, ware.getLonentid());
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -99,7 +100,7 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Warehouse> query(String custno) {
-		String sql = "select whCode from ZX_WAREHOUSE where custNo='" + custno + "'";
+		String sql = "SELECT WHCODE FROM ZX_WAREHOUSE WHERE CUSTNO='" + custno + "'";
 		List<Warehouse> list = null;
 		list = getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Warehouse.class));
 		return list;

@@ -32,7 +32,7 @@ public class CustomerDAO extends DAOSupport implements ICustomerDAO {
 	public List<Customer> findcustallList(Customer query, IThumbPageTools tools) {
 		List<Customer> list = null;
 		StringBuffer sql = new StringBuffer(
-				"Select a.custId,a.custNo,a.custName,a.custCreatedate,a.custUpdatedate from zx_customer a ");//,zx_distribset b ");
+				"Select a.custId,a.custNo,a.custOrganizationcode,a.custName,a.custCreatedate,a.custUpdatedate from zx_customer a ");//,zx_distribset b ");
 		List<Object> params = new ArrayList<Object>();
 		formatSQL(query, sql, params);
 		try {
@@ -45,7 +45,7 @@ public class CustomerDAO extends DAOSupport implements ICustomerDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Customer> query() {
-		String sql = "Select custNo from zx_customer";
+		String sql = "Select a.custId,a.custNo,a.custOrganizationcode,a.custName,a.custCreatedate,a.custUpdatedate from zx_customer a";
 		List<Customer> list = null;
 		list = getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Customer.class));
 		return list;
@@ -63,9 +63,10 @@ public class CustomerDAO extends DAOSupport implements ICustomerDAO {
 	 */
 	public void formatSQL(Customer query, StringBuffer sql, List<Object> params) {
 		sql.append(" where 1=1 ");
-		if (!StringUtil.isEmpty(query.getCustNo())) {
-			sql.append(" and a.custNo like ? ");
-			params.add("%" + query.getCustNo().trim() + "%");
+		//sql.append(" and a.custOrganizationcode=b.organizationcode ");
+		if (!StringUtil.isEmpty(query.getCustOrganizationcode())) {
+			sql.append(" and a.custOrganizationcode like ? ");
+			params.add("%" + query.getCustOrganizationcode().trim() + "%");
 		}
 		if (!StringUtil.isEmpty(query.getCustName())) {
 			sql.append(" and a.custName like ? ");

@@ -7,13 +7,13 @@ package com.zd.csms.zxbank.web.bean;
  */
 public class MoveDetailFar{
 
-	private String mwCode;
-	private String iwCode;
-	private String cmdCode;
-	private String stkNum;
-	private String vin;
-	private String hgzNo;
-	private String carPrice;
+	private String mwCode;//移出仓库编号
+	private String iwCode;// 移入仓库编号
+	private String cmdCode;//商品代码 
+	private String stkNum;//移库数量
+	private String vin;//车架号
+	private String hgzNo;// 合格证编号
+	private String carPrice;// 车价
 	
 	public String getMwCode() {
 		return mwCode;

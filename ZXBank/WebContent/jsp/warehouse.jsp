@@ -25,6 +25,13 @@
 <script src="easyui/jquery.easyui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
 <script>
+	$(function(){
+		if("${msg}"!=""){
+			alert("${msg}");
+		}		
+	});
+
+
 	function doQuery() {
 		if ($('#choose').val() == "2" && $("#custNo").val() == "") {
 			alert("ECIF客户号不能为空");
@@ -110,6 +117,7 @@
 										<th class="t-th">序号</th>
 										<th class="t-th">ECIF客户号</th>
 										<th class="t-th">借款企业名称</th>
+										<th class="t-th">借款企业ID</th>
 										<th class="t-th">仓库名称</th>
 										<th class="t-th">仓库代码</th>
 										<th class="t-th">仓库级别</th>
@@ -127,6 +135,7 @@
 												<td class="t-td"><c:out value="${index+1}" /></td>
 												<td class="t-td"><c:out value="${row.custNo}" /></td>
 												<td class="t-td"><c:out value="${row.loncpname}" /></td>
+												<td class="t-td"><c:out value="${row.lonentid}" /></td>
 												<td class="t-td"><c:out value="${row.whName}" /></td>
 												<td class="t-td"><c:out value="${row.whCode}" /></td>
 												<td class="t-td"><c:out value="${row.whLevel==1?'一级仓库':'二级仓库'}" /></td>

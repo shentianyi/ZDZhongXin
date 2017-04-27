@@ -24,6 +24,11 @@
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/thumbpage/thumbpage.js"></script>
 <script>
+	$(function(){
+		if("${msg}"!=""){
+			alert("${msg}");
+		}
+	});
 	function doQuery() {
 		if ($('#choose').val() == "2" && $("#loncpid").val() == "") {
 			alert("ECIF客户号不能为空");
@@ -68,13 +73,13 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden"><font class="req" color="#FF0000" style="visibility: hidden;">*</font>ECIF客户号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="loncpid" name="agreement.ag_custno" value="${agreement.ag_custno }" maxlength="20" />
+									<input class="ly-bor-none" type="text" id="loncpid" name="agreement.agCustno" value="${agreement.agCustno }" maxlength="20" />
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.ag_loncpname" value="${agreement.ag_loncpname }" maxlength="120" />
+									<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.agLoncpname" value="${agreement.agLoncpname }" maxlength="120" />
 								</div>
 							</div>
 
@@ -123,23 +128,23 @@
 										<logic:iterate name="list" id="row" indexId="index">
 											<tr class="t-tr">
 												<td class="t-td"><c:out value="${index+1}" /></td>
-												<td class="t-td"><c:out value="${row.ag_custno }" /></td>
-												<td class="t-td"><c:out value="${row.ag_loncpid }" /></td>
-												<td class="t-td"><c:out value="${row.ag_loncpname }" /></td>
-												<td class="t-td"><c:out value="${row.ag_operorg }" /></td>
-												<td class="t-td"><c:out value="${row.ag_protocolno }" /></td>
-												<td class="t-td"><c:out value="${row.ag_protocolcode }" /></td>
-												<td class="t-td"><c:if test="${row.ag_isonline=='0'}">否</c:if> <c:if test="${row.ag_isonline=='1'}">是</c:if>
+												<td class="t-td"><c:out value="${row.agCustno }" /></td>
+												<td class="t-td"><c:out value="${row.agLoncpid }" /></td>
+												<td class="t-td"><c:out value="${row.agLoncpname }" /></td>
+												<td class="t-td"><c:out value="${row.agOperorg }" /></td>
+												<td class="t-td"><c:out value="${row.agProtocolno }" /></td>
+												<td class="t-td"><c:out value="${row.agProtocolcode }" /></td>
+												<td class="t-td"><c:if test="${row.agIsonline=='0'}">否</c:if> <c:if test="${row.agIsonline=='1'}">是</c:if>
 												</td>
-												<td class="t-td"><c:if test="${row.ag_ismove=='0'}">否</c:if> <c:if test="${row.ag_ismove=='1'}">是</c:if>
+												<td class="t-td"><c:if test="${row.agIsmove=='0'}">否</c:if> <c:if test="${row.agIsmove=='1'}">是</c:if>
 												</td>
-												<td class="t-td"><c:if test="${row.ag_state=='0' }">失效</c:if> <c:if test="${row.ag_state=='1' }">生效</c:if>
+												<td class="t-td"><c:if test="${row.agState=='0' }">失效</c:if> <c:if test="${row.agState=='1' }">生效</c:if>
 												</td>
-												<td class="t-td"><c:out value="${row.ag_stdate }" /></td>
-												<td class="t-td"><c:out value="${row.ag_enddate }" /></td>
-												<td class="t-td"><c:out value="${row.ag_totnum }" /></td>
-												<td class="t-td"><select:timestamp timestamp="${row.ag_createdate}" idtype="ss" /></td>
-												<td class="t-td"><select:timestamp timestamp="${row.ag_updatedate}" idtype="ss" /></td>
+												<td class="t-td"><c:out value="${row.agStdate }" /></td>
+												<td class="t-td"><c:out value="${row.agEnddate }" /></td>
+												<td class="t-td"><c:out value="${row.agTotnum }" /></td>
+												<td class="t-td"><select:timestamp timestamp="${row.agCreatedate}" idtype="ss" /></td>
+												<td class="t-td"><select:timestamp timestamp="${row.agUpdatedate}" idtype="ss" /></td>
 											</tr>
 										</logic:iterate>
 									</c:if>

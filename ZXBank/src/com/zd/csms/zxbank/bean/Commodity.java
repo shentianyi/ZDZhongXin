@@ -14,15 +14,17 @@ public class Commodity implements Serializable{
 	private static final long serialVersionUID = -1582947405226599731L;
 
 	private int cmId;//质物入库商品表主键id
+	
+	private int cmGaid;//质物入库表ID
+	private String cmWhcode;//仓库代码
+	
 	private String cmCmdcode;//商品代码
 	private int cmStknum;//入库数量
 	private BigDecimal cmIstkprc;//入库单价
-	private String cmWhcode;//仓库代码
 	private String cmVin;//车架号
 	private String cmHgzno;//合格证编号
 	private BigDecimal cmCarprice;//车价
 	private String cmLoancode;// 融资编号
-	private int cmGaid;//质物入库表ID
 	public int getCmId() {
 		return cmId;
 	}

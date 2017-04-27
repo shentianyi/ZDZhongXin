@@ -1,13 +1,18 @@
 package com.zd.csms.zxbank.bean;
+
+import com.zd.core.annotation.table;
+
 /**
  * 
  * 盘库信息 
  * @author caizhuo
  *
  */
+@table(name="ZX_CHECKSTOCK")
 public class Checkstock {
 	private int csId;//--盘库表id
 	private String csLoncpid;//--借款企业id
+	private String csHostName;//--借款企业名称
 	private String csProtocolno;//--系统监管协议编号
 	private String csProtocolcode;//--纸质监管协议编号
 	private String csUserno;//--操作人编号
@@ -18,6 +23,7 @@ public class Checkstock {
 	private String csErrorreport;// --差错报告
 	private String csRemark;//--备注
 	private String csCreatedate;// --创建时间
+	
 	public int getCsId() {
 		return csId;
 	}
@@ -90,14 +96,10 @@ public class Checkstock {
 	public void setCsCreatedate(String csCreatedate) {
 		this.csCreatedate = csCreatedate;
 	}
-	@Override
-	public String toString() {
-		return "Checkstock [csId=" + csId + ", csLoncpid=" + csLoncpid
-				+ ", csProtocolno=" + csProtocolno + ", csProtocolcode="
-				+ csProtocolcode + ", csUserno=" + csUserno + ", csUsername="
-				+ csUsername + ", csTradeid=" + csTradeid + ", csPlandate="
-				+ csPlandate + ", csFactdate=" + csFactdate
-				+ ", csErrorreport=" + csErrorreport + ", csRemark=" + csRemark
-				+ ", csCreatedate=" + csCreatedate + "]";
+	public String getCsHostName() {
+		return csHostName;
+	}
+	public void setCsHostName(String csHostName) {
+		this.csHostName = csHostName;
 	}
 }

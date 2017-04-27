@@ -50,6 +50,11 @@
 							</div>
 
 							<div class="ly-col fl">
+								<div class="label block fl hidden">借款企业ID：</div>
+								<div class="input block fl hidden">${checkstock.csHostname}</div>
+							</div>
+
+							<div class="ly-col fl">
 								<div class="label block fl hidden">系统监管协议编号：</div>
 								<div class="input block fl hidden">${checkstock.csProtocolno}</div>
 							</div>
@@ -58,20 +63,16 @@
 								<div class="input block fl hidden">${checkstock.csProtocolcode}</div>
 							</div>
 
-							<div class="ly-col fl">
-								<div class="label block fl hidden">操作人员编号：</div>
-								<div class="input block fl hidden">${checkstock.csUserno}</div>
-							</div>
 						</div>
 
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
-								<div class="label block fl hidden">操作人名称：</div>
-								<div class="input block fl hidden">${checkstock.csUsername}</div>
+								<div class="label block fl hidden">操作人员编号：</div>
+								<div class="input block fl hidden">${checkstock.csUserno}</div>
 							</div>
 							<div class="ly-col fl">
-								<div class="label block fl hidden">交易流水号：</div>
-								<div class="input block fl hidden">${checkstock.csTradeid}</div>
+								<div class="label block fl hidden">操作人名称：</div>
+								<div class="input block fl hidden">${checkstock.csUsername}</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">计划盘库日期：</div>
@@ -83,6 +84,10 @@
 							</div>
 						</div>
 						<div class="ly-row clearfix">
+							<div class="ly-col fl">
+								<div class="label block fl hidden">交易流水号：</div>
+								<div class="input block fl hidden">${checkstock.csTradeid}</div>
+							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">差错报告：</div>
 								<div class="input block fl hidden">${checkstock.csErrorreport}</div>
@@ -109,10 +114,9 @@
 										<th class="t-th">序号</th>
 										<th class="t-th">仓库级别</th>
 										<th class="t-th">仓库代码</th>
+										<th class="t-th">仓库名称</th>
 										<th class="t-th">仓库地址</th>
-										<th class="t-th">商品代码</th>
-										<th class="t-th">盘库商品数量</th>
-										<th class="t-th">动产质押担保合同编号</th>
+										<th class="t-th">车辆数量</th>
 										<th class="t-th">车架号</th>
 									</tr>
 								</thead>
@@ -123,10 +127,9 @@
 												<td class="t-td"><c:out value='${index+1 }' /></td>
 												<td class="t-td"><c:out value="${row.whlevel==1?'一级仓库':'二级仓库'}" /></td>
 												<td class="t-td"><c:out value='${row.whcode }' /></td>
+												<td class="t-td"><c:out value='${row.whname }' /></td>
 												<td class="t-td"><c:out value='${row.whaddr }' /></td>
-												<td class="t-td"><c:out value='${row.cmcode }' /></td>
 												<td class="t-td"><c:out value='${row.num }' /></td>
-												<td class="t-td"><c:out value='${row.cmgrtcntno }' /></td>
 												<td class="t-td"><c:out value='${row.vin }' /></td>
 											</tr>
 										</logic:iterate>
@@ -140,7 +143,7 @@
 					<div class="public-main-footer-pagin fr">
 						<c:if test="${not empty list }">
 							<thumbpage:tools className="<%=ThumbPageConstants.CLASSNAME_DEFAULT.getCode()%>" tableName="CheckstockVO"
-								action="ZXinterface.do?method=checkstockDetail&csid=${list[0].scid}&loncpid=${checkstock.csLoncpid}" />
+								action="ZXinterface.do?method=checkstockDetail&csid=${list[0].scid}" />
 						</c:if>
 					</div>
 				</div>

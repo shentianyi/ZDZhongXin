@@ -5,20 +5,20 @@ package com.zd.csms.zxbank.web.bean;
  * @author duyong
  */
 public class RemovePledgeDetailFar{
-	private String cmdCode;
-	private String cmdName;
-	private String unit;
-	private String stkNum;
-	private String rlsmgNum;
-	private String whCode;
-	private String scflonNo;
-	private String grtcntNo;
-	private String mvstkNum;
-	private String vin;
-	private String hgzNo;
-	private String carPrice;
-	private String rdmoprName;
-	private String rdmopridNo;
+	private String cmdCode;//商品代码
+	private String cmdName;//商品名称
+	private String unit;//计量单位
+	private String stkNum;//库存数量
+	private String rlsmgNum;//解除质押数量
+	private String whCode;// 所在仓库编号
+	private String scflonNo;// scf放款批次号
+	private String grtcntNo;//动产质押担保合同编号
+	private String mvstkNum;//移库数量	
+	private String vin;// 车架号
+	private String hgzNo;//合格证编号
+	private String carPrice;//车价
+	private String rdmoprName;//- 赎货经办人姓名 
+	private String rdmopridNo;//赎货经办人身份证号码 
 	
 	public String getCmdCode() {
 		return cmdCode;

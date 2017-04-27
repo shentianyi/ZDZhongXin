@@ -33,7 +33,13 @@
 	}
 </style>
 <script type="text/javascript">
+	$(function(){
+		if("${msg}"!=""){
+			alert("${msg}");
+		}
+	});
 	function doQuery() {
+		var fgNo=$("fgLonentNo").val();
 		if ($("#choose").val() == "2") {
 			if (fgNo == "") {
 				alert("借款企业ID不能为空");
@@ -78,15 +84,8 @@
 	function doChoose(val) {
 		if (val == "2") {
 			$(".req").css("visibility", "visible");
-			$('#fgStDateEnd').datebox('setValue',"");
-			$('#fgStDateEnd').datebox({
-				disabled : true
-			});
 		} else {
 			$(".req").css("visibility", "hidden");
-			$('#fgStDateEnd').datebox({
-				disabled : false
-			});
 		}
 	}
 	
@@ -146,7 +145,7 @@
 								</div>
 							</div>
 							<div class="ly-col fl">
-								<div class="label block fl hidden">融资起始日-结束：</div>
+								<div class="label block fl hidden"><font class="req" color="#FF0000" style="visibility: hidden;">*</font>融资起始日-结束：</div>
 								<div class="input block fl hidden">
 									<input id="fgStDateEnd" name="financingVO.fgStDateEnd" type="text"/>
 								</div>

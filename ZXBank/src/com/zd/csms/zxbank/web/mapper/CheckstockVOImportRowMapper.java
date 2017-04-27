@@ -18,10 +18,9 @@ public class CheckstockVOImportRowMapper implements IImportRowMapper {
 		CheckstockVO check = new CheckstockVO();
 		check.setWhlevel(values[index++]);
 		check.setWhcode(values[index++]);
+		check.setWhname(values[index++]);
 		check.setWhaddr(values[index++]);
-		check.setCmcode(values[index++]);
 		check.setNum(values[index++]);
-		check.setCmgrtcntno(values[index++]);
 		check.setVin(values[index++]);
 		return check;
 	}

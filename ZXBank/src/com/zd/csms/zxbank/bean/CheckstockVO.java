@@ -14,11 +14,16 @@ public class CheckstockVO implements Serializable{
 	private String whlevel;//仓库级别
 	private String whcode;//仓库代码
 	private String whaddr;//仓库地址
-	private String cmcode;//商品代码
-	private String num;//商品数量
-	private String cmgrtcntno;//质押合同编号
+	private String whname;//仓库地址
+	private String num;//车辆数量
 	private String vin;//车架号
 	
+	public String getWhname() {
+		return whname;
+	}
+	public void setWhname(String whname) {
+		this.whname = whname;
+	}
 	public String getWhlevel() {
 		return whlevel;
 	}
@@ -37,23 +42,11 @@ public class CheckstockVO implements Serializable{
 	public void setWhaddr(String whaddr) {
 		this.whaddr = whaddr;
 	}
-	public String getCmcode() {
-		return cmcode;
-	}
-	public void setCmcode(String cmcode) {
-		this.cmcode = cmcode;
-	}
 	public String getNum() {
 		return num;
 	}
 	public void setNum(String num) {
 		this.num = num;
-	}
-	public String getCmgrtcntno() {
-		return cmgrtcntno;
-	}
-	public void setCmgrtcntno(String cmgrtcntno) {
-		this.cmgrtcntno = cmgrtcntno;
 	}
 	public String getVin() {
 		return vin;
@@ -70,16 +63,7 @@ public class CheckstockVO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "CheckstockVO [scid=" + scid + ", whlevel=" + whlevel
-				+ ", whcode=" + whcode + ", whaddr=" + whaddr + ", cmcode="
-				+ cmcode + ", num=" + num + ", cmgrtcntno=" + cmgrtcntno
-				+ ", vin=" + vin + ", getWhlevel()=" + getWhlevel()
-				+ ", getWhcode()=" + getWhcode() + ", getWhaddr()="
-				+ getWhaddr() + ", getCmcode()=" + getCmcode() + ", getNum()="
-				+ getNum() + ", getCmgrtcntno()=" + getCmgrtcntno()
-				+ ", getVin()=" + getVin() + ", getScid()=" + getScid()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "CheckstockVO [scid=" + scid + ", whlevel=" + whlevel + ", whcode=" + whcode + ", whaddr=" + whaddr
+				+ ", whname=" + whname + ", num=" + num + ", vin=" + vin + "]";
 	}
-	
 }

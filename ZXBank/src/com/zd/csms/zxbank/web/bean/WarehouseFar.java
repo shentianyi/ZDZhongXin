@@ -1,14 +1,14 @@
 package com.zd.csms.zxbank.web.bean;
 /**
- * 
  * 仓库信息表
  */
 public class WarehouseFar {
+	private String lonNm;//借款企业名称  新增
+	private String lonentid;//借款企业id 新增  
 	private String whName;//仓库名字
 	private String bkwhCode;//仓库代码
 	private String whLevel;//仓库级别
 	private String operOrg;//经办行
-	private String lonNm;//借款企业名称  新增
 	private String address;//仓库地址
 	private String phone;//电话
 	public String getWhName() {
@@ -53,12 +53,18 @@ public class WarehouseFar {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public String getLonentid() {
+		return lonentid;
+	}
+	public void setLonentid(String lonentid) {
+		this.lonentid = lonentid;
+	}
 	@Override
 	public String toString() {
-		return "仓库名字:" + whName + "\n仓库代码:" + bkwhCode
-				+ "\n仓库级别:" + whLevel + "\n经办行:" + operOrg + "\n借款企业名称:"
-				+ lonNm + "\n仓库地址:" + address + "\n电话:" + phone;
+		return "WarehouseFar [lonNm=" + lonNm + ", lonentid=" + lonentid
+				+ ", whName=" + whName + ", bkwhCode=" + bkwhCode
+				+ ", whLevel=" + whLevel + ", operOrg=" + operOrg
+				+ ", address=" + address + ", phone=" + phone + "]";
 	}
-	
 	
 }

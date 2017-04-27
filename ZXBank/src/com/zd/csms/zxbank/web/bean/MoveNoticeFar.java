@@ -6,13 +6,13 @@ package com.zd.csms.zxbank.web.bean;
  * 
  */
 public class MoveNoticeFar{
-	private String operOrg;
-	private String spventnm;
-	private String mwapyDate;
-	private String lonentNm;
-	private String mwntcNo;
-	private String ntcDate;
-	private String totnum;
+	private String operOrg;//经办行
+	private String spventnm;//监管企业名称
+	private String mwapyDate;//移库申请日期
+	private String lonentNm;//借款企业名称
+	private String mwntcNo;//移库通知编号
+	private String ntcDate;//通知日期
+	private String totnum;// 总记录数
 	
 	public String getOperOrg() {
 		return operOrg;

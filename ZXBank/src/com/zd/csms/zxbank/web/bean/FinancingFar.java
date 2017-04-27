@@ -18,6 +18,9 @@ public class FinancingFar implements Serializable{
 	private String procrt;//授信产品，银行承兑汇票 procrt
 	private String bizMod;//业务模式，先票后货bizMod
 	private String operOrg;//经办行 operOrg
+//	private String lonentid;//借款企业id（是否需要）
+//	private String lonentnm;//借款企业名称（是否需要）
+	
 	public String getLoanstDate() {
 		return loanstDate;
 	}

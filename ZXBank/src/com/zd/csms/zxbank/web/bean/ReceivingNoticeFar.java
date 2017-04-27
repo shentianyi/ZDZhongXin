@@ -1,22 +1,27 @@
 package com.zd.csms.zxbank.web.bean;
-
+/**
+ * 发货通知信息
+ * @author caizhuo
+ *
+ */
 public class ReceivingNoticeFar {
-	private String rcvcmdntcNo;
-	private String corentNm;
-	private String spventNm;
-	private String onwspveNm;
-	private String trsptentNm;
-	private String lonentId;
-	private String lonentNm;
-	private String csnDate;
-	private String etaDate;
-	private String epa;
-	private String offlnsatNo;
-	private String ntcDate;
-	private String ttlcmdval;
-	private String excPlace;
-	private String remark;
-	private String totnum;
+//	private String retcode;//返回代码
+	private String rcvcmdntcNo;//收货通知书编号
+	private String corentNm;//核心企业名称
+	private String spventNm;//（在库）监管企业名称
+	private String onwspveNm;//（在途）监管企业名称
+	private String trsptentNm;//运输企业名称
+	private String lonentId;//借款企业id
+	private String lonentNm;//借款企业名称
+	private String csnDate;//发货日期
+	private String etaDate;//预计到港(库)日期
+	private String epa;//预计到港(库) 
+	private String offlnsatNo;//纸质监管协议编号
+	private String ntcDate;//通知书日期
+	private String ttlcmdval;//-货物价值合计
+	private String excPlace;//交货地点
+	private String remark;//-备注
+	private String totnum;//总记录数
 	public String getRcvcmdntcNo() {
 		return rcvcmdntcNo;
 	}

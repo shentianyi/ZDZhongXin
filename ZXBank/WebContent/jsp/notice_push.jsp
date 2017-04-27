@@ -54,10 +54,10 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">通知类型：</div>
 								<div class="input block fl hidden">
-									<select class="ly-bor-none" id="notice" name="notice.ntType">
+									<select class="ly-bor-none" id="notice" name="notice.ntType" >
 										<option>请选择</option>
 										<c:forEach items="${types}" var="row">
-											<option value="<c:out value='${row.ntType}'/>">
+											<option value="${row.ntType}">
 												<c:if test="${row.ntType=='1'}">收货通知书</c:if>
 												<c:if test="${row.ntType=='2'}">移库通知书</c:if>
 												<c:if test="${row.ntType=='3'}">解除质押通知书</c:if>
@@ -71,7 +71,7 @@
 								<div class="label block fl hidden">通知书编号：</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="ntno"
-										name="notice.ntNo" maxlength="20" />
+										name="notice.ntNo" maxlength="20" value="${notice.ntNo}"/>
 								</div>
 							</div>
 						</div>

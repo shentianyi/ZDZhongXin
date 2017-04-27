@@ -36,6 +36,7 @@ public class ZXBankTimer extends TimerTask {
 		port = Integer.parseInt(SystemProperty.getPropertyValue("bankdock.properties", "zx.port"));
 	}
 
+	private DistribsetService ds = new DistribsetService();
 	private CustomerService cs = new CustomerService();
 	private WareHouseService whs = new WareHouseService();
 
@@ -45,11 +46,15 @@ public class ZXBankTimer extends TimerTask {
 		/**
 		 * 客户信息的自动同步
 		 */
-		String org = SystemProperty.getPropertyValue("bankdock.properties", "zx.orgcode");
-		try {
-			customerAuto(socket, org);
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		List<String> orgCodes = ds.findAllByOrg();
+		
+		for (String orgcode : orgCodes) {
+			try {
+				customerAuto(socket, orgcode);
+			} catch (Exception e) {
+				e.printStackTrace();
+				Log.error(e.getMessage());
+			}
 		}
 		
 		/**
@@ -89,7 +94,7 @@ public class ZXBankTimer extends TimerTask {
 		ZhongXinBankUtil.autoFill(body, "DLCDCMLQ", "admin", orgcode);
 		String xml = socket.send(head, body);
 		List list = parseXML(xml, "", CustomerFar.class);
-		cs.autoUpdateCust(list);
+		cs.autoUpdateCust(list, new Customer(orgcode));
 	}
 	public void warehouseAuto(SocketClient socket, String ecifcode) throws Exception {
 		Map<String, Object> head = ZhongXinBankUtil.getBaseHeadList();

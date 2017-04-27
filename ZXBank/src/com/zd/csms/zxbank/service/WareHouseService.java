@@ -59,6 +59,7 @@ public class WareHouseService extends ServiceSupport {
 		ware.setWhName(weFar.getWhName());
 		ware.setWhOperorg(weFar.getOperOrg());
 		ware.setUpdateDate(new Date());
+		ware.setLonentid(weFar.getLonentid());
 		return wdao.upadat(ware);
 	}
 
@@ -75,6 +76,7 @@ public class WareHouseService extends ServiceSupport {
 		was.setWhName(waFar.getWhName());
 		was.setWhOperorg(waFar.getOperOrg());
 		was.setCreateDate(new Date());
+		was.setLonentid(waFar.getLonentid());
 		return wdao.add(was);
 	}
 

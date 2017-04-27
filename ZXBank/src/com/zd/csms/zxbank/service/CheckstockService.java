@@ -25,4 +25,19 @@ public class CheckstockService {
 	public List<CheckstockVO> findAllVOList(int id, IThumbPageTools tools) {
 		return dao.findAllVOList(id, tools);
 	}
+	
+	public boolean addCS(Checkstock cs){
+		return dao.add(cs);
+	}
+	
+	public boolean addList(List<?> lists){
+		try {
+			for (Object object : lists) {
+				dao.add(object);	
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 }

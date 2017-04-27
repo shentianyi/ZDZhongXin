@@ -3,7 +3,6 @@ package com.zd.core.listener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
-
 import com.zd.core.SystemProperty;
 
 public class ZXTimerManager {
