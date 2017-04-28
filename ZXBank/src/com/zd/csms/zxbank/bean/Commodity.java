@@ -14,10 +14,7 @@ public class Commodity implements Serializable{
 	private static final long serialVersionUID = -1582947405226599731L;
 
 	private int cmId;//质物入库商品表主键id
-	
 	private int cmGaid;//质物入库表ID
-	private String cmWhcode;//仓库代码
-	
 	private String cmCmdcode;//商品代码
 	private int cmStknum;//入库数量
 	private BigDecimal cmIstkprc;//入库单价
@@ -25,6 +22,8 @@ public class Commodity implements Serializable{
 	private String cmHgzno;//合格证编号
 	private BigDecimal cmCarprice;//车价
 	private String cmLoancode;// 融资编号
+	
+//	private String cmWhcode;//仓库代码
 	public int getCmId() {
 		return cmId;
 	}
@@ -48,12 +47,6 @@ public class Commodity implements Serializable{
 	}
 	public void setCmIstkprc(BigDecimal cmIstkprc) {
 		this.cmIstkprc = cmIstkprc;
-	}
-	public String getCmWhcode() {
-		return cmWhcode;
-	}
-	public void setCmWhcode(String cmWhcode) {
-		this.cmWhcode = cmWhcode;
 	}
 	public String getCmVin() {
 		return cmVin;
@@ -87,12 +80,10 @@ public class Commodity implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Commodity [cmId=" + cmId + ", cmCmdcode=" + cmCmdcode
-				+ ", cmStknum=" + cmStknum + ", cmIstkprc=" + cmIstkprc
-				+ ", cmWhcode=" + cmWhcode + ", cmVin=" + cmVin + ", cmHgzno="
-				+ cmHgzno + ", cmCarprice=" + cmCarprice + ", cmLoancode="
-				+ cmLoancode + ", cmGaid=" + cmGaid + "]";
+		return "Commodity [cmId=" + cmId + ", cmGaid=" + cmGaid
+				+ ", cmCmdcode=" + cmCmdcode + ", cmStknum=" + cmStknum
+				+ ", cmIstkprc=" + cmIstkprc + ", cmVin=" + cmVin
+				+ ", cmHgzno=" + cmHgzno + ", cmCarprice=" + cmCarprice
+				+ ", cmLoancode=" + cmLoancode + "]";
 	}
-	
-	
 }

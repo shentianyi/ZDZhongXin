@@ -18,9 +18,9 @@
 <title>质物入库详情</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
-<link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" />
 <script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
+<!-- <link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" />
+<script src="js/jquery-ui.min.js"></script> -->
 <script src="js/thumbpage/thumbpage.js"></script>
 </head>
 <body class="h-100 public">
@@ -36,53 +36,78 @@
 	<div class="public-main abs">
 		<div class="ly-contai rel">
 			<html:form action="/ZXinterface.do" method="post" onsubmit="return false">
-				<div class="public-main-input ly-col-2 hidden abs">
+				<div class="public-main-input ly-col-3 hidden abs">
 					<div class="ly-input-w">
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
 								<div class="label block fl hidden">
-									<font color="#FF0000">*</font>借款企业ID：
+									<font color="#FF0000">*</font>借款企业ID:
 								</div>
-								<div class="input block fl hidden">${Gager.gaLonentno }</div>
+								<div class="input block fl hidden">${Gager.gaLonentno}</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">
-									<font color="#FF0000">*</font>操作人名称：
+									<font color="#FF0000">*</font>借款企业名称:
+								</div>
+								<div class="input block fl hidden">${Gager.gaLonentname}</div>
+							</div>
+							<div class="ly-col fl">
+								<div class="label block fl hidden">
+									<font color="#FF0000">*</font>操作人名称:
 								</div>
 								<div class="input block fl hidden">${Gager.gaOprtname }</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">
-									<font color="#FF0000">*</font>交易流水号：
+									<font color="#FF0000">*</font>仓库代码:
 								</div>
-								<div class="input block fl hidden">${Gager.gaOrderno }</div>
-							</div>
-							<div class="ly-col fl">
-								<div class="label block fl hidden">纸质担保编号</div>
-								<div class="input block fl hidden">${Gager.gaPcgrtntno }</div>
+								<div class="input block fl hidden">${Gager.gawhCode}</div>
 							</div>
 						</div>
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
-								<div class="label block fl hidden">动产质押合同编号</div>
-								<div class="input block fl hidden">${Gager.gaCmgrtcntno }</div>
+								<div class="label block fl hidden">
+									<font color="#FF0000">*</font>交易流水号:
+								</div>
+								<div class="input block fl hidden">${Gager.gaOrderno}</div>
 							</div>
 							<div class="ly-col fl">
-								<div class="label block fl hidden">总记录数：</div>
-								<div class="input block fl hidden">${Gager.gaCount }</div>
+								<div class="label block fl hidden">纸质担保编号:</div>
+								<div class="input block fl hidden">${Gager.gaPcgrtntno}</div>
 							</div>
 							<div class="ly-col fl">
-								<div class="label block fl hidden">状态：</div>
-								<div class="input block fl hidden">${Gager.gaState }</div>
+								<div class="label block fl hidden">动产质押合同编号:</div>
+								<div class="input block fl hidden">${Gager.gaCmgrtcntno}</div>
 							</div>
 							<div class="ly-col fl">
-								<div class="label block fl hidden">申请时间：</div>
+								<div class="label block fl hidden">质物监管确认书编号:
+								</div>
+								<div class="input block fl hidden">${Gager.gaConfirmno}</div>
+							</div>
+						</div>
+						<div class="ly-row clearfix">
+							<div class="ly-col fl">
+								<div class="label block fl hidden">总记录数:</div>
+								<div class="input block fl hidden">${Gager.gaCount}</div>
+							</div>
+							<div class="ly-col fl">
+								<div class="label block fl hidden">状态:</div>
 								<div class="input block fl hidden">
-									<select:timestamp timestamp="${Gager.gaCreatedate }" idtype="ss" />
+								<c:if test="${Gager.gaState==1}">入库申请中</c:if>
+								<c:if test="${Gager.gaState==2}">入库申请失败</c:if>
+								<c:if test="${Gager.gaState==3}">入库申请成功</c:if>
+								</div>
+							</div>
+							<div class="ly-col fl">
+								<div class="label block fl hidden">申请时间:</div>
+								<div class="input block fl hidden">
+									<select:timestamp timestamp="${Gager.gaCreatedate}" idtype="ss" />
 								</div>
 							</div>
 						</div>
-
+						
+						
+						
 					</div>
 					<div class="ly-button-w">
 						<a href="history.go(-1)" onclick="history.go(-1)" class="button btn-query">返回</a>
@@ -98,7 +123,6 @@
 										<th class="t-th">商品代码</th>
 										<th class="t-th">入库数量</th>
 										<th class="t-th">入库单价</th>
-										<th class="t-th">仓库代码</th>
 										<th class="t-th">车架号</th>
 										<th class="t-th">合格证编号</th>
 										<th class="t-th">车价</th>
@@ -113,7 +137,6 @@
 												<td class="t-td"><c:out value='${row.cmCmdcode}' /></td>
 												<td class="t-td"><c:out value='${row.cmStknum }' /></td>
 												<td class="t-td"><c:out value='${row.cmIstkprc }' /></td>
-												<td class="t-td"><c:out value='${row.cmWhcode }' /></td>
 												<td class="t-td"><c:out value='${row.cmVin }' /></td>
 												<td class="t-td"><c:out value='${row.cmHgzno }' /></td>
 												<td class="t-td"><c:out value='${row.cmCarprice }' /></td>

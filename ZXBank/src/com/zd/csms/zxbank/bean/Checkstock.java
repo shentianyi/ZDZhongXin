@@ -102,4 +102,16 @@ public class Checkstock {
 	public void setCsHostName(String csHostName) {
 		this.csHostName = csHostName;
 	}
+	@Override
+	public String toString() {
+		return "Checkstock [csId=" + csId + ", csLoncpid=" + csLoncpid
+				+ ", csHostName=" + csHostName + ", csProtocolno="
+				+ csProtocolno + ", csProtocolcode=" + csProtocolcode
+				+ ", csUserno=" + csUserno + ", csUsername=" + csUsername
+				+ ", csTradeid=" + csTradeid + ", csPlandate=" + csPlandate
+				+ ", csFactdate=" + csFactdate + ", csErrorreport="
+				+ csErrorreport + ", csRemark=" + csRemark + ", csCreatedate="
+				+ csCreatedate + "]";
+	}
+	
 }

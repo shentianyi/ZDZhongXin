@@ -43,6 +43,9 @@
 		$('#csFactdate').datebox({
 			editable : false
 		});
+		
+		if('${message}'!="")
+			alert('${message}');
 
 	});
 
@@ -79,7 +82,7 @@
 			<html:form action="/ZXinterface.do" styleId="stockForm" method="post" onsubmit="return false"
 				enctype="multipart/form-data">
 				<input name="method" id="method" type="hidden" value="" />
-				<div class="public-main-input ly-col-3 hidden abs" style="height: 165px;">
+				<div class="public-main-input ly-col-4 hidden abs" style="height: 200px;">
 					<div class="ly-input-w">
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
@@ -91,14 +94,13 @@
 										value="${checkstock.csLoncpid}" maxlength="10" />
 								</div>
 							</div>
-
 							<div class="ly-col fl">
 								<div class="label block fl hidden">
-									<font color="#FF0000">*</font>系统监管协议编号：
+									<font color="#FF0000">*</font>借款企业名称：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="csProtocolno" name="checkstock.csProtocolno"
-										value="${checkstock.csProtocolno}" maxlength="20" />
+									<input class="ly-bor-none" type="text" id="" name="checkstock."
+										value="${checkstock.csLoncpid}" maxlength="10" />
 								</div>
 							</div>
 
@@ -124,14 +126,13 @@
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">
 								<div class="label block fl hidden">
-									<font color="#FF0000">*</font>交易流水号：
+									<font color="#FF0000">*</font>系统监管协议编号：
 								</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="csTradeid" name="checkstock.csTradeid"
-										value="${checkstock.csTradeid}" maxlength="20" />
+									<input class="ly-bor-none" type="text" id="csProtocolno" name="checkstock.csProtocolno"
+										value="${checkstock.csProtocolno}" maxlength="20" />
 								</div>
 							</div>
-
 							<div class="ly-col fl">
 								<div class="label block fl hidden">
 									<font color="#FF0000">*</font>纸质监管协议编号：
@@ -159,7 +160,17 @@
 								</div>
 							</div>
 						</div>
+						
 						<div class="ly-row clearfix">
+							<div class="ly-col fl">
+								<div class="label block fl hidden">
+									<font color="#FF0000">*</font>交易流水号：
+								</div>
+								<div class="input block fl hidden">
+									<input class="ly-bor-none" type="text" id="csTradeid" name="checkstock.csTradeid"
+										value="${checkstock.csTradeid}" maxlength="20" />
+								</div>
+							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">
 									<font color="#FF0000">*</font>差错报告：
@@ -183,6 +194,8 @@
 										value="${fileName}"> <input type="file" id="importFile" name="importFile" accept=".xls" />
 								</div>
 							</div>
+						</div>
+						<div class="ly-row clearfix">
 							<div class="ly-col fl">
 								<div class="label block fl hidden">文件模板：</div>
 								<div class="input block fl hidden">
@@ -191,14 +204,13 @@
 							</div>
 						</div>
 					</div>
-
-					<div style="margin-top: 25px" class="ly-button-w">
-						<a href="javascript:doQuery('perstock');" class="button btn">提交</a>
+					<div style="margin-top: 10px" class="ly-button-w">
+						<a href="javascript:doQuery('stockApp');" class="button btn">提交</a>
 						<a href="javascript:doClear();" class="button btn-reset">重置</a>
 						<a href="javascript:doQuery('perstock');" class="button btn">导入</a>
-					</div>
+					</div> 
 				</div>
-				<div class="public-main-table hidden abs" style="top: 175px;">
+				<div class="public-main-table hidden abs" style="margin-top: 15px;">
 					<div class="ly-cont">
 						<div style="overflow-x: auto; overflow-y: auto; height: 100%; width: 100%">
 							<table class="t-table" border="0" cellspacing="0" cellpadding="0">

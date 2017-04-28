@@ -24,7 +24,7 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 	@Override
 	public List<Gager> findAllList(Gager query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select * from zx_gager");
+		sql.append("SELECT * FROM ZX_GAGER");
 		List<Object> parameter = new ArrayList<Object>();
 		List<Gager> list = null;
 		formatSQL(query, parameter, sql);
@@ -37,10 +37,10 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 	}
 
 	private void formatSQL(Gager query, List<Object> parameter, StringBuffer sql) {
-		sql.append(" where 1=1");
+		sql.append(" WHERE 1=1");
 		if (!StringUtil.isEmpty(query.getGaLonentno())) {
 			parameter.add("%" + query.getGaLonentno().trim() + "%");
-			sql.append(" and ga_lonentno like ?");
+			sql.append(" AND GALONENTNO LIKE ?");
 		}
 	}
 
@@ -49,7 +49,7 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 	public Gager getGager(int gaid) {
 		StringBuffer sql = new StringBuffer();
 		if (!StringUtil.isEmpty(gaid + "")) {
-			sql.append("select * from zx_gager where ga_id=" + gaid);
+			sql.append("SELECT * FROM ZX_GAGER WHERE GAID=" + gaid);
 		}
 		List<Gager> list = null;
 		try {
@@ -63,7 +63,7 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 		return list.get(0);
 	}
 
-	@Override
+	/*@Override
 	public boolean add(Gager gager) {
 		String sql = "INSERT INTO ZX_GAGER(GA_ID,GA_LONENTNO,GA_OPRTNAME,GA_ORDERNO,GA_PCGRTNTNO,GA_CMGRTCNTNO,GA_CONFIRMNO,GA_LONENTNAME,GA_REMARK,GA_BIZMOD,GA_CREATEDATE,GA_STATE,GA_COUNT) VALUES(?,?,?,?,?,?,?,?,?,?,TO_DATE(?,'YYYY-MM-DD HH24:MI:SS'),?,?)";
 		try {
@@ -78,6 +78,11 @@ public class GagerDAO extends DAOSupport implements IGagerDAO {
 			return false;
 		}
 		return true;
+	}*/
+	
+	@Override
+	public boolean add(Gager gager) {
+		return super.add(gager);
 	}
 
 }

@@ -18,9 +18,9 @@
 <title>质物入库申请</title>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/public.css" />
-<link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" />
 <script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
+<!-- <link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" />
+<script src="js/jquery-ui.min.js"></script> -->
 <script src="js/thumbpage/thumbpage.js"></script>
 <script>
 	function doQuery() {
@@ -78,7 +78,7 @@
 										<th class="t-th">纸质担保合同编号</th>
 										<th class="t-th">动产质押合同编号</th>
 										<th class="t-th">质物监管确认书编号</th>
-										<th class="t-th">业务模式</th>
+										<th class="t-th">仓库代码</th>
 										<th class="t-th">状态</th>
 										<th class="t-th">总记录数</th>
 										<th class="t-th">备注</th>
@@ -98,7 +98,7 @@
 												<td class="t-td"><c:out value='${row.gaPcgrtntno }' /></td>
 												<td class="t-td"><c:out value='${row.gaCmgrtcntno }' /></td>
 												<td class="t-td"><c:out value='${row.gaConfirmno }' /></td>
-												<td class="t-td"><c:out value='${row.gaBizmod }' /></td>
+												<td class="t-td"><c:out value='${row.gawhCode }' /></td>
 												<td class="t-td"><c:out value='${row.gaState }' /></td>
 												<td class="t-td"><c:out value='${row.gaCount }' /></td>
 												<td class="t-td"><c:out value='${row.gaRemark }' /></td>

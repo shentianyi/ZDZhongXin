@@ -19,13 +19,13 @@ public class Gager implements Serializable{
 	private String gaOrderno;//交易流水号
 	private String gaPcgrtntno;//纸质担保合同编号
 	private String gaCmgrtcntno;//动产质押担保合同编号 
+	private String gawhCode;//仓库代码（必填项）
 	private String gaRemark;//备注
-	private String gaBizmod;//业务模式(没有)
 	private String gaConfirmno;//质物监管确认书编号
 	private int gaCount;//总记录数
-	private String gaCreatedate;//数据添加时间
 	private int gaState;//质物入库状态
-//	private String whCode;//仓库代码（必填项）
+	private String gaCreatedate;//数据添加时间
+//	private String gaBizmod;//业务模式(没有)
 	
 	public int getGaId() {
 		return gaId;
@@ -81,11 +81,12 @@ public class Gager implements Serializable{
 	public void setGaRemark(String gaRemark) {
 		this.gaRemark = gaRemark;
 	}
-	public String getGaBizmod() {
-		return gaBizmod;
+	
+	public String getGawhCode() {
+		return gawhCode;
 	}
-	public void setGaBizmod(String gaBizmod) {
-		this.gaBizmod = gaBizmod;
+	public void setGawhCode(String gawhCode) {
+		this.gawhCode = gawhCode;
 	}
 	public String getGaCreatedate() {
 		return gaCreatedate;
@@ -105,15 +106,17 @@ public class Gager implements Serializable{
 	public void setGaCount(int gaCount) {
 		this.gaCount = gaCount;
 	}
-
 	@Override
 	public String toString() {
 		return "Gager [gaId=" + gaId + ", gaLonentno=" + gaLonentno
 				+ ", gaLonentname=" + gaLonentname + ", gaOprtname="
 				+ gaOprtname + ", gaOrderno=" + gaOrderno + ", gaPcgrtntno="
 				+ gaPcgrtntno + ", gaCmgrtcntno=" + gaCmgrtcntno
-				+ ", gaConfirmno=" + gaConfirmno + ", gaRemark=" + gaRemark
-				+ ", gaBizmod=" + gaBizmod + ", gaCreatedate=" + gaCreatedate
-				+ ", gaState=" + gaState + ", gaCount=" + gaCount + "]";
+				+ ", gawhCode=" + gawhCode + ", gaRemark=" + gaRemark
+				+ ", gaConfirmno=" + gaConfirmno + ", gaCount=" + gaCount
+				+ ", gaState=" + gaState + ", gaCreatedate=" + gaCreatedate
+				+ "]";
 	}
+	
+	
 }

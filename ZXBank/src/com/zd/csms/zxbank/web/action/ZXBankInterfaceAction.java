@@ -790,10 +790,10 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				request.setAttribute("message", "第" + (i + 2) + "行入库单价不能为空");
 				return mapping.findForward("gagerApp");
 			}
-			if (StringUtil.isEmpty(commodity.getCmWhcode())) {
-				request.setAttribute("message", "第" + (i + 2) + "行仓库代码不能为空");
-				return mapping.findForward("gagerApp");
-			}
+//			if (StringUtil.isEmpty(commodity.getCmWhcode())) {
+//				request.setAttribute("message", "第" + (i + 2) + "行仓库代码不能为空");
+//				return mapping.findForward("gagerApp");
+//			}
 			if (StringUtil.isEmpty(commodity.getCmVin())) {
 				request.setAttribute("message", "第" + (i + 2) + "行车架号不能为空");
 				return mapping.findForward("gagerApp");
@@ -826,7 +826,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public ActionForward gagerApp(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response){
 		GagerService gds = new GagerService();
 		CommodityService cds = new CommodityService();
 		// setOptions(request);
@@ -846,60 +846,64 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			return mapping.findForward("gagerApp");
 		}
 
-		Map<String, Object> head = ZhongXinBankUtil.getBaseHeadList();
-		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("action", "DLCDIGSM");
-		body.put("userName", "佳兵");
-		body.put("hostNo", gager.getGaLonentno());
-		body.put("oprtName", gager.getGaOprtname());
-		body.put("orderNo", gager.getGaOrderno());
-		body.put("pcgrtntNo", gager.getGaPcgrtntno());
-		body.put("cmgrtcntNo", gager.getGaCmgrtcntno());
-		body.put("totnum", gager.getGaCount());
+		try {
+			Map<String, Object> head = ZhongXinBankUtil.getBaseHeadList();
+			Map<String, Object> body = new HashMap<String, Object>();
+			body.put("action", "DLCDIGSM");
+			body.put("userName", "caizuo");
+			body.put("hostNo", gager.getGaLonentno());
+			body.put("oprtName", gager.getGaOprtname());
+			body.put("orderNo", gager.getGaOrderno());
+			body.put("pcgrtntNo", gager.getGaPcgrtntno());
+			body.put("cmgrtcntNo", gager.getGaCmgrtcntno());
+			body.put("totnum", gager.getGaCount());
 
-		List<Map<String, Object>> lst = new ArrayList<Map<String, Object>>();
-		for (Commodity commodity : list) {
-			Map<String, Object> comMap = new HashMap<String, Object>();
-			comMap.put("cmdCode", commodity.getCmCmdcode());
-			comMap.put("stkNum", commodity.getCmStknum());
-			comMap.put("istkPrc", commodity.getCmIstkprc());
-			comMap.put("whCode", commodity.getCmWhcode());
-			comMap.put("vin", commodity.getCmVin());
-			comMap.put("hgzNo", commodity.getCmHgzno());
-			comMap.put("carPrice", commodity.getCmCarprice());
-			comMap.put("loanCode", commodity.getCmLoancode());
-			lst.add(comMap);
+			List<Map<String, Object>> lst = new ArrayList<Map<String, Object>>();
+			for (Commodity commodity : list) {
+				Map<String, Object> comMap = new HashMap<String, Object>();
+				comMap.put("cmdCode", commodity.getCmCmdcode());
+				comMap.put("stkNum", commodity.getCmStknum());
+				comMap.put("istkPrc", commodity.getCmIstkprc());
+//			comMap.put("whCode", commodity.getCmWhcode());
+				comMap.put("vin", commodity.getCmVin());
+				comMap.put("hgzNo", commodity.getCmHgzno());
+				comMap.put("carPrice", commodity.getCmCarprice());
+				comMap.put("loanCode", commodity.getCmLoancode());
+				lst.add(comMap);
+			}
+			body.put("lst", lst);
+
+			//准备方法
+			SocketClient socket = new SocketClient(host, port);
+			String xml = socket.send(head, body);
+			xml = xml.substring(2);
+			// 拼接返回值
+			Document doc = DocumentHelper.parseText(xml);
+			Element ap = doc.getRootElement();
+			if (!ZhongXinBankUtil.getRetCode(ap.element("head"))) {
+				return mapping.findForward("gagerApp");
+			}
+			Element bodyNode = ap.element("stream");
+			if (!bodyNode.hasContent()) {
+				return mapping.findForward("gagerApp");
+			}
+
+			String status = bodyNode.element("status").getText();
+			
+			//获取交易码并判断
+			if (status.equals("AAAAAAA")) {
+				request.setAttribute("message", "导入成功");
+				gager.setGaId(SqlUtil.getID(Gager.class));
+				boolean bl = gds.addGager(gager);
+				System.out.println(bl);
+				cds.addList(list, gager.getGaId());
+			} else {
+				request.setAttribute("message", "返回交易码异常，导入失败");
+			}
+		} catch (Exception e) {
+			request.setAttribute("message", "远程提交申请失败");
+			e.printStackTrace();
 		}
-		body.put("lst", lst);
-
-		//准备方法
-		SocketClient socket = new SocketClient(host, port);
-		String xml = socket.send(head, body);
-		xml = xml.substring(2);
-		// 拼接返回值
-		Document doc = DocumentHelper.parseText(xml);
-		Element ap = doc.getRootElement();
-		if (!ZhongXinBankUtil.getRetCode(ap.element("head"))) {
-			return mapping.findForward("gagerApp");
-		}
-		Element bodyNode = ap.element("stream");
-		if (!bodyNode.hasContent()) {
-			return mapping.findForward("gagerApp");
-		}
-
-		String status = bodyNode.element("status").getText();
-
-		//获取交易码并判断
-		if (status.equals("AAAAAAA")) {
-			request.setAttribute("message", "导入成功");
-			gager.setGaId(SqlUtil.getID(Gager.class));
-			boolean bl = gds.addGager(gager);
-			System.out.println(bl);
-			cds.addList(list, gager.getGaId());
-		} else {
-			request.setAttribute("message", "导入失败");
-		}
-
 		return mapping.findForward("gagerApp");
 	}
 
@@ -1029,7 +1033,8 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public ActionForward stockApp(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response) {
+		
 		CheckstockService cs = new CheckstockService();
 		
 		BankInterfaceForm bForm = (BankInterfaceForm) form;
@@ -1038,12 +1043,12 @@ public class ZXBankInterfaceAction extends ActionSupport {
 		@SuppressWarnings("unchecked")
 		List<CheckstockVO> list = (List<CheckstockVO>) request.getSession().getAttribute("checkList");
 		//其它必填项确认
-		if (StringUtil.isEmpty(check.getCsLoncpid())) {
+		/*if (StringUtil.isEmpty(check.getCsLoncpid())) {
 			request.setAttribute("message", "必填项必须填写");
 			request.setAttribute("fileName", request.getParameter("fileName"));
 			request.setAttribute("list", list);
-			return mapping.findForward("gagerApp");
-		}
+			return mapping.findForward("stocktaking");
+		}*/
 		List<Checkwarehouse> wlist = new ArrayList<Checkwarehouse>();
 		List<Check> clist = new ArrayList<Check>();
 		for (CheckstockVO csVO : list) {
@@ -1063,7 +1068,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 				Checkwarehouse cw = new Checkwarehouse();
 				cw.setChWhcode(csVO.getWhcode());
 				cw.setChWhlevel(csVO.getWhlevel());
-				cw.setChWhlevel(csVO.getWhname());
+				cw.setChWhname(csVO.getWhname());
 				cw.setChWhaddr(csVO.getWhaddr());
 				cw.setChNum(1);
 				wlist.add(cw);
@@ -1075,69 +1080,74 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			clist.add(c);
 			flag = false;
 		}
-
-		Map<String, Object> head = ZhongXinBankUtil.getBaseHeadList();
-		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("ACTION", "DLCDCSSM");
-		body.put("USERNAME", "佳兵");
-		body.put("HOSTNO", check.getCsLoncpid());
-		body.put("HOSTNAME", check.getCsHostName());
-		body.put("SPVAGTID", check.getCsProtocolno());
-		body.put("SPVAGTNO", check.getCsProtocolcode());
-		body.put("ORDERNO", check.getCsTradeid());
-		body.put("PCHKSTKDT", check.getCsPlandate());
-		body.put("RCHKSTKDT", check.getCsFactdate());
-		body.put("OPRNO", check.getCsUserno());
-		body.put("OPRNM", check.getCsUsername());
-		body.put("REMARK", check.getCsRemark());
-		body.put("ERROREXPLAIN", check.getCsErrorreport());
-
-		List<Map<String, Object>> wlst = new ArrayList<Map<String, Object>>();
-		for (Checkwarehouse ware : wlist) {
-			Map<String, Object> wMap = new HashMap<String, Object>();
-			wMap.put("WHCODE", ware.getChWhcode());
-			wMap.put("WHNAME", ware.getChWhname());
-			wMap.put("WHLEVEL", ware.getChWhlevel());
-			wMap.put("WHADDR", ware.getChWhlevel());
-			wMap.put("CARCOUNT", ware.getChNum());
-			wlst.add(wMap);
-		}
-
-		List<Map<String, Object>> clst = new ArrayList<Map<String, Object>>();
-		for (Check ck : clist) {
-			Map<String, Object> cMap = new HashMap<String, Object>();
-			cMap.put("SPVWHCODE", ck.getCkSpvwhcode());
-			cMap.put("VIN", ck.getCkVin());
-			clst.add(cMap);
-		}
-		body.put("WAREHOUSELIST", wlst);
-		body.put("SPVWHCMDLST", clst);
-
-		SocketClient socket = new SocketClient(host, port);
-		String xml = socket.send(head, body);
-		xml = xml.substring(2);
-
-		// 拼接返回值
-		Document doc = DocumentHelper.parseText(xml);
-		Element ap = doc.getRootElement();
-		if (!ZhongXinBankUtil.getRetCode(ap.element("head"))) {
-			return mapping.findForward("stocktaking");
-		}
-		Element bodyNode = ap.element("stream");
-		if (!bodyNode.hasContent()) {
-			return mapping.findForward("stocktaking");
-		}
-
-		String status = bodyNode.element("status").getText();
 		
-		if (status.equals("AAAAAAA")) {
-			request.setAttribute("message", "导入成功");
-			check.setCsId(SqlUtil.getID(Checkstock.class));
-			cs.addCS(check);
-			cs.addList(wlist);
-			cs.addList(clist);
-		} else {
-			request.setAttribute("message", "导入失败");
+		try {
+			Map<String, Object> head = ZhongXinBankUtil.getBaseHeadList();
+			Map<String, Object> body = new HashMap<String, Object>();
+			body.put("ACTION", "DLCDCSSM");
+			body.put("USERNAME", "佳兵");
+			body.put("HOSTNO", check.getCsLoncpid());
+			//body.put("HOSTNAME", check.getCsHostName());
+			body.put("SPVAGTID", check.getCsProtocolno());
+			body.put("SPVAGTNO", check.getCsProtocolcode());
+			body.put("ORDERNO", check.getCsTradeid());
+			body.put("PCHKSTKDT", check.getCsPlandate());
+			body.put("RCHKSTKDT", check.getCsFactdate());
+			body.put("OPRNO", check.getCsUserno());
+			body.put("OPRNM", check.getCsUsername());
+			body.put("REMARK", check.getCsRemark());
+			body.put("ERROREXPLAIN", check.getCsErrorreport());
+
+			List<Map<String, Object>> wlst = new ArrayList<Map<String, Object>>();
+			for (Checkwarehouse ware : wlist) {
+				Map<String, Object> wMap = new HashMap<String, Object>();
+				wMap.put("WHCODE", ware.getChWhcode());
+				wMap.put("WHNAME", ware.getChWhname());
+				wMap.put("WHLEVEL", ware.getChWhlevel());
+				wMap.put("WHADDR", ware.getChWhlevel());
+				wMap.put("CARCOUNT", ware.getChNum());
+				wlst.add(wMap);
+			}
+
+			List<Map<String, Object>> clst = new ArrayList<Map<String, Object>>();
+			for (Check ck : clist) {
+				Map<String, Object> cMap = new HashMap<String, Object>();
+				cMap.put("SPVWHCODE", ck.getCkSpvwhcode());
+				cMap.put("VIN", ck.getCkVin());
+				clst.add(cMap);
+			}
+			body.put("WAREHOUSELIST", wlst);
+			body.put("SPVWHCMDLST", clst);
+
+			SocketClient socket = new SocketClient(host, port);
+			String xml = socket.send(head, body);
+			xml = xml.substring(2);
+
+			// 拼接返回值
+			Document doc = DocumentHelper.parseText(xml);
+			Element ap = doc.getRootElement();
+			if (!ZhongXinBankUtil.getRetCode(ap.element("head"))) {
+				return mapping.findForward("stocktaking");
+			}
+			Element bodyNode = ap.element("stream");
+			if (!bodyNode.hasContent()) {
+				return mapping.findForward("stocktaking");
+			}
+
+			String status = bodyNode.element("status").getText();
+			
+			if (status.equals("AAAAAAA")) {
+				request.setAttribute("message", "导入成功");
+				check.setCsId(SqlUtil.getID(Checkstock.class));
+				cs.addCS(check);
+				cs.addList(wlist);
+				cs.addList(clist);
+			} else {
+				request.setAttribute("message", "导入失败");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "远程提交失败");
 		}
 		
 		return mapping.findForward("stocktaking");

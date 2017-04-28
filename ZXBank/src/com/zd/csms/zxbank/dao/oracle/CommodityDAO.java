@@ -25,7 +25,7 @@ public class CommodityDAO extends DAOSupport implements ICommodityDAO {
 		StringBuffer sql=new StringBuffer();
 		List<Commodity> list = null;
 		if(!StringUtil.isEmpty(query.getCmGaid()+"")){
-			sql.append("select * from zx_commodity where cm_gaid="+query.getCmGaid());	
+			sql.append("SELECT * FROM ZX_COMMODITY WHERE CMGAID="+query.getCmGaid());	
 		}
 		try {
 			list = tools.goPage(sql.toString(),new BeanPropertyRowMapper(Commodity.class));
@@ -37,6 +37,11 @@ public class CommodityDAO extends DAOSupport implements ICommodityDAO {
 
 	@Override
 	public boolean add(Commodity com) {
+		return super.add(com);
+	}
+
+/*	@Override
+	public boolean add(Commodity com) {
 		String sql = "INSERT INTO ZX_COMMODITY(CM_ID,CM_CMDCODE,CM_STKNUM,CM_ISTKPRC,CM_WHCODE,CM_VIN,CM_HGZNO,CM_CARPRICE,CM_LOANCODE,CM_GAID) VALUES(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			getJdbcTemplate().add(
@@ -47,5 +52,7 @@ public class CommodityDAO extends DAOSupport implements ICommodityDAO {
 		}
 		return true;
 	}
+	*/
+	
 
 }

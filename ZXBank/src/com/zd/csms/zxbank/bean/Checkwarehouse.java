@@ -59,5 +59,12 @@ public class Checkwarehouse {
 	public void setChWhname(String chWhname) {
 		this.chWhname = chWhname;
 	}
+	@Override
+	public String toString() {
+		return "Checkwarehouse [chId=" + chId + ", chCsid=" + chCsid
+				+ ", chWhlevel=" + chWhlevel + ", chWhcode=" + chWhcode
+				+ ", chWhname=" + chWhname + ", chWhaddr=" + chWhaddr
+				+ ", chNum=" + chNum + "]";
+	}
 	
 }

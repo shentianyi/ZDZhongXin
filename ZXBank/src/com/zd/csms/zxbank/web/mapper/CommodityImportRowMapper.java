@@ -25,7 +25,7 @@ public class CommodityImportRowMapper implements IImportRowMapper{
 		index++;
 		commodity.setCmIstkprc(new BigDecimal(values[index].equals("")?"0":values[index]));
 		index++;
-		commodity.setCmWhcode(values[index++]);
+//		commodity.setCmWhcode(values[index++]);
 		commodity.setCmVin(values[index++]);
 		commodity.setCmHgzno(values[index++]);
 		commodity.setCmCarprice(new BigDecimal(values[index].equals("")?"0":values[index]));

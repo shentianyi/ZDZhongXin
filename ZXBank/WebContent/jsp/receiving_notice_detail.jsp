@@ -20,7 +20,7 @@
 <link type="text/css" rel="stylesheet" href="css/public.css" />
 <script src="js/thumbpage/thumbpage.js"></script>
 <script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
+<!-- <script src="js/jquery-ui.min.js"></script> -->
 <script type="text/javascript">
 	function saveCode() {
 		document.forms[0].submit();
@@ -45,7 +45,7 @@
 			<html:form action="/ZXinterface.do" method="post" onsubmit="return false">
 				<input type="hidden" name="method" value="receivingdetailOut" />
 				<input type="hidden" name="nyno" value='${receiving.nyNo}' />
-				<div class="public-main-input ly-col-3 abs">
+				<div class="public-main-input ly-col-4 abs">
 					<div class="ly-input-w">
 						<div class="ly-row clearfix">
 							<div class="ly-col fl">

@@ -44,4 +44,10 @@ public class Check {
 	public void setCkVin(String ckVin) {
 		this.ckVin = ckVin;
 	}
+	@Override
+	public String toString() {
+		return "Check [ckId=" + ckId + ", ckCsid=" + ckCsid + ", ckSpvwhcode="
+				+ ckSpvwhcode + ", ckVin=" + ckVin + "]";
+	}
+	
 }
