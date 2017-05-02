@@ -19,9 +19,12 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import com.zd.csms.zxbank.bean.Notice;
+import com.zd.csms.zxbank.bean.PushNoticeDetail;
 import com.zd.csms.zxbank.service.NoticeService;
+import com.zd.csms.zxbank.service.PushNoticeDetailService;
 import com.zd.csms.zxbank.util.DateUtil;
 import com.zd.csms.zxbank.util.ReturnReceiptUtil;
+import com.zd.csms.zxbank.util.SqlUtil;
 import com.zd.csms.zxbank.util.ZhongXinBankUtil;
 import com.zd.csms.zxbank.web.action.ZXBankInterfaceAction;
 import com.zd.csms.zxbank.web.bean.*;
@@ -38,6 +41,7 @@ public class ReturnReceiptServer implements Runnable {
 	private Socket socket;
 
 	private NoticeService ns = new NoticeService();
+	private PushNoticeDetailService pnds=new PushNoticeDetailService();
 	
 	public ReturnReceiptServer() {}
 
@@ -62,56 +66,80 @@ public class ReturnReceiptServer implements Runnable {
 		if (ZhongXinBankUtil.getRetCode(ap.element("head"))) {
 			Element bodyNode = ap.element("stream");
 			if (bodyNode.hasContent()) {
-				String ntctp = bodyNode.element("NTCTP").getText();
-				//控制台打印
 				String ntcno = bodyNode.element("NTCNO").getText();
-				String lonentid = bodyNode.element("LONENTID").getText();
+				String ntctp = bodyNode.element("NTCTP").getText();
 				String branchid = bodyNode.element("BRANCHID").getText();
 				String ntcdate = bodyNode.element("NTCDATE").getText();
+				String totnum=bodyNode.element("TOTNUM").getText();
 				Element list = bodyNode.element("LST");
 				List infos = list.elements("row");
-				
-				//打印
-				System.out.println("NTCTP:" + ntctp);
-				System.out.println("LONENTID:" + lonentid);
-				System.out.println("NTCNO:" + ntcno);
-				System.out.println("BRANCHID:" + branchid);
-				System.out.println("NTCDATE:" + ntcdate);
-				System.out.println("---集合列表---");
-//				List resultList = new ArrayList();
-				if (infos != null)
-					for (Iterator it = infos.iterator(); it.hasNext();) {
-						Element info = (Element) it.next();
-						System.out.println(info.element("ECIFCODE").getText());
-						System.out.println(info.element("OPERORG").getText());
-					}
-				//
-				
-				//保存
+				//设置通知推送信息
 				Notice notice=new Notice();
-				notice.setNtNo(ntcno);//通知编号
-				notice.setNtStdate(DateUtil.StringToDate(ntcdate));//通知发送时间
-				notice.setNtBranchid(branchid);//分行id
-				notice.setNtLonentid(lonentid);//借款企业id
-				notice.setNtType(ntctp.equals("DLCDRGNQ")?1:ntctp.equals("DLCDTWNQ")?2:ntctp.equals("DLCDUINQ")?3:0);
-				ns.addOrUpdate(notice);
+				notice.setNtctp(ntctp.equals("DLCDRGNQ")?1:ntctp.equals("DLCDTWNQ")?2:ntctp.equals("DLCDUINQ")?3:0);//通知书类型
+				notice.setNtcno(ntcno);//通知编号
+				notice.setNtcdate(DateUtil.StringToDate(ntcdate));//通知发送时间
+				notice.setNtbranchid(branchid);//分行id
+				notice.setNttotnum(Integer.parseInt(totnum));//总记录条数
+				//设置通知推送明细
+				if(ns.isNotice(notice)){
+					ns.update(notice);
+				}else{
+					notice.setNid(SqlUtil.getID(Notice.class));
+					ns.add(notice);
+					PushNoticeDetail pnd=new PushNoticeDetail();
+					String ecifcode;
+					String operorg;
+					String vin;
+					String loancode;
+					if (infos != null)
+						for (Iterator it = infos.iterator(); it.hasNext();) {
+							Element info = (Element) it.next();
+							ecifcode=info.element("ECIFCODE").getText();
+							operorg=info.element("OPERORG").getText();
+							vin=info.element("VIN").getText();
+							loancode=info.element("LOANCODE").getText();
+							pnd.setNid(notice.getNid());
+							pnd.setPndEcifcode(ecifcode);
+							pnd.setPndOperorg(operorg);
+							pnd.setPndVin(vin);
+							pnd.setPndLoancode(loancode);
+							pnds.add(pnd);
+						}
+				}
+				
 				//回执方法开始
 				String status = ReturnReceiptUtil.returnReceipt(ntctp, ntcno);
 				if (status != null && status.equals("AAAAAAA")) {
 					System.out.println("--回执成功--");
 					//通知查询报文发送
 					if(FarQuery(ntcno,ntctp)){
-						notice.setNtFailflag(3);
+						notice.setNtfailflag(3);
 						ns.update(notice);
 					}else{
-						notice.setNtFailflag(2);
+						notice.setNtfailflag(2);
 						ns.update(notice);
 					}
 				}else{
 					System.out.println("--回执失败--");
-					notice.setNtFailflag(1);
+					notice.setNtfailflag(1);
 					ns.update(notice);
 				}
+				
+				//打印
+				System.out.println("NTCTP:" + ntctp);
+				System.out.println("NTCNO:" + ntcno);
+				System.out.println("BRANCHID:" + branchid);
+				System.out.println("NTCDATE:" + ntcdate);
+				System.out.println("TOTNUM:" + totnum);
+				System.out.println("---集合列表---");
+				if (infos != null)
+					for (Iterator it = infos.iterator(); it.hasNext();) {
+						Element info = (Element) it.next();
+						System.out.println(info.element("ECIFCODE").getText());
+						System.out.println(info.element("OPERORG").getText());
+						System.out.println(info.element("VIN").getText());
+						System.out.println(info.element("LOANCODE").getText());
+					}
 			}
 		}
 	}

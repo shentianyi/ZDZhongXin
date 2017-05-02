@@ -134,11 +134,11 @@
 												<td class="t-td"><c:out value="${row.agOperorg }" /></td>
 												<td class="t-td"><c:out value="${row.agProtocolno }" /></td>
 												<td class="t-td"><c:out value="${row.agProtocolcode }" /></td>
-												<td class="t-td"><c:if test="${row.agIsonline=='0'}">否</c:if> <c:if test="${row.agIsonline=='1'}">是</c:if>
+												<td class="t-td"><c:if test="${row.agIsonline=='00'}">未开通</c:if> <c:if test="${row.agIsonline=='01'}">开通</c:if>
 												</td>
-												<td class="t-td"><c:if test="${row.agIsmove=='0'}">否</c:if> <c:if test="${row.agIsmove=='1'}">是</c:if>
+												<td class="t-td"><c:if test="${row.agIsmove=='00'}">不允许</c:if> <c:if test="${row.agIsmove=='01'}">允许</c:if>
 												</td>
-												<td class="t-td"><c:if test="${row.agState=='0' }">失效</c:if> <c:if test="${row.agState=='1' }">生效</c:if>
+												<td class="t-td"><c:if test="${row.agState=='01' }">生效</c:if> <c:if test="${row.agState=='02' }">失效</c:if>
 												</td>
 												<td class="t-td"><c:out value="${row.agStdate }" /></td>
 												<td class="t-td"><c:out value="${row.agEnddate }" /></td>

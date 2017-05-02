@@ -30,7 +30,7 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 	@Override
 	public List<Agreement> firnAllAgList(Agreement query, IThumbPageTools tools) {
 		StringBuffer sql=new StringBuffer();
-		sql.append("select agCustno,agLoncpid,agLoncpname,agProtocolno,agProtocolcode,agState,agStdate,agEnddate,agIsonline,agIsmove,agOperorg,agTotnum,agCreatedate,agUpdatedate from zx_agreement ");
+		sql.append("SELECT AGCUSTNO,AGLONCPID,AGLONCPNAME,AGPROTOCOLNO,AGPROTOCOLCODE,AGSTATE,AGSTDATE,AGENDDATE,AGISONLINE,AGISMOVE,AGOPERORG,AGTOTNUM,AGCREATEDATE,AGUPDATEDATE FROM ZX_AGREEMENT");
 		List<Object> params=new ArrayList<Object>();
 		List<Agreement> list=null;
 		formatSQL(sql,params,query);
@@ -54,11 +54,11 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 		sql.append(" where 1=1");
 		if(query.getAgCustno()!=null&&!query.getAgCustno().equals("")){
 			params.add("%"+query.getAgCustno().trim()+"%");
-			sql.append(" and agCustno like ?");
+			sql.append(" and AGCUSTNO like ?");
 		}
 		if(query.getAgLoncpname()!=null&&!query.getAgLoncpname().equals("")){
 			params.add("%"+query.getAgLoncpname().trim()+"%");
-			sql.append(" and agLoncpname like ?");
+			sql.append(" and AGLONCPNAME like ?");
 		}
 		
 	}
@@ -66,7 +66,7 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 	 * 根据客户号查询单个协议信息。
 	 */
 	public Agreement getAgreement(String LonentNo){
-		String sql="select agLoncpname from zx_agreement where agLoncpid='"+LonentNo+"'";
+		String sql="SELECT AGLONCPNAME FROM ZX_AGREEMENT WHERE AGLONCPID='"+LonentNo+"'";
 		List<Agreement> list=getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Agreement.class));
 		if(list.size()==0){
 			return null;
@@ -75,13 +75,13 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 	}
 	
 	public List<Agreement> query(){
-		String sql="select agProtocolno  from zx_agreement";
+		String sql="SELECT AGPROTOCOLNO  FROM ZX_AGREEMENT";
 		List<Agreement> list=getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Agreement.class));
 		return list;
 	}
 	@Override
 	public boolean update(Agreement agreement) {
-		String sql = "update zx_agreement set agCustno=?,agLoncpid=?,agLoncpname=?,agProtocolcode=?,agState=?,agStdate=?,agEnddate=?,agIsonline=?,agIsmove=?,agOperorg=?,agTotnum=?,agUpdatedate=to_date(?,'YYYY-MM-DD HH24:MI:SS') where agProtocolno=?";
+		String sql = "UPDATE ZX_AGREEMENT SET AGCUSTNO=?,AGLONCPID=?,AGLONCPNAME=?,AGPROTOCOLCODE=?,AGSTATE=?,AGSTDATE=?,AGENDDATE=?,AGISONLINE=?,AGISMOVE=?,AGOPERORG=?,AGTOTNUM=?,AGUPDATEDATE=TO_DATE(?,'YYYY-MM-DD HH24:MI:SS') WHERE AGPROTOCOLNO=?";
 		PreparedStatement stmt = null;
 		try {
 			stmt = BeanManager.getDataSource(null).getConnection().prepareStatement(sql);

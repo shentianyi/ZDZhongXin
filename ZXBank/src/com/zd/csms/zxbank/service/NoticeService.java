@@ -46,6 +46,7 @@ public class NoticeService extends ServiceSupport{
 	
 	private IRemovePledgeDAO irpdao=ZXBankDAOFactory.getRemovePledgeDAO();
 	private IRemovePledgeDetailDAO irpddao=ZXBankDAOFactory.getRemovePledgeDetailDAO();
+	
 	public List<Notice> findNotice(Notice notice,IThumbPageTools tools){
 		return ndao.findNotice(notice, tools);
 	}
@@ -53,22 +54,17 @@ public class NoticeService extends ServiceSupport{
 	public List<Notice> findnoticetype(){
 		return ndao.findnoticetype();
 	}
-	
-	public boolean addOrUpdate(Notice notice){
-		System.out.println("推送接收到的通知："+notice);
+	//判断是否存在
+	public boolean isNotice(Notice notice){
 		if(ndao.getNotice(notice)!=null){
-			return update(notice);
-		}else{
-			return add(notice);
+			return true;
 		}
+		return false;
 	}
-	
-	private boolean add(Notice notice){
-		notice.setNtId(SqlUtil.getID(Notice.class));
+	public boolean add(Notice notice){
 		return ndao.add(notice);
 	}
 	public boolean update(Notice notice){
-		notice.setNtEnddate(new Date());
 		System.out.println("-通知推送更新信息-");
 		return ndao.update(notice);
 	}

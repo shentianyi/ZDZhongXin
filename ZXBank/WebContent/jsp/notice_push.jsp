@@ -57,10 +57,11 @@
 									<select class="ly-bor-none" id="notice" name="notice.ntType" >
 										<option>请选择</option>
 										<c:forEach items="${types}" var="row">
-											<option value="${row.ntType}">
-												<c:if test="${row.ntType=='1'}">收货通知书</c:if>
-												<c:if test="${row.ntType=='2'}">移库通知书</c:if>
-												<c:if test="${row.ntType=='3'}">解除质押通知书</c:if>
+											<option value="${row.ntctp}">
+												<c:if test="${row.ntctp=='1'}">收货通知书</c:if>
+												<c:if test="${row.ntctp=='2'}">移库通知书</c:if>
+												<c:if test="${row.ntctp=='3'}">解除质押通知书</c:if>
+												<c:if test="${row.ntctp=='4'}">质物与融资关系变更通知书</c:if>
 											</option>
 										</c:forEach>
 									</select>
@@ -71,7 +72,7 @@
 								<div class="label block fl hidden">通知书编号：</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="ntno"
-										name="notice.ntNo" maxlength="20" value="${notice.ntNo}"/>
+										name="notice.ntNo" maxlength="20" value="${notice.ntcno}"/>
 								</div>
 							</div>
 						</div>
@@ -91,8 +92,9 @@
 										<th class="t-th">序号</th>
 										<th class="t-th">通知书类型</th>
 										<th class="t-th">通知书编号</th>
+										<th class="t-th">分行ID</th>
 										<th class="t-th">通知书状态</th>
-										<th class="t-th">创建时间</th>
+										<th class="t-th">发送时间</th>
 										<th class="t-th">操作</th>
 									</tr>
 								</thead>
@@ -100,15 +102,18 @@
 									<logic:iterate name="list" id="row" indexId="index">
 										<tr class="t-tr">
 											<td class="t-td"><c:out value="${index+1}" /></td>
-											<td class="t-td"><c:if test="${row.ntType=='1'}">收货通知书</c:if>
-												<c:if test="${row.ntType=='2'}">移库通知书</c:if> <c:if
-													test="${row.ntType=='3'}">解除质押通知书</c:if></td>
-											<td class="t-td"><c:out value="${row.ntNo}" /></td>
-											<td class="t-td"><c:if test="${row.ntFailflag=='1' }">回执失败</c:if>
-												<c:if test="${row.ntFailflag=='2' }">读取失败</c:if> <c:if
-													test="${row.ntFailflag=='3' }">读取成功</c:if></td>
+											<td class="t-td"><c:if test="${row.ntctp=='1'}">收货通知书</c:if>
+												<c:if test="${row.ntctp=='2'}">移库通知书</c:if> <c:if
+													test="${row.ntctp=='3'}">解除质押通知书</c:if>
+													<c:if test="${row.ntctp=='4'}">质物与融资关系变更通知书</c:if>
+											</td>
+											<td class="t-td"><c:out value="${row.ntcno}" /></td>
+											<td class="t-td"><c:out value="${row.ntbranchid}" /></td>
+											<td class="t-td"><c:if test="${row.ntfailflag=='0' }">回执失败</c:if>
+												<c:if test="${row.ntfailflag=='1' }">读取失败</c:if> <c:if
+													test="${row.ntfailflag=='2' }">读取成功</c:if></td>
 											<td class="t-td"><select:timestamp
-													timestamp="${row.ntStdate}" idtype="ss" /></td>
+													timestamp="${row.ntcdate}" idtype="ss" /></td>
 											<td class="t-td">
 													<c:if test="${row.ntFailflag=='1'}">
 														<a>

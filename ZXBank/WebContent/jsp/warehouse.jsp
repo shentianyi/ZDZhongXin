@@ -124,8 +124,11 @@
 										<th class="t-th">经办行</th>
 										<th class="t-th">地址</th>
 										<th class="t-th">电话</th>
+										<th class="t-th">仓库距离</th>
+										<th class="t-th">监管仓库联系人</th>
 										<th class="t-th">创建时间</th>
 										<th class="t-th">更新时间</th>
+										<th class="t-th">操作</th>
 									</tr>
 								</thead>
 								<tbody class="t-tbody hidden">
@@ -134,7 +137,7 @@
 											<tr class="t-tr">
 												<td class="t-td"><c:out value="${index+1}" /></td>
 												<td class="t-td"><c:out value="${row.custNo}" /></td>
-												<td class="t-td"><c:out value="${row.loncpname}" /></td>
+												<td class="t-td"><c:out value="${row.whlonentnm}" /></td>
 												<td class="t-td"><c:out value="${row.lonentid}" /></td>
 												<td class="t-td"><c:out value="${row.whName}" /></td>
 												<td class="t-td"><c:out value="${row.whCode}" /></td>
@@ -142,8 +145,11 @@
 												<td class="t-td"><c:out value="${row.whOperorg}" /></td>
 												<td class="t-td"><c:out value="${row.whAddress}" /></td>
 												<td class="t-td"><c:out value="${row.phone}" /></td>
+												<td class="t-td"><c:out value="${row.whdistance}" /></td>
+												<td class="t-td"><c:out value="${row.whContacts}" /></td>
 												<td class="t-td"><select:timestamp timestamp="${row.createDate}" idtype="ss" /></td>
 												<td class="t-td"><select:timestamp timestamp="${row.updateDate}" idtype="ss" /></td>
+												<td class="t-td"><a>编辑</a></td>
 											</tr>
 										</logic:iterate>
 									</c:if>

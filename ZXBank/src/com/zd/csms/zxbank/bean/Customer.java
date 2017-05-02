@@ -14,7 +14,7 @@ public class Customer {
 	private String custNo;//客户号
 	private String custOrganizationcode;//组织机构代码
 	private String custName;//客户名称
-	private Date custCreateDate;//数据同步时间
+	private Date custCreateDate;//数据同步创建时间
 	private Date custUpdateDate;//数据同步更新时间
 	
 	public Customer(){}

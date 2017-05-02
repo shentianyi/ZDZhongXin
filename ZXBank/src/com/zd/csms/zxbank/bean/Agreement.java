@@ -3,21 +3,22 @@ package com.zd.csms.zxbank.bean;
 import java.util.Date;
 
 public class Agreement {
+	
 	private int agId ;//监管协议id主键
 	private String agCustno ; //客户号
-	private String agLoncpid ; //借款企业id
+	private String agLoncpid ; //借款企业id（银行借款企业ECIF编号）
 	private String agLoncpname ;//借款企业名称
 	private String agProtocolno ;//系统监管协议编号
 	private String agProtocolcode ;//纸质监管协议编号
-	private String agState ;//协议状态（0,失效,1,生效）
+	private String agState ;//协议状态（01-生效,02-失效）
 	private String agStdate ;//协议起始日（长度 8）
 	private String agEnddate ;//协议到期日（长度 8）
-	private String agIsonline ;//是否开通线上业务（0,否,1,是）
-	private String agIsmove  ;//是否允许移库（0,否,1,是）
+	private String agIsonline ;//是否开通线上业务（00-未开通,01-开通）
+	private String agIsmove  ;//是否允许移库（00-不允许,01-允许）
 	private String agOperorg ;//经办行
 	private String agTotnum ;//总记录数
-	private Date agCreatedate ;//同步数据时间
-	private Date agUpdatedate ;//同步更新数据时间
+	private Date agCreatedate ;//数据创建时间
+	private Date agUpdatedate ;//数据更新时间
 	public int getAgId() {
 		return agId;
 	}

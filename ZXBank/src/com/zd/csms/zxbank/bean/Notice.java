@@ -5,77 +5,66 @@ import java.util.Date;
 import com.zd.core.annotation.table;
 
 /**
- * 通知推送表
- * @author yixiangyang
+ * 通知推送
+ * @author caizhuo
  *
  */
 @table(name="ZX_NOTICE")
 public class Notice {
-	private int ntId;//通知推送表主键
-	private int ntType;//通知书类型1收货2移库3质押
-	private String ntNo;//通知书编号
-	private String ntLonentid;//借款企业id 新增
-	private String ntBranchid;//分行id 新增
-	private Date ntStdate;//通知发送时间
-	private Date ntEnddate;//通知书更新时间
-	private int ntFailflag;//1回执失败2读取失败3读取成功
-	public int getNtId() {
-		return ntId;
+	private int nid;//--通知推送表主键
+	private String ntcno;//--通知书编号
+	private int ntctp;//--通知书类型1、收货	2、移库   3、解除质押 	4、质物与融资关系变更通知
+	private String ntbranchid;//--分行id 新增
+	private Date ntcdate;//--通知书接收时间
+	private int nttotnum;//--总记录数
+	private int ntfailflag;// --0回执失败，1读取，2读取成功
+	public int getNid() {
+		return nid;
 	}
-	public void setNtId(int ntId) {
-		this.ntId = ntId;
+	public void setNid(int nid) {
+		this.nid = nid;
 	}
-	public int getNtType() {
-		return ntType;
+	public String getNtcno() {
+		return ntcno;
 	}
-	public void setNtType(int ntType) {
-		this.ntType = ntType;
+	public void setNtcno(String ntcno) {
+		this.ntcno = ntcno;
 	}
-	public String getNtNo() {
-		return ntNo;
+	public int getNtctp() {
+		return ntctp;
 	}
-	public void setNtNo(String ntNo) {
-		this.ntNo = ntNo;
+	public void setNtctp(int ntctp) {
+		this.ntctp = ntctp;
 	}
-	
-	
-	public Date getNtStdate() {
-		return ntStdate;
+	public String getNtbranchid() {
+		return ntbranchid;
 	}
-	public void setNtStdate(Date ntStdate) {
-		this.ntStdate = ntStdate;
+	public void setNtbranchid(String ntbranchid) {
+		this.ntbranchid = ntbranchid;
 	}
-	public Date getNtEnddate() {
-		return ntEnddate;
+	public Date getNtcdate() {
+		return ntcdate;
 	}
-	public void setNtEnddate(Date ntEnddate) {
-		this.ntEnddate = ntEnddate;
+	public void setNtcdate(Date ntcdate) {
+		this.ntcdate = ntcdate;
 	}
-	public int getNtFailflag() {
-		return ntFailflag;
+	public int getNttotnum() {
+		return nttotnum;
 	}
-	public void setNtFailflag(int ntFailflag) {
-		this.ntFailflag = ntFailflag;
+	public void setNttotnum(int nttotnum) {
+		this.nttotnum = nttotnum;
 	}
-	public String getNtLonentid() {
-		return ntLonentid;
+	public int getNtfailflag() {
+		return ntfailflag;
 	}
-	public void setNtLonentid(String ntLonentid) {
-		this.ntLonentid = ntLonentid;
-	}
-	public String getNtBranchid() {
-		return ntBranchid;
-	}
-	public void setNtBranchid(String ntBranchid) {
-		this.ntBranchid = ntBranchid;
+	public void setNtfailflag(int ntfailflag) {
+		this.ntfailflag = ntfailflag;
 	}
 	@Override
 	public String toString() {
-		return "Notice [ntId=" + ntId + ", ntType=" + ntType + ", ntNo=" + ntNo
-				+ ", ntLonentid=" + ntLonentid + ", ntBranchid=" + ntBranchid
-				+ ", ntStdate=" + ntStdate + ", ntEnddate=" + ntEnddate
-				+ ", ntFailflag=" + ntFailflag + "]";
+		return "Notice [nid=" + nid + ", ntcno=" + ntcno + ", ntctp=" + ntctp
+				+ ", ntbranchid=" + ntbranchid + ", ntcdate=" + ntcdate
+				+ ", nttotnum=" + nttotnum + ", ntfailflag=" + ntfailflag + "]";
 	}
-	
 	
 }

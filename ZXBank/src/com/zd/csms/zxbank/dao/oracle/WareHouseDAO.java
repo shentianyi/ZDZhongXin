@@ -28,7 +28,7 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 	@Override
 	public List<Warehouse> findBusinessList(Warehouse query, IThumbPageTools tools) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT LONCPNAME,LONENTID,WHID,CUSTNO,WHNAME,WHCODE,WHLEVEL,WHOPERORG,WHADDRESS,PHONE,CREATEDATE,UPDATEDATE FROM ZX_WAREHOUSE");
+		sql.append("SELECT CUSTNO,WHLONENTNM,WHNAME,WHCODE,WHLEVEL,WHOPERORG,WHADDRESS,PHONE,LONENTID,WHDISTANCE,WHCONTACTS,CREATEDATE,UPDATEDATE FROM ZX_WAREHOUSE");
 		List<Object> params = new ArrayList<Object>();
 		List<Warehouse> list = null;
 		formatSQL(sql, params, query);
@@ -39,7 +39,6 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 		}
 		return list;
 	}
-
 	/**
 	 * sql语句拼接
 	 * @param sql
@@ -68,21 +67,22 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 
 	@Override
 	public boolean upadat(Warehouse ware) {
-
-		String sql = "UPDATE ZX_WAREHOUSE SET CUSTNO=?,WHNAME=?,WHLEVEL=?,WHOPERORG=?,LONCPNAME=?,WHADDRESS=?,PHONE=?,UPDATEDATE=TO_DATE(?,'YYYY-MM-DD HH24:MI:SS'),LONENTID=? WHERE WHCODE=?";
+		String sql="UPDATE ZX_WAREHOUSE SET CUSTNO=?,WHLONENTNM=?,WHNAME=?,WHLEVEL=?,WHOPERORG=?,WHADDRESS=?,PHONE=?,LONENTID=?,WHDISTANCE=?,WHCONTACTS=?,UPDATEDATE=TO_DATE(?,'YYYY-MM-DD HH24:MI:SS') WHERE WHCODE=?";
 		PreparedStatement stmt = null;
 		try {
 			stmt = BeanManager.getDataSource(null).getConnection().prepareStatement(sql);
 			stmt.setString(1, ware.getCustNo());
-			stmt.setString(2, ware.getWhName());
-			stmt.setString(3, ware.getWhLevel());
-			stmt.setString(4, ware.getWhOperorg());
-			stmt.setString(5, ware.getLoncpname());
+			stmt.setString(2, ware.getWhlonentnm());
+			stmt.setString(3, ware.getWhName());
+			stmt.setInt(4, ware.getWhLevel());
+			stmt.setString(5, ware.getWhOperorg());
 			stmt.setString(6, ware.getWhAddress());
 			stmt.setString(7, ware.getPhone());
-			stmt.setString(8, DateUtil.getStringFormatByDate(ware.getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
-			stmt.setString(9, ware.getWhCode());
-			stmt.setString(10, ware.getLonentid());
+			stmt.setString(8, ware.getLonentid());
+			stmt.setString(9, ware.getWhdistance());
+			stmt.setString(10, ware.getWhContacts());
+			stmt.setString(11, DateUtil.getStringFormatByDate(ware.getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
+			stmt.setString(12, ware.getWhCode());
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {

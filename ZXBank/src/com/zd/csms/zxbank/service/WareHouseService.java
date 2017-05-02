@@ -51,11 +51,11 @@ public class WareHouseService extends ServiceSupport {
 		Warehouse ware=new Warehouse();
 		ware.setWhid(SqlUtil.getID(Warehouse.class));
 		ware.setCustNo(custNo);
-		ware.setLoncpname(weFar.getLonNm());
+		ware.setWhlonentnm(weFar.getLonNm());
 		ware.setPhone(weFar.getPhone());
 		ware.setWhAddress(weFar.getAddress());
 		ware.setWhCode(weFar.getBkwhCode());
-		ware.setWhLevel(weFar.getWhLevel());
+		ware.setWhLevel(Integer.parseInt(weFar.getWhLevel()));
 		ware.setWhName(weFar.getWhName());
 		ware.setWhOperorg(weFar.getOperOrg());
 		ware.setUpdateDate(new Date());
@@ -68,11 +68,11 @@ public class WareHouseService extends ServiceSupport {
 		Warehouse was = new Warehouse();
 		was.setWhid(SqlUtil.getID(Warehouse.class));//获取下一个主键id
 		was.setCustNo(custNo);
-		was.setLoncpname(waFar.getLonNm());
+		was.setWhlonentnm(waFar.getLonNm());
 		was.setPhone(waFar.getPhone());
 		was.setWhAddress(waFar.getAddress());
 		was.setWhCode(waFar.getBkwhCode());
-		was.setWhLevel(waFar.getWhLevel());
+		was.setWhLevel(Integer.parseInt(waFar.getWhLevel()));
 		was.setWhName(waFar.getWhName());
 		was.setWhOperorg(waFar.getOperOrg());
 		was.setCreateDate(new Date());
