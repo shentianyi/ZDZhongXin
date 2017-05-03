@@ -38,6 +38,11 @@
 			alert("${msg}");
 		}
 	});
+	
+	function doUpdate(fgLoanCode){
+		location="<url:context/>/ZXinterface.do?method=financingUpdateShow&fgLoanCode="+fgLoanCode;
+	}
+	
 	function doQuery() {
 		var fgNo=$("fgLonentNo").val();
 		if ($("#choose").val() == "2") {
@@ -188,9 +193,10 @@
 										<th class="t-th">授信产品</th>
 										<th class="t-th">经办行</th>
 										<th class="t-th">业务模式</th>
+										<th class="t-th">协议编号</th>
 										<th class="t-th">创建时间</th>
 										<th class="t-th">更新时间</th>
-
+										<th class="t-th">编辑</th>
 									</tr>
 								</thead>
 								<tbody class="t-tbody hidden">
@@ -208,15 +214,19 @@
 											<td class="t-td"><c:out value="${row.fgFstblRat}%" /></td>
 											<td class="t-td"><c:out value="${row.fgStDate}" /></td>
 											<td class="t-td"><c:out value="${row.fgEndDate}" /></td>
-											<td class="t-td"><c:if test="${row.fgProcrt==1}">
+											<%-- <td class="t-td"><c:if test="${row.fgProcrt==1}">
 										银行承兑汇票
-									</c:if></td>
+									</c:if></td> --%>
+											<td class="t-td"><c:out value="${row.fgProcrt}" /></td>	
 											<td class="t-td"><c:out value="${row.fgOperOrg}" /></td>
-											<td class="t-td"><c:if test="${row.fgBizMod==11}">
+											<%-- <td class="t-td"><c:if test="${row.fgBizMod==11}">
 										汽车金融先票后货三方
-									</c:if></td>
+									</c:if></td> --%>
+											<td class="t-td"><c:out value="${row.fgBizMod}" /></td>
+											<td class="t-td"><c:out value="${row.fgagtid}" /></td>
 											<td class="t-td"><select:timestamp timestamp="${row.fgCreateDate}" idtype="ss" /></td>
 											<td class="t-td"><select:timestamp timestamp="${row.fgUpdateDate}" idtype="ss" /></td>
+											<td class="t-td"><a onclick="doUpdate(${row.fgLoanCode})">编辑</a></td>
 										</tr>
 									</logic:iterate>
 									</c:if>

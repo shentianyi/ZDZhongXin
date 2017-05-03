@@ -30,7 +30,7 @@ public class AgreementService extends ServiceSupport {
 				for (AgreementFar agreementFar : bankList) {
 					int tem = 0;
 					for (int i = 0; i < list.size(); i++) {
-						if (list.get(i).getAgProtocolno().trim().equals(agreementFar.getSpvagtid().trim())) {
+						if (list.get(i).getSpvagtid().trim().equals(agreementFar.getSpvagtid().trim())) {
 							if(update(agreementFar,query)){
 								System.out.println("更新协议："+agreementFar.getSpvagtid()+"成功");
 							}else{
@@ -59,34 +59,34 @@ public class AgreementService extends ServiceSupport {
 	public boolean add(AgreementFar agtFar,Agreement agt){
 		
 		agt.setAgId(SqlUtil.getID(Agreement.class));
-		agt.setAgCreatedate(new Date());
-		agt.setAgEnddate(agtFar.getEnddate());
-		agt.setAgIsmove(agtFar.getIsmv());
-		agt.setAgIsonline(agtFar.getIsauth());
-		agt.setAgLoncpid(agtFar.getHostno());
-		agt.setAgLoncpname(agtFar.getLonnm());
-		agt.setAgOperorg(agtFar.getOperorg());
-		agt.setAgProtocolcode(agtFar.getSpvagtno());
-		agt.setAgProtocolno(agtFar.getSpvagtid());
-		agt.setAgState(agtFar.getAgtstt());
-		agt.setAgStdate(agtFar.getStartdate());
-//		agt.setAgTotnum(agt.getAgTotnum());//总记录条数
+		agt.setAgcreatedate(new Date());
+		agt.setEnddate(agtFar.getEnddate());
+		agt.setIsmv(agtFar.getIsmv());
+		agt.setIsauth(agtFar.getIsauth());
+		agt.setHostno(agtFar.getHostno());
+		agt.setLonnm(agtFar.getLonnm());
+		agt.setOperorg(agtFar.getOperorg());
+		agt.setSpvagtno(agtFar.getSpvagtno());
+		agt.setSpvagtid(agtFar.getSpvagtid());
+		agt.setAgtstt(agtFar.getAgtstt());
+		agt.setStartdate(agtFar.getStartdate());
+		agt.setTotnum(agt.getTotnum());//总记录条数
 		return  dao.add(agt);
 	}
 	
 	public boolean update(AgreementFar agtFar,Agreement agt){
-		agt.setAgEnddate(agtFar.getEnddate());
-		agt.setAgIsmove(agtFar.getIsmv());
-		agt.setAgIsonline(agtFar.getIsauth());
-		agt.setAgLoncpid(agtFar.getHostno());
-		agt.setAgLoncpname(agtFar.getLonnm());
-		agt.setAgOperorg(agtFar.getOperorg());
-		agt.setAgProtocolcode(agtFar.getSpvagtno());
-		agt.setAgProtocolno(agtFar.getSpvagtid());
-		agt.setAgState(agtFar.getAgtstt());
-		agt.setAgStdate(agtFar.getStartdate());
-		agt.setAgUpdatedate(new Date());
-//		agt.setAgTotnum(agt.get)
+		agt.setEnddate(agtFar.getEnddate());
+		agt.setIsmv(agtFar.getIsmv());
+		agt.setIsauth(agtFar.getIsauth());
+		agt.setHostno(agtFar.getHostno());
+		agt.setHostno(agtFar.getLonnm());
+		agt.setOperorg(agtFar.getOperorg());
+		agt.setSpvagtno(agtFar.getSpvagtno());
+		agt.setSpvagtid(agtFar.getSpvagtid());
+		agt.setAgtstt(agtFar.getAgtstt());
+		agt.setStartdate(agtFar.getStartdate());
+		agt.setAgupdatedate(new Date());
+		agt.setTotnum(agt.getTotnum());
 		return dao.update(agt);
 	}
 	

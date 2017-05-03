@@ -22,4 +22,6 @@ public interface IFinancingDAO extends IDAO {
 	public boolean update(Financing financing);
 	
 	public boolean add(Financing financing);
+	
+	public Financing getFinancing(String code);
 }

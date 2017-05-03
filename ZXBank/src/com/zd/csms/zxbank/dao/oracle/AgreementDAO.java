@@ -30,7 +30,7 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 	@Override
 	public List<Agreement> firnAllAgList(Agreement query, IThumbPageTools tools) {
 		StringBuffer sql=new StringBuffer();
-		sql.append("SELECT AGCUSTNO,AGLONCPID,AGLONCPNAME,AGPROTOCOLNO,AGPROTOCOLCODE,AGSTATE,AGSTDATE,AGENDDATE,AGISONLINE,AGISMOVE,AGOPERORG,AGTOTNUM,AGCREATEDATE,AGUPDATEDATE FROM ZX_AGREEMENT");
+		sql.append("SELECT HOSTNO,AGLONCPID,LONNM,SPVAGTID,SPVAGTNO,AGTSTT,STARTDATE,ENDDATE,ISAUTH,ISMV,OPERORG,TOTNUM,AGCREATEDATE,AGUPDATEDATE  FROM ZX_AGREEMENT");
 		List<Object> params=new ArrayList<Object>();
 		List<Agreement> list=null;
 		formatSQL(sql,params,query);
@@ -52,13 +52,13 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 	private void formatSQL(StringBuffer sql, List<Object> params,
 			Agreement query) {
 		sql.append(" where 1=1");
-		if(query.getAgCustno()!=null&&!query.getAgCustno().equals("")){
-			params.add("%"+query.getAgCustno().trim()+"%");
-			sql.append(" and AGCUSTNO like ?");
+		if(query.getHostno()!=null&&!query.getHostno().equals("")){
+			params.add("%"+query.getHostno().trim()+"%");
+			sql.append(" and HOSTNO like ?");
 		}
-		if(query.getAgLoncpname()!=null&&!query.getAgLoncpname().equals("")){
-			params.add("%"+query.getAgLoncpname().trim()+"%");
-			sql.append(" and AGLONCPNAME like ?");
+		if(query.getLonnm()!=null&&!query.getLonnm().equals("")){
+			params.add("%"+query.getLonnm().trim()+"%");
+			sql.append(" and LONNM like ?");
 		}
 		
 	}
@@ -66,7 +66,7 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 	 * 根据客户号查询单个协议信息。
 	 */
 	public Agreement getAgreement(String LonentNo){
-		String sql="SELECT AGLONCPNAME FROM ZX_AGREEMENT WHERE AGLONCPID='"+LonentNo+"'";
+		String sql="SELECT LONNM FROM ZX_AGREEMENT WHERE AGLONCPID='"+LonentNo+"'";
 		List<Agreement> list=getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Agreement.class));
 		if(list.size()==0){
 			return null;
@@ -75,29 +75,29 @@ public class AgreementDAO extends DAOSupport implements IAgreementDAO{
 	}
 	
 	public List<Agreement> query(){
-		String sql="SELECT AGPROTOCOLNO  FROM ZX_AGREEMENT";
+		String sql="SELECT SPVAGTID FROM ZX_AGREEMENT";
 		List<Agreement> list=getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Agreement.class));
 		return list;
 	}
 	@Override
 	public boolean update(Agreement agreement) {
-		String sql = "UPDATE ZX_AGREEMENT SET AGCUSTNO=?,AGLONCPID=?,AGLONCPNAME=?,AGPROTOCOLCODE=?,AGSTATE=?,AGSTDATE=?,AGENDDATE=?,AGISONLINE=?,AGISMOVE=?,AGOPERORG=?,AGTOTNUM=?,AGUPDATEDATE=TO_DATE(?,'YYYY-MM-DD HH24:MI:SS') WHERE AGPROTOCOLNO=?";
+		String sql = "UPDATE ZX_AGREEMENT SET HOSTNO=?,AGLONCPID=?,LONNM=?,SPVAGTNO=?,AGTSTT=?,STARTDATE=?,ENDDATE=?,ISAUTH=?,ISMV=?,OPERORG=?,TOTNUM=?,AGUPDATEDATE=TO_DATE(?,'YYYY-MM-DD HH24:MI:SS') WHERE SPVAGTID=?";
 		PreparedStatement stmt = null;
 		try {
 			stmt = BeanManager.getDataSource(null).getConnection().prepareStatement(sql);
-			stmt.setString(1,agreement.getAgCustno());
-			stmt.setString(2,agreement.getAgLoncpid());
-			stmt.setString(3,agreement.getAgLoncpname());
-			stmt.setString(4,agreement.getAgProtocolcode());
-			stmt.setString(5,agreement.getAgState());
-			stmt.setString(6,agreement.getAgStdate());
-			stmt.setString(7,agreement.getAgEnddate());
-			stmt.setString(8,agreement.getAgIsonline());
-			stmt.setString(9,agreement.getAgIsmove());
-			stmt.setString(10,agreement.getAgOperorg());
-			stmt.setString(11,agreement.getAgTotnum());
-			stmt.setString(12,DateUtil.getStringFormatByDate(agreement.getAgUpdatedate(),"yyyy-MM-dd HH:mm:ss"));
-			stmt.setString(13,agreement.getAgProtocolno());
+			stmt.setString(1,agreement.getHostno());
+			stmt.setString(2,agreement.getAgloncpid());
+			stmt.setString(3,agreement.getLonnm());
+			stmt.setString(4,agreement.getSpvagtno());
+			stmt.setString(5,agreement.getAgtstt());
+			stmt.setString(6,agreement.getStartdate());
+			stmt.setString(7,agreement.getEnddate());
+			stmt.setString(8,agreement.getIsauth());
+			stmt.setString(9,agreement.getIsmv());
+			stmt.setString(10,agreement.getOperorg());
+			stmt.setString(11,agreement.getTotnum());
+			stmt.setString(12,DateUtil.getStringFormatByDate(agreement.getAgupdatedate(),"yyyy-MM-dd HH:mm:ss"));
+			stmt.setString(13,agreement.getSpvagtid());
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {

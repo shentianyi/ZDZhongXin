@@ -54,7 +54,7 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden">通知类型：</div>
 								<div class="input block fl hidden">
-									<select class="ly-bor-none" id="notice" name="notice.ntType" >
+									<select class="ly-bor-none" id="notice" name="notice.ntctp" >
 										<option>请选择</option>
 										<c:forEach items="${types}" var="row">
 											<option value="${row.ntctp}">
@@ -62,6 +62,7 @@
 												<c:if test="${row.ntctp=='2'}">移库通知书</c:if>
 												<c:if test="${row.ntctp=='3'}">解除质押通知书</c:if>
 												<c:if test="${row.ntctp=='4'}">质物与融资关系变更通知书</c:if>
+												<c:if test="${row.ntctp=='5'}">入库通知书</c:if>
 											</option>
 										</c:forEach>
 									</select>
@@ -72,7 +73,7 @@
 								<div class="label block fl hidden">通知书编号：</div>
 								<div class="input block fl hidden">
 									<input class="ly-bor-none" type="text" id="ntno"
-										name="notice.ntNo" maxlength="20" value="${notice.ntcno}"/>
+										name="notice.ntcno" maxlength="20" value="${notice.ntcno}"/>
 								</div>
 							</div>
 						</div>
@@ -106,6 +107,7 @@
 												<c:if test="${row.ntctp=='2'}">移库通知书</c:if> <c:if
 													test="${row.ntctp=='3'}">解除质押通知书</c:if>
 													<c:if test="${row.ntctp=='4'}">质物与融资关系变更通知书</c:if>
+													<c:if test="${row.ntctp=='5'}">入库通知书</c:if>
 											</td>
 											<td class="t-td"><c:out value="${row.ntcno}" /></td>
 											<td class="t-td"><c:out value="${row.ntbranchid}" /></td>
@@ -115,19 +117,19 @@
 											<td class="t-td"><select:timestamp
 													timestamp="${row.ntcdate}" idtype="ss" /></td>
 											<td class="t-td">
-													<c:if test="${row.ntFailflag=='1'}">
+													<c:if test="${row.ntfailflag=='0'}">
 														<a>
 															<input type="button" value="待推送" />
 														</a>
 													</c:if>
-													<c:if test="${row.ntFailflag=='2'}">
+													<c:if test="${row.ntfailflag=='1'}">
 														<a
-															href="ZXinterface.do?method=noticeReread&ntType=${row.ntType}&ntcno=${row.ntNo}">
+															href="ZXinterface.do?method=noticeReread&ntType=${row.ntctp}&ntcno=${row.ntcno}">
 															<input type="button" value="重新读取" />
 														</a>
-													</c:if> <c:if test="${row.ntFailflag=='3'}">
+													</c:if> <c:if test="${row.ntfailflag=='2'}">
 														<a
-															href="ZXinterface.do?method=noticepush&ntNo=${row.ntNo}&ntType=${row.ntType}">
+															href="ZXinterface.do?method=noticepush&ntNo=${row.ntcno}&ntType=${row.ntctp}">
 															<input type="button" value="查看详情" />
 														</a>
 													</c:if>

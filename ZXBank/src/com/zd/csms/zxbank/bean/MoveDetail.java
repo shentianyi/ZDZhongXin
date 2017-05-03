@@ -17,7 +17,7 @@ public class MoveDetail implements Serializable{
 	
 	private int mdId;//序列ID
 	private String mdNo;//通知编号
-	private String mdRemoveoutno;//移除仓库编号
+	private String mdRemoveoutno;//移出仓库编号
 	private String mdRemoveinno;//移入仓库编号
 	private String mdWareno;//商品代码
 	private String mdMovenumber;//移库数量

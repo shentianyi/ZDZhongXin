@@ -1,3 +1,4 @@
+<%@page import="com.zd.csms.zxbank.bean.Warehouse"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="form.tld" prefix="form"%>
@@ -31,7 +32,7 @@
 		}		
 	});
 
-
+	
 	function doQuery() {
 		if ($('#choose').val() == "2" && $("#custNo").val() == "") {
 			alert("ECIF客户号不能为空");
@@ -54,6 +55,11 @@
 			$("#whName").removeAttr("disabled");
 		}
 	}
+	function doUpate(val1,val2){
+		location = "<url:context/>/ZXinterface.do?method=warehouseUpdateShow&custNo="+val1+"&whCode="+val2;
+	}
+	
+	
 </script>
 </head>
 <body class="h-100 public">
@@ -99,7 +105,6 @@
 									</select>
 								</div>
 							</div>
-
 						</div>
 					</div>
 					<div class="ly-button-w">
@@ -141,7 +146,7 @@
 												<td class="t-td"><c:out value="${row.lonentid}" /></td>
 												<td class="t-td"><c:out value="${row.whName}" /></td>
 												<td class="t-td"><c:out value="${row.whCode}" /></td>
-												<td class="t-td"><c:out value="${row.whLevel==1?'一级仓库':'二级仓库'}" /></td>
+												<td class="t-td"><c:out value="${row.whLevel==1?'一级仓库':row.whLevel==2?'二级仓库':''}" /></td>
 												<td class="t-td"><c:out value="${row.whOperorg}" /></td>
 												<td class="t-td"><c:out value="${row.whAddress}" /></td>
 												<td class="t-td"><c:out value="${row.phone}" /></td>
@@ -149,7 +154,7 @@
 												<td class="t-td"><c:out value="${row.whContacts}" /></td>
 												<td class="t-td"><select:timestamp timestamp="${row.createDate}" idtype="ss" /></td>
 												<td class="t-td"><select:timestamp timestamp="${row.updateDate}" idtype="ss" /></td>
-												<td class="t-td"><a>编辑</a></td>
+												<td class="t-td"><a onClick="doUpate(${row.custNo},${row.whCode})">编辑</a></td>
 											</tr>
 										</logic:iterate>
 									</c:if>

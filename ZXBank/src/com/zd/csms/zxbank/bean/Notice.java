@@ -13,9 +13,9 @@ import com.zd.core.annotation.table;
 public class Notice {
 	private int nid;//--通知推送表主键
 	private String ntcno;//--通知书编号
-	private int ntctp;//--通知书类型1、收货	2、移库   3、解除质押 	4、质物与融资关系变更通知
+	private int ntctp;//--通知书类型1、收货	2、移库   3、解除质押 	4、质物与融资关系变更通知 	5-入库通知
 	private String ntbranchid;//--分行id 新增
-	private Date ntcdate;//--通知书接收时间
+	private Date ntcdate;//--通知书发送时间
 	private int nttotnum;//--总记录数
 	private int ntfailflag;// --0回执失败，1读取，2读取成功
 	public int getNid() {

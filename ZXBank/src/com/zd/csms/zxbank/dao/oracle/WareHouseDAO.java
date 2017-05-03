@@ -105,4 +105,16 @@ public class WareHouseDAO extends DAOSupport implements IWareHouseDAO {
 		list = getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Warehouse.class));
 		return list;
 	}
+
+	@Override
+	public Warehouse getWarehouse(String custNo, String whCode) {
+		
+		String sql = "SELECT * FROM ZX_WAREHOUSE WHERE CUSTNO='" + custNo + "' and WHCODE='"+whCode+"'";
+		List<Warehouse> list = null;
+		list = getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Warehouse.class));
+		if(list.size()==0){
+			return null;
+		}
+		return list.get(0);
+	}
 }

@@ -24,7 +24,7 @@ public class Gager implements Serializable{
 	private String gaConfirmno;//质物监管确认书编号
 	private int gaCount;//总记录数
 	private int gaState;//质物入库状态
-	private String gaCreatedate;//数据添加时间
+	private String gaCreatedate;//数据创建时间
 //	private String gaBizmod;//业务模式(没有)
 	
 	public int getGaId() {

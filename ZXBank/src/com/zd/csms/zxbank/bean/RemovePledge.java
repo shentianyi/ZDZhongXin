@@ -13,7 +13,7 @@ public class RemovePledge implements Serializable{
 
 	private static final long serialVersionUID = -4016128896242148226L;
 
-	private int rpId;//序列号
+	private int rpId;//序列号 主键id
 	private String rpNo;//通知书编号
 	private String rpOperorg;//经办行
 	private String rpPldegeename;//出质人名称
@@ -24,8 +24,8 @@ public class RemovePledge implements Serializable{
 	private String rpRelievepddate;//解除质押日期
 	private String rpContent;//出库原因
 	private String rpNoticedate;//通知书日期
-	private Date rpCreatedate;//同步数据时间
-	private Date rpUpdatedate;//同步更新数据时间
+	private Date rpCreatedate;//数据创建时间
+	private Date rpUpdatedate;//数据更新时间
 	public int getRpId() {
 		return rpId;
 	}

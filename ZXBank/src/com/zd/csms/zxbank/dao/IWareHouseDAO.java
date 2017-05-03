@@ -23,4 +23,13 @@ public interface IWareHouseDAO extends IDAO {
 	 * @return
 	 */
 	public List<Warehouse> query(String custno);
+	
+	/**
+	 * 查出客户下仓库信息
+	 * @param custNo 客户号
+	 * @param whCode 仓库代码
+	 * @return
+	 */
+	public Warehouse getWarehouse(String custNo,String whCode);
+	
 }

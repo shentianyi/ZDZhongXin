@@ -62,7 +62,11 @@ public class RemovePledgeDAO  extends DAOSupport implements IRemovePledgeDAO{
 		StringBuffer sql = new StringBuffer();
 		sql.append(RemovePledgeDAO.select_removepledge);
 		sql.append("AND RPNO ="+no);
-		rp = (RemovePledge) getJdbcTemplate().query(sql.toString(),new BeanPropertyRowMapper(RemovePledge.class)).get(0);
-		return rp;
+		List<RemovePledge> list=null;
+		list=getJdbcTemplate().query(sql.toString(),new BeanPropertyRowMapper(RemovePledge.class));
+		if(list.size()==0){
+			return null;
+		}
+		return list.get(0);
 	}
 }

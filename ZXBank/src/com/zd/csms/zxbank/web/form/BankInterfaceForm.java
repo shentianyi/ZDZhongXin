@@ -6,6 +6,7 @@ import org.apache.struts.upload.FormFile;
 import com.zd.csms.zxbank.bean.Agreement;
 import com.zd.csms.zxbank.bean.Checkstock;
 import com.zd.csms.zxbank.bean.Customer;
+import com.zd.csms.zxbank.bean.Financing;
 import com.zd.csms.zxbank.bean.FinancingQueryVO;
 import com.zd.csms.zxbank.bean.Gager;
 import com.zd.csms.zxbank.bean.MoveNotice;
@@ -37,6 +38,11 @@ public class BankInterfaceForm extends ActionForm {
 	 * 融资信息Form
 	 */
 	private FinancingQueryVO financingVO = new FinancingQueryVO();
+	/**
+	 * 融资信息Form
+	 */
+	private Financing financing=new Financing();
+	
 	/**
 	 * 监管协议Form
 	 */
@@ -148,6 +154,14 @@ public class BankInterfaceForm extends ActionForm {
 
 	public void setCheckstock(Checkstock checkstock) {
 		this.checkstock = checkstock;
+	}
+
+	public Financing getFinancing() {
+		return financing;
+	}
+
+	public void setFinancing(Financing financing) {
+		this.financing = financing;
 	}
 
 }

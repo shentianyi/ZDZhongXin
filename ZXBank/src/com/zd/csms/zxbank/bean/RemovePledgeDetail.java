@@ -14,7 +14,7 @@ public class RemovePledgeDetail implements Serializable{
 
 	private static final long serialVersionUID = 1682831269544002616L;
 	
-	private int rdId;//序列ID
+	private int rdId;//序列ID 主键id
 	private String rdNo;//通知书编号
 	private String rdCmdcode;//商品代码
 	private String rdCmdname;//商品名称
@@ -28,6 +28,7 @@ public class RemovePledgeDetail implements Serializable{
 	private String rdChassisno;//车架号
 	private String rdCertificationno;//合格证编号
 	private String rdCarprice;//车价
+	//一下两个字段原本为rdmoprlst集合内的。当前暂时放入详情集合内，待测试。
 	private String rdUsername;//赎货经办人姓名
 	private String rdUsercardid;//赎货经办人身份证号码
 	public int getRdId() {

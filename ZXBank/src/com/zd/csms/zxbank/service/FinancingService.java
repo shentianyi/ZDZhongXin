@@ -25,7 +25,12 @@ public class FinancingService extends ServiceSupport {
 	public List<Financing> findByQuery(FinancingQueryVO query, IThumbPageTools tools) {
 		return dao.findByQuery(query, tools);
 	}
-
+	public Financing getFinancing(String code){
+		return dao.getFinancing(code);
+	}
+	public boolean update(Financing financing){
+		return dao.update(financing);
+	}
 	public void addOrUpdate(List<FinancingFar> list,FinancingQueryVO query) {
 		Agreement agreement=adao.getAgreement(query.getFgLonentNo().trim());
 		Financing fg=new Financing();
@@ -44,7 +49,7 @@ public class FinancingService extends ServiceSupport {
 					fg.setFgScftxNo(ffar.getScftxNo());
 					fg.setFgSlfcap(ffar.getSlfcapRat());
 					fg.setFgLonentNo(query.getFgLonentNo());//借款企业id
-					fg.setFgLoncpName(agreement==null?"":agreement.getAgLoncpname());//借款企业名称
+					fg.setFgLoncpName(agreement==null?"":agreement.getLonnm());//借款企业名称
 					fg.setFgUpdateDate(new Date());
 					if(dao.update(fg)){
 						System.out.println("更新融资信息成功");
@@ -66,7 +71,7 @@ public class FinancingService extends ServiceSupport {
 				fg.setFgScftxNo(ffar.getScftxNo());
 				fg.setFgSlfcap(ffar.getSlfcapRat());
 				fg.setFgLonentNo(query.getFgLonentNo());//借款企业id
-				fg.setFgLoncpName(agreement==null?"":agreement.getAgLoncpname());//借款企业名称
+				fg.setFgLoncpName(agreement==null?"":agreement.getLonnm());//借款企业名称
 				if(dao.add(fg)){
 					System.out.println("融资添加成功");
 				}else{

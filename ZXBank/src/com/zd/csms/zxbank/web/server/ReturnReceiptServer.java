@@ -73,19 +73,21 @@ public class ReturnReceiptServer implements Runnable {
 				String totnum=bodyNode.element("TOTNUM").getText();
 				Element list = bodyNode.element("LST");
 				List infos = list.elements("row");
-				//设置通知推送信息
+				
 				Notice notice=new Notice();
 				notice.setNtctp(ntctp.equals("DLCDRGNQ")?1:ntctp.equals("DLCDTWNQ")?2:ntctp.equals("DLCDUINQ")?3:0);//通知书类型
 				notice.setNtcno(ntcno);//通知编号
 				notice.setNtcdate(DateUtil.StringToDate(ntcdate));//通知发送时间
 				notice.setNtbranchid(branchid);//分行id
 				notice.setNttotnum(Integer.parseInt(totnum));//总记录条数
-				//设置通知推送明细
+				
 				if(ns.isNotice(notice)){
 					ns.update(notice);
 				}else{
+					//保存通知推送信息
 					notice.setNid(SqlUtil.getID(Notice.class));
 					ns.add(notice);
+					//保存通知推送明细
 					PushNoticeDetail pnd=new PushNoticeDetail();
 					String ecifcode;
 					String operorg;

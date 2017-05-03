@@ -73,13 +73,13 @@
 							<div class="ly-col fl">
 								<div class="label block fl hidden"><font class="req" color="#FF0000" style="visibility: hidden;">*</font>ECIF客户号：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="loncpid" name="agreement.agCustno" value="${agreement.agCustno }" maxlength="20" />
+									<input class="ly-bor-none" type="text" id="loncpid" name="agreement.hostno" value="${agreement.hostno}" maxlength="20" />
 								</div>
 							</div>
 							<div class="ly-col fl">
 								<div class="label block fl hidden">借款企业名称：</div>
 								<div class="input block fl hidden">
-									<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.agLoncpname" value="${agreement.agLoncpname }" maxlength="120" />
+									<input class="ly-bor-none" type="text" id="loncpid_name" name="agreement.lonnm" value="${agreement.lonnm}" maxlength="120" />
 								</div>
 							</div>
 
@@ -128,23 +128,23 @@
 										<logic:iterate name="list" id="row" indexId="index">
 											<tr class="t-tr">
 												<td class="t-td"><c:out value="${index+1}" /></td>
-												<td class="t-td"><c:out value="${row.agCustno }" /></td>
-												<td class="t-td"><c:out value="${row.agLoncpid }" /></td>
-												<td class="t-td"><c:out value="${row.agLoncpname }" /></td>
-												<td class="t-td"><c:out value="${row.agOperorg }" /></td>
-												<td class="t-td"><c:out value="${row.agProtocolno }" /></td>
-												<td class="t-td"><c:out value="${row.agProtocolcode }" /></td>
-												<td class="t-td"><c:if test="${row.agIsonline=='00'}">未开通</c:if> <c:if test="${row.agIsonline=='01'}">开通</c:if>
+												<td class="t-td"><c:out value="${row.hostno}" /></td>
+												<td class="t-td"><c:out value="${row.agloncpid}" /></td>
+												<td class="t-td"><c:out value="${row.lonnm}" /></td>
+												<td class="t-td"><c:out value="${row.operorg}" /></td>
+												<td class="t-td"><c:out value="${row.spvagtid}" /></td>
+												<td class="t-td"><c:out value="${row.spvagtno}" /></td>
+												<td class="t-td"><c:if test="${row.isauth=='00'}">未开通</c:if> <c:if test="${row.isauth=='01'}">开通</c:if>
 												</td>
-												<td class="t-td"><c:if test="${row.agIsmove=='00'}">不允许</c:if> <c:if test="${row.agIsmove=='01'}">允许</c:if>
+												<td class="t-td"><c:if test="${row.ismv=='00'}">不允许</c:if> <c:if test="${row.ismv=='01'}">允许</c:if>
 												</td>
-												<td class="t-td"><c:if test="${row.agState=='01' }">生效</c:if> <c:if test="${row.agState=='02' }">失效</c:if>
+												<td class="t-td"><c:if test="${row.agtstt=='01'}">生效</c:if> <c:if test="${row.agtstt=='02' }">失效</c:if>
 												</td>
-												<td class="t-td"><c:out value="${row.agStdate }" /></td>
-												<td class="t-td"><c:out value="${row.agEnddate }" /></td>
-												<td class="t-td"><c:out value="${row.agTotnum }" /></td>
-												<td class="t-td"><select:timestamp timestamp="${row.agCreatedate}" idtype="ss" /></td>
-												<td class="t-td"><select:timestamp timestamp="${row.agUpdatedate}" idtype="ss" /></td>
+												<td class="t-td"><c:out value="${row.startdate}" /></td>
+												<td class="t-td"><c:out value="${row.enddate}" /></td>
+												<td class="t-td"><c:out value="${row.totnum}" /></td>
+												<td class="t-td"><select:timestamp timestamp="${row.agcreatedate}" idtype="ss" /></td>
+												<td class="t-td"><select:timestamp timestamp="${row.agupdatedate}" idtype="ss" /></td>
 											</tr>
 										</logic:iterate>
 									</c:if>

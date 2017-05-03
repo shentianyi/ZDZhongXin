@@ -63,7 +63,11 @@ public class MoveNoticeDAO  extends DAOSupport implements IMoveNoticeDAO{
 		StringBuffer sql = new StringBuffer();
 		sql.append(MoveNoticeDAO.select_movenotice);
 		sql.append("AND MNNO ="+no);
-		mn = (MoveNotice) getJdbcTemplate().query(sql.toString(),new BeanPropertyRowMapper(MoveNotice.class)).get(0);
-		return mn;
+		List<MoveNotice> list=null;
+		list=getJdbcTemplate().query(sql.toString(),new BeanPropertyRowMapper(MoveNotice.class));
+		if(list.size()==0){
+			return null;
+		}
+		return list.get(0);
 	}
 }

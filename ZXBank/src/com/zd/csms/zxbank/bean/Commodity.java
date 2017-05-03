@@ -22,7 +22,6 @@ public class Commodity implements Serializable{
 	private String cmHgzno;//合格证编号
 	private BigDecimal cmCarprice;//车价
 	private String cmLoancode;// 融资编号
-	
 //	private String cmWhcode;//仓库代码
 	public int getCmId() {
 		return cmId;

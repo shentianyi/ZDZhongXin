@@ -5,121 +5,120 @@ import java.util.Date;
 public class Agreement {
 	
 	private int agId ;//监管协议id主键
-	private String agCustno ; //客户号
-	private String agLoncpid ; //借款企业id（银行借款企业ECIF编号）
-	private String agLoncpname ;//借款企业名称
-	private String agProtocolno ;//系统监管协议编号
-	private String agProtocolcode ;//纸质监管协议编号
-	private String agState ;//协议状态（01-生效,02-失效）
-	private String agStdate ;//协议起始日（长度 8）
-	private String agEnddate ;//协议到期日（长度 8）
-	private String agIsonline ;//是否开通线上业务（00-未开通,01-开通）
-	private String agIsmove  ;//是否允许移库（00-不允许,01-允许）
-	private String agOperorg ;//经办行
-	private String agTotnum ;//总记录数
-	private Date agCreatedate ;//数据创建时间
-	private Date agUpdatedate ;//数据更新时间
+	private String hostno  ; //客户号
+	private String agloncpid  ; //借款企业id（银行借款企业ECIF编号）
+	private String lonnm  ;//借款企业名称
+	private String spvagtid  ;//系统监管协议编号
+	private String spvagtno  ;//纸质监管协议编号
+	private String agtstt  ;//协议状态（01-生效,02-失效）
+	private String startdate  ;//协议起始日（长度 8）
+	private String enddate  ;//协议到期日（长度 8）
+	private String isauth  ;//是否开通线上业务（00-未开通,01-开通）
+	private String ismv   ;//是否允许移库（00-不允许,01-允许）
+	private String operorg  ;//经办行
+	private String totnum  ;//总记录数
+	private Date agcreatedate  ;//数据创建时间
+	private Date agupdatedate  ;//数据更新时间
 	public int getAgId() {
 		return agId;
 	}
 	public void setAgId(int agId) {
 		this.agId = agId;
 	}
-	public String getAgCustno() {
-		return agCustno;
+	public String getHostno() {
+		return hostno;
 	}
-	public void setAgCustno(String agCustno) {
-		this.agCustno = agCustno;
+	public void setHostno(String hostno) {
+		this.hostno = hostno;
 	}
-	public String getAgLoncpid() {
-		return agLoncpid;
+	public String getAgloncpid() {
+		return agloncpid;
 	}
-	public void setAgLoncpid(String agLoncpid) {
-		this.agLoncpid = agLoncpid;
+	public void setAgloncpid(String agloncpid) {
+		this.agloncpid = agloncpid;
 	}
-	public String getAgLoncpname() {
-		return agLoncpname;
+	public String getLonnm() {
+		return lonnm;
 	}
-	public void setAgLoncpname(String agLoncpname) {
-		this.agLoncpname = agLoncpname;
+	public void setLonnm(String lonnm) {
+		this.lonnm = lonnm;
 	}
-	public String getAgProtocolno() {
-		return agProtocolno;
+	public String getSpvagtid() {
+		return spvagtid;
 	}
-	public void setAgProtocolno(String agProtocolno) {
-		this.agProtocolno = agProtocolno;
+	public void setSpvagtid(String spvagtid) {
+		this.spvagtid = spvagtid;
 	}
-	public String getAgProtocolcode() {
-		return agProtocolcode;
+	public String getSpvagtno() {
+		return spvagtno;
 	}
-	public void setAgProtocolcode(String agProtocolcode) {
-		this.agProtocolcode = agProtocolcode;
+	public void setSpvagtno(String spvagtno) {
+		this.spvagtno = spvagtno;
 	}
-	public String getAgState() {
-		return agState;
+	public String getAgtstt() {
+		return agtstt;
 	}
-	public void setAgState(String agState) {
-		this.agState = agState;
+	public void setAgtstt(String agtstt) {
+		this.agtstt = agtstt;
 	}
-	public String getAgStdate() {
-		return agStdate;
+	public String getStartdate() {
+		return startdate;
 	}
-	public void setAgStdate(String agStdate) {
-		this.agStdate = agStdate;
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
 	}
-	public String getAgEnddate() {
-		return agEnddate;
+	public String getEnddate() {
+		return enddate;
 	}
-	public void setAgEnddate(String agEnddate) {
-		this.agEnddate = agEnddate;
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
 	}
-	public String getAgIsonline() {
-		return agIsonline;
+	public String getIsauth() {
+		return isauth;
 	}
-	public void setAgIsonline(String agIsonline) {
-		this.agIsonline = agIsonline;
+	public void setIsauth(String isauth) {
+		this.isauth = isauth;
 	}
-	public String getAgIsmove() {
-		return agIsmove;
+	public String getIsmv() {
+		return ismv;
 	}
-	public void setAgIsmove(String agIsmove) {
-		this.agIsmove = agIsmove;
+	public void setIsmv(String ismv) {
+		this.ismv = ismv;
 	}
-	public String getAgOperorg() {
-		return agOperorg;
+	public String getOperorg() {
+		return operorg;
 	}
-	public void setAgOperorg(String agOperorg) {
-		this.agOperorg = agOperorg;
+	public void setOperorg(String operorg) {
+		this.operorg = operorg;
 	}
-	public String getAgTotnum() {
-		return agTotnum;
+	public String getTotnum() {
+		return totnum;
 	}
-	public void setAgTotnum(String agTotnum) {
-		this.agTotnum = agTotnum;
+	public void setTotnum(String totnum) {
+		this.totnum = totnum;
 	}
-	public Date getAgCreatedate() {
-		return agCreatedate;
+	public Date getAgcreatedate() {
+		return agcreatedate;
 	}
-	public void setAgCreatedate(Date agCreatedate) {
-		this.agCreatedate = agCreatedate;
+	public void setAgcreatedate(Date agcreatedate) {
+		this.agcreatedate = agcreatedate;
 	}
-	public Date getAgUpdatedate() {
-		return agUpdatedate;
+	public Date getAgupdatedate() {
+		return agupdatedate;
 	}
-	public void setAgUpdatedate(Date agUpdatedate) {
-		this.agUpdatedate = agUpdatedate;
+	public void setAgupdatedate(Date agupdatedate) {
+		this.agupdatedate = agupdatedate;
 	}
 	@Override
 	public String toString() {
-		return "Agreement [agId=" + agId + ", agCustno=" + agCustno
-				+ ", agLoncpid=" + agLoncpid + ", agLoncpname=" + agLoncpname
-				+ ", agProtocolno=" + agProtocolno + ", agProtocolcode="
-				+ agProtocolcode + ", agState=" + agState + ", agStdate="
-				+ agStdate + ", agEnddate=" + agEnddate + ", agIsonline="
-				+ agIsonline + ", agIsmove=" + agIsmove + ", agOperorg="
-				+ agOperorg + ", agTotnum=" + agTotnum + ", agCreatedate="
-				+ agCreatedate + ", agUpdatedate=" + agUpdatedate + "]";
+		return "Agreement [agId=" + agId + ", hostno=" + hostno
+				+ ", agloncpid=" + agloncpid + ", lonnm=" + lonnm
+				+ ", spvagtid=" + spvagtid + ", spvagtno=" + spvagtno
+				+ ", agtstt=" + agtstt + ", startdate=" + startdate
+				+ ", enddate=" + enddate + ", isauth=" + isauth + ", ismv="
+				+ ismv + ", operorg=" + operorg + ", totnum=" + totnum
+				+ ", agcreatedate=" + agcreatedate + ", agupdatedate="
+				+ agupdatedate + "]";
 	}
-	
 	
 }

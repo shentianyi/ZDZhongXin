@@ -307,7 +307,41 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			//--开始本地查询--
 		return mapping.findForward("warehouse");
 	}
-
+	
+	/**
+	 * 仓库修改展示页
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	public ActionForward warehouseUpdateShow(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response){
+		WareHouseService whs = new WareHouseService();
+		String custNo=request.getParameter("custNo");
+		String whCode=request.getParameter("whCode");
+		Warehouse warehouse=whs.getWarehouse(custNo, whCode);
+		request.setAttribute("warehouse",warehouse);
+		return mapping.findForward("warehouseUpdate");
+	}
+	//仓库更新
+	public ActionForward warehouseUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response){
+		BankInterfaceForm WarHouseform = (BankInterfaceForm) form;
+		Warehouse query = WarHouseform.getWarehouse();
+		
+		WareHouseService whs=new WareHouseService();
+		query.setUpdateDate(new Date());
+		System.out.println(query);
+		if(whs.update(query)){
+			return warehouse(mapping, WarHouseform, request, response);
+		}
+		request.setAttribute("msg", "更新失败");
+		return mapping.findForward("warehouseUpdate");
+	}
+	
+	
+	
 	/**
 	 * 融资信息查询
 	 * 
@@ -320,7 +354,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 	 */
 	public ActionForward financing(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) {
-		FinancingService fs = new FinancingService();
+			FinancingService fs = new FinancingService();
 			BankInterfaceForm form = (BankInterfaceForm) actionform;
 			FinancingQueryVO query = form.getFinancingVO();
 
@@ -363,7 +397,44 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			request.setAttribute("financingVO", query);
 			return mapping.findForward("financing");
 	}
-
+	/**
+	 * 融资修改界面
+	 * @param mapping
+	 * @param actionform
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward financingUpdateShow(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
+			HttpServletResponse response) {
+		String fgLoanCode=request.getParameter("fgLoanCode");
+		FinancingService fs = new FinancingService();
+		Financing financing=fs.getFinancing(fgLoanCode);
+		request.setAttribute("financing", financing);
+		return mapping.findForward("financingupdate");
+	}
+	/**
+	 * 融资更新
+	 * @param mapping
+	 * @param actionform
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward financingUpdate(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
+			HttpServletResponse response) {
+		BankInterfaceForm form = (BankInterfaceForm) actionform;
+		Financing query = form.getFinancing();
+		FinancingService fs = new FinancingService();
+		query.setFgUpdateDate(new Date());
+		System.out.println("当前from："+query);
+		if(fs.update(query)){
+			return financing(mapping, actionform, request, response);
+		}
+		request.setAttribute("msg", "更新失败");
+		return mapping.findForward("financingupdate");
+	}
+	
 	/**
 	 * 监管协议查询
 	 * @param mapping
@@ -394,7 +465,7 @@ public class ZXBankInterfaceAction extends ActionSupport {
 			request.setAttribute("ACTION", "DLCDAGTQ");
 			//userName 需要等到整合时将Session中用户保存
 			request.setAttribute("USERNAME", "");
-			request.setAttribute("HOSTNO",query.getAgCustno());
+			request.setAttribute("HOSTNO",query.getHostno());
 			try {
 				boolean flg = commonRequest(mapping, request, "", AgreementFar.class, new String[] { "ACTION", "USERNAME",
 						"HOSTNO" });

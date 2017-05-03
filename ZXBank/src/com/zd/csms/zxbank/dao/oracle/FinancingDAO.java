@@ -25,7 +25,7 @@ public class FinancingDAO extends DAOSupport implements IFinancingDAO{
 	}
 	
 	// 资源查询语句
-	private static String select_financing = "SELECT FIID,FGLONENTNO,FGLONCPNAME,FGSTDATE,FGENDDATE,FGLOANCODE,FGSCFTXNO,FGLOANAMT,FGBAILRAT,FGSLFCAP,FGFSTBLRAT,FGPROCRT,FGBIZMOD,FGOPERORG,FGCREATEDATE,FGUPDATEDATE FROM ZX_FINANCING WHERE 1=1";
+	private static String select_financing = "SELECT FIID,FGLONENTNO,FGLONCPNAME,FGSTDATE,FGENDDATE,FGLOANCODE,FGSCFTXNO,FGLOANAMT,FGBAILRAT,FGSLFCAP,FGFSTBLRAT,FGPROCRT,FGBIZMOD,FGOPERORG,FGAGTID,FGCREATEDATE,FGUPDATEDATE FROM ZX_FINANCING WHERE 1=1";
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -72,7 +72,7 @@ public class FinancingDAO extends DAOSupport implements IFinancingDAO{
 
 	@Override
 	public boolean update(Financing fing) {
-		String sql="update ZX_FINANCING set fgLonentNo=?,fgLoncpName=?,fgStDate=?,fgEndDate=?,fgScftxNo=?,fgLoanAmt=?,fgBailRat=?,fgSlfcap=?,fgFstblRat=?,fgProcrt=?,fgBizMod=?,fgOperOrg=?,fgUpdateDate=to_date(?,'YYYY-MM-DD HH24:MI:SS') where fgLoanCode=?";
+		String sql="update ZX_FINANCING set fgLonentNo=?,fgLoncpName=?,fgStDate=?,fgEndDate=?,fgScftxNo=?,fgLoanAmt=?,fgBailRat=?,fgSlfcap=?,fgFstblRat=?,fgProcrt=?,fgBizMod=?,fgOperOrg=?,fgagtid=?,fgUpdateDate=to_date(?,'YYYY-MM-DD HH24:MI:SS') where fgLoanCode=?";
 		PreparedStatement stmt = null;
 		try {
 			stmt = BeanManager.getDataSource(null).getConnection().prepareStatement(sql);
@@ -88,8 +88,9 @@ public class FinancingDAO extends DAOSupport implements IFinancingDAO{
 			stmt.setString(10,fing.getFgProcrt());
 			stmt.setString(11,fing.getFgBizMod());
 			stmt.setString(12,fing.getFgOperOrg());
-			stmt.setString(13,DateUtil.getStringFormatByDate(fing.getFgUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
-			stmt.setString(14,fing.getFgLoanCode());
+			stmt.setString(13,fing.getFgagtid());
+			stmt.setString(14,DateUtil.getStringFormatByDate(fing.getFgUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
+			stmt.setString(15,fing.getFgLoanCode());
 			stmt.executeUpdate();
 			return true;	
 		} catch (SQLException e) {
@@ -108,4 +109,19 @@ public class FinancingDAO extends DAOSupport implements IFinancingDAO{
 	public boolean add(Financing financing) {
 		return super.add(financing);
 	}
+
+	@Override
+	public Financing getFinancing(String code) {
+		String sql = "SELECT * FROM ZX_FINANCING WHERE FGLOANCODE = '"+code+"'";
+		List<Financing> list=null;
+		list=getJdbcTemplate().query(sql, new BeanPropertyRowMapper(Financing.class));
+		if(list.size()==0){
+			return null;
+		}
+		return list.get(0);
+	}
+	
+	
+	
+	
 }

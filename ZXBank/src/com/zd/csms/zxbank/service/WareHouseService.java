@@ -79,5 +79,11 @@ public class WareHouseService extends ServiceSupport {
 		was.setLonentid(waFar.getLonentid());
 		return wdao.add(was);
 	}
-
+	
+	public Warehouse getWarehouse( String custNo, String whCode) {
+		return wdao.getWarehouse(custNo, whCode);
+	}
+	public boolean update(Warehouse warehouse){
+		return wdao.upadat(warehouse);
+	}
 }

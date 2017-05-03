@@ -12,18 +12,19 @@ import com.zd.core.annotation.table;
 public class Financing {
 	private int fiId;//融资查询表主键
 	private String fgLonentNo;//借款企业Id
-	private String fgLoncpName ;//借款企业名称  新增
-	private String fgStDate;//融资起始日期 ，格式为YYYYMMDD
-	private String fgEndDate;//融资结束日期，格式为YYYYMMDD
+	private String fgLoncpName;//借款企业名称  
+	private String fgStDate;//融资起始日 ，格式为YYYYMMDD
+	private String fgEndDate;//融资到期日，格式为YYYYMMDD
 	private String fgLoanCode;//融资编号
 	private String fgScftxNo;//放款批次号
 	private String fgLoanAmt;//融资金额
-	private String fgBailRat;//保证金比例
+	private String fgBailRat;//首付保证金比例
 	private String fgSlfcap;//自有资金比例
 	private String fgFstblRat;//首付保证金可提货比例
 	private String fgProcrt;//授信产品，银行承兑汇票
 	private String fgBizMod;//业务模式，先票后货
 	private String fgOperOrg;//经办行
+	private String fgagtid;//协议编号
 	private Date fgCreateDate;//融资数据同步时间
 	private Date fgUpdateDate;//融资同步更新时间
 	public int getFiId() {
@@ -122,6 +123,12 @@ public class Financing {
 	public void setFgLoncpName(String fgLoncpName) {
 		this.fgLoncpName = fgLoncpName;
 	}
+	public String getFgagtid() {
+		return fgagtid;
+	}
+	public void setFgagtid(String fgagtid) {
+		this.fgagtid = fgagtid;
+	}
 	@Override
 	public String toString() {
 		return "Financing [fiId=" + fiId + ", fgLonentNo=" + fgLonentNo
@@ -131,9 +138,10 @@ public class Financing {
 				+ ", fgBailRat=" + fgBailRat + ", fgSlfcap=" + fgSlfcap
 				+ ", fgFstblRat=" + fgFstblRat + ", fgProcrt=" + fgProcrt
 				+ ", fgBizMod=" + fgBizMod + ", fgOperOrg=" + fgOperOrg
-				+ ", fgCreateDate=" + fgCreateDate + ", fgUpdateDate="
-				+ fgUpdateDate + "]";
+				+ ", fgagtid=" + fgagtid + ", fgCreateDate=" + fgCreateDate
+				+ ", fgUpdateDate=" + fgUpdateDate + "]";
 	}
+	
 	
 	
 }

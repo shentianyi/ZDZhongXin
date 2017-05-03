@@ -1,7 +1,11 @@
 package com.zd.csms.zxbank.bean;
 
 import com.zd.core.annotation.table;
-
+/**
+ * 收货通知书详情
+ * @author caizhuo
+ *
+ */
 @table(name="zx_notifydetail")
 public class ReceivingDetail {
 	private int ndId;//--收货质物明细表主键id

@@ -3,7 +3,11 @@ package com.zd.csms.zxbank.bean;
 import java.util.Date;
 
 import com.zd.core.annotation.table;
-
+/**
+ * 收货通知书
+ * @author caizhuo
+ *
+ */
 @table(name="ZX_NOTIFY")
 public class ReceivingNotice {
 	private int nyId;//--收货通知表主键id

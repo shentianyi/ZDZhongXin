@@ -27,6 +27,8 @@
 			<forward name="stocktaking" path="/jsp/stock_taking.jsp" />
 			<forward name="checkstock" path="/jsp/stock_taking_select.jsp" />
 			<forward name="checkstockDetail" path="/jsp/stock_taking_detail.jsp" />
+			<forward name="warehouseUpdate" path="/jsp/warehouse_update.jsp" />
+			<forward name="financingupdate" path="/jsp/financing_update.jsp" />
 		</action>
 	</action-mappings>
 </struts-config>	
