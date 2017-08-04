@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="dbsyForm" type="com.zd.csms.dbsy.web.form.DbsyForm"></form-bean>
+	</form-beans>
+	
+  <global-forwards>
+    <forward name="error" path="/common/500error.jsp" />
+  </global-forwards> 
+  
+	<action-mappings>
+		<action path="/dbsy" 
+		    name="dbsyForm" 
+		    parameter="method" 
+		    type="com.zd.csms.dbsy.web.action.DbsyAction"
+		    scope="request">
+			<forward name="dbsy_list" path="/WEB-INF/jsp/dbsy/dbsy_list.jsp"/>
+			<forward name="dbsy_list_num" path="/WEB-INF/jsp/base/ajax_result.jsp"/>
+		</action>
+	</action-mappings>
+	
+</struts-config>
+

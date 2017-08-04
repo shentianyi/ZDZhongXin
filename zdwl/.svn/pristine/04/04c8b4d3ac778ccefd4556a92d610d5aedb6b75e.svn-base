@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="videoPlanForm" type="com.zd.csms.planandreport.web.form.VideoPlanForm"></form-bean>
+		<form-bean name="inspectionPlanForm" type="com.zd.csms.planandreport.web.form.InspectionPlanForm"></form-bean>
+		<!-- 视频检查报告 -->
+		<form-bean name="videoReportForm" type="com.zd.csms.planandreport.web.form.VideoReportForm"></form-bean>
+	</form-beans>
+	
+    <global-forwards>
+    	<forward name="error" path="/common/500error.jsp" />
+    </global-forwards> 
+  
+	<action-mappings>
+		<!-- 视频检查计划 -->
+		<action path="/videoPlan" 
+		    name="videoPlanForm" 
+		    parameter="method" 
+		    type="com.zd.csms.planandreport.web.action.VideoPlanAction"
+		    scope="request">
+		    <!-- 视频检查计划列表未审核(专员) -->
+			<forward name="video_plan_list" path="/WEB-INF/jsp/planAndReport/videoPlan/video_plan_list.jsp"/>
+		    <!-- 视频检查计划列表已审核(专员) -->
+			<forward name="video_plan_list_alreadycheck" path="/WEB-INF/jsp/planAndReport/videoPlan/video_plan_list_alreadycheck.jsp"/>
+		    <!-- 视频检查计划未审核详情页(专员) -->
+			<forward name="detail_dealer" path="/WEB-INF/jsp/planAndReport/videoPlan/detail_dealer.jsp"/>
+		    <!-- 视频检查计划已审核详情页(专员) -->
+			<forward name="detail_dealer_alreadycheck" path="/WEB-INF/jsp/planAndReport/videoPlan/detail_dealer_alreadycheck.jsp"/>
+		    <!-- 视频检查计划新增-待选经销商(专员) -->
+			<forward name="add_stay_dealer" path="/WEB-INF/jsp/planAndReport/videoPlan/add_stay_dealer.jsp"/>
+		    <!-- 视频检查计划新增-已选经销商(专员) -->
+			<forward name="add_already_dealer" path="/WEB-INF/jsp/planAndReport/videoPlan/add_already_dealer.jsp"/>
+		    <!-- 视频检查计划未审核列表页(经理) -->
+			<forward name="video_plan_list_approve" path="/WEB-INF/jsp/planAndReport/videoPlan/video_plan_list_approve.jsp"/>
+		    <!-- 视频检查计划已审核列表页(经理) -->
+			<forward name="video_plan_list_approveno" path="/WEB-INF/jsp/planAndReport/videoPlan/video_plan_list_approveno.jsp"/>
+		    <!-- 视频检查计划未审核详情页(经理) -->
+			<forward name="detail_dealer_approve" path="/WEB-INF/jsp/planAndReport/videoPlan/detail_dealer_approve.jsp"/>
+		    <!-- 视频检查计划已审核详情页(经理) -->
+			<forward name="detail_dealer_approveno" path="/WEB-INF/jsp/planAndReport/videoPlan/detail_dealer_approveno.jsp"/>
+		    <!-- 视频检查计划台账 -->
+			<forward name="video_plan_ledger" path="/WEB-INF/jsp/planAndReport/videoPlan/videoPlanLedger/video_plan_ledger.jsp"/>
+		</action>
+		
+		<action path="/json/saveCheckMinute" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.planandreport.web.jsonaction.SaveCheckMinuteJsonAction"
+				scope="request">
+		</action>
+		
+		<action path="/json/saveCheckDate" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.planandreport.web.jsonaction.SaveCheckDateJsonAction"
+				scope="request">
+		</action>
+		
+		<!-- 巡检计划 -->
+		<action path="/inspectionPlan" 
+		    name="inspectionPlanForm" 
+		    parameter="method"
+		    type="com.zd.csms.planandreport.web.action.InspectionPlanAction"
+		    scope="request">
+		    <!-- 新增页待选经销商列表 -->
+			<forward name="add_stay_dealer" path="/WEB-INF/jsp/planAndReport/inspectionPlan/add_stay_dealer.jsp"/>
+		    <!-- 新增页已选经销商列表 -->
+			<forward name="add_already_dealer" path="/WEB-INF/jsp/planAndReport/inspectionPlan/add_already_dealer.jsp"/>
+		    <!-- 列表页未审核 -->
+			<forward name="inspection_plan_list" path="/WEB-INF/jsp/planAndReport/inspectionPlan/inspection_plan_list.jsp"/>
+		    <!-- 列表页已审核 -->
+			<forward name="inspection_plan_list_alreadycheck" path="/WEB-INF/jsp/planAndReport/inspectionPlan/inspection_plan_list_alreadycheck.jsp"/>
+			<!-- 专员未审核详情页 -->
+			<forward name="detail_dealer" path="/WEB-INF/jsp/planAndReport/inspectionPlan/detail_dealer.jsp"/>
+			<!-- 专员已审核详情页 -->
+			<forward name="detail_dealer_alreadycheck" path="/WEB-INF/jsp/planAndReport/inspectionPlan/detail_dealer_alreadycheck.jsp"/>
+			<!-- 经理未审核列表页 -->
+			<forward name="inspection_plan_list_approve" path="/WEB-INF/jsp/planAndReport/inspectionPlan/inspection_plan_list_approve.jsp"/>
+			<!-- 经理已审核列表页 -->
+			<forward name="inspection_plan_list_approveno" path="/WEB-INF/jsp/planAndReport/inspectionPlan/inspection_plan_list_approveno.jsp"/>
+			<!-- 经理未审核详情页 -->
+			<forward name="detail_dealer_approve" path="/WEB-INF/jsp/planAndReport/inspectionPlan/detail_dealer_approve.jsp"/>
+			<!-- 经理已审核详情页 -->
+			<forward name="detail_dealer_approveno" path="/WEB-INF/jsp/planAndReport/inspectionPlan/detail_dealer_approveno.jsp"/>
+			<!-- 巡检计划未审核台账 -->
+			<forward name="inspection_plan_list_ledger" path="/WEB-INF/jsp/planAndReport/inspectionPlan/inspectionPlanLedger/inspection_plan_list_ledger.jsp"/>
+			<!-- 巡检计划已审核台账 -->
+			<forward name="inspection_plan_list_ledgerno" path="/WEB-INF/jsp/planAndReport/inspectionPlan/inspectionPlanLedger/inspection_plan_list_ledgerno.jsp"/>
+			<!-- 巡检计划未审核台账详情页 -->
+			<forward name="inspection_plan_detail_ledger" path="/WEB-INF/jsp/planAndReport/inspectionPlan/inspectionPlanLedger/inspection_plan_detail_ledger.jsp"/>
+			<!-- 巡检计划已审核台账详情页 -->
+			<forward name="inspection_plan_detail_ledgerno" path="/WEB-INF/jsp/planAndReport/inspectionPlan/inspectionPlanLedger/inspection_plan_detail_ledgerno.jsp"/>
+		</action>
+		
+		<action path="/json/saveInspectionData" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.planandreport.web.jsonaction.SaveInspectionJsonAction"
+				scope="request">
+		</action>
+		
+		<!-- 视频检查报告及列表 -->
+		<action path="/videoReport" 
+		    name="videoReportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.planandreport.web.action.VideoReportAction"
+		    scope="request">    
+		    <!-- 视频检查报告-->                       
+			<forward name="addReport" path="/WEB-INF/jsp/planAndReport/videoReport/addReport.jsp" />
+			<forward name="updateReport" path="/WEB-INF/jsp/planAndReport/videoReport/updReport.jsp"/>
+			<forward name="viewReport" path="/WEB-INF/jsp/planAndReport/videoReport/viewReport.jsp" />
+			 <!-- 视频专员:视频检查报告列表:未完成 -->                       
+			<forward name="progressList" path="/WEB-INF/jsp/planAndReport/videoReport/progressList.jsp"/>
+			<!-- 视频专员:视频检查报告列表:已完成 -->   
+			<forward name="completedList" path="/WEB-INF/jsp/planAndReport/videoReport/completedList.jsp"/>
+			<!-- 视频部全员及各部门经理以上:视频检查报告列表:查看 -->   
+			<forward name="viewList" path="/WEB-INF/jsp/planAndReport/videoReport/viewList.jsp"/>
+			
+		</action> 
+
+	</action-mappings>
+	
+</struts-config>

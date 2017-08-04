@@ -1,0 +1,133 @@
+#页面查询
+#经销商  dealerQuery
+#总行/分行/支行  bankQuery
+#品牌  brandQuery
+#区 （省，区，县，详细地址） areaQuery
+#进驻时间  inDateQuery 
+#协议邮寄时间  mailingTimeQuery
+#协议到期时间  protocolExpireQuery
+#项目进驻流转单时间   proInTransferQuery
+#业务进驻流转单时间   busInTransferQuery
+#绑定时间  bindingTimeQuery
+#开票时间 billingTimeQuery **
+#票号  draftNumQuery
+#到期日 dueDateQuery
+#车架号 vinQuery
+#移动时间moveQuery
+#空格spaceQuery
+
+#市场部信息提醒-------------------
+
+#进驻7天未交监管费提醒
+SEVENDAYSNONREGULATORYFEE="dealerQuery,brandQuery,bankQuery,inDateQuery"
+
+#监管费到期前30天进行提醒
+SUPERVISIONFEE30DAYSAGO="dealerQuery,brandQuery,bankQuery,inDateQuery"
+
+#监管费收取3天后未开票提醒
+THREEDAYSAFTERNOBILLING="dealerQuery,brandQuery,bankQuery,inDateQuery"
+
+#项目进驻当天协议未收回提醒
+PROJECTINAGREEMENTNOTRECOVERED="dealerQuery,brandQuery,bankQuery,inDateQuery,mailingTimeQuery"
+
+#监管协议到期前30天提醒
+SUPERVISIONAGREEMENT30DAYSAGO="dealerQuery,brandQuery,bankQuery,inDateQuery,protocolExpireQuery"
+
+#监管协议签署10天未收回提醒
+AGREEMENTSIGNING10DAYNOTRECOVERED="dealerQuery,brandQuery,bankQuery,inDateQuery,mailingTimeQuery"
+
+#协议签署超15天未发进店流转单提醒
+AGREEMENTSIGNING15DAYNOTRANSFER="dealerQuery,brandQuery,bankQuery,spaceQuery,proInTransferQuery,mailingTimeQuery"
+
+#业务进驻流转单进驻前3天未匹配人员提醒
+BUSINESSIN3DAYSAGONOTPERSONNEL="dealerQuery,brandQuery,bankQuery,busInTransferQuery"
+
+#1,4,7,10月5日中信银行监管费明细提醒
+NO5CITICBANKSUPERVISIONFEE=
+
+#项目进驻流转单
+PROJECTIN="dealerQuery,brandQuery,bankQuery,proInTransferQuery"
+
+#业务进驻流转单
+BUSINESSIN="dealerQuery,brandQuery,bankQuery,busInTransferQuery"
+
+#项目撤出流转单
+PROJECTOUT="dealerQuery,brandQuery,bankQuery,busInTransferQuery"
+
+#项目绑定流转单
+PROJECTBINDING="dealerQuery,brandQuery,bankQuery,busInTransferQuery"
+
+#项目解绑流转单
+PROJECTUNBINDING="dealerQuery,brandQuery,bankQuery,busInTransferQuery,bindingTimeQuery"
+
+
+#市场部信息预警---------------------
+
+#进驻15天未交监管费预警
+FIFTEENDAYSNONREGULATORYFEE="dealerQuery,brandQuery,bankQuery,inDateQuery"
+
+#监管费到期前10天进行预警
+SUPERVISIONFEE10DAYSAGO="dealerQuery,brandQuery,bankQuery,inDateQuery"
+
+#监管费收取后10天未开票预警*
+
+TENDAYSAFTERNOBILLING="dealerQuery,brandQuery,bankQuery,inDateQuery"
+
+#监管费到期日未收费预警
+
+EXPIRENOFEE="dealerQuery,brandQuery,bankQuery,inDateQuery"
+
+#项目进驻15天协议未收回预警
+
+FIFTEENDAYSAGREEMENTNOTRECOVERED="dealerQuery,brandQuery,bankQuery,inDateQuery,mailingTimeQuery"
+
+#监管协议到期前15天预警
+AGREEMENT15DAYSAGO="dealerQuery,brandQuery,bankQuery,inDateQuery,protocolExpireQuery"
+
+#协议到期未续签预警
+AGREEMENTNOSIGNING="dealerQuery,brandQuery,bankQuery,inDateQuery,protocolExpireQuery"
+
+#业务进驻流转单进驻前1天未匹配人员预警
+BUSINESSINONEDAYSAGONOTPERSONNEL="dealerQuery,brandQuery,bankQuery,busInTransferQuery"
+
+#业务部信息预警
+
+#开票15个工作日未到车预警
+BILLNOCARFIFTEENWARING="dealerQuery,brandQuery,bankQuery,draftNumQuery,billingTimeQuery"
+#开票45天汇票未押满预警
+BILLFORTYFIVENOFULLWARING="dealerQuery,brandQuery,bankQuery,draftNumQuery,billingTimeQuery,dueDateQuery"
+#汇票到期当天未清票预警
+BILLNODRAFTNOWDATEWARING="dealerQuery,brandQuery,bankQuery,draftNumQuery,billingTimeQuery,dueDateQuery"
+#零库存零汇票延续7天预警
+ZEROSKUZERODRAFTWARING="dealerQuery,brandQuery,bankQuery"
+#连续五天无业务发生预警
+FIVEDAYNOBUSINESSWARING="dealerQuery,brandQuery,bankQuery"
+#移动车辆超过30天未处理预警
+MOVEEXCEEDTHIRTYNOPROCESSWARING="dealerQuery,brandQuery,bankQuery,vinQuery,moveQuery"
+#异常车辆超过总库存20%预警
+EXCEPTIONCAREXCEEDSKUTWENTYWARING="dealerQuery,brandQuery,bankQuery"
+
+#业务部信息提醒
+
+#银行移动审批提醒 (移动时间,状态)
+BANKMOVESTORAGEREMIND="dealerQuery,brandQuery,bankQuery,vinQuery"
+#银行释放审批提醒(日期)
+BANKOUTSTORAGEREMIND="dealerQuery,brandQuery,bankQuery,draftNumQuery,vinQuery"
+#最后一笔业务提醒
+MSGLASTBUSINESSREMIND="dealerQuery,brandQuery,bankQuery"
+#开票10个工作日未到车提醒
+MSGBILLNOCARREMIND="dealerQuery,brandQuery,bankQuery,draftNumQuery,billingTimeQuery"
+#开票30天汇票未押满
+MSGBILLNOFULLREMIND="dealerQuery,brandQuery,bankQuery,draftNumQuery,billingTimeQuery,dueDateQuery"
+#汇票到期前7天未清票提醒
+MSGBILLNODRAFTREMIND="dealerQuery,brandQuery,bankQuery,draftNumQuery,billingTimeQuery,dueDateQuery"
+#零库存零汇票提醒
+MSGZEROSKUZERODRAFTREMIND="dealerQuery,brandQuery,bankQuery"
+#连续三天无业务发生提醒
+MSGTHREEDAYNOBUSINESSREMIND="dealerQuery,brandQuery,bankQuery"
+#移动车辆超过25天未处理提醒
+MSGMOVEEXCEEDTWENTYFIVENOPROCESSREMIND="dealerQuery,brandQuery,bankQuery,moveQuery"
+#移动车辆超过总库存20%提醒
+MSGMOVECARTEXCEEDKURTWENTYEMIND="dealerQuery,brandQuery,bankQuery"
+#异常车辆超过总库存15%提醒
+MSGEXCEPTIONCAREXCEEDSKUFIFTEENREMIND="dealerQuery,brandQuery,bankQuery"

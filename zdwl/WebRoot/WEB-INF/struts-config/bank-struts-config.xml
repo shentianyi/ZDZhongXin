@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="bankForm" type="com.zd.csms.bank.web.form.BankForm"></form-bean>
+		<form-bean name="bankManagerForm" type="com.zd.csms.bank.web.form.BankManagerForm"></form-bean>
+		<form-bean name="biForm" type="com.zd.csms.bank.web.form.BankInterfaceForm"></form-bean>
+	</form-beans>
+	
+  <global-forwards>
+    <forward name="error" path="/common/500error.jsp" />
+  </global-forwards> 
+  
+	<action-mappings>
+		<action path="/bank" 
+		    name="bankForm" 
+		    parameter="method" 
+		    type="com.zd.csms.bank.web.action.BankAction"
+		    scope="request">
+			<forward name="bank_list" path="/WEB-INF/jsp/bank/bank_list.jsp"/>
+			<forward name="add_bank" path="/WEB-INF/jsp/bank/add_bank.jsp"/>
+			<forward name="upd_bank" path="/WEB-INF/jsp/bank/upd_bank.jsp"/>
+		</action>
+		
+		<action path="/bank/bankManager" 
+		    name="bankManagerForm" 
+		    parameter="method" 
+		    type="com.zd.csms.bank.web.action.BankManagerAction"
+		    scope="request">
+			<forward name="list" path="/WEB-INF/jsp/bankManager/list.jsp"/>
+			<forward name="add" path="/WEB-INF/jsp/bankManager/add.jsp"/>
+			<forward name="update" path="/WEB-INF/jsp/bankManager/update.jsp"/>
+		</action>
+		
+		<action path="/bank/bankChildrenManager" 
+		    name="bankForm" 
+		    parameter="method" 
+		    type="com.zd.csms.bank.web.action.BankAction"
+		    scope="request">
+			<forward name="bank_children_manager" path="/WEB-INF/jsp/bankChildrenManager/list.jsp"/>
+			<forward name="bank_children_in" path="/WEB-INF/jsp/bankChildrenManager/zhihang_in.jsp"/>
+			<forward name="bank_children_out" path="/WEB-INF/jsp/bankChildrenManager/zhihang_out.jsp"/>
+			
+		</action>
+		
+		<action path="/bank/interface" 
+		    parameter="method" 
+		    name="biForm"
+		    type="com.zd.csms.bank.web.action.BankInterfaceAction"
+		    scope="request">
+			<forward name="gyl001" path="/WEB-INF/jsp/bankinterface/gyl001_result.jsp"></forward>
+			<forward name="gyl002" path="/WEB-INF/jsp/bankinterface/gyl002_result.jsp"></forward>
+			<forward name="gyl003" path="/WEB-INF/jsp/bankinterface/gyl003_result.jsp"></forward>
+			<forward name="gyl004" path="/WEB-INF/jsp/bankinterface/gyl004_result.jsp"></forward>
+			<forward name="gyl005" path="/WEB-INF/jsp/bankinterface/gyl005_result.jsp"></forward>
+			<forward name="gyl006" path="/WEB-INF/jsp/bankinterface/gyl006_result.jsp"></forward>
+			<forward name="gyl007" path="/WEB-INF/jsp/bankinterface/gyl007_result.jsp"></forward>
+			<forward name="gyl009" path="/WEB-INF/jsp/bankinterface/gyl009_result.jsp"></forward>
+			<forward name="gyl011" path="/WEB-INF/jsp/bankinterface/gyl011_result.jsp"></forward>
+			<forward name="gyl022" path="/WEB-INF/jsp/bankinterface/gyl022_result.jsp"></forward>
+			<forward name="gyl013" path="/WEB-INF/jsp/bankinterface/gyl013_result.jsp"></forward>
+			<forward name="gyl017" path="/WEB-INF/jsp/bankinterface/gyl017_result.jsp"></forward>
+			<forward name="gyl018" path="/WEB-INF/jsp/bankinterface/gyl018_result.jsp"></forward>
+			<forward name="gyl019" path="/WEB-INF/jsp/bankinterface/gyl019_result.jsp"></forward>
+			<forward name="gyl025" path="/WEB-INF/jsp/bankinterface/gyl025_result.jsp"></forward>
+			<forward name="pregyl009" path="/WEB-INF/jsp/bankinterface/pregyl009.jsp"></forward>
+			<forward name="pregyl016" path="/WEB-INF/jsp/bankinterface/pregyl016.jsp"></forward>
+			<forward name="pregyl020" path="/WEB-INF/jsp/bankinterface/pregyl020.jsp"></forward>
+			<forward name="gyl021" path="/WEB-INF/jsp/bankinterface/gyl021_result.jsp"></forward>
+		</action>
+	</action-mappings>
+	
+	
+</struts-config>

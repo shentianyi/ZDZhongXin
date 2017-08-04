@@ -1,0 +1,86 @@
+/* 代办列表
+-------------------------------------------------- */
+.gray-bg {
+	background-color: #e1e1e1;
+}
+.todo-box {
+	position: relative;
+	margin: 10px 13px;
+	padding: 2px 0;	
+	background-image: url('../images/mobile/todo-top-x.png'), url('../images/mobile/todo-bottom-x.png');
+	background-position: left top, left bottom;
+	background-repeat: repeat-x;
+	background-size: 8px auto, 8px auto;
+}
+.todo-box:before {
+	position: absolute;
+	top: 60px;
+	left: -7px;
+	display: block;
+	width: 14px;
+	height: 14px;
+	background-color: #e1e1e1;
+	border-radius: 14px;
+	content: '';
+}
+.todo-box:after {
+	position: absolute;
+	top: 60px;
+	right: -7px;
+	display: block;
+	width: 14px;
+	height: 14px;
+	background-color: #e1e1e1;
+	border-radius: 14px;
+	content: '';
+}
+.todo-box .todo-box-main {
+	overflow: hidden;
+	display: block;
+	background-color: #fff;
+}
+.todo-box .todo-btn-line {
+	height: 20px;
+	margin: 0 12px 10px;	
+	line-height: 20px;	
+}
+.todo-btn-line .detail-btn {
+	padding-right: 15px;
+	color: #666!important;
+	background-repeat: no-repeat;
+	background-image: url('../images/mobile/detail-btn.png');
+	background-position: right center;
+	background-size: 11px auto;
+}
+
+/* 媒体查询 3倍密度手机
+-------------------------------------------------- */
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+	.todo-box {
+		margin: 13px 16px;
+		background-size: 10px auto, 10px auto;
+	}
+	.todo-box .todo-btn-line {
+		height: 30px;
+		margin: 0 15px 12px;
+		line-height: 30px;
+	}
+	.todo-btn-line .detail-btn {
+		padding-right: 22px;
+		font-size: 15px;
+		background-size: 15px auto;
+	}
+	.todo-box:before,
+	.todo-box:after {
+		top: 80px;
+		width: 18px;
+		height: 18px;
+		border-radius: 18px;
+	}
+	.todo-box:before {
+		left: -9px;
+	}
+	.todo-box:after {
+		right: -9px;
+	}
+}

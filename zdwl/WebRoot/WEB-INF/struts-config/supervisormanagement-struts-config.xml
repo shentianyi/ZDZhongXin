@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="usernameManageForm" type="com.zd.csms.supervisorymanagement.web.form.UsernameManageForm"></form-bean>
+		<form-bean name="fixedAssetListForm" type="com.zd.csms.supervisorymanagement.web.form.FixedAssetListForm"></form-bean>
+		<form-bean name="fixedAssetsForm" type="com.zd.csms.supervisorymanagement.web.form.FixedAssetsForm"></form-bean>
+		<form-bean name="postageRequisitionForm" type="com.zd.csms.supervisorymanagement.web.form.PostageRequisitionForm"></form-bean>
+		<form-bean name="handoverLogForm" type="com.zd.csms.supervisorymanagement.web.form.HandoverLogForm"></form-bean>
+		<form-bean name="handoverPlanForm" type="com.zd.csms.supervisorymanagement.web.form.HandoverPlanForm"></form-bean>
+		<form-bean name="transferForm" type="com.zd.csms.supervisorymanagement.web.form.TransferForm"></form-bean>
+		<form-bean name="systemManageForm" type="com.zd.csms.supervisorymanagement.web.form.SystemManageForm"></form-bean>
+		<form-bean name="systemSuperviseForm" type="com.zd.csms.supervisorymanagement.web.form.SystemSuperviseForm"></form-bean>
+		<form-bean name="mailcostForm" type="com.zd.csms.supervisorymanagement.web.form.MailcostForm"></form-bean>
+		<form-bean name="dataMailcostForm" type="com.zd.csms.supervisorymanagement.web.form.DataMailcostForm"></form-bean>
+		<form-bean name="leaveApplyForm" type="com.zd.csms.supervisorymanagement.web.form.LeaveApplyForm"></form-bean>
+		<form-bean name="extraworkApplyForm" type="com.zd.csms.supervisorymanagement.web.form.ExtraworkApplyForm"></form-bean>
+		<form-bean name="resignApplyForm" type="com.zd.csms.supervisorymanagement.web.form.ResignApplyForm"></form-bean>
+	</form-beans>
+	
+  <global-forwards>
+    <forward name="error" path="/common/500error.jsp" />
+  </global-forwards> 
+  
+	<action-mappings>
+		<action path="/usernameManage" 
+		    name="usernameManageForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.UsernameManageAction"
+		    scope="request">
+			<forward name="username_manage_list" path="/WEB-INF/jsp/supervisorymanagement/usernameManage/username_manage_list.jsp"/>
+			<forward name="add_username_manage" path="/WEB-INF/jsp/supervisorymanagement/usernameManage/add_username_manage.jsp"/>
+			<forward name="upd_username_manage" path="/WEB-INF/jsp/supervisorymanagement/usernameManage/upd_username_manage.jsp"/>
+		</action>
+		<action path="/fixedAssets" 
+		    name="fixedAssetsForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.FixedAssetsAction"
+		    scope="request">
+			<forward name="fixed_assets_list" path="/WEB-INF/jsp/supervisorymanagement/fixedAssets/fixed_assets_list.jsp"/>
+			<forward name="add_fixed_assets" path="/WEB-INF/jsp/supervisorymanagement/fixedAssets/add_fixed_assets.jsp"/>
+			<forward name="upd_fixed_assets" path="/WEB-INF/jsp/supervisorymanagement/fixedAssets/upd_fixed_assets.jsp"/>
+			<forward name="import_fixed" path="/WEB-INF/jsp/supervisorymanagement/fixedAssets/import_fixed.jsp"/>
+		</action>
+		<action path="/fixedAssetList" 
+		    name="fixedAssetListForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.FixedAssetListAction"
+		    scope="request">
+			<forward name="fixed_asset_list" path="/WEB-INF/jsp/supervisorymanagement/fixedAssets/fixed_asset_list.jsp"/>
+			<forward name="add_fixed_asset_list" path="/WEB-INF/jsp/supervisorymanagement/fixedAssets/add_fixed_asset_list.jsp"/>
+			<forward name="upd_fixed_asset_list" path="/WEB-INF/jsp/supervisorymanagement/fixedAssets/upd_fixed_asset_list.jsp"/>
+			<forward name="detail_fixed_asset_list" path="/WEB-INF/jsp/supervisorymanagement/fixedAssets/detail_fixed_asset_list.jsp"/>
+		</action>
+		<action path="/postageRequisition" 
+		    name="postageRequisitionForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.PostageRequisitionAction"
+		    scope="request">
+			<forward name="postageRequisition_list" path="/WEB-INF/jsp/usernameManage/postageRequisition_list.jsp"/>
+			<forward name="add_postageRequisition" path="/WEB-INF/jsp/usernameManage/add_postageRequisition.jsp"/>
+			<forward name="upd_postageRequisition" path="/WEB-INF/jsp/usernameManage/upd_postageRequisition.jsp"/>
+		</action>
+		<action path="/handoverLog" 
+		    name="handoverLogForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.HandoverLogAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/handoverLog/handoverLog_list.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/handoverLog/handoverLog_already_approval_list.jsp"/>
+			<forward name="add_handoverLog" path="/WEB-INF/jsp/handoverLog/add_handoverLog.jsp"/>
+			<forward name="upd_handoverLog" path="/WEB-INF/jsp/handoverLog/upd_handoverLog.jsp"/>
+			<forward name="handoverLogDetail" path="/WEB-INF/jsp/handoverLog/handoverLog_detail.jsp"/>
+			<forward name="down_upfile" path="/WEB-INF/jsp/handoverLog/down_upfile.jsp"/>
+			<forward name="upload_handoverLogPic" path="/WEB-INF/jsp/handoverLog/upload_handoverLogPic.jsp"/>
+			<forward name="handoverBook_approval" path="/WEB-INF/jsp/handoverLog/handoverBookApproval.jsp"/>
+			<forward name="upd_handoverBook" path="/WEB-INF/jsp/handoverLog/upd_handoverBook.jsp"/>
+			<forward name="add_supervise_import" path="/WEB-INF/jsp/handoverLog/add_supervise_import.jsp"/>
+			<forward name="upd_supervise_import" path="/WEB-INF/jsp/handoverLog/upd_supervise_import.jsp"/>
+			<!-- 需求59 Added to 20170516  //-->
+			<forward name="HandoverRecordManagementLedgerList" path="/WEB-INF/jsp/handoverLog/handover_record_management_ledger_list.jsp"></forward>
+			<forward name="handover_record_management_ledger_detail" path="/WEB-INF/jsp/handoverLog/handover_record_management_ledger_detail.jsp"></forward>
+		</action>
+		<action path="/transfer" 
+		    name="transferForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.TransferAction"
+		    scope="request">
+			<forward name="transfer_list" path="/WEB-INF/jsp/transfer/transfer_list.jsp"/>
+			<forward name="add_transfer" path="/WEB-INF/jsp/transfer/add_transfer.jsp"/>
+			<forward name="upd_transfer" path="/WEB-INF/jsp/transfer/upd_transfer.jsp"/>
+			<forward name="transfer_supervisor_list" path="/WEB-INF/jsp/transfer/transfer_supervisor_list.jsp"/>
+			
+		</action>
+		<action path="/systemManage" 
+		    name="systemManageForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.SystemManageAction"
+		    scope="request">
+			<forward name="system_manage_list" path="/WEB-INF/jsp/supervisorymanagement/systemManage/system_manage_list.jsp"/>
+			<forward name="add_system_manage" path="/WEB-INF/jsp/supervisorymanagement/systemManage/add_system_manage.jsp"/>
+			<forward name="upd_system_manage" path="/WEB-INF/jsp/supervisorymanagement/systemManage/upd_system_manage.jsp"/>
+		</action>
+		<action path="/systemSupervise" 
+		    name="systemSuperviseForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.SystemSuperviseAction"
+		    scope="request">
+			<forward name="system_supervise_list" path="/WEB-INF/jsp/supervisorymanagement/systemSupervise/system_supervise_list.jsp"/>
+			<forward name="add_system_supervise" path="/WEB-INF/jsp/supervisorymanagement/systemSupervise/add_system_supervise.jsp"/>
+			<forward name="upd_system_supervise" path="/WEB-INF/jsp/supervisorymanagement/systemSupervise/upd_system_supervise.jsp"/>
+		</action>
+		<action path="/mailcost" 
+		    name="mailcostForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.MailcostAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisorymanagement/mailcost/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisorymanagement/mailcost/list_already_approval.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisorymanagement/mailcost/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisorymanagement/mailcost/approval.jsp"/>
+			<forward name="add_mail_cost" path="/WEB-INF/jsp/supervisorymanagement/mailcost/add_mail_cost.jsp"/>
+			<forward name="upd_mail_cost" path="/WEB-INF/jsp/supervisorymanagement/mailcost/upd_mail_cost.jsp"/>
+		</action>
+		<action path="/dataMailcost" 
+		    name="dataMailcostForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.DataMailcostAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisorymanagement/datamailcost/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisorymanagement/datamailcost/list_already_approval.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisorymanagement/datamailcost/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisorymanagement/datamailcost/approval.jsp"/>
+			<forward name="add_datamail_cost" path="/WEB-INF/jsp/supervisorymanagement/datamailcost/add_datamail_cost.jsp"/>
+			<forward name="upd_datamail_cost" path="/WEB-INF/jsp/supervisorymanagement/datamailcost/upd_datamail_cost.jsp"/>
+			<!-- 需求54 资料邮寄费用台账列表 -->
+            <forward name="dataMailingFeeList" path="/WEB-INF/jsp/supervisorymanagement/datamailcost/dataMailingFeeList.jsp"></forward>
+            <forward name="dataMailingFee_detail" path="/WEB-INF/jsp/supervisorymanagement/datamailcost/dataMailingFee_detail.jsp"></forward>
+		</action>
+		<action path="/handoverPlan" 
+		    name="handoverPlanForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.HandoverPlanAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/handoverPlan/handoverPlan_list.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/handoverPlan/list_already_approval.jsp"/>
+			<forward name="add_handoverPlan" path="/WEB-INF/jsp/handoverPlan/add_handoverPlan.jsp"/>
+			<forward name="upd_handoverPlan" path="/WEB-INF/jsp/handoverPlan/upd_handoverPlan.jsp"/>
+			<forward name="handoverPlan_detail" path="/WEB-INF/jsp/handoverPlan/handoverPlan_detail.jsp"/>
+			<forward name="handoverPlan_approval" path="/WEB-INF/jsp/handoverPlan/handoverPlan_approval.jsp"/>
+			<!-- 需求57 轮岗计划表台账 -->
+			<forward name="HandoverPlanLedgerList" path="/WEB-INF/jsp/handoverPlan/handoverPlan_ledger_list.jsp"></forward>
+			<forward name="handoverPlan_ledger_detail" path="/WEB-INF/jsp/handoverPlan/handoverPlan_ledger_detail.jsp"></forward>
+		</action>
+		<!-- 请假申请 -->
+		<action path="/leaveApply" 
+		    name="leaveApplyForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.LeaveApplyAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisorymanagement/leaveApply/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisorymanagement/leaveApply/list_already_approval.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisorymanagement/leaveApply/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisorymanagement/leaveApply/approval.jsp"/>
+			<forward name="add_leave_apply" path="/WEB-INF/jsp/supervisorymanagement/leaveApply/add_leave_apply.jsp"/>
+			<forward name="upd_leave_apply" path="/WEB-INF/jsp/supervisorymanagement/leaveApply/upd_leave_apply.jsp"/>
+		</action>
+		<!-- 加班申请 -->
+		<action path="/extraworkApply" 
+		    name="extraworkApplyForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.ExtraworkApplyAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisorymanagement/extraworkApply/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisorymanagement/extraworkApply/list_already_approval.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisorymanagement/extraworkApply/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisorymanagement/extraworkApply/approval.jsp"/>
+			<forward name="add_extrawork_apply" path="/WEB-INF/jsp/supervisorymanagement/extraworkApply/add_extrawork_apply.jsp"/>
+			<forward name="upd_extrawork_apply" path="/WEB-INF/jsp/supervisorymanagement/extraworkApply/upd_extrawork_apply.jsp"/>
+		</action>
+		<!-- 辞职申请 -->
+		<action path="/resignApply" 
+		    name="resignApplyForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisorymanagement.web.action.ResignApplyAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisorymanagement/resignApply/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisorymanagement/resignApply/list_already_approval.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisorymanagement/resignApply/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisorymanagement/resignApply/approval.jsp"/>
+			<forward name="add_resign_apply" path="/WEB-INF/jsp/supervisorymanagement/resignApply/add_resign_apply.jsp"/>
+			<forward name="upd_resign_apply" path="/WEB-INF/jsp/supervisorymanagement/resignApply/upd_resign_apply.jsp"/>
+		</action>
+	</action-mappings>
+	
+</struts-config>

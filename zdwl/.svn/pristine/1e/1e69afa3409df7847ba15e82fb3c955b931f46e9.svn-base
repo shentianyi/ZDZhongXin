@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="superviseImportForm" type="com.zd.csms.supervisory.web.form.SuperviseImportForm"></form-bean>
+		<form-bean name="dealerForm" type="com.zd.csms.marketing.web.form.DealerForm"></form-bean>
+		<form-bean name="mailcostForm" type="com.zd.csms.supervisorymanagement.web.form.MailcostForm"></form-bean>
+		<form-bean name="complaintForm" type="com.zd.csms.business.web.form.ComplaintForm"></form-bean>		
+		<form-bean name="fixedAssetsForm" type="com.zd.csms.supervisorymanagement.web.form.FixedAssetsForm"></form-bean>
+		<form-bean name="fixedAssetListForm" type="com.zd.csms.supervisorymanagement.web.form.FixedAssetListForm"></form-bean>
+		<form-bean name="agreementBackForm" type="com.zd.csms.marketing.web.form.AgreementBackForm"></form-bean>
+		<form-bean name="repairCostForm" type="com.zd.csms.supervisory.web.form.RepairCostForm"></form-bean>
+		<form-bean name="repositoryForm" type="com.zd.csms.repository.web.form.RepositoryForm"></form-bean>
+		<form-bean name="rosterForm" type="com.zd.csms.roster.web.form.RosterForm"></form-bean>
+		<form-bean name="transferForm" type="com.zd.csms.supervisorymanagement.web.form.TransferForm"></form-bean>
+		<form-bean name="leaveApplyForm" type="com.zd.csms.supervisorymanagement.web.form.LeaveApplyForm"></form-bean>
+		<form-bean name="extraworkApplyForm" type="com.zd.csms.supervisorymanagement.web.form.ExtraworkApplyForm"></form-bean>
+		<form-bean name="resignApplyForm" type="com.zd.csms.supervisorymanagement.web.form.ResignApplyForm"></form-bean>
+		<form-bean name="attendanceForm" type="com.zd.csms.attendance.web.form.AttendanceForm"></form-bean>
+		<!-- 视频检查报告 -->
+		<form-bean name="videoReportForm" type="com.zd.csms.planandreport.web.form.VideoReportForm"></form-bean>
+		 <!--巡检报告台账列表  -->
+		<form-bean name="inspectionLedgerForm"
+			type="com.zd.csms.windcontrol.web.form.InspectionLedgerForm"></form-bean>
+		<form-bean name="checkStockManageForm"
+			type="com.zd.csms.supervisory.web.form.CheckStockManageForm"></form-bean>
+		<form-bean name="btForm" type="com.zd.csms.marketing.web.form.BusinessTransferForm"></form-bean>
+	</form-beans>
+	
+  <global-forwards>
+    <forward name="error" path="/common/500error.jsp" />
+  </global-forwards> 
+  
+	<action-mappings>
+		<action path="/ledger/superviseImport" 
+		    name="superviseImportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.SuperviseImportActon"
+		    scope="request">
+			<forward name="supervise_ledger" path="/WEB-INF/jsp/ledger/supervise_ledger.jsp"/>
+		</action>
+		<action path="/ledger/businessTransfer" 
+		    name="btForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.BusinessTransferListAction"
+		    scope="request">
+			<forward name="list_all" path="/WEB-INF/jsp/ledger/business_transfer_ledger.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/ledger/business_transfer_detail.jsp"/>
+		</action>
+		<action path="/ledger/dealer" 
+		    name="dealerForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.DealerAction"
+		    scope="request">
+		    <!-- 经销商名录表（市场） -->
+			<forward name="dealer_ledger" path="/WEB-INF/jsp/ledger/dealer_ledger.jsp"/>
+			<!-- 经销商名录表：业务部 -->
+			<forward name="dealer_business_ledger" path="/WEB-INF/jsp/ledger/dealer_business_ledger.jsp"/>
+			<forward name="dealer_detail" path="/WEB-INF/jsp/ledger/dealer_detail.jsp"/>
+			<forward name="expense_total_ledger" path="/WEB-INF/jsp/ledger/expense_total_ledger.jsp"/>
+			<forward name="paymentDetailList" path="/WEB-INF/jsp/ledger/paymentDetailList.jsp"/>
+			<!-- 20170511-需求53 -->
+			<forward name="dealer_modify" path="/WEB-INF/jsp/ledger/dealer_modify.jsp"></forward>
+			<forward name="modeChange_log" path="/WEB-INF/jsp/ledger/modeChange_log.jsp"></forward>
+		</action>
+		<action path="/ledger/mailcost" 
+		    name="mailcostForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.MailcostAction"
+		    scope="request">
+			<forward name="mailcost_ledger" path="/WEB-INF/jsp/ledger/mailcost_ledger.jsp"/>
+			<forward name="mailcost_detail" path="/WEB-INF/jsp/ledger/mailcost_detail.jsp"/>
+		</action>
+		<action path="/ledger/complaint" 
+		    name="complaintForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.ComplaintAction"
+		    scope="request">
+			<forward name="complaint_ledger" path="/WEB-INF/jsp/ledger/complaint_ledger.jsp"/>
+			<forward name="complaint_detail" path="/WEB-INF/jsp/ledger/complaint_detail.jsp"/>
+		</action>
+		
+		<action path="/ledger/fixedAssets" 
+		    name="fixedAssetsForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.FixedAssetsAction"
+		    scope="request">
+			<forward name="fixed_assets_ledger" path="/WEB-INF/jsp/ledger/fixed_assets_ledger.jsp"/>
+		</action>
+		<action path="/ledger/fixedAssetList" 
+		    name="fixedAssetListForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.FixedAssetListAction"
+		    scope="request">
+			<forward name="fixed_asset_list" path="/WEB-INF/jsp/ledger/fixed_asset_list.jsp"/>
+			<forward name="detail_fixed_asset_list" path="/WEB-INF/jsp/ledger/detail_fixed_asset_list.jsp"/>
+		</action>
+		<action path="/ledger/agreement" 
+		    name="agreementBackForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.AgreementAction"
+		    scope="request">
+			<forward name="agreement_ledger" path="/WEB-INF/jsp/ledger/agreement_ledger.jsp"/>
+		</action>
+		<!-- 设备维修台账 -->
+		<action path="/ledger/repaircost" 
+		    name="repairCostForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.RepairCostAction"
+		    scope="request">
+			<forward name="repaircost_ledger" path="/WEB-INF/jsp/ledger/repaircost_ledger.jsp"/>
+			<forward name="repaircost_detail" path="/WEB-INF/jsp/ledger/repaircost_detail.jsp"/>
+		</action>
+		<action path="/ledger/repository" 
+		    name="repositoryForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.RepositoryAction"
+		    scope="request">
+			<forward name="repository_ledger" path="/WEB-INF/jsp/ledger/repository_ledger.jsp"/>
+			<forward name="repository_detail" path="/WEB-INF/jsp/ledger/repository_detail.jsp"/>
+		</action>
+		<action path="/ledger/roster" 
+		    name="rosterForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.RosterAction"
+		    scope="request">
+			<forward name="roster_ledger" path="/WEB-INF/jsp/ledger/roster_ledger.jsp"/>
+			<forward name="roster_detail" path="/WEB-INF/jsp/ledger/roster_detail.jsp"/>
+		</action>
+		<action path="/ledger/transfer" 
+		    name="transferForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.TransferAction"
+		    scope="request">
+			<forward name="transfer_ledger" path="/WEB-INF/jsp/ledger/transfer_ledger.jsp"/>
+			<forward name="transfer_supervisor_list" path="/WEB-INF/jsp/ledger/transfer_supervisor_list.jsp"/>
+		</action>
+		<action path="/ledger/leaveApply" 
+		    name="leaveApplyForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.LeaveApplyAction"
+		    scope="request">
+			<forward name="leaveApply_ledger" path="/WEB-INF/jsp/ledger/leaveApply_ledger.jsp"/>
+			<forward name="leaveApply_detail" path="/WEB-INF/jsp/ledger/leaveApply_detail.jsp"/>
+		</action>
+		<action path="/ledger/extraworkApply" 
+		    name="extraworkApplyForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.ExtraworkApplyAction"
+		    scope="request">
+			<forward name="extraworkApply_ledger" path="/WEB-INF/jsp/ledger/extraworkApply_ledger.jsp"/>
+			<forward name="extraworkApply_detail" path="/WEB-INF/jsp/ledger/extraworkApply_detail.jsp"/>
+		</action>
+		<action path="/ledger/resignApply" 
+		    name="resignApplyForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.ResignApplyAction"
+		    scope="request">
+			<forward name="resignApply_ledger" path="/WEB-INF/jsp/ledger/resignApply_ledger.jsp"/>
+			<forward name="resignApply_detail" path="/WEB-INF/jsp/ledger/resignApply_detail.jsp"/>
+		</action>
+		<action path="/ledger/attendance" 
+		    name="attendanceForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.AttendanceAction"
+		    scope="request">
+			<forward name="attendance_ledger" path="/WEB-INF/jsp/ledger/attendance_lenger.jsp"/>
+		</action>
+		<!-- 视频经理:视频检查报告台账列表 -->
+		<action path="/ledger/videoReport" 
+		    name="videoReportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.VideoReportAction"
+		    scope="request">
+			<forward name="reportLedger" path="/WEB-INF/jsp/ledger/videoReport_lenger.jsp"/>
+			<forward name="videoReport_lenger_detail" path="/WEB-INF/jsp/ledger/videoReport_lenger_detail.jsp"></forward>
+		</action>
+		<!-- 巡检报告台账 -->
+		<action path="/ledger/inspectionReport" 
+		    name="inspectionLedgerForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.InspectionReportAction"
+		    scope="request">
+			<forward name="reportLedger" path="/WEB-INF/jsp/ledger/inspecReport_lenger.jsp"/>
+		</action>
+		<action path="/ledger/checkStockManage" 
+		    name="checkStockManageForm" 
+		    parameter="method" 
+		    type="com.zd.csms.ledger.CheckStockManageAction"
+		    scope="request">
+			<forward name="checkStock_manage_leger" path="/WEB-INF/jsp/ledger/checkStock_manage_leger.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/ledger/checkStock_manage_detailPage.jsp"/>
+		</action>
+		
+	</action-mappings>
+	
+	
+</struts-config>

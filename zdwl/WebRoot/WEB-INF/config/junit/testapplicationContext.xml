@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+          http://www.springframework.org/schema/jee
+          http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+          
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>file:WebContent/WEB-INF/config/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+          
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost/csms</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>123</value>
+		</property>
+	</bean>
+	
+   
+	<bean id="jdbcTemplate" class="com.comall.core.jdbc.JdbcTemplate"
+		abstract="false" lazy-init="false" autowire="default">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+	
+	
+	
+	
+    <bean id="transactionManager"
+    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+    </bean>
+   
+     
+	
+	
+  
+  <!--     
+        
+   <bean id="DAOSupport"
+    class="com.comall.core.DAOSupport">
+    <property name="dataSourceName">
+    <value>dataSource</value>
+    </property>
+    </bean>
+   
+	
+  <bean id="Mydao"
+    class="com.comall.csms.demo.dao.mysql.DemoMysqlDAO">
+    <property name="dataSource">
+    <value>dataSource</value>
+    </property>
+    
+</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+		abstract="false" lazy-init="false" autowire="default">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+	
+	
+	
+     
+     	 <bean id="service"
+    class="com.comall.csms.demo.service.DemoService">
+    
+    </bean>
+    
+    -->
+	
+   
+    
+	
+
+    
+	<bean id="DemoVO"
+    class="com.comall.csms.demo.model.DemoVO">
+    <property name="id">
+    <value>12</value>
+    </property>
+    
+    
+    <property name="name">
+    <value>zhangsan</value>
+    </property>
+  
+   
+   </bean>
+   
+	<bean id="uservo"
+    class="com.comall.csms.rbac.model.UserVO">
+    <property name="email">
+    <value>huanglong1524@163.com</value>
+    </property>
+    
+    <property name="id">
+    <value>12</value>
+    </property>
+    
+    <property name="moblephone">
+    <value>18534567</value>
+    </property>
+    
+    <property name="userName">
+    <value>黄龙</value>
+    </property>
+    
+    <property name="state">
+    <value>1</value>
+    </property>
+    
+   </bean>
+   
+   
+   <bean id="usersession"
+    class="com.comall.csms.rbac.login.model.UserSession">
+    <property name="ip">
+    <value>12-12-12</value>
+    </property>
+    
+    
+    <property name="loginState">
+    <value>1</value>
+    </property>
+    
+    <property name="user" ref="uservo"/>
+    
+   </bean>
+	
+</beans>

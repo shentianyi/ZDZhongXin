@@ -1,0 +1,67 @@
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>无标题文档</title>
+		<style type="text/css">
+.navPoint {
+	font-size: 9pt;
+	cursor: hand;
+	color: #7c7c7c;
+	font-family: Webdings
+}
+
+.a2 {
+	background-color: #A4B6D7
+}
+</style>
+		<script language=javascript type=text/javascript>
+function switchSysBar(){
+	frmElem=window.parent.document.getElementById("chechewang_body");
+	if (document.all("switchPoint").innerText==3){
+		document.all("switchPoint").innerText=4;
+		frmElem.cols = "0, 13, *";
+	}
+	else{
+		document.all("switchPoint").innerText=3;
+		frmElem.cols = "190, 13, *";
+	}
+}
+</script>
+
+	</head>
+
+	<body id="midbar" style="margin: 0">
+		<table height="100%" cellSpacing="0" cellPadding="0" border="0" bgcolor="#ffd990">
+			<tbody>
+				<tr>
+					<td style="height: 100%" onClick="switchSysBar()">
+						<font style="font-size: 9pt; cursor: default; color: #7c7c7c"> <br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br> <span class="navpoint" id="switchPoint" title="关闭/打开左栏"></span> <br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>屏幕切换 </font>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
+<script>
+if(window.screen.width<'1024'){switchSysBar()}
+</script>

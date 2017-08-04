@@ -1,0 +1,123 @@
+/* 注册步骤 */
+.regstep {height:81px;background:url(../images/regstepbg.png) repeat-x;color:#f0b243;}
+.regstep p {background:url(../images/headtitle.png) no-repeat;height:24px;width:96px;margin:19px 0 0 77px;display:inline-block;}
+.regstep span {width:491px;height:42px;background-image:url(../images/step.png);background-repeat:no-repeat;display:block;position:absolute;left:50%;top:50%;margin:-29px 0 0 -247px;}
+.regstep span.step1 {background-position:0px 0px;}
+.regstep span.step2 {background-position:0 -42px;}
+.regstep span.step3 {background-position:0 -84px;}
+
+/* 注册基本资料 */
+.regform {width:100%;}
+.baseinfo {width:1000px;margin:0 auto;background-color:#fff;padding-top:40px;}
+.baseinfo .binfo_dl {width:100%;height:28px;padding-bottom:33px;}
+.binfo_dl dt {width:350px;line-height:28px;float:left;text-align:right;color:#666;font-size:16px;font-family:"Microsoft YaHei";}
+.binfo_dl dd.bidd_judge {width:40px;height:28px;float:left;background-image:url(../images/register/register_bg.png);background-repeat:no-repeat;}
+.binfo_dl dd.correct_cont {background-position:-172px -222px;}
+.binfo_dl dd.false_cont {background-position:-172px -193px;}
+.binfo_dl dd.noimg{background:none;}
+.binfo_dl dd.bidd_input {width:230px;float:left;}
+.binfo_dl dd.bidd_input input {width:210px;padding:5px 4px;border:#d7d7d7 1px solid;background-color:#f4f4f4;height:16px;line-height:16px;}
+.binfo_dl dd.bidd_input input.focus_in, .cont_line input.focus_in, .cont_add input.focus_in {background-color:#fafafa;border:#fdc04d 1px solid;color:#333;}
+.cont_line input.input_c, .cont_add input.input_c {color:#333;}
+.binfo_dl dd.bidd_star {width:13px;height:28px;float:left;background:url(../images/register/register_bg.png) -152px -193px no-repeat;}
+.binfo_dl dd.bidd_tips {width:360px;height:28px;float:left;position:relative;}
+.binfo_dl dd.bidd_tips p {padding:7px 10px;line-height:16px;position:absolute;top:0px;left:12px;border:#efebeb 1px solid;background-color:#fbfff1;color:#bbb;font-family:'����';}
+.binfo_dl dd.bidd_tips p span {color:#dedede;}
+.binfo_dl dd.bidd_tips i {width:5px;height:9px;overflow:hidden;display:block;position:absolute;top:9px;left:8px;background:url(../images/register/register_bg.png) -195px -86px no-repeat;}
+.baseinfo .binfo_line {padding:10px 355px 40px 345px;height:30px;}
+.binfo_line input.line_checkbox {width:13px;height:13px;float:left;margin:8px 8px 0px 0px;display:inline;}
+.binfo_line label {width:175px;line-height:30px;float:left;color:#666;cursor:pointer;outline:none;}
+.binfo_line label a {text-decoration:underline;color:#f4a24a;}
+.binfo_line input.line_btn {width:93px;height:30px;float:left;border:none;cursor:pointer;background:none;background-image:url(../images/register/register_bg.png);background-repeat:no-repeat;}
+.binfo_line input.nextbtn {background-position:-94px -162px;}
+.binfo_line input.un_nextbtn {background-position:0px -162px;}
+
+/* 注册详细资料 */
+.detailinfo {width:1000px;margin:0 auto;background-color:#fff;padding-top:20px;}
+.info_title {height:42px;padding-left:252px;background-image:url(../images/register/register_bg.png);background-repeat:no-repeat;}
+.detailinfo .infot1 {background-position:0 0px;}
+.detailinfo .infot2 {background-position:0 -43px;margin-bottom:20px;}
+.info_cont {width:494px;margin:0 auto;}
+.info_cont .cont_t {width:100%;height:24px;line-height:24px;padding-bottom:10px;color:#444;font-size:14px;font-family:"Microsoft YaHei";}
+.info_cont .cont_main {padding-top:10px;}
+.info_cont .cont_line {height:59px;float:left;position:relative;z-index:0;}
+.info_cont .select_contline {z-index:10;}
+.info_cont .line1 {width:494px;clear:both}
+.info_cont .line2 {width:220px;}
+.info_cont .line3 {width:150px;margin-right:22px;}
+.info_cont .spe_line {float:right;margin:0px;}
+.cont_line i {width:17px;height:28px;display:block;position:absolute;top:0px;right:-22px;background-image:url(../images/register/register_bg.png);background-repeat:no-repeat;}
+.cont_line i.correct_i {background-position:-183px -222px;}
+.cont_line i.false_i {background-position:-183px -193px;}
+.cont_line i.noimg{background:none;}
+.cont_line p {height:31px;line-height:31px;padding:0px 6px;}
+.cont_line p.correct_tips {color:#bbb;}
+.cont_line p.false_tips {color:#ff0000;}
+.cont_line input, .cont_add .add_input {height:16px;line-height:16px;padding:5px 6px;border:#d7d7d7 1px solid;background-color:#f4f4f4;color:#d1d1d1;}
+.line1 .info_input {width:480px;}
+.line2 .info_input {width:206px;}
+.line3 .info_input {width:113px;padding:0px 28px 0px 7px;}
+.line3 i {right:-20px;}
+.info_cont .cont_area {width:493px;border:#d7d7d7 1px solid;border-bottom:none;border-right:none;margin-bottom:20px;}
+.cont_area .ca_line {height:27px;}
+.ca_line p {line-height:26px;border:#d7d7d7 1px solid;border-top:none;border-left:none;color:#666;float:left;padding:0px 8px;}
+.cal_t p {background-color:#f5f5f5;color:#999;text-align:center;}
+.ca_line p.caline_p1 {width:36px;}
+.ca_line p.caline_p2 {width:102px;}
+.ca_line p.caline_p3 {width:108px;}
+.ca_line p.caline_p4 {width:101px;}
+.ca_line p.caline_p5 {width:61px;}
+.cal_c p.caline_p1 {text-align:center;color:#bbb;}
+.cal_c p.caline_p2 {text-align:left;}
+.cal_c p.caline_p3 {text-align:right;}
+.cal_c p.caline_p4 {text-align:right;}
+.cal_c p.caline_p5 {text-align:center;}
+.cal_c p.caline_p5 a {color:#666;}
+.cal_c p.caline_p5 a:hover {color:#efb341;text-decoration:underline;}
+.info_cont .cont_add {width:100%;}
+.cont_add .input_line {float:left;margin-right:10px;display:inline;}
+.cont_add .add_input {width:150px;}
+.cont_add .ip1 {width:100px;}
+.cont_add .ip2 {width:150px;}
+.cont_add .ip3 {width:97px;}
+.cont_add .add_btn {width:75px;height:28px;background:url(../images/register/register_bg.png) -76px -193px no-repeat;border:none;cursor:pointer;}
+.cont_add .noclick_btn {background-position:0px -193px;}
+.cont_add .mg0{margin:0;}
+.info_cont .cont_btn {width:214px;height:30px;padding:35px 0px 35px 280px;}
+.cont_btn input.line_btn {width:93px;height:30px;border:none;cursor:pointer;background:none;background-image:url(../images/register/register_bg.png);background-repeat:no-repeat;}
+.cont_btn input.prevbtn {background-position:-94px -131px;float:left;}
+.cont_btn input.un_prevbtn {background-position:0px -131px;float:left;}
+.cont_btn input.nextbtn {background-position:-94px -162px;float:right;}
+.cont_btn input.un_nextbtn {background-position:0px -162px;float:right;}
+.cont_btn input.submitbtn {background-position:0px -222px;float:right;}
+.info_cont .tab_line {width:100%;height:44px;padding:30px 0px 10px 0px;}
+.tab_line span {width:134px;height:44px;float:left;background:url(../images/register/register_bg.png) 0px -86px no-repeat;}
+
+/* select写法 */
+.cont_line .select_div {width:212px;height:26px;background-color:#f4f4f4;border:#d7d7d7 1px solid;padding-left:6px;position:relative;}
+.cont_line .click_div {background-color:#fafafa;border:#fdc04d 1px solid;color:#333;}
+.cont_line .spe_select {width:142px;}
+.select_div span {width:185px;height:26px;line-height:26px;overflow:hidden;float:left;color:#d1d1d1;}
+.spe_select span {width:115px;}
+.select_div .spe_span {color:#333;}
+.select_div a.select_a {width:27px;height:26px;float:left;background:url(../images/register/register_bg.png) -135px -86px no-repeat;}
+.select_div a.selected {background-position:-163px -86px;}
+.select_div ul {width:218px;border:#fdc04d 1px solid;border-top:none;background-color:#fafafa;position:absolute;top:27px;left:-1px;z-index:100;display:none;}
+.spe_select ul {width:148px;}
+.select_div ul li {width:212px;height:22px;line-height:22px;overflow:hidden;padding-left:6px;cursor:pointer;}
+.select_div ul li.hover_li {background-color:#daa134;}
+.spe_select ul li {width:142px;}
+
+/* 日历写法 */
+.calendar_div span {width:185px;height:26px;line-height:26px;overflow:hidden;float:left;color:#d1d1d1;}
+.calendar_div a.calendar_a {width:27px;height:26px;float:left;background:url(../images/register/register_bg.png) -94px -222px no-repeat;}
+.click_div span {color:#333;}
+.click_div a.calendar_a {background-position:-122px -222px;}
+.outerarea {position:absolute;top:26px;left:-1px;width:151px;height:193px;}
+
+/* 注册完成 */
+.lastinfo {width:600px;padding:60px 0px 60px 400px;background:url(../images/register/success_bg.jpg) 140px 60px no-repeat;margin:0 auto;background-color:#fff;color:#e5a937;font-weight:bold;font-family:"Microsoft YaHei";}
+.lastinfo .info_line1 {line-height:38px;font-size:26px;}
+.lastinfo .info_line2 {line-height:28px;font-size:18px;padding-bottom:10px;}
+.lastinfo .info_line3 {line-height:22px;color:#444;font-size:14px;}
+.lastinfo .info_line4 {line-height:22px;color:#888;font-size:14px;padding-left:15px;}

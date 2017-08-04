@@ -1,0 +1,36 @@
+html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,pre,a,em,font,img,small,strong,b,u,i,s,dl,dt,dd,ol,ul,li,fieldset,form,label,input,textarea,table,tr,td{padding:0px;margin:0px;}
+body{font:12px/150% "ËÎÌו";background-color:transparent;}
+a{text-decoration:none;}
+ol, ul li{list-style:none outside none;}
+img{border:0px;}
+table{border-collapse:collapse;}
+tr,td {border:1px solid #d2d2d2;}
+.main_tabs {padding:34px 0px 17px;overflow:auto;zoom:1;}
+.main_tabs li {width:130px;height:28px;line-height:28px;overflow:hidden;float:left;margin-right:1px;display:inline;background:url(../images/index/indexbg.png) 0px -371px no-repeat;color:#888;text-align:center;cursor:pointer;}
+.main_tabs li.curli {color:#cb8500;background-position:0px -400px;}
+.main_tab {padding:34px 0px 17px;overflow:auto;zoom:1;}
+.main_tab li {width:100px;height:28px;line-height:28px;overflow:hidden;float:left;margin-right:1px;display:inline;background:url(../images/index/indexbg.png) 0px -202px no-repeat;color:#888;text-align:center;cursor:pointer;}
+.main_tab li.curli {color:#cb8500;background-position:0px -231px;}
+/*----------------Div(Normal)--------------------*/
+.title {
+	font-size:16px; font-weight:bold; text-align:center;height:28px;line-height:28px;padding:31px 0px 20px; 
+}
+.pagebodyOuter {
+	width:100%; text-align:center;
+}
+.pagebodyInner {
+	width:100%;
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+}
+/*----------------Table(form)--------------------*/
+DIV.tagbarMenu{
+	position:relative;
+	height:auto;
+	text-align:left;
+	padding-left:12px;
+	padding-right:12px;
+}
+

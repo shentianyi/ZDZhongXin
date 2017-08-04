@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="supervisorStorageForm" type="com.zd.csms.messagequartz.web.form.SupervisorStorageForm"></form-bean>
+		<form-bean name="supervisorRepairCostForm" type="com.zd.csms.supervisory.web.form.repairecostms.SupervisorRepairCostMessageFrom"></form-bean>
+		<form-bean name="supervisorCostMailForm" type="com.zd.csms.supervisory.web.form.costmail.SupervisorCostMailMessageFrom"></form-bean>
+		<form-bean name="supervisorOverTimeForm" type="com.zd.csms.supervisory.web.form.overtime.SupervisorOverTimeMessageFrom"></form-bean>
+		<form-bean name="supervisorOutStockForm" type="com.zd.csms.supervisory.web.form.outstock.SupervisorOutStockMessageFrom"></form-bean>
+		<form-bean name="supervisorMoveStockForm" type="com.zd.csms.supervisory.web.form.movestock.SupervisorMoveStockMessageFrom"></form-bean>
+		<form-bean name="inspectionSupervisorForm" type="com.zd.csms.messagequartz.web.form.InspectionSupervisorForm"></form-bean>
+		<form-bean name="unInspectionPlanForm" type="com.zd.csms.messagequartz.web.form.UnInspectionPlanFrom"></form-bean>
+		<form-bean name="unInspectFrom" type="com.zd.csms.messagequartz.web.form.UnInspectFrom"></form-bean>
+		<form-bean name="inspectRemindForm" type="com.zd.csms.messagequartz.web.form.InspectRemindFrom"></form-bean>
+	</form-beans>
+	
+    <global-forwards>
+    	<forward name="error" path="/common/500error.jsp" />
+    </global-forwards> 
+  
+	<action-mappings>
+	
+		<!-- 监管员生日提醒-->
+		<action path="/supervisormessage" 
+		    name="supervisorStorageForm" 
+		    parameter="method"
+		    type="com.zd.csms.messagequartz.web.action.DealerSupervisorAction"
+		    scope="request">
+		    <!-- 监管员生日提醒详情页-->
+			<forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/supervisorMassage/message_page_list.jsp"/>
+		</action>
+		
+		<!-- 监管员入职满一年提醒-->
+		<action path="/supervisoryearanday" 
+		    name="supervisorStorageForm" 
+		    parameter="method"
+		    type="com.zd.csms.messagequartz.web.action.DealerSupervisorAction"
+		    scope="request">
+		    <!-- 监管员入职满一年提醒-->
+			<forward name="message_yearpage_list" path="/WEB-INF/jsp/messagequartz/supervisorMassage/message_yearpage_list.jsp"/>
+		</action>
+		
+		<!--设备申请提醒信息-->
+		<action path="/supervisorRepairCost" 
+		    name="supervisorRepairCostForm"
+		    parameter="method"
+		    type="com.zd.csms.supervisory.web.action.SupervisorRepairCostMessageAction"
+		    scope="request">
+			<forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/repairecostms/message_page_list.jsp"/>
+		</action>
+		
+		<!--邮寄费用申请提醒信息-->
+		<action path="/supervisorCostMail" 
+		    name="supervisorCostMailForm"
+		    parameter="method"
+		    type="com.zd.csms.supervisory.web.action.SupervisorCostMailMessageAction"
+		    scope="request">
+			<forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/costmail/message_page_list.jsp"/>
+		</action>
+		
+		<!--加班申请提醒信息-->
+		<action path="/supervisorOverTime" 
+		    name="supervisorOverTimeForm"
+		    parameter="method"
+		    type="com.zd.csms.supervisory.web.action.SupervisorOverTimeMessageAction"
+		    scope="request">
+			<forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/overtime/message_page_list.jsp"/>
+		</action>
+		
+		<!--释放申请提醒信息-->
+		<action path="/supervisorOutStock" 
+		    name="supervisorOutStockForm"
+		    parameter="method"
+		    type="com.zd.csms.supervisory.web.action.SupervisorOutStockMessageAction"
+		    scope="request">
+			<forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/outstock/message_page_list.jsp"/>
+		</action>
+		
+		<!--移动申请提醒信息-->
+		<action path="/supervisorMoveStock" 
+		    name="supervisorMoveStockForm"
+		    parameter="method"
+		    type="com.zd.csms.supervisory.web.action.SupervisorMoveStockMessageAction"
+		    scope="request">
+			<forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/movestock/message_page_list.jsp"/>
+		</action>
+		
+		<!--每月20日提交巡店检查计划提交视频检查计划提醒-->
+		<action path="/inspectionSupervisor" 
+		    name="inspectionSupervisorForm"
+		    parameter="method"
+		    type="com.zd.csms.messagequartz.web.action.InspectionSupervisorAction"
+		    scope="request">
+			<forward name="message_inspection_list" path="/WEB-INF/jsp/messagequartz/inspectionsupervisor/message_inspection_list.jsp"/>
+			<forward name="message_inspectionvideo_list" path="/WEB-INF/jsp/messagequartz/inspectionsupervisor/message_inspectionvideo_list.jsp"/>
+		</action>
+		
+		<!--未按风控巡检计划执行提醒-->
+		<action path="/unInspectionPlan" 
+		    name="unInspectionPlanForm"
+		    parameter="method"
+		    type="com.zd.csms.messagequartz.web.action.UnInspectionPlanAction"
+		    scope="request">
+		    <forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/uninspectionplan/message_page_list.jsp"/>
+		</action>
+		
+		<!--巡店报告上传3日未上传新报告提醒-->
+		<action path="/unInspect" 
+		    name="unInspectFrom"
+		    parameter="method"
+		    type="com.zd.csms.messagequartz.web.action.UnInspectAction"
+		    scope="request">
+		    <forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/uninspect/message_page_list.jsp"/>
+		</action>
+		
+		<!--巡店报告提醒-->
+		<action path="/inspectRemind" 
+		    name="inspectRemindForm"
+		    parameter="method"
+		    type="com.zd.csms.messagequartz.web.action.InspectRemindAction"
+		    scope="request">
+		    <forward name="message_page_list" path="/WEB-INF/jsp/messagequartz/inspectremind/message_page_list.jsp"/>
+		</action>
+		
+	</action-mappings>
+	
+</struts-config>

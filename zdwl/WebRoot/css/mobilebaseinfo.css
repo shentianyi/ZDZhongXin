@@ -1,0 +1,33 @@
+/* 基本信息
+-------------------------------------------------- */
+.footer-baseinfo {
+	height: 30px;
+	padding: 9px 0;
+}
+.footer-baseinfo a {
+	position: relative;
+	float: left;
+	width: 49%;
+	height: 30px;
+	line-height: 30px;	
+	text-align: center;
+	font-size: 18px;
+	color: #333;
+}
+.footer-baseinfo a:first-child {
+	border-right: #000 1px solid;
+}
+
+/* 媒体查询 3倍密度手机
+-------------------------------------------------- */
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+    .footer-baseinfo {
+    	height: 40px;
+    	padding: 10px 0;
+    }
+    .footer-baseinfo a {
+    	height: 40px;
+    	line-height: 40px;
+    	font-size: 22px;
+    }
+}

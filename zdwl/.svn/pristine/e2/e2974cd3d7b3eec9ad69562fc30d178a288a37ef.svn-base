@@ -1,0 +1,448 @@
+/*--------------------------------------------------------*/
+BODY {
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	font-size: 14px; 
+	color: #333;
+	margin-top:2px;
+	margin-bottom:2px;
+	margin-left:2px;
+	margin-right:2px;
+	background-color:#ffffff;
+}
+TABLE {
+	FONT-SIZE: 14px;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+}
+TR {
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+}
+TD {
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+}
+HR {
+	color: #fdc04d;
+	width:95%;
+}
+
+/*閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷峰紡閿熸枻鎷�-----------------------------------------------------*/
+   
+A:visited {
+	COLOR: #333; 
+    FONT-SIZE: 14px; 
+	TEXT-DECORATION: none;
+	cursor:hand;
+}
+A:link {
+	COLOR: #333; 
+    FONT-SIZE: 14px; 
+	TEXT-DECORATION: none;
+	cursor:hand;
+}
+A:hover {
+	COLOR: #0033cc; 
+    FONT-SIZE: 14px; 
+	TEXT-DECORATION: underline;
+	cursor:hand;
+}
+A:active {
+	COLOR: #333333; 
+    FONT-SIZE: 14px; 
+	TEXT-DECORATION: none;
+	cursor:hand;
+}
+.disLink {
+	 color: #999999;
+	 cursor:hand;
+}
+
+/*----------------Div(Normal)--------------------*/
+.title {
+	width:100%;
+	height:50px;
+	margin: 0 auto;
+	font-family:'Microsoft YaHei';
+	font-size:18px;
+	font-weight:bold;
+	text-align:center;
+	line-height:50px;
+	background:#eee;
+}
+.pagebodyOuter {
+	width:100%; text-align:center;
+}
+.pagebodyInner {
+	width:100%;
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+}
+/*----------------Table(form)--------------------*/
+
+.formTable tr{
+	FONT-SIZE: 14px;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	background-color:#fff;
+}
+TABLE.formTable{
+	width: 100%;
+	background-color:#fff;
+
+}
+
+TR.formTitle{
+	color:#344B50;
+	font-size:18px;
+	font-weight: bolder;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	height:34px;
+	background-color:#eee;
+	text-align:center;
+}
+
+TR.formHead{
+	color:#344B50;
+	font-size:14px;
+	font-weight:bold;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	background-color:#ededed;
+	height:30px;
+}
+
+TD.nameCol,TD.nameColHL,TD.codeCol{
+	/* padding: 0 15px; */
+	height: 50px;
+	width:15%;
+	line-height:50px;
+	text-align:right; 
+	border-bottom: solid 1px #eee;
+	border-right: solid 1px #eee;	
+}
+
+
+TD.right-border-none,.listTr_a td.right-border-none {
+	border-right: 0;
+}
+
+TD.codeCol{
+	text-align:left;
+	
+}
+
+.codeCol input[type=text]{
+	height: 32px;
+	line-height: 32px;
+ 	width:100%;  
+	border: solid 1px #eee;
+}
+
+TD .tdWidth {
+	width:10%;
+}
+
+/*-------閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹 start----------*/
+
+TD.nameColThree{
+	width:15%;
+	height:30px;
+	text-align:right;
+	background-color:#FFFFFF;
+}
+
+TD.codeColThree{
+	width:18%;
+	height:30px;
+	background-color:#FFFFFF;
+}
+
+
+/*-------閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹 end----------*/
+
+TR.formTableFoot{
+	background-color:#FFFFFF;
+	height:50px;
+	line-height:50px;
+}
+
+.bottomTable.tdPadding,.formTableFoot.tdPadding,.tdPadding {
+	padding-top:20px;
+	padding-bottom:30px;
+}
+
+/*----------------Table(閿熸枻鎷烽敓鏂ゆ嫹鏂滈敓锟介敓鏂ゆ嫹澶撮敓鏂ゆ嫹閿熷彨鎲嬫嫹閿熸枻鎷峰悓涓�敓鏂ゆ嫹table--------------------*/
+TABLE.listTalbe{
+	width:100%;
+	border-left:solid 1px #eee;
+	border-right:solid 1px #eee;
+	white-space: nowrap;
+
+}
+.listTalbe TR{
+	FONT-SIZE: 14px;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	height: 22px;
+}
+TR.listHead{
+	font-size: 14px;
+	font-weight: bolder;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	/* background-color:#fdc04d; */
+	height:30px;
+	text-align:center;
+}
+TR.listHeadHL{
+	font-size: 14px;
+	font-weight: bolder;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	background-color:#f4f4f4;
+	height:30px;
+	text-align:center;
+}
+TR.listTr_a{
+	background-color: #fff;
+	height: 50px;
+	line-height :50px;
+	border-bottom:solid 1px #eee;
+}
+
+
+.listTr_a td{
+	text-align:center;
+	border-right:solid 1px #eee;
+	border-bottom:solid 1px #eee;
+}
+
+TR.listTr_b{
+	background-color:#EEF7F9;
+	height:30px;
+}
+tr.evenline td {background-color:#f4f4f4;}
+tr.hoverline td {background-color:#FFF5DC;}
+
+TABLE.dividePage{
+	margin-top:32px;
+	font-size: 14px;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	color:#333;
+	background-color:#ffffff;
+	text-align:right;
+	width:100%;
+	height:30px;
+	line-height:30px;
+}
+
+TABLE.dividePageTagbar{
+	margin-top:32px;
+	font-size: 14px;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	color:#333;
+	background-color:#ffffff;
+	text-align:right;
+	width:100%;
+	height:30px;
+	line-height:30px;
+}
+
+/*----------------椤电table閿熸枻鎷穞agbar閿熸枻鎷�----------*/
+DIV.tagbarMenu{
+	position:relative;
+	height:80px;
+	padding-left:30px;
+	background:url(../images/tab-bg.png) repeat-x;
+	border-radius:5px 5px 0 0;
+}
+
+LABEL.focusLable a,LABEL.blurLable a{
+	text-decoration:none;
+}
+LABEL.focusLable{
+	float:left;
+	margin-top:35px;
+	padding-left:30px;
+	padding-right:30px;
+	color:#fff;
+	text-align:center;
+	line-height:45px;
+	height:45px;
+	display:inline-block;
+	font-size:14px;
+	background-color:#da3940;
+	font-family:'Microsoft YaHei';
+	border-radius:5px 5px 0 0;
+}
+
+LABEL.blurLable{
+	float:left;
+	padding-left:30px;
+	padding-right:30px;
+	margin-top:35px;
+	margin-left:3px;
+	color:#1c1c1c;
+	text-align:center;
+	vertical-align:bottom;
+	line-height:45px;
+	height:45px;
+	float:left;
+	display:inline-block;
+	font-size:14px;
+	background-color:#dcdcdc;
+	font-family:'Microsoft YaHei';
+	border-radius:5px 5px 0 0;
+	
+	
+}
+
+
+    
+.focusLable A:visited {
+	COLOR: #fff;
+}
+.focusLable A:link {
+	COLOR: #fff;
+}
+.focusLable A:hover {
+	COLOR: #fff; 
+}
+.focusLable A:active {
+	COLOR: #fff;
+}
+    
+.blurLable A:visited {
+	COLOR: #1c1c1c; 
+}
+.blurLable A:link {
+	COLOR: #1c1c1c;
+}
+.blurLable A:hover {
+	COLOR: #1c1c1c;
+}
+.blurLable A:active {
+	COLOR: #8c8c8c;
+}
+
+/*----------------Table(Normal)--------------------*/
+TABLE.bottomTable{
+	padding-bottom:0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:10px; 
+	width:100%;
+	border:0;
+	rainstyle:expression(this.border = "0",
+						 this.cellSpacing = "0",
+						 this.cellPadding = "0");
+}
+
+
+/*----------------Button閿熸枻鎷烽挳--------------------*/
+.formButton {
+	margin-right:40px;
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+	border: 0;
+	background: #c6262d;
+	font-family:'Microsoft YaHei';
+	cursor:pointer;
+	
+}
+
+/*----------------Button閿熸枻鎷烽挳--------------------*/
+.formButton2{
+	BORDER-RIGHT: #e3eff9 0px solid;
+	PADDING-RIGHT: 20px;
+	BORDER-TOP: #e3eff9 0px solid;
+	PADDING-LEFT: 22px;
+	FONT-SIZE: 19px;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#fdc04d, EndColorStr=#fdc04d);
+	BORDER-LEFT: #e3eff9 0px solid;
+	CURSOR: hand;
+	COLOR: #FFFFFF;
+	PADDING-TOP: 4px;
+	PADDING-BOTTOM: 2px;
+	BORDER-BOTTOM: #e3eff9 0px solid;
+	background-color:#fdc04d;
+	outline-style:none; 
+	hide-focus:expression(this.hideFocus=true);
+	margin-left: 5px;
+}
+
+.dividePageButton{
+	BORDER-RIGHT: #99A4A6 1px solid;
+	PADDING-RIGHT: 5px;
+	BORDER-TOP: #99A4A6 1px solid;
+	PADDING-LEFT: 5px;
+	FONT-SIZE: 12px;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#FFFFFF, EndColorStr=#DFE5E9);
+	BORDER-LEFT: #99A4A6 1px solid;
+	CURSOR: hand;
+	COLOR: #000000;
+	PADDING-TOP: 3px;
+	PADDING-BOTTOM: 1px;
+	BORDER-BOTTOM: #99A4A6 1px solid;
+}
+
+/*----------------褰曢敓鏂ゆ嫹涓堕敓鏂ゆ嫹閿熺粸锟�------------------*/
+.selectClass {
+	font-size: 12px;
+	color: #000000;
+	background-color: #FFFFFF;
+	border: 1px solid #7F9DB9;
+}
+
+/* 閿熺Ц鐧界》鎷烽敓绲沬v閿熸枻鎷烽敓鏂ゆ嫹寮忛敓鏂ゆ嫹閿熺晫锛氶敓鏂ゆ嫹璇㈤敓鏂ゆ嫹閿熸枻鎷烽敓鍙唻鎷烽敓鏂ゆ嫹閿熺獤顖ゆ嫹閿熸枻鎷烽敓鍙唻鎷蜂箣閿熸枻鎷峰嫙閿熸枻鎷烽敓鏂ゆ嫹*/
+.space {
+	height: 1px;
+	font-size: 14px;
+}
+
+.message{
+	font-size: 14px;
+	font-family: "閿熸枻鎷烽敓鏂ゆ嫹", "閿熸枻鎷烽敓鏂ゆ嫹_GB2312", "閿熸枻鎷烽敓鏂ゆ嫹";
+	color:#FF0000;
+}
+
+/* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺瓔鈥�閿熻剼鈽呮嫹閿熸枻鎷烽敓鏂ゆ嫹寮�*/
+.required {
+	font-size: 14px;
+	color: #FF0000;
+	margin-right: 5px;
+}
+
+
+.a_addfile {
+background-image:url(../images/f1.gif);
+background-repeat:no-repeat;
+background-position:-823px -17px;
+display:block;
+float:left;
+height:20px;
+margin-top:-1px;
+position:relative;
+text-decoration:none;
+top:0pt;
+width:80px;
+}
+
+.input_addfile {
+cursor:pointer !important;
+height:18px;
+left:-13px;
+filter:alpha(opacity=0); 
+position:absolute;
+top:5px;
+width:1px;
+z-index: -1;
+}
+
+.dvScroll {
+	margin:0 auto;
+	max-width:1370px;
+	overflow:auto;
+}
+
+textarea {
+	height:80px;
+	width:60%;
+}

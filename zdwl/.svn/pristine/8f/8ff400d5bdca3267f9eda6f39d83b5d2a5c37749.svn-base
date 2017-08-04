@@ -1,0 +1,16 @@
+﻿//table行颜色
+$(function(){
+	$(".listTalbe").each(function(){
+		$(this).find("tr:odd").each(function(){
+			$(this).addClass("evenline");
+		});
+		$(this).find("tr.listTr_a").hover(
+			function(){
+				$(this).addClass("hoverline");
+			},
+			function(){
+				$(this).removeClass("hoverline");
+			}
+		);
+	});
+})

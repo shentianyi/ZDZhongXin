@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="supervisorForm" type="com.zd.csms.supervisory.web.form.SupervisorForm"></form-bean>
+		<form-bean name="superviseImportForm" type="com.zd.csms.supervisory.web.form.SuperviseImportForm"></form-bean>
+		<form-bean name="actualAddressForm" type="com.zd.csms.supervisory.web.form.ActualAddressForm"></form-bean>
+		<form-bean name="duedateForm" type="com.zd.csms.supervisory.web.form.DuedateForm"></form-bean>
+		<form-bean name="repairCostForm" type="com.zd.csms.supervisory.web.form.RepairCostForm"></form-bean>
+		<form-bean name="checkStockForm" type="com.zd.csms.supervisory.web.form.CheckStockForm"></form-bean>
+		<form-bean name="abnormalForm" type="com.zd.csms.supervisory.web.form.AbnormalForm"></form-bean>
+		<form-bean name="carOperationForm" type="com.zd.csms.supervisory.web.form.CarOperationForm"></form-bean>
+		<form-bean name="carManualForm" type="com.zd.csms.supervisory.web.form.CarManualForm"></form-bean>
+		<form-bean name="bankApproveForm" type="com.zd.csms.supervisory.web.form.BankApproveForm"></form-bean>
+		<form-bean name="checkStockManageForm" type="com.zd.csms.supervisory.web.form.CheckStockManageForm"></form-bean>
+	</form-beans>
+	
+  <global-forwards>
+    <forward name="error" path="/common/500error.jsp" />
+  </global-forwards> 
+  
+	<action-mappings>
+		<action path="/supervisory" 
+		    name="supervisorForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.SupervisoryAction"
+		    scope="request">
+			<forward name="supervisory_list" path="/WEB-INF/jsp/supervisorymanagement/supervisoryBaseInfo/supervisory_list.jsp"/>
+			<forward name="add_supervisory_baseInfo" path="/WEB-INF/jsp/supervisorymanagement/supervisoryBaseInfo/add_supervisory_baseInfo.jsp"/>
+			<forward name="upd_supervisory_baseInfo" path="/WEB-INF/jsp/supervisorymanagement/supervisoryBaseInfo/upd_supervisory_baseInfo.jsp"/>
+			<forward name="supervisoryEducation_list" path="/WEB-INF/jsp/supervisorymanagement/supervisoryEducation/supervisoryEducation_list.jsp"/>
+			<forward name="add_supervisory_education" path="/WEB-INF/jsp/supervisorymanagement/supervisoryEducation/add_supervisory_education.jsp"/>
+			<forward name="upd_supervisory_education" path="/WEB-INF/jsp/supervisorymanagement/supervisoryEducation/upd_supervisory_education.jsp"/>
+			<forward name="supervisoryFamily_list" path="/WEB-INF/jsp/supervisorymanagement/supervisoryFamily/supervisoryFamily_list.jsp"/>
+			<forward name="add_supervisory_family" path="/WEB-INF/jsp/supervisorymanagement/supervisoryFamily/add_supervisory_family.jsp"/>
+			<forward name="upd_supervisory_family" path="/WEB-INF/jsp/supervisorymanagement/supervisoryFamily/upd_supervisory_family.jsp"/>
+			<forward name="supervisoryRecommend_list" path="/WEB-INF/jsp/supervisorymanagement/supervisoryRecommend/supervisoryRecommend_list.jsp"/>
+			<forward name="add_supervisory_recommend" path="/WEB-INF/jsp/supervisorymanagement/supervisoryRecommend/add_supervisory_recommend.jsp"/>
+			<forward name="upd_supervisory_recommend" path="/WEB-INF/jsp/supervisorymanagement/supervisoryRecommend/upd_supervisory_recommend.jsp"/>
+			<forward name="supervisoryWorkExperience_list" path="/WEB-INF/jsp/supervisorymanagement/supervisoryWorkExperience/supervisoryWorkExperience_list.jsp"/>
+			<forward name="add_supervisory_workExperience" path="/WEB-INF/jsp/supervisorymanagement/supervisoryWorkExperience/add_supervisory_workExperience.jsp"/>
+			<forward name="upd_supervisory_workExperience" path="/WEB-INF/jsp/supervisorymanagement/supervisoryWorkExperience/upd_supervisory_workExperience.jsp"/>
+			<forward name="supervisory_detail" path="/WEB-INF/jsp/supervisorymanagement/supervisoryBaseInfo/supervisory_detail.jsp"/>
+			<forward name="import_supervise" path="/WEB-INF/jsp/supervisorymanagement/supervisoryBaseInfo/import_supervise.jsp"/>
+			<forward name="down_upfile" path="/WEB-INF/jsp/supervisorymanagement/supervisoryBaseInfo/down_upfile.jsp"/>
+		</action>
+		<action path="/superviseImport" 
+		    name="superviseImportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.SuperviseImportAction"
+		    scope="request">
+			<forward name="supervise_import_list" path="/WEB-INF/jsp/supervisory/import/supervise_import_list.jsp"/>
+			<forward name="add_supervise_import" path="/WEB-INF/jsp/supervisory/import/add_supervise_import.jsp"/>
+			<forward name="upd_supervise_import" path="/WEB-INF/jsp/supervisory/import/upd_supervise_import.jsp"/>
+			<forward name="supervise_ledger" path="/WEB-INF/jsp/supervisory/import/supervise_ledger.jsp"/>
+			<forward name="import_supervise" path="/WEB-INF/jsp/supervisory/import/import_supervise.jsp"/>
+			<forward name="supervise_deleCarInfo" path="/WEB-INF/jsp/supervisory/import/supervise_deleteCarInfo.jsp"/>
+		</action>
+		<action path="/superviseStorage" 
+		    name="superviseImportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.SuperviseStorageAction"
+		    scope="request">
+			<forward name="supervise_storage_list" path="/WEB-INF/jsp/supervisory/storage/supervise_storage_list.jsp"/>
+			<forward name="supervise_storage_now_list" path="/WEB-INF/jsp/supervisory/storage/supervise_storage_now_list.jsp"/>
+			<forward name="upd_supervise_storage" path="/WEB-INF/jsp/supervisory/storage/upd_supervise_storage.jsp"/>
+			<forward name="import_supervise" path="/WEB-INF/jsp/supervisory/storage/import_supervise.jsp"/>
+		</action>
+		<!-- 如果经销商是和银行对接的 那么这部分接口发送给银行接口专用服务器 由银行对接的服务器去处理，如果需要更新上面的内容连带着下面的一起更新 -->
+		<action path="/bank/interface/superviseStorage" 
+		    name="superviseImportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.SuperviseStorageAction"
+		    scope="request">
+			<forward name="supervise_storage_list" path="/WEB-INF/jsp/supervisory/storage/supervise_storage_list.jsp"/>
+			<forward name="supervise_storage_now_list" path="/WEB-INF/jsp/supervisory/storage/supervise_storage_now_list.jsp"/>
+			<forward name="upd_supervise_storage" path="/WEB-INF/jsp/supervisory/storage/upd_supervise_storage.jsp"/>
+			<forward name="import_supervise" path="/WEB-INF/jsp/supervisory/storage/import_supervise.jsp"/>
+		</action>
+		<action path="/superviseOut" 
+		    name="superviseImportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.SuperviseOutAction"
+		    scope="request">
+			<forward name="supervise_out_list" path="/WEB-INF/jsp/supervisory/out/supervise_out_list.jsp"/>
+			<forward name="supervise_out_now_list" path="/WEB-INF/jsp/supervisory/out/supervise_out_now_list.jsp"/>
+			<forward name="upd_supervise_out" path="/WEB-INF/jsp/supervisory/out/upd_supervise_out.jsp"/>
+		</action>
+		<!-- 如果经销商是和银行对接的 那么这部分接口发送给银行接口专用服务器 由银行对接的服务器去处理，如果需要更新上面的内容连带着下面的一起更新 -->
+		<action path="/bank/interface/superviseOut" 
+		    name="superviseImportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.SuperviseOutAction"
+		    scope="request">
+			<forward name="supervise_out_list" path="/WEB-INF/jsp/supervisory/out/supervise_out_list.jsp"/>
+			<forward name="supervise_out_now_list" path="/WEB-INF/jsp/supervisory/out/supervise_out_now_list.jsp"/>
+			<forward name="upd_supervise_out" path="/WEB-INF/jsp/supervisory/out/upd_supervise_out.jsp"/>
+		</action>
+		<action path="/superviseMove" 
+		    name="superviseImportForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.SuperviseMoveAction"
+		    scope="request">
+			<forward name="supervise_move_list" path="/WEB-INF/jsp/supervisory/move/supervise_move_list.jsp"/>
+			<forward name="supervise_move_now_list" path="/WEB-INF/jsp/supervisory/move/supervise_move_now_list.jsp"/>
+			<forward name="upd_supervise_move" path="/WEB-INF/jsp/supervisory/move/upd_supervise_move.jsp"/>
+			<forward name="choose_two_address" path="/WEB-INF/jsp/supervisory/move/choose_two_address.jsp"/>
+		</action>
+		<action path="/actualAddress" 
+		    name="actualAddressForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.ActualAddressAction"
+		    scope="request">
+			<forward name="actual_address_list" path="/WEB-INF/jsp/supervisory/actualAddress/actual_address_list.jsp"/>
+			<forward name="add_actual_address" path="/WEB-INF/jsp/supervisory/actualAddress/add_actual_address.jsp"/>
+			<forward name="upd_actual_address" path="/WEB-INF/jsp/supervisory/actualAddress/upd_actual_address.jsp"/>
+		</action>
+		<action path="/duedate" 
+		    name="duedateForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.DuedateAction"
+		    scope="request">
+		    <forward name="add_duedate" path="/WEB-INF/jsp/supervisory/duedate/add_duedate.jsp"/>
+			<forward name="ben_list" path="/WEB-INF/jsp/supervisory/duedate/ben_list.jsp"/>
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisory/duedate/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisory/duedate/list_already_approval.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisory/duedate/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisory/duedate/approval.jsp"/>
+			<forward name="ben_ledger" path="/WEB-INF/jsp/supervisory/duedate/ben_ledger.jsp"/>
+			<forward name="due_detail" path="/WEB-INF/jsp/supervisory/duedate/due_detail.jsp"/>
+			<forward name="down_upfile" path="/WEB-INF/jsp/supervisory/duedate/down_upfile.jsp"/>
+		</action>
+		<action path="/twodate" 
+		    name="duedateForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.TwodateAction"
+		    scope="request">
+		    <forward name="add_twodate" path="/WEB-INF/jsp/supervisory/twodate/add_twodate.jsp"/>
+			<forward name="two_list" path="/WEB-INF/jsp/supervisory/twodate/two_list.jsp"/>
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisory/twodate/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisory/twodate/list_already_approval.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisory/twodate/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisory/twodate/approval.jsp"/>
+			<forward name="two_ledger" path="/WEB-INF/jsp/supervisory/twodate/two_ledger.jsp"/>
+			<forward name="two_detail" path="/WEB-INF/jsp/supervisory/twodate/two_detail.jsp"/>
+			<forward name="down_upfile" path="/WEB-INF/jsp/supervisory/twodate/down_upfile.jsp"/>
+		</action>
+		<action path="/supervisor/checkStock" 
+		    name="checkStockForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.CheckStockAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisory/checkStock/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisory/checkStock/list_already_approval.jsp"/>
+			<forward name="add" path="/WEB-INF/jsp/supervisory/checkStock/add.jsp"/>
+			<forward name="update" path="/WEB-INF/jsp/supervisory/checkStock/update.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisory/checkStock/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisory/checkStock/approval.jsp"/>
+			<forward name="dealer_list" path="/WEB-INF/jsp/supervisory/checkStock/dealer_list.jsp"/>
+			<forward name="addDealer" path="/WEB-INF/jsp/supervisory/checkStock/addDealer.jsp"/>
+		</action>
+		<action path="/repaircost" 
+		    name="repairCostForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.RepairCostAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisory/repaircost/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisory/repaircost/list_already_approval.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisory/repaircost/detailPage.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisory/repaircost/approval.jsp"/>
+			<forward name="add_repair_cost" path="/WEB-INF/jsp/supervisory/repaircost/add_repair_cost.jsp"/>
+			<forward name="upd_repair_cost" path="/WEB-INF/jsp/supervisory/repaircost/upd_repair_cost.jsp"/>
+		</action>
+		<action path="/supervisory/abnormal" 
+		    name="abnormalForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.AbnormalAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/supervisory/abnormal/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/supervisory/abnormal/list_already_approval.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/supervisory/abnormal/approval.jsp"/>
+			<forward name="add" path="/WEB-INF/jsp/supervisory/abnormal/add.jsp"/>
+			<forward name="update" path="/WEB-INF/jsp/supervisory/abnormal/update.jsp"/>
+			<forward name="import_abnormal" path="/WEB-INF/jsp/supervisory/abnormal/import_abnormal.jsp"/>
+		</action>
+		
+		<action path="/carOperation" 
+		    name="carOperationForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.CarOperationAction"
+		    scope="request">
+			<forward name="zai_car_list" path="/WEB-INF/jsp/supervisory/carOperation/zai_car_list.jsp"/>
+			<forward name="out_car_list" path="/WEB-INF/jsp/supervisory/carOperation/out_car_list.jsp"/>
+			<forward name="move_car_list" path="/WEB-INF/jsp/supervisory/carOperation/move_car_list.jsp"/>
+			<forward name="down_upfile" path="/WEB-INF/jsp/supervisory/carOperation/down_upfile.jsp"/>
+			
+			<forward name="storage_list" path="/WEB-INF/jsp/supervisory/carOperation/storage_list.jsp"/>
+			
+			<forward name="out_list" path="/WEB-INF/jsp/supervisory/carOperation/out_list.jsp"/>
+			
+			<forward name="move_list" path="/WEB-INF/jsp/supervisory/carOperation/move_list.jsp"/>
+			
+		</action>
+		<action path="/carManual" 
+		    name="carManualForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.CarManualAction"
+		    scope="request">
+			<forward name="car_manual_list" path="/WEB-INF/jsp/supervisory/carManual/car_manual_list.jsp"/>
+			<forward name="upd_car_manual" path="/WEB-INF/jsp/supervisory/carManual/upd_car_manual.jsp"/>
+		</action>
+		<action path="/bankApprove" 
+		    name="bankApproveForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.BankApproveAction"
+		    scope="request">
+			<forward name="bank_approve_list" path="/WEB-INF/jsp/supervisory/bankApprove/bank_approve_list.jsp"/>
+		</action>
+		<action path="/supervisor/checkStockManage" 
+		    name="checkStockManageForm" 
+		    parameter="method" 
+		    type="com.zd.csms.supervisory.web.action.CheckStockManageAction"
+		    scope="request">
+			<forward name="checkStock_manage_list" path="/WEB-INF/jsp/supervisory/checkStockManage/checkStock_manage_list.jsp"/>
+			<forward name="add" path="/WEB-INF/jsp/supervisory/checkStockManage/add.jsp"/>
+			<forward name="update" path="/WEB-INF/jsp/supervisory/checkStockManage/update.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/supervisory/checkStockManage/detailPage.jsp"/>
+		</action>
+	</action-mappings>
+	
+</struts-config>

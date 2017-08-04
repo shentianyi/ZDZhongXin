@@ -1,0 +1,199 @@
+/* 车辆管理---在库车辆历史
+-------------------------------------------------- */
+.car-header {
+	position: fixed;
+	top: 48px;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	height: 60px;
+	background-color: #fff;
+}
+.car-header .year-line {
+	width: 40%;
+	height: 50px;
+	margin: 0 auto;
+	line-height: 50px;
+	text-align: center;
+	color: #333;
+	font-size: 15px;
+}
+.car-header .year-line span {
+	width: 20px;
+	height: 50px;
+	background-size: 10px auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.car-header .year-line span.year-prev {
+	background-image: url('../images/mobile/header-back.png');	
+}
+.car-header .year-line span.year-next {
+	background-image: url('../images/mobile/header-next.png');
+}
+.car-histroy-list {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+	background-color: #fff;
+}
+.car-histroy-list li {
+	height: 50px;
+	margin: 0 12px;
+	line-height: 50px;
+	background-image: url('../images/mobile/right-icon.png');
+	background-size: 7px auto;
+	background-position: right center;
+	background-repeat: no-repeat;
+	border-bottom: #999 1px solid;
+}
+.car-histroy-list li a {
+	display: block;
+	width: 100%;
+	height: 50px;
+	color: #333!important;
+	font-size: 15px;
+}
+
+/* 车辆管理---车辆详情
+-------------------------------------------------- */
+.car-header .car-header-title {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 18px;
+	color: #333;
+}
+.car-detail {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+	padding-bottom: 10px;
+	background-color: #fff;
+}
+.car-detail .button-line {
+	margin-bottom: 0;
+}
+.select-btn {
+	margin-left: 10px;
+	padding: 1px 10px;
+	color: #fff;
+	cursor: pointer;
+	background-color: #000;
+	border-radius: 3px;
+}
+.car-detail-img .car-img-title {
+	line-height: 35px;
+	text-align: center;
+	font-size: 15px;
+}
+.car-detail-img .car-img-list {
+	overflow: hidden;
+	margin: 0 7px;
+}
+.car-detail-img .car-img-list li {
+	float: left;
+	width: 50%;
+	margin-bottom: 12px;
+}
+.car-detail-img .car-img-list li:nth-child(2n+1) {
+	clear: left;
+}
+.car-detail-img .car-img-list li:nth-child(2n) {
+	clear: right;
+}
+.car-detail-img .car-img-list li span {
+	display: block;
+	margin: 0 5px;
+}
+.car-detail-img .car-img-list li img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.car-detail-img .dl-line {
+	padding: 7px 0 20px;
+}
+.car-img-zoom {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+.car-img-zoom span {
+	display: block;
+	margin: 10px;
+}
+.car-img-zoom img {
+	width: 100%;
+	height: auto;
+}
+
+/* 媒体查询 3倍密度手机
+-------------------------------------------------- */
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+	.car-header {
+		top: 60px;
+		height: 75px;
+	}
+	.car-header .year-line {
+		height: 62px;
+		line-height: 62px;
+		font-size: 19px;
+	}
+	.car-header .year-line span {
+		width: 30px;
+		height: 62px;
+		background-size: 13px auto;
+	}
+	.car-histroy-list {
+		top: 75px;
+	}
+	.car-histroy-list li {
+		height: 60px;
+		margin: 0 15px;
+		line-height: 60px;
+		background-size: 10px auto;
+	}
+	.car-histroy-list li a {
+		height: 60px;
+		font-size: 19px;
+	}
+	.car-brand-title {
+		height: 26px;
+		padding-left: 13px;
+		line-height: 26px;
+		font-size: 15px;
+	}
+	.car-brand-content li {
+		padding: 7px 0 7px 18px;
+		line-height: 50px;
+		font-size: 19px;
+	}
+	.car-brand-content li img {
+		width: 50px;
+		height: 50px;
+		margin-right: 18px;
+	}
+	.car-header .car-header-title {
+		height: 62px;
+		line-height: 62px;
+		font-size: 22px;
+	}
+	.car-detail {
+		top: 75px;
+	}
+	.car-detail-img .car-img-title {
+		line-height: 42px;
+		font-size: 19px;
+	}
+}	

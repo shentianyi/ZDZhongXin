@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="refundInvoiceForm" type="com.zd.csms.finance.web.form.RefundInvoiceForm"></form-bean>
+		<form-bean name="supervisionfeeForm" type="com.zd.csms.finance.web.form.SupervisionfeeForm"></form-bean>
+		<form-bean name="openInvoiceForm" type="com.zd.csms.finance.web.form.OpenInvoiceForm"></form-bean>
+		<form-bean name="openInvoiceListForm" type="com.zd.csms.finance.web.form.OpenInvoiceListForm"></form-bean>
+	</form-beans>
+	
+  <global-forwards>
+    <forward name="error" path="/common/500error.jsp" />
+  </global-forwards> 
+  
+	<action-mappings>
+		<action path="/refundInvoice" 
+		    name="refundInvoiceForm" 
+		    parameter="method" 
+		    type="com.zd.csms.finance.web.action.RefundInvoiceAction"
+		    scope="request">
+			<forward name="refund_invoice_list" path="/WEB-INF/jsp/finance/refundInvoice/refund_invoice_list.jsp"/>
+			<forward name="add_refund_invoice" path="/WEB-INF/jsp/finance/refundInvoice/add_refund_invoice.jsp"/>
+			<forward name="upd_refund_invoice" path="/WEB-INF/jsp/finance/refundInvoice/upd_refund_invoice.jsp"/>
+		</action>
+		<action path="/supervisionfee" 
+		    name="supervisionfeeForm" 
+		    parameter="method" 
+		    type="com.zd.csms.finance.web.action.SupervisionfeeAction"
+		    scope="request">
+			<forward name="supervisionfee_list" path="/WEB-INF/jsp/finance/supervisionfee/supervisionfee_list.jsp"/>
+			<forward name="add_supervisionfee" path="/WEB-INF/jsp/finance/supervisionfee/add_supervisionfee.jsp"/>
+			<forward name="upd_supervisionfee" path="/WEB-INF/jsp/finance/supervisionfee/upd_supervisionfee.jsp"/>
+			
+			<forward name="supervisionfee_summary" path="/WEB-INF/jsp/finance/supervisionfee/supervisionfee_summary.jsp"/>
+			<forward name="supervisionfee_summary_list" path="/WEB-INF/jsp/finance/supervisionfee/supervisionfee_summary_list.jsp"/>
+		</action>
+		<action path="/supervisionfeeRefund" 
+		    name="supervisionfeeForm" 
+		    parameter="method" 
+		    type="com.zd.csms.finance.web.action.SupervisionfeeRefundAction"
+		    scope="request">
+			<forward name="supervisionfee_refund_list" path="/WEB-INF/jsp/finance/supervisionfeeRefund/supervisionfee_refund_list.jsp"/>
+			<forward name="add_supervisionfee_refund" path="/WEB-INF/jsp/finance/supervisionfeeRefund/add_supervisionfee_refund.jsp"/>
+			<forward name="upd_supervisionfee_refund" path="/WEB-INF/jsp/finance/supervisionfeeRefund/upd_supervisionfee_refund.jsp"/>
+		</action>
+		<action path="/openInvoice" 
+		    name="openInvoiceForm" 
+		    parameter="method" 
+		    type="com.zd.csms.finance.web.action.OpenInvoiceAction"
+		    scope="request">
+			<forward name="open_invoice_list" path="/WEB-INF/jsp/finance/openInvoice/open_invoice_list.jsp"/>
+			<forward name="add_open_invoice" path="/WEB-INF/jsp/finance/openInvoice/add_open_invoice.jsp"/>
+			<forward name="upd_open_invoice" path="/WEB-INF/jsp/finance/openInvoice/upd_open_invoice.jsp"/>
+		</action>
+		<action path="/openInvoiceList" 
+		    name="openInvoiceListForm" 
+		    parameter="method" 
+		    type="com.zd.csms.finance.web.action.OpenInvoiceListAction"
+		    scope="request">
+			<forward name="open_invoice_lists" path="/WEB-INF/jsp/finance/openInvoiceList/open_invoice_lists.jsp"/>
+			<forward name="add_open_invoice_list" path="/WEB-INF/jsp/finance/openInvoiceList/add_open_invoice_list.jsp"/>
+			<forward name="upd_open_invoice_list" path="/WEB-INF/jsp/finance/openInvoiceList/upd_open_invoice_list.jsp"/>
+		</action>
+	</action-mappings>
+	
+</struts-config>

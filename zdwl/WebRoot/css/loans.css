@@ -1,0 +1,39 @@
+.fl{float:left;}
+.fr{float:right;}
+.mr_tabs .sroll_content2 {width:707px;height:28px;overflow:hidden;position:absolute;top:34px;left:0;}
+.bc_line .blackfont {color:#333;}
+#bank_cont_2 .bl_t{width:17%;}/*修改放款银行的列表尺寸 20131031*/
+#bank_cont_2 .bl_t_last{width:14.5%;text-align:center;}/*修改放款银行的列表尺寸 20131031*/
+#bank_cont_2 .bl_c {width:17%;text-align:center;}
+#bank_cont_2 .bl_icon {width:14%;text-align:center;background-color:#f4f4f4;}
+#bank_cont_2 .bl_icon {width:14.5%;text-align:center;background-color:#f4f4f4;}
+
+#bank_cont_2 .bl_icon a{background:url(../images/loans/loans.png) no-repeat;width:60px;height:20px;margin:2px auto 0;z-index:999;}
+
+#bank_cont_2 .bl_icon a.loans_icon{background-position:0 -118px;}
+#bank_cont_2 .bl_icon a.loans_icon:hover{background-position:0 -141px;}
+
+#bank_cont_2 .fk {text-align:center; background:#fff;}
+#bank_cont_2 .fk a{background:url(../images/loans/loans.png) no-repeat 0 -118px;width:60px;height:20px; display:block;}
+#bank_cont_2 .fk .repay_icon{background:url(../images/loans/loans.png) no-repeat 0 -118px;width:60px;height:20px;margin:2px auto 0;z-index:999;}
+#bank_cont_2 .fk a.repay_icon:hover{background:url(../images/loans/loans.png) no-repeat 0 -118px}
+
+
+
+#bank_cont_2 .bl_icon a.repay_icon{background-position:0 -163px;}
+#bank_cont_2 .bl_icon a.repay_icon:hover{background-position:0 -186px;}
+.bank_line .bl_icon {width:28%;background-color:#f4f4f4;}
+.bank_line .bl_fk {width:15.6%;background-color:#f4f4f4;}
+.bank_line .bl_fks {width:14.4%;background-color:#f4f4f4;}
+#bank_line2 .last_fks {width:23.63%;background-color:#f4f4f4;}
+.bank_line .bl_fksss {width:15.6%;background-color:#f4f4f4;}
+.bl_icon a {width:18px;height:18px;display:block;background:url(../images/loans/loans.png) no-repeat;margin:4px 0 0 3px;}
+.bl_c_icon1 a {background-position:0 0;}
+.bl_c_icon2 a {background-position:-19px 0;}
+.bl_c_icon3 a {background-position:-38px 0;}
+.bl_c_icon4 a {background-position:0 -19px;}
+.bl_c_icon5 a {background-position:-19px -19px;}
+.bl_c_icon6 a {background-position:-38px -19px;}
+.bank_line .bl_t2 {width:225px;text-align:center;}
+.bank_line .bl_c2 {width:215px;text-align:right;}
+

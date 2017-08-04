@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="bankForm" type="com.zd.csms.bank.web.form.BankForm"></form-bean>
+		<form-bean name="dealerForm" type="com.zd.csms.marketing.web.form.DealerForm"></form-bean>
+		<form-bean name="selectsForm" type="com.zd.csms.base.web.form.SelectForm"></form-bean>
+		<form-bean name="selectUserForm" type="com.zd.csms.base.web.form.SelectUserForm"></form-bean>
+		<form-bean name="btForm" type="com.zd.csms.marketing.web.form.BusinessTransferForm"></form-bean>
+	</form-beans>
+
+	<global-forwards>
+		<forward name="error" path="/common/500error.jsp" />
+	</global-forwards> 
+
+	<action-mappings>
+		<action path="/select"
+		    name="selectsForm"
+		    parameter="method"
+		    type="com.zd.csms.base.web.action.SelectAction"
+		    scope="request">
+			<forward name="repository_list" path="/WEB-INF/jsp/base/select/repository_list.jsp"/>
+		</action>
+		
+		<action path="/selectUserList"
+		    name="selectUserForm"
+		    parameter="method"
+		    type="com.zd.csms.base.web.action.SelectOutControlUserListAction"
+		    scope="request">
+			<forward name="selectOutControlUser_list" path="/WEB-INF/jsp/base/select/selectOutControlUser_list.jsp"/>
+		</action>
+		
+		<action path="/json/getBankChildById" 
+				name="bankForm" 
+				parameter="method" 
+				type="com.zd.csms.bank.web.action.BankJsonAction"
+				scope="request">
+		</action>
+		
+		<action path="/json/getDealerList" 
+				name="dealerForm" 
+				parameter="method" 
+				type="com.zd.csms.marketing.web.jsonaction.DealerJsonAction"
+				scope="request">
+		</action>
+		
+		<action path="/json/getDealerByRepositoryId" 
+				name="dealerForm" 
+				parameter="method" 
+				type="com.zd.csms.marketing.web.jsonaction.getDealerByRepositoryId"
+				scope="request">
+		</action>
+		<!-- 业务流转单 -->
+		<action path="/market/businessTransferajax" 
+				name="btForm" 
+				parameter="method" 
+		        type="com.zd.csms.marketing.web.action.BusinessTransferAjaxAction"
+		        scope="request">
+		</action>
+		
+		<action path="/market/businessTransferajaxzpzy" 
+				name="btForm" 
+				parameter="method" 
+		        type="com.zd.csms.marketing.web.action.BusinessTransferZpzyAjaxAction"
+		        scope="request">
+		</action>
+		
+		<action path="/json/getSupervisorByRepositoryId" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.marketing.web.jsonaction.SupervisorJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/getRepositoryById" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.repository.web.jsonaction.RepositoryJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/getRepositoryBySupervisorId" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.repository.web.jsonaction.RepositoryBySupervisorIdJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/getContentExist" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.repository.web.jsonaction.ContentExistJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/getSupervisorById" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.supervisory.web.jsonaction.SupervisorJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/getDealerByIdJsonAction" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.marketing.web.jsonaction.DealerByIdJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/getMailCost" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.supervisorymanagement.web.jsonaction.MailCostJsonAction"
+				scope="request">
+		</action>
+		
+		<action path="/json/getProcessingById" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.roster.web.jsonaction.ProcessingJsonAction"
+				scope="request">
+		</action>
+		
+		<action path="/json/getRosterById" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.roster.web.jsonaction.RosterJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/getApprovalMessageCount" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.message.approval.ApprovalTotalCountJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/getHandoverLogByDealerId" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.supervisorymanagement.web.jsonaction.getHandoverLogByDealerIdJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/checkSupervise" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.supervisory.web.jsonaction.CheckSuperviseJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/findRegionByParentId" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.region.web.jsonaction.FindRegionJsonByParentIdAction"
+				scope="request">
+		</action>
+		<action path="/json/getRepositoryDispatchCityByRepositoryId" 
+				name="" 
+				parameter="method"
+				type="com.zd.csms.repository.web.jsonaction.FindRepositoryDispatchCityJsonByRepositoryIdAction"
+				scope="request">
+		</action>
+		
+		<action path="/json/bankManagerByBankId" 
+				parameter="method"
+				type="com.zd.csms.bank.web.jsonaction.BankManagerByBankId"
+				scope="request">
+		</action>
+		<action path="/json/getSuperviser" 
+				name="selectForm" 
+				parameter="method"
+				type="com.zd.csms.base.web.jsonaction.SuperviserJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/checkVin" 
+				name="selectForm" 
+				parameter="method"
+				type="com.zd.csms.base.web.jsonaction.CheckVinJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/messageRead" 
+				parameter="method"
+				type="com.zd.csms.message.web.jsonaction.MessageReadJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/bankNameValid" 
+				parameter="method"
+				type="com.zd.csms.bank.web.jsonaction.BankNameValidJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/changeDraft" 
+				name="selectForm" 
+				parameter="method"
+				type="com.zd.csms.base.web.jsonaction.ChangeDraftJsonAction"
+				scope="request">
+		</action>
+		<action path="/json/BankNameByDealerId" 
+				name="selectForm" 
+				parameter="method"
+				type="com.zd.csms.base.web.jsonaction.BankNameByDealerIdJsonAction"
+				scope="request">
+		</action>
+		<action path="/showImg" 
+				parameter="method"
+				type="com.zd.csms.file.action.FileAction"
+				scope="request">
+		</action>
+		<action path="/json/getDealerBankInfoByRepId" 
+				parameter="method"
+				type="com.zd.csms.marketing.web.jsonaction.findDealerBankByRepId"
+				scope="request">
+		</action>
+		<action path="/json/validateByDealerIsDock" 
+				parameter="method"
+				type="com.zd.csms.set.web.jsonAction.DealerDockValidateAction"
+				scope="request">
+		</action>
+	</action-mappings>
+
+</struts-config>
+

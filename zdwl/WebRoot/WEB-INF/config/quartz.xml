@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.0.xsd">
+	<!-- 调度器Demo 开始-->
+	<bean id="testMethod" class="com.zd.core.quartz.TestQuartz"/>
+	<bean id="TestQtzJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+	    <property name="targetObject">  
+	        <ref bean="testMethod"/>  
+	    </property>  
+	    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+	        <value>run</value>  
+	    </property>  
+	</bean>  
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="TestTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="TestQtzJobMethod"></property>  
+	    <property name="cronExpression" value="0 13 14 * * ?"></property>  
+	</bean>  
+	<!-- 调度器Demo 结束-->
+	
+	<!-- 消息预警 -->
+		<bean id="messageQrtz" class="com.zd.csms.message.qrtz.MessageQrtz"/>
+		<bean id="messageJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="messageQrtz"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>run</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="MessageTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="messageJobMethod"></property>  
+		    <property name="cronExpression" value="0 20 1 * * ?"></property>  
+		</bean>  
+	<!-- 消息预警 -->
+	
+	<!-- 经销商扣费 start -->
+		<bean id="dealerPayment" class="com.zd.csms.quartz.market.DealerPayment"/>
+		<bean id="dealerPaymentJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="dealerPayment"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>run</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器:每天凌晨1点十分执行 ======================== -->  
+		<bean id="dealerPaymentTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="dealerPaymentJobMethod"></property>  
+		    <property name="cronExpression" value="0 10 1 * * ?"></property>  
+		</bean> 
+	<!-- 经销商扣费 end -->
+	
+	<!-- 监管员信息 -->
+	<bean id="dealerSupervisor" class="com.zd.csms.messagequartz.quartz.MessageQuartz"/>
+		<bean id="dealerSupervisorJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="dealerSupervisor"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>run</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器:每天凌晨1点十分执行 ======================== -->  
+		<bean id="dealerSupervisorTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="dealerSupervisorJobMethod"></property>  
+		    <property name="cronExpression" value="0 0 0 * * ?"></property>  
+		</bean> 
+	<!-- 监管员信息end-->
+	
+	<!-- 提交巡店检查计划提醒 -->
+	<bean id="inspectionSupervisor" class="com.zd.csms.messagequartz.quartz.InspectionQuartz"/>
+		<bean id="inspectionSupervisorJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="inspectionSupervisor"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>run</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器:每月20号凌晨1点十分执行 ======================== -->  
+		<bean id="inspectionSupervisorTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="inspectionSupervisorJobMethod"></property>  
+		    <property name="cronExpression" value="0 0 0 20 * ?"></property>  
+		</bean> 
+	 <!-- 提交巡店检查计划提醒 -->
+
+	
+	<!-- 经销商余额不足提醒 start -->
+		<bean id="dar" class="com.zd.csms.quartz.market.DelaerArrearsRemind"/>
+		<bean id="darJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="dar"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>run</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="darTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="darJobMethod"></property>  
+		    <property name="cronExpression" value="0 15 1 * * ?"></property>  
+		</bean> 
+	<!-- 经销商余额不足提醒 end -->
+	<!-- 更新客户信息start -->
+		<bean id="updCust" class="com.zd.csms.bank.quartz.AutoUpdate"/>
+		<bean id="updCustMetod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="updCust"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>run</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="updCustBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="updCustMetod"></property>  
+		    <property name="cronExpression" value="0 1 0 * * ?"></property>  
+		</bean> 
+	<!-- 更新客户信息end -->
+	<!-- 更新客户信息start -->
+		<bean id="createAttendance" class="com.zd.csms.attendance.quartz.CreateAttendance"/>
+		<bean id="createAttendanceMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="createAttendance"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>run</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="createAttendanceBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="createAttendanceMethod"></property>  
+		    <property name="cronExpression" value="0 15 1 1 * ?"></property>  
+		</bean> 
+	<!-- 更新客户信息end -->
+	
+	<!-- 监管员管理部消息提醒和预警start -->
+	<!-- 每月25日提交轮岗计划提醒start -->
+		<bean id="supervisoryManagementWarning" class="com.zd.csms.supervisorymanagement.warning.SupervisoryManagementWarning"/>
+		<bean id="handoverPlan" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>handoverPlan</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="handoverPlanBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="handoverPlan"></property>  
+		  	 <property name="cronExpression" value="0 0 0 25-25 1-12 ? "></property>
+		   <!-- <property name="cronExpression" value="0 0/2 * * * ? "></property>  -->
+		</bean> 
+	<!-- 每月25日提交轮岗计划提醒end -->
+	
+	<!-- 每月三日提交前一月监管员管理费及社保费用提醒   start -->
+		<bean id="supervisionFee" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>supervisionFee</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="supervisionFeeBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="supervisionFee"></property>  
+		  	 <property name="cronExpression" value="0 0 0 3-3 1-12 ?  "></property> 
+		 	<!-- <property name="cronExpression" value="0 0/5 * * * ? "></property> -->
+		</bean> 
+	<!-- 每月三日提交前一月监管员管理费及社保费用   end -->
+	
+	<!-- 每月一日提交监管员考勤提醒   start -->
+		<bean id="supervisorAttendance" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>supervisorAttendance</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="supervisorAttendanceBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="supervisorAttendance"></property>  
+		  	 <property name="cronExpression" value="0 0 0 1-1 1-12 ?  "></property>
+			<!-- <property name="cronExpression" value="0 0/3 * * * ?"></property> -->
+		</bean> 
+	<!-- 每月一日提交监管员考勤提醒   end -->
+		
+	<!-- 未按轮岗计划执行提醒   start -->
+		<bean id="noExecuteHandoverPlan" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>noExecuteHandoverPlan</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="noExecuteHandoverPlanBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="noExecuteHandoverPlan"></property>  
+		   <!--  每天12：00执行 -->
+		   <property name="cronExpression" value="0 0 12/23 * * ? "></property> 
+			 <!-- <property name="cronExpression" value="0 0/3 * * * ? "></property>  -->
+		</bean> 
+	<!-- 未按轮岗计划执行提醒  end -->
+	<!-- 监管员系统签到异常信息   start -->
+		<bean id="supervisorSignInAbnormal" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>supervisorSignInAbnormal</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="supervisorSignInAbnormalBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="supervisorSignInAbnormal"></property> 
+		    <!-- 每天23:50执行  -->
+		   <property name="cronExpression" value="0 50 23 * * ?"></property> 
+			<!--  <property name="cronExpression" value="0 0/5 * * * ? "></property> -->
+		</bean> 
+	<!-- 监管员系统签到异常信息  end -->
+	<!-- 监管员系统签退异常信息  start -->
+		<bean id="supervisorSignOutAbnormal" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>supervisorSignOutAbnormal</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="supervisorSignOutAbnormalBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="supervisorSignOutAbnormal"></property>  
+		    <!-- 每天23:50执行  -->
+		  	 <property name="cronExpression" value="0 50 23 * * ?"></property> 
+			<!-- <property name="cronExpression" value="0 0/4 * * * ? "></property> -->
+		</bean> 
+	<!-- 监管员系统签退异常信息  end -->
+	<!-- 项目进驻流转单发出后三天未录入人员信息提醒  start -->
+		<bean id="projectCircuNoSupervisor" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>projectCircuNoSupervisor</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="projectCircuNoSupervisorBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="projectCircuNoSupervisor"></property>  
+		  	<property name="cronExpression" value="0 0 1/23 * * ?  "></property> 
+			 <!-- <property name="cronExpression" value="0 0/5 * * * ? "></property> -->
+		</bean> 
+	<!-- 项目进驻流转单发出后三天未录入人员信息提醒  end -->
+	
+	<!-- 监管员面试完成一日未安排培训提醒  start -->
+		<bean id="repositoryNoTrain" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>repositoryNoTrain</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="repositoryNoTrainBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="repositoryNoTrain"></property>  
+		  	<property name="cronExpression" value="0 0 1/23 * * ?  "></property> 
+			<!-- <property name="cronExpression" value="0 0/5 * * * ? "></property> -->
+		</bean> 
+	<!-- 监管员面试完成一日未安排培训提醒  end -->
+	<!-- 监管员进入储备库15天未安排上岗提醒  start -->
+		<bean id="repFifteenDaysNoPost" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>repFifteenDaysNoPost</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="repFifteenDaysNoPostBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="repFifteenDaysNoPost"></property>  
+		  	<property name="cronExpression" value="0 0 1/23 * * ?  "></property> 
+			<!--  <property name="cronExpression" value="0 0/3 * * * ? "></property>  -->
+		</bean> 
+	<!-- 监管员进入储备库15天未安排上岗提醒  end -->
+	<!-- 监管员辞职离岗时间前十天未提交人员信息 start -->
+		<bean id="resignNoHandoverLog" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>resignNoHandoverLog</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="resignNoHandoverLogBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="resignNoHandoverLog"></property>  
+		  	 <property name="cronExpression" value="0 50 23 * * ? "></property>  
+			<!--<property name="cronExpression" value="0 0/5 * * * ? "></property>  -->
+		</bean> 
+	<!-- 监管员辞职离岗时间前十天未提交人员信息  end -->
+	<!-- 监管员培训考核不通过提醒   start -->
+		<bean id="supAssessNotPass" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>supAssessNotPass</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="supAssessNotPassBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="supAssessNotPass"></property>  
+		  	 <!-- 每天23:52执行  -->
+		  	<property name="cronExpression" value="0 52 23 * * ?"></property>
+		 	 <!-- <property name="cronExpression" value="0 0/3 * * * ? "></property> -->
+		</bean> 
+	<!-- 监管员培训考核不通过提醒   end -->
+	<!-- 监管员在一家店工作五个月提醒start -->
+		<bean id="supWorkFiveMonth" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>supWorkFiveMonth</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="supWorkFiveMonthBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="supWorkFiveMonth"></property>  
+		  	 <property name="cronExpression" value="0 55 23 * * ? "></property>
+			 <!--<property name="cronExpression" value="0 0/3 * * * ? "></property> -->
+		</bean> 
+	<!-- 监管员在一家店工作五个月提醒  end -->
+	<!-- 监管员系统考勤连续三天异常预警start -->
+		<bean id="supervisorThreeDaySignAbnormal" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>supervisorThreeDaySignAbnormal</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="supervisorThreeDaySignAbnormalBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="supervisorThreeDaySignAbnormal"></property>  
+		  	 <property name="cronExpression" value="0 55 23 * * ? "></property> 
+			 <!-- <property name="cronExpression" value="0 0/3 * * * ? "></property>  -->
+		</bean> 
+	<!-- 监管员系统考勤连续三天异常预警  end -->
+	<!-- 项目进驻流转单发出后五天未匹配人员信息预警start -->
+		<bean id="projectCircuNoSupervisorWarning" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>projectCircuNoSupervisorWarning</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="projectCircuNoSupervisorWarningBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="projectCircuNoSupervisorWarning"></property>  
+		  	<property name="cronExpression" value="0 0 1/23 * * ?  "></property>  
+			<!-- <property name="cronExpression" value="0 0/3 * * * ? "></property> -->
+		</bean> 
+	<!-- 项目进驻流转单发出后五天未匹配人员信息预警  end -->
+	<!-- 监管员上岗未培训考核预警start -->
+		<bean id="postNoTrain" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>postNoTrain</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="postNoTrainBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="postNoTrain"></property>  
+		  	 <property name="cronExpression" value="0 55 23 * * ? "></property> 
+			<!-- <property name="cronExpression" value="0 0/3 * * * ? "></property>  -->
+		</bean> 
+	<!-- 监管员上岗未培训考核预警  end -->
+	<!-- 监管员面试完成三日未安排培训预警start -->
+		<bean id="repositoryNoTrainWarning" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>repositoryNoTrainWarning</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="repositoryNoTrainWarningBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="repositoryNoTrainWarning"></property>  
+		  	<property name="cronExpression" value="0 55 23 * * ? "></property>
+			<!-- <property name="cronExpression" value="0 0/3 * * * ?"></property> --> 
+		</bean> 
+	<!-- 监管员面试完成三日未安排培训预警 end -->
+	<!-- 监管员辞职离岗时间前五天未提交人员信息预警start -->
+		<bean id="resignNoHandoverLogWarning" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>resignNoHandoverLogWarning</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="resignNoHandoverLogWarningBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="resignNoHandoverLogWarning"></property>  
+		  	<property name="cronExpression" value="0 50 23 * * ? "></property>  
+			<!-- <property name="cronExpression" value="0 0/10 * * * ? "></property>  -->
+		</bean> 
+	<!-- 监管员辞职离岗时间前五天未提交人员信息预警 end -->
+	<!-- 监管员在一家店工作六个月预警start -->
+		<bean id="supWorkSixMonthWarning" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="supervisoryManagementWarning"/>  
+		    </property>  
+		    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+		        <value>supWorkSixMonthWarning</value>  
+		    </property>  
+		</bean>  
+		<!-- ======================== 调度触发器 ======================== -->  
+		<bean id="supWorkSixMonthWarningBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="supWorkSixMonthWarning"></property>  
+			<property name="cronExpression" value="0 50 23 * * ? "></property>  
+			<!--  <property name="cronExpression" value="0 0/10 * * * ? "></property>  -->
+		</bean> 
+	<!-- 监管员在一家店工作六个月预警 end -->
+	<!-- 监管员管理部消息提醒和预警end -->
+	
+	<!-- 市场部消息 消息提醒和预警start-->
+	    <bean id="marketMessageAndWarning" class="com.zd.csms.messageAndWaring.message.quartz.MarketMessageAndWaring"/>
+	     <!-- 消息提醒 -->
+	     <!-- 进驻7天未交监管费提醒 start-->
+		 <bean id="sevenDaysNoFee" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>sevenDaysNoFee</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="sevenDaysNoFeeBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="sevenDaysNoFee"></property>  
+		  	<property name="cronExpression" value="0 10 0 ? * *"></property> 
+		  	<!--  <property name="cronExpression" value="0 0/2 * * * ? "></property> -->
+		 </bean> 
+	   
+	    <!-- 监管费到期前30天进行提醒 start-->
+		 <bean id="feeExpire30DaysAgo" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>feeExpire30DaysAgo</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="feeExpire30DaysAgoBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="feeExpire30DaysAgo"></property>  
+		  	<property name="cronExpression" value="0 20 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/10 * * * ? "></property>  -->
+		 </bean> 
+	   
+	   
+	     <!-- 监管费收取3天后未开票提醒 start-->
+		 <bean id="threeDaysAfterNoBilling" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>threeDaysAfterNoBilling</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="threeDaysAfterNoBillingBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="threeDaysAfterNoBilling"></property>  
+		  	 <property name="cronExpression" value="0 30 0 ? * * "></property>
+		  <!-- 	<property name="cronExpression" value="0 0/2 * * * ? "></property> -->
+		 </bean> 
+	  
+	       <!-- 项目进驻当天协议未收回提醒 start-->
+		 <bean id="agreementNoRecovered" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>agreementNoRecovered</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="agreementNoRecoveredBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="agreementNoRecovered"></property>  
+		  	<property name="cronExpression" value="0 40 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/20 * * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 监管协议到期前30天提醒 start-->
+		 <bean id="agreementExpire30DaysAgo" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>agreementExpire30DaysAgo</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="agreementExpire30DaysAgoBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="agreementExpire30DaysAgo"></property>  
+		  	<property name="cronExpression" value="0 50 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/25 * * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 监管协议签署10天未收回提醒 start-->
+		 <bean id="signing10DayNoRecovered" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>signing10DayNoRecovered</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="signing10DayNoRecoveredBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="signing10DayNoRecovered"></property>  
+		  	<property name="cronExpression" value="0 00 01 ? * *"></property>
+		  		<!--  <property name="cronExpression" value="0 0/30 * * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 协议签署超15天未发进店流转单提醒  start-->
+		 <bean id="signing15DayNoTransfer" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>signing15DayNoTransfer</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="signing15DayNoTransferBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="signing15DayNoTransfer"></property>  
+		  	<property name="cronExpression" value="0 10 01 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/35 0 * * ? "></property>  -->
+		 </bean> 
+		 
+		 <!-- 业务进驻流转单进驻前3天未匹配人员提醒  start-->
+		 <bean id="businessInThreeDayNOSupervise" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>businessInThreeDayNOSupervise</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="businessInThreeDayNOSuperviseBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="businessInThreeDayNOSupervise"></property>  
+		  	<property name="cronExpression" value="0 15 01 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/40 0 * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 1、4、7、10月5日中信银行监管费明细提醒 -->
+		  
+		 <!-- 消息预警 -->
+		 <!-- 进驻15天未交监管费预警 start-->
+		 <bean id="fifteenDaysNoFee" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>fifteenDaysNoFee</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="fifteenDaysNoFeeBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="fifteenDaysNoFee"></property>  
+		  	<property name="cronExpression" value="0 20 01 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/5 0 * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 监管费到期前10天进行预警 start-->
+		 <bean id="feeExpire10DaysAgo" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>feeExpire10DaysAgo</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="feeExpire10DaysAgoBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="feeExpire10DaysAgo"></property>  
+		  	<property name="cronExpression" value="0 30 01 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/15 0 * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 监管费收取后10天未开票预警 start-->
+		 <bean id="sevenDaysAfterNoBilling" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>sevenDaysAfterNoBilling</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="sevenDaysAfterNoBillingBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="sevenDaysAfterNoBilling"></property>  
+		  	<property name="cronExpression" value="0 40 01 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/20 0 * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 监管费到期日未收费预警 start-->
+		 <bean id="expireNoFee" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>expireNoFee</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="expireNoFeeBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="expireNoFee"></property>  
+		  	<property name="cronExpression" value="0 50 01 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/25 0 * * ? "></property>  -->
+		 </bean> 
+	    
+	      <!-- 项目进驻15天协议未收回预警 start-->
+		 <bean id="fifteenAgreementNoRecovered" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>fifteenAgreementNoRecovered</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="fifteenAgreementNoRecoveredBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="fifteenAgreementNoRecovered"></property>  
+		  	<property name="cronExpression" value="0 00 02 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/30 0 * * ? "></property>  -->
+		 </bean> 
+	   
+	       <!-- 监管协议到期前15天预警 start-->
+		 <bean id="agreement15DaysAgo" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>agreement15DaysAgo</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="agreement15DaysAgoBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="agreement15DaysAgo"></property>  
+		  		<property name="cronExpression" value="0 10 02 ? * *"></property>
+		  		<!--  <property name="cronExpression" value="0 0/35 0 * * ? "></property>  -->
+		 </bean> 
+		 
+		   <!-- 协议到期未续签预警 start-->
+		 <bean id="agreementNoSigning" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>agreementNoSigning</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="agreementNoSigningBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="agreementNoSigning"></property>  
+		  	<property name="cronExpression" value="0 20 02 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/40 0 * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 业务进驻流转单进驻前1天未匹配人员预警 start-->
+		 <bean id="businessInONEDayNOSupervise" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="marketMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>businessInONEDayNOSupervise</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="businessInONEDayNOSuperviseBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="businessInONEDayNOSupervise"></property>  
+		  	<property name="cronExpression" value="0 25 02 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/45 0 * * ? "></property>  -->
+		 </bean> 
+		
+	 <!-- 市场部消息 消息提醒和预警end-->
+	 
+	 <!-- 业务部消息提醒和预警start-->
+	    <bean id="businessMessageAndWarning" class="com.zd.csms.messageAndWaring.message.quartz.BusinessMessageAndWaring"/>
+	    <!-- 消息预警-->
+	  
+	     <!-- 开票15个工作日未到车预警  start-->
+		 <bean id="billNoCarFifteen" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>billNoCarFifteen</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="billNoCarFifteenBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="billNoCarFifteen"></property>  
+		  	<property name="cronExpression" value="0 5 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/5 * * * ? "></property>  -->
+		 </bean> 
+		 
+		 <!-- 开票四十五天未押满-预警  start-->
+		 <bean id="billFortyFiveNoFull" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>billFortyFiveNoFull</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="billFortyFiveNoFullBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="billFortyFiveNoFull"></property>  
+		  	<property name="cronExpression" value="0 10 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/10 * * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 汇票到期当天未清票预警  start-->
+		 <bean id="billNoDraftNowDate" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>billNoDraftNowDate</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="billNoDraftNowDateBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="billNoDraftNowDate"></property>  
+		  	<property name="cronExpression" value="0 15 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/15 * * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!-- 零库存零汇票延续7天预警  start-->
+		 <bean id="zeroSkuDraft" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>zeroSkuDraft</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="zeroSkuDraftBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="zeroSkuDraft"></property>  
+		  	<property name="cronExpression" value="0 20 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/15 * * * ? "></property>  -->
+		 </bean> 
+		 
+		 <!--  连续五天无业务发生预警  start-->
+		 <bean id="fiveDayNoBusiness" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>fiveDayNoBusiness</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="fiveDayNoBusinessBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="fiveDayNoBusiness"></property>  
+		  	<property name="cronExpression" value="0 25 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/20 * * * ? "></property>  -->
+		 </bean> 
+		 
+		 <!--  移动车辆超过30天未处理预警  start-->
+		 <bean id="carInfoThirty" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>carInfoThirty</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="carInfoThirtyBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="carInfoThirty"></property>  
+		  	<property name="cronExpression" value="0 30 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/20 * * * ? "></property>  -->
+		 </bean> 
+		 
+		  <!--  异常车辆超过总库存20%预警  start-->
+		 <bean id="carInfoTwenty" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">   
+		        <value>carInfoTwenty</value>  
+		    </property>  
+		 </bean>  
+		 
+		 <bean id="carInfoTwentyBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="carInfoTwenty"></property>  
+		  	<property name="cronExpression" value="0 35 0 ? * *"></property>
+		  	<!--  <property name="cronExpression" value="0 0/20 * * * ? "></property>  -->
+		 </bean> 
+		 
+	  <!-- 消息提醒-->
+	  
+	   <!-- 开票10个工作日未到车提醒 -->
+		<bean id="msgBillNoCarJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod">    
+		        <value>msgBillNoCar</value>  
+		    </property>  
+		</bean> 
+		 
+		<bean id="msgBillNoCarTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="msgBillNoCarJobMethod"></property>  
+		    <property name="cronExpression" value="0 0 0 * * ?"></property>  
+		   <!--  <property name="cronExpression" value="0 0/1 * * * ? "></property>  -->
+		</bean> 
+		
+		<!-- 开票30天汇票未押满提醒 -->
+		<bean id="msgBillNoFullJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod"> 
+		        <value>msgBillNoFull</value>  
+		    </property>  
+		</bean> 
+		 
+		<bean id="msgBillNoFullTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="msgBillNoFullJobMethod"></property>  
+		    <property name="cronExpression" value="0 5 0 * * ?"></property>  
+		   <!--  <property name="cronExpression" value="0 0/1 * * * ? "></property>  --> 
+		</bean> 
+		
+		<!-- 汇票到期前7天未清票提醒 -->
+		<bean id="msgBillNoDraftJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod"> 
+		        <value>msgBillNoDraft</value>  
+		    </property>  
+		</bean> 
+		 
+		<bean id="msgBillNoDraftTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="msgBillNoDraftJobMethod"></property>  
+		    <property name="cronExpression" value="0 10 0 * * ?"></property>  
+		  <!--   <property name="cronExpression" value="0 0/1 * * * ? "></property>   -->
+		</bean> 
+		
+		<!--连续三天无业务发生提醒  -->
+		<bean id="msgThreeDayNoBusinessJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod"> 
+		        <value>msgThreeDayNoBusiness</value>  
+		    </property>  
+		</bean> 
+		 
+		<bean id="msgThreeDayNoBusinessTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="msgThreeDayNoBusinessJobMethod"></property>  
+		    <property name="cronExpression" value="0 15 0 * * ?"></property>  
+		   <!--  <property name="cronExpression" value="0 0/1 * * * ? "></property> -->  
+		</bean> 
+		
+		<!--零库存零汇票提醒  -->
+		<bean id="msgZeroSkuDraftJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod"> 
+		        <value>msgZeroSkuDraft</value>  
+		    </property>  
+		</bean> 
+		 
+		<bean id="msgZeroSkuDraftTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="msgZeroSkuDraftJobMethod"></property>  
+		    <property name="cronExpression" value="0 20 0 * * ?"></property>  
+		   <!--  <property name="cronExpression" value="0 0/1 * * * ? "></property> -->  
+		</bean> 
+		
+		
+		<!--移动车辆超过25天未处理提醒-->
+		<bean id="msgCarInfoTwentyFiveJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod"> 
+		        <value>msgCarInfoTwentyFive</value>  
+		    </property>  
+		</bean> 
+		 
+		<bean id="msgCarInfoTwentyFiveTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="msgCarInfoTwentyFiveJobMethod"></property>  
+		    <property name="cronExpression" value="0 25 0 * * ?"></property>  
+		   <!--  <property name="cronExpression" value="0 0/1 * * * ? "></property> -->  
+		</bean> 
+		
+		<!--移动车辆超过总库存20%提醒-->
+		<bean id="msgCarInfoTwentyJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod"> 
+		        <value>msgCarInfoTwenty</value>  
+		    </property>  
+		</bean> 
+		 
+		<bean id="msgCarInfoTwentyTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="msgCarInfoTwentyJobMethod"></property>  
+		    <property name="cronExpression" value="0 30 0 * * ?"></property>  
+		   <!--  <property name="cronExpression" value="0 0/1 * * * ? "></property> -->  
+		</bean> 
+		
+		<!--异常车辆超过总库存15%提醒-->
+		<bean id="msgCarInfoFifteenJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		    <property name="targetObject">  
+		        <ref bean="businessMessageAndWarning"/>  
+		    </property>  
+		    <property name="targetMethod"> 
+		        <value>msgCarInfoFifteen</value>  
+		    </property>  
+		</bean> 
+		 
+		<bean id="msgCarInfoFifteenTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		    <property name="jobDetail" ref="msgCarInfoFifteenJobMethod"></property>  
+		    <property name="cronExpression" value="0 35 0 * * ?"></property>  
+		   <!--  <property name="cronExpression" value="0 0/1 * * * ? "></property> -->  
+		</bean> 
+		
+	  <!-- 业务部消息提醒和预警end-->
+	  
+	  <!-- 中信银行每日同步 start -->
+	<bean id="zxbankquartz" class="com.zd.csms.zxbank.web.quartz.zxbankQuartz" />
+	<!-- 每日信息更新 -->
+	<bean id="autoQuartz"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="zxbankquartz" />
+		</property>
+		<property name="targetMethod">
+			<value>zxbankAuto</value>
+		</property>
+	</bean>
+
+	<bean id="zxauto" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="autoQuartz"></property>
+		<property name="cronExpression" value="0 0 19 * * ?"></property>
+		<!-- <property name="cronExpression" value="0 */1 * * * ?"></property> -->
+	</bean>
+	<!-- 日终批量数据同步 -->
+	<bean id="allFile"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="zxbankquartz" />
+		</property>
+		<property name="targetMethod">
+			<value>allFile</value>
+		</property>
+	</bean>
+
+	<bean id="aFile" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="allFile"></property>
+		<!-- <property name="cronExpression" value="0 */3 * * * ?"></property> -->
+		<property name="cronExpression" value="0 30 18 * * ?"></property>
+	</bean>
+
+	<!-- 每月确认书次数重置 -->
+	<bean id="Confirmation"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="zxbankquartz" />
+		</property>
+		<property name="targetMethod">
+			<value>Confirmation</value>
+		</property>
+	</bean>
+
+	<bean id="cfation" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="Confirmation"></property>
+		<!-- <property name="cronExpression" value="0 */1 * * * ?"></property> -->
+		<property name="cronExpression" value="0 0 1 1 * ?"></property>
+	</bean>
+
+	<!-- 中信银行每日同步 end -->
+	  
+	<!-- ======================== 调度工厂 ======================== -->  
+	<bean id="SpringJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+	    <property name="triggers">  
+	        <list>  
+	            <!-- <ref bean="TestTriggerBean"/>  -->
+	            <!-- <ref bean="MessageTriggerBean"/> -->  
+	            <!-- 经销商余额不足提醒 start -->
+	            <!-- <ref bean="darTriggerBean"/>  -->
+	            <!-- 经销商余额不足提醒 end -->
+	            
+	            <!-- 经销商扣费 start -->
+	            <ref bean="dealerPaymentTriggerBean"/> 
+	            <!-- 经销商扣费 end -->
+	            
+	            <!-- 更新客户信息start -->
+	            <ref bean="createAttendanceBean"/> 
+	            <!-- 更新客户信息end -->
+	            
+	            <!-- 更新客户信息start -->
+	            <ref bean="updCustBean"/> 
+	            <!-- 更新客户信息end -->
+	            
+	            <!-- 监管员信息start -->
+	            <ref bean="dealerSupervisorTriggerBean"/> 
+	            <ref bean="inspectionSupervisorTriggerBean"/> 
+	            <!-- 监管员信息end -->
+	            
+	           <!-- 监管员管理部start -->
+	           <ref bean="handoverPlanBean"/> 
+	           <ref bean="supervisionFeeBean"/> 
+	           <ref bean="supervisorAttendanceBean"/> 
+	           <ref bean="noExecuteHandoverPlanBean"/> 
+	           <ref bean="supervisorSignInAbnormalBean"/> 
+	           <ref bean="supervisorSignOutAbnormalBean"/> 
+	           <ref bean="projectCircuNoSupervisorBean"/>
+	           <ref bean="repositoryNoTrainBean"/>  
+	           <ref bean="repFifteenDaysNoPostBean"/>  
+	           <ref bean="resignNoHandoverLogBean"/> 
+	           <ref bean="supAssessNotPassBean"/> 
+	           <ref bean="supWorkFiveMonthBean"/>  
+	           <ref bean="supervisorThreeDaySignAbnormalBean"/>  
+	           <ref bean="projectCircuNoSupervisorWarningBean"/>  
+	           <ref bean="postNoTrainBean"/> 
+	           <ref bean="repositoryNoTrainWarningBean"/> 
+	           <ref bean="resignNoHandoverLogWarningBean"/> 
+	           <ref bean="supWorkSixMonthWarningBean"/> 
+	           <!-- 监管员管理部end -->
+	            
+	           <!-- 市场部start-->
+	           <!-- 信息提醒 -->
+	           <ref bean="sevenDaysNoFeeBean"/> 
+	           <ref bean="feeExpire30DaysAgoBean"/>
+	           <ref bean="threeDaysAfterNoBillingBean"/>
+	           <ref bean="agreementNoRecoveredBean"/>
+	           <ref bean="agreementExpire30DaysAgoBean"/>
+	           <ref bean="signing10DayNoRecoveredBean"/>
+	           <ref bean="signing15DayNoTransferBean"/>
+	           <ref bean="businessInThreeDayNOSuperviseBean"/>
+	           <!-- 1、4、7、10月5日中信银行监管费明细提醒 -->
+	           <!-- 信息预警 -->
+	           <ref bean="fifteenDaysNoFeeBean"/>
+	           <ref bean="feeExpire10DaysAgoBean"/>
+	           <ref bean="sevenDaysAfterNoBillingBean"/>
+	           <ref bean="expireNoFeeBean"/>
+	           <ref bean="fifteenAgreementNoRecoveredBean"/>
+	           <ref bean="agreement15DaysAgoBean"/>
+	           <ref bean="agreementNoSigningBean"/>
+	           <ref bean="businessInONEDayNOSuperviseBean"/>
+	           <!-- 市场部 end-->
+	            
+	           <!-- 业务部start-->
+	           <!-- 消息预警 -->
+	           <ref bean="billNoCarFifteenBean"/>
+	           <ref bean="billFortyFiveNoFullBean"/>
+	           <ref bean="billNoDraftNowDateBean"/>
+	           <ref bean="zeroSkuDraftBean"/> 
+	           <ref bean="fiveDayNoBusinessBean"/>
+	           <ref bean="carInfoThirtyBean"/>
+	           <ref bean="carInfoTwentyBean"/>
+	           
+	           <!-- 消息提醒 -->
+               <ref bean="msgBillNoCarTriggerBean"/>
+               <ref bean="msgBillNoFullTriggerBean"/>
+               <ref bean="msgBillNoDraftTriggerBean"/>
+               <ref bean="msgThreeDayNoBusinessTriggerBean"/>
+               <ref bean="msgZeroSkuDraftTriggerBean"/>
+               <ref bean="msgCarInfoTwentyFiveTriggerBean"/>
+               <ref bean="msgCarInfoTwentyTriggerBean"/>
+               <ref bean="msgCarInfoFifteenTriggerBean"/>
+	           <!-- 业务部end-->
+	           
+	           <!-- 中信银行同步start -->
+				<ref bean="zxauto" />
+				<ref bean="aFile" />
+				<ref bean="cfation" />
+				<!-- 中信银行同步end -->
+	        </list>  
+	    </property>  
+	</bean>   
+	
+	
+</beans>

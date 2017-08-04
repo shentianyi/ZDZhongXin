@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+.main{width:1000px;margin:auto;margin-top:45px;}
+.main .main_ts{background:url(../images/404_03.png) no-repeat;width:232px;height:329px;position:absolute;top:32px;left:426px;}
+.main .main_ts p{font-family:"微软雅黑";color:#fff;margin:116px 0 0 38px;font-size:14px;line-height:1.7em;}
+.main .car{position:absolute;bottom:-55px;left:272px;}
+.footer{background:url(../images/headbg.gif) repeat-x;height:120px;}
+.footer_inner{width:1000px;margin:auto;}
+.footer_inner .logo{padding-top:20px;margin-left:70px;}

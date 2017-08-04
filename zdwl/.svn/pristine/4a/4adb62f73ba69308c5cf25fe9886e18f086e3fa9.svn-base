@@ -1,0 +1,102 @@
+.content {
+	margin: 0 auto;
+	width: 888px;
+	font-family: 'Microsoft Yahei';
+}
+
+.container-top {
+	height: 255px;
+}
+
+.container-bottom {
+	height: 540px;
+	background: #a40000;
+}
+
+.login-logo {
+	margin-top: 205px;
+	height: 100px;
+	width: 845px;
+	background: url(../images/login-logo.jpg);
+}
+
+.login-title {
+	margin-top: 100px;
+	font-size: 30px;
+	color: #a40000;
+	text-align: center;
+}
+
+.login-box {
+	margin: 0 auto;
+	height: 210px;
+	width: 365px;
+	background: url(../images/loginbox-gb.png);
+}
+
+.login-box-pdding {
+	padding-top: 80px;
+}
+
+.login-footer {
+	margin-top: 105px;
+}
+
+.login-ul {
+	margin: 0 auto;
+	width: 700px;
+}
+
+.login-ul li {
+	float: left;
+	padding-left: 40px;
+	padding-right: 40px;
+	border-right: solid 1px #fff;
+}
+
+.login-ul li a {
+	color: #fff;
+}
+
+.login-footer-copyright {
+	margin-top: 35px;
+}
+
+.login-footer-p {
+	text-align: center;
+	color: #fff;
+}
+
+.login-footer-p {
+	text-align: center;
+}
+
+.login-username-input,
+.login-password-input {
+	left: 67px;
+	padding: 0 16px;
+	height: 47px;
+	line-height: 47px;
+	width: 263px;
+	border: 0;
+	font-size: 12px;
+	font-family: 'Microsoft Yahei';
+	
+}
+
+.login-username-input {
+	top: 3px;
+}
+
+.login-password-input {
+	top: 82px;
+}
+
+.login-btn {
+	top: 158px;
+	left: 2px;
+	display: block;
+	height: 50px;
+	width: 360px;
+	/*	border: solid 1px green;*/
+}

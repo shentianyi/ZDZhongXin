@@ -1,0 +1,4 @@
+.mail_main {width:100%;padding-top:40px;}
+.mail_main .mailcont {width:605px;margin:0 auto;line-height:45px;color:#333;font-size:14px;}
+.mailcont span, .mailcont a {color:#ee9900;}
+.mailcont a:hover {text-decoration:underline;}

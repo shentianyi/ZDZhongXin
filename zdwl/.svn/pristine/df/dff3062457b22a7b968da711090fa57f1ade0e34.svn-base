@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="addresslistForm" type="com.zd.csms.business.web.form.AddresslistForm"></form-bean>
+		<form-bean name="draftForm" type="com.zd.csms.business.web.form.DraftForm"></form-bean>
+		<form-bean name="twoAddressForm" type="com.zd.csms.business.web.form.TwoAddressForm"></form-bean>
+		<form-bean name="complaintForm" type="com.zd.csms.business.web.form.ComplaintForm"></form-bean>
+		<form-bean name="mailingForm" type="com.zd.csms.business.web.form.MailingForm"></form-bean>
+		<form-bean name="flowForm" type="com.zd.csms.business.web.form.FlowForm"></form-bean>
+		<form-bean name="noteForm" type="com.zd.csms.business.web.form.NoteForm"></form-bean>
+		<form-bean name="ywBankForm" type="com.zd.csms.business.web.form.YwBankForm"></form-bean>
+	</form-beans>
+	
+  <global-forwards>
+    <forward name="error" path="/common/500error.jsp" />
+  </global-forwards> 
+  
+	<action-mappings>
+		<action path="/addresslist" 
+		    name="addresslistForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.AddresslistAction"
+		    scope="request">
+			<forward name="address_list" path="/WEB-INF/jsp/business/addresslist/address_list.jsp"/>
+			<forward name="add_addresslist" path="/WEB-INF/jsp/business/addresslist/add_addresslist.jsp"/>
+			<forward name="upd_addresslist" path="/WEB-INF/jsp/business/addresslist/upd_addresslist.jsp"/>
+		</action>
+		<action path="/addressSuperviselist" 
+		    name="addresslistForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.AddressSuperviselistAction"
+		    scope="request">
+			<forward name="address_supervise_list" path="/WEB-INF/jsp/business/addressSuperviselist/address_supervise_list.jsp"/>
+			<forward name="add_addressSuperviselist" path="/WEB-INF/jsp/business/addressSuperviselist/add_addressSuperviselist.jsp"/>
+			<forward name="upd_addressSuperviselist" path="/WEB-INF/jsp/business/addressSuperviselist/upd_addressSuperviselist.jsp"/>
+		</action>
+		<action path="/draft" 
+		    name="draftForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.DraftAction"
+		    scope="request">
+			<forward name="draft_list" path="/WEB-INF/jsp/business/draft/draft_list.jsp"/>
+			<forward name="add_draft" path="/WEB-INF/jsp/business/draft/add_draft.jsp"/>
+			<forward name="upd_draft" path="/WEB-INF/jsp/business/draft/upd_draft.jsp"/>
+			<forward name="import_draft" path="/WEB-INF/jsp/business/draft/import_draft.jsp"/>
+			<forward name="draft_supervise_list" path="/WEB-INF/jsp/business/draft/draft_supervise_list.jsp"/>
+			<forward name="draft_viewList" path="/WEB-INF/jsp/business/draft/draft_viewList.jsp"/>
+			<forward name="draft_detail" path="/WEB-INF/jsp/business/draft/draft_detail.jsp"/>
+		</action>
+		<action path="/twoAddress" 
+		    name="twoAddressForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.TwoAddressAction"
+		    scope="request">
+			<forward name="two_address_list" path="/WEB-INF/jsp/business/twoAddress/two_address_list.jsp"/>
+			<forward name="add_two_address" path="/WEB-INF/jsp/business/twoAddress/add_two_address.jsp"/>
+			<forward name="upd_two_address" path="/WEB-INF/jsp/business/twoAddress/upd_two_address.jsp"/>
+		</action>
+		
+		<action path="/complaint" 
+		    name="complaintForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.ComplaintAction"
+		    scope="request">
+			<forward name="list_wait_approval" path="/WEB-INF/jsp/business/complaint/list_wait_approval.jsp"/>
+			<forward name="list_already_approval" path="/WEB-INF/jsp/business/complaint/list_already_approval.jsp"/>
+			<forward name="add" path="/WEB-INF/jsp/business/complaint/add.jsp"/>
+			<forward name="update" path="/WEB-INF/jsp/business/complaint/update.jsp"/>
+			<forward name="detailPage" path="/WEB-INF/jsp/business/complaint/detailPage.jsp"/>
+			<forward name="detailPages" path="/WEB-INF/jsp/business/complaint/detailPages.jsp"/>
+			<forward name="approval" path="/WEB-INF/jsp/business/complaint/approval.jsp"/>
+			<forward name="updateComplaint" path="/WEB-INF/jsp/business/complaint/updateComplaint.jsp"/>
+			<forward name="updateComplaintSend" path="/WEB-INF/jsp/business/complaint/updateComplaintSend.jsp"/>
+			<forward name="updateComplaintCorrection" path="/WEB-INF/jsp/business/complaint/updateComplaintCorrection.jsp"/>
+		</action>
+		<action path="/mailing" 
+		    name="mailingForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.MailingAction"
+		    scope="request">
+			<forward name="mailing_list" path="/WEB-INF/jsp/business/mailing/mailing_list.jsp"/>
+			<forward name="add_mailing" path="/WEB-INF/jsp/business/mailing/add_mailing.jsp"/>
+			<forward name="upd_mailing" path="/WEB-INF/jsp/business/mailing/upd_mailing.jsp"/>
+		</action>
+		<action path="/flow" 
+		    name="flowForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.FlowAction"
+		    scope="request">
+			<forward name="flow_list" path="/WEB-INF/jsp/business/flow/flow_list.jsp"/>
+			<forward name="add_flow" path="/WEB-INF/jsp/business/flow/add_flow.jsp"/>
+			<forward name="upd_flow" path="/WEB-INF/jsp/business/flow/upd_flow.jsp"/>
+			<forward name="detail_flow" path="/WEB-INF/jsp/business/flow/detail_flow.jsp"/>
+			<forward name="supervise_flow_list" path="/WEB-INF/jsp/business/flow/supervise_flow_list.jsp"/>
+		</action>
+		
+		<action path="/note" 
+		    name="noteForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.NoteAction"
+		    scope="request">
+			<forward name="note_list" path="/WEB-INF/jsp/business/note/note_list.jsp"/>
+			<forward name="add_note" path="/WEB-INF/jsp/business/note/add_note.jsp"/>
+			<forward name="upd_note" path="/WEB-INF/jsp/business/note/upd_note.jsp"/>
+			<forward name="detail" path="/WEB-INF/jsp/business/note/detail_note.jsp"/>
+			<forward name="notes_list" path="/WEB-INF/jsp/business/note/notes_list.jsp"/>
+		</action>
+		
+		<action path="/business/ywBank" 
+		    name="ywBankForm" 
+		    parameter="method" 
+		    type="com.zd.csms.business.web.action.YwBankAction"
+		    scope="request">
+			<forward name="list" path="/WEB-INF/jsp/business/ywBank/ywbank_list.jsp"/>
+			<forward name="add" path="/WEB-INF/jsp/business/ywBank/add_ywbank.jsp"/>
+			<forward name="update" path="/WEB-INF/jsp/business/ywBank/upd_ywbank.jsp"/>
+			<forward name="ywUserList" path="/WEB-INF/jsp/business/ywBank/user_list.jsp"/>
+			<forward name="brandList" path="/WEB-INF/jsp/business/ywBank/brand.jsp"/>
+			<forward name="brandoutList" path="/WEB-INF/jsp/business/ywBank/brand_out.jsp"/>
+		</action>
+	</action-mappings>
+	
+</struts-config>
