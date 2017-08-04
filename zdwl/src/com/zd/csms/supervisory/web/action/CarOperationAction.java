@@ -410,6 +410,15 @@ public class CarOperationAction extends ActionSupport {
 					if(vo!=null){
 						vo.setApply(0);
 						//vo.setState(4);
+						
+						//判断是否是移动到本库
+						//1是  将状态改为2
+						
+						
+						if(StringUtil.isNotEmpty(vo.getIsmovetoone()) && vo.getIsmovetoone().equals("1")){
+							vo.setState(2);
+						}
+						
 						vo.setMovetime(new Date());
 						siservice.updSuperviseImport(vo,0);
 						

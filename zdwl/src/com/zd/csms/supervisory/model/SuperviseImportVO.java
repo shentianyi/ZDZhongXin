@@ -47,6 +47,7 @@ public class SuperviseImportVO implements Serializable {
 	private int nextApproval;//下一审批人（业务专员、银行审批人）
 	private int identifi;//车辆标识符0:默认值1:在库2:移动
 	
+	private String ismovetoone;//是否移动到本库
 	
 	public int getIdentifi() {
 		return identifi;
@@ -246,6 +247,35 @@ public class SuperviseImportVO implements Serializable {
 	public void setNextApproval(int nextApproval) {
 		this.nextApproval = nextApproval;
 	}
-
+	public String getIsmovetoone() {
+		return ismovetoone;
+	}
+	public void setIsmovetoone(String ismovetoone) {
+		this.ismovetoone = ismovetoone;
+	}
+	@Override
+	public String toString() {
+		return "SuperviseImportVO [id=" + id + ", certificate_date="
+				+ certificate_date + ", certificate_num=" + certificate_num
+				+ ", car_model=" + car_model + ", car_structure="
+				+ car_structure + ", displacement=" + displacement + ", color="
+				+ color + ", engine_num=" + engine_num + ", vin=" + vin
+				+ ", key_num=" + key_num + ", money=" + money + ", des=" + des
+				+ ", draft_num=" + draft_num + ", key_amount=" + key_amount
+				+ ", state=" + state + ", price=" + price + ", payment_amount="
+				+ payment_amount + ", two_name=" + two_name
+				+ ", certificate_intime=" + certificate_intime
+				+ ", storagetime=" + storagetime + ", movetime=" + movetime
+				+ ", outtime=" + outtime + ", brandid=" + brandid + ", apply="
+				+ apply + ", importtime=" + importtime + ", bond=" + bond
+				+ ", createuserid=" + createuserid + ", createdate="
+				+ createdate + ", upduserid=" + upduserid + ", upddate="
+				+ upddate + ", addressId=" + addressId + ", nextApproval="
+				+ nextApproval + ", identifi=" + identifi + ", ismovetoone="
+				+ ismovetoone + "]";
+	}
+	
+	
+	
 	
 }

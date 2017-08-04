@@ -142,6 +142,7 @@ public class DAOSupport implements IDAO{
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
+		
 		return (T) getJdbcTemplate().queryForObject(sql, new Object[]{id}, rowMapper);
 	}
 }

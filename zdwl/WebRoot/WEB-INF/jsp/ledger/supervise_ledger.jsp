@@ -142,7 +142,6 @@ $(function(){
     restrict();
     
      var dnum = $("#dnum").val();
-    console.log(dnum);
     if(dnum !=null && dnum !="" && dnum != -1){
         //$("#superviseImportquery.draft_num").append("<option value='dnum' selected>dnum</option>");
         document.getElementById("superviseImportquery.draft_num").options.add(new Option(dnum,dnum));
@@ -191,7 +190,7 @@ function restrict(){
 		                    </form:select> --%>
 		                    <div class="ly-sel-w">
 			                    <select id="superviseImportquery.dealername" style="width:85%;" name="superviseImportquery.dealername" >
-									<option value="-1">请选择</option>
+									<option value="">请选择</option>
 									<c:forEach items="${dealersName }" var="row">
 										<option <c:if test="${superviseImportForm.superviseImportquery.dealername==row.value}">selected='selected'</c:if>  value="<c:out value='${row.value }'/>"><c:out value="${row.label }"/></option> 
 									</c:forEach>

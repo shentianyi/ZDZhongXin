@@ -46,6 +46,8 @@ public class SuperviseImportMapper implements RowMapper {
 		o.setAddressId(rs.getInt("addressId"));
 		o.setNextApproval(rs.getInt("nextapproval"));
 		o.setIdentifi(rs.getInt("identifi"));
+		o.setIsmovetoone(rs.getString("ismovetoone"));
+		
 		return o;
 	}
 

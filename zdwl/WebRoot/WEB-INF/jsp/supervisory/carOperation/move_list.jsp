@@ -258,7 +258,7 @@ function restrict(){
 									<td class="t-td"><c:out value="${row.certificate_num}" /></td>
 									<td class="t-td"><c:out value="${row.key_amount}" /></td>
 									<td class="t-td"><c:out value="${row.money}" /></td>
-									<td align="center"><select:timestamp timestamp="${row.storagetime}" idtype="ss"/></td>
+									<td class="t-td"><select:timestamp timestamp="${row.storagetime}" idtype="date"/></td>
 									<td class="t-td"><select:bankaprove sid="${row.id}" idtype="movetime"/></td>
 									<td class="t-td"><c:out value="${row.bond}" /></td>
 									<td class="t-td"><c:out value="${row.two_name}" /></td>

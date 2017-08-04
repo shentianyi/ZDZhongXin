@@ -243,14 +243,15 @@ public class SuperviseMoveAction extends ActionSupport {
 					for (int i = 0; i < idArray.length; i++) {
 						SuperviseImportVO vo = service.loadSuperviseImportById(Integer.parseInt(idArray[i]));
 						vo.setTwo_name("");
-						vo.setState(2);
-						vo.setBond("");
+						vo.setState(4);
+						vo.setBond(vo.getBond());
 						vo.setAddressId(null);
 						vo.setApply(1);
 						vo.setUpduserid(user.getId());
 						vo.setUpddate(new Date());
 						vo.setIdentifi(1);
 						vo.setNextApproval(RoleConstants.BANK_APPROVE.getCode());
+						vo.setIsmovetoone("1");
 						
 						service.updSuperviseImport(vo,0);
 						id = idArray[i];

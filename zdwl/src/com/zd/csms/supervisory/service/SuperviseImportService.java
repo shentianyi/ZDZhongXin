@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
 import com.zd.core.ServiceSupport;
 import com.zd.csms.rbac.login.common.UserSessionUtil;
 import com.zd.csms.rbac.model.UserVO;
