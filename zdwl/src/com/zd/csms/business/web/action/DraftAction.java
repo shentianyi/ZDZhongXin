@@ -141,7 +141,6 @@ public class DraftAction extends ActionSupport {
 		request.setAttribute("dealersOptions", OptionUtil.getDealersByYW(user.getId(),roleId));
 		
 		
-		
 		String draftnum = dform.getDraft().getDraft_num();
 		
 		boolean bool = service.validateDraftIsRepeat(draftnum);
@@ -155,6 +154,10 @@ public class DraftAction extends ActionSupport {
 		dvo.setCreateuserid(user.getId());
 		dvo.setCreatedate(new Date());
 		
+		if(StringUtil.isEmpty(dvo.getBailscale())){
+			//设置保证金比例为-
+			dvo.setBailscale("-");
+		}		
 		//执行新增操作并获取操作结果
 		boolean flag = service.addDraft(dvo);
 		

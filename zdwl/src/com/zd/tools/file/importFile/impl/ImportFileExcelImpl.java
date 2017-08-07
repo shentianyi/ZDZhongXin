@@ -285,7 +285,7 @@ public class ImportFileExcelImpl implements IImportFile {
 					}
 					break;
 				case HSSFCell.CELL_TYPE_FORMULA:
-					data[j++]=cell.getNumericCellValue()+"";
+					data[j++]=cell.getStringCellValue();
 					break;
 				default:				
 					data[j++] = null;

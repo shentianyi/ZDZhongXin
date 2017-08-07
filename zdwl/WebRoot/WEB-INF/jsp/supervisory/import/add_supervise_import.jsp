@@ -182,7 +182,7 @@ width:35%}
 		</td>
 		<td class="add_textStyle">合格证号：</td>
 		<td >
-			<html:text property="superviseImport.certificate_num"style="width:100%;height:30px;border:1px solid #DDDDDD" styleClass="easyui-numberbox" styleId="superviseImport.certificate_num"></html:text>
+			<html:text property="superviseImport.certificate_num"style="width:100%;height:30px;border:1px solid #DDDDDD" styleId="superviseImport.certificate_num"></html:text>
 		</td>
 	</tr>
 	<tr>

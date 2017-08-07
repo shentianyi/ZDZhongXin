@@ -682,7 +682,7 @@ public class DealerDAOImpl extends DAOSupport implements IDealerDAO{
 			params.add(query.getEquipmentProvide());
 			flag = true;
 		}
-		if(query.getCredit() > 0){
+		if(query.getCredit()!=null && query.getCredit() > 0){
 			if(flag){
 				sql.append(" ,");
 			}
