@@ -1,8 +1,0 @@
-@charset "utf-8";
-/* CSS Document */
-body{margin:0;padding:0;font-size:12px;}
-.ListTable table{border-right:1px solid #b2b2b2;border-bottom:1px solid #b2b2b2;}
-.ListTable td{border-top:1px solid #b2b2b2;border-left:1px solid #b2b2b2;height:22px;line-height:22px;padding:5px;}
-.ListTable td.dis{padding:2px 5px 5px 5px;}
-.ListTable span{display:inline-block;background:#fdc04d;color:#fff;height:22px;line-height:22px;padding:0 8px;margin:3px 3px 0 0;cursor:pointer;}
-.ListTable span:hover{background:url(../images/del.gif) no-repeat right top #fdc04d;}
